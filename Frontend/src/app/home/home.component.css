@@ -1,0 +1,97 @@
+.home-component{
+    height: 100vh;
+    position: relative;
+
+}
+
+.homepage-img-container{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.homepage-img{
+    width: 50%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 1200px){
+
+    .homepage-img-container{
+        flex-direction: column !important;
+        height: 200%;
+    }
+
+    .homepage-img{
+        width: 100%;
+    }
+
+    .logo-container{
+        display: none;
+    }
+
+    .graphical-editor-container, .integration-container{
+        width: 100%;
+        height: 100%;
+    }
+
+    .navigation-content-container{
+        flex-direction: column !important;
+        align-items: center;
+        height: 200%;
+    }
+
+
+    .content-container{
+        margin-top: 71.375vh !important;
+    }
+
+    .overlay{
+        height: 200vh !important;
+    }
+
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.logo-container{
+    padding-top: 223px;
+}
+
+.logo-container img {
+    width: 100px;
+}
+
+.logo-container p, button {
+    font-size: 1.25rem;
+}
+
+.logo-container span {
+    font-size: 1.953rem;
+}
+
+.graphical-editor-container, .integration-container{
+    width: 50%;
+}
+
+p {
+    font-size: 2.441rem;
+}
+
+button img {
+    width: 24px;
+}
+
+.content-container{
+    margin-top: 82px;
+}
