@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as d3 from 'd3';
 import { BuildingsService } from './buildings.service';
 import { SurroundingObjectsService } from './surrounding-objects.service';
@@ -18,7 +19,9 @@ export class BuildingsComponent implements OnInit {
   svg: any;
 
   constructor(private buildingsService: BuildingsService,
-    private surroundingObjectsService: SurroundingObjectsService) { }
+    private surroundingObjectsService: SurroundingObjectsService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.createSvg();
@@ -28,6 +31,7 @@ export class BuildingsComponent implements OnInit {
         data => {
           this.applyMainBuildingData(data[0]);
           this.draw(this.mainBuilding, 'main-building');
+          this.addNavigationToMainBuildingPlan();
 
           this.drawSurroundingObjects();
         });
@@ -61,6 +65,15 @@ export class BuildingsComponent implements OnInit {
       .attr('stroke', function (d: { stroke: any; }) { return d.stroke; })
       .attr('stroke-width', 8)
       .attr('class', className);
+  }
+
+  private addNavigationToMainBuildingPlan() {
+    let mainBuilding = d3.selectAll('.main-building');
+    let component = this;
+
+    mainBuilding.on('click', function () {
+      component.router.navigate(['plan'], { relativeTo: component.route, queryParams: { building: 'mainBuilding' } })
+    })
   }
 
   private drawSurroundingObjects() {
