@@ -1,0 +1,8 @@
+#map-background {
+    background: url(../../assets/images/oasis-map.png) center center / cover no-repeat  fixed;
+}
+
+button img {
+    width: 24px;
+    transform: rotate(180deg);
+}
