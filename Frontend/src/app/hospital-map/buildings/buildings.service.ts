@@ -6,11 +6,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BuildingsService {
-    private apiUrl: string = 'https://localhost:44342/api/buildings';
+    private baseUrl: string = 'https://localhost:44342/api/buildings';
 
     constructor(private http: HttpClient) { }
 
     getBuildings(): Observable<any> {
-        return this.http.get(this.apiUrl);
+        return this.http.get(this.baseUrl);
     }
 }

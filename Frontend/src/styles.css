@@ -2,6 +2,6 @@ body{
     font-family: 'Poppins', sans-serif !important;
 }
 
-.main-building {
+#main-building {
     cursor: pointer;
 }

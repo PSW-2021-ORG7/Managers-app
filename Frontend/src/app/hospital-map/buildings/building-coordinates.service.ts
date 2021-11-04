@@ -5,12 +5,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SurroundingObjectsService {
-    private jsonPath: string = 'assets/surroundingObjects.json';
+export class BuildingCoordinatesService {
+    private jsonPath: string = 'assets/buildingCoordinates.json';
 
     constructor(private http: HttpClient) { }
 
-    getSurroundingObjects() : Observable<any> {
+    getCoordinates() : Observable<any> {
         return this.http.get(this.jsonPath);
     }
 }
