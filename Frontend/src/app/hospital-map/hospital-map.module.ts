@@ -3,17 +3,17 @@ import { CommonModule } from '@angular/common';
 
 import { HospitalMapRoutingModule } from './hospital-map-routing.module';
 import { HospitalMapComponent } from './hospital-map.component';
-import { BuildingsComponent } from './buildings/buildings.component';
+import { D3Service } from './shared/d3.service';
 
 
 @NgModule({
   declarations: [
-    HospitalMapComponent,
-    BuildingsComponent
+    HospitalMapComponent
   ],
   imports: [
     CommonModule,
     HospitalMapRoutingModule
-  ]
+  ],
+  providers: [D3Service]
 })
 export class HospitalMapModule { }
