@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { D3Service } from '../shared/d3.service';
 import { RoomsService } from './rooms.service';
 
+
 @Component({
   selector: 'app-floor-plan',
   templateUrl: './floor-plan.component.html',
@@ -25,7 +26,15 @@ export class FloorPlanComponent implements OnInit {
   // buildingId: string = '';
   // svg: any;
 
-  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) { }
+  selectedFloor: any = 0;
+
+  selectedFloorChanged(e: any): void{
+    console.log(this.selectedFloor)
+  }
+
+  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {
+    this.selectedFloor = 0;
+  }
 
   ngOnInit(): void {
     // TODO: Fetch data from API
