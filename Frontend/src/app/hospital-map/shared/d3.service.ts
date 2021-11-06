@@ -56,5 +56,11 @@ export class D3Service {
     return object;
   }
 
+  addFillAndStroke(svg:any, className: string) {
+    svg.selectAll('.' + className)
+      .attr('fill', '#cccccc')
+      .attr('stroke', '#ffffff');
+  }
+
 }
 
