@@ -4,12 +4,16 @@ import { CommonModule } from '@angular/common';
 import { IntegrationRoutingModule } from './integration-routing.module';
 import { IntegrationComponent } from './integration.component';
 import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-registration.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
 
 
 @NgModule({
   declarations: [
     IntegrationComponent,
-    PharmacyRegistrationComponent
+    PharmacyRegistrationComponent,
+    FeedbackComponent,
+    CreateFeedbackComponent
    
   ],
   imports: [
