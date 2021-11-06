@@ -1,4 +1,18 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CreateFeedbackService } from './create-feedback.service';
+
+export class Pharmacy{
+  constructor(
+    public idPharmacy : string,
+    public namePharmacy : string,
+    public apiKeyPharmacy : string,
+    public endpoint : string
+  ) {
+    
+  }
+
+}
 
 @Component({
   selector: 'app-create-feedback',
@@ -7,9 +21,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateFeedbackComponent implements OnInit {
 
-  constructor() { }
+  pharmacies: Pharmacy[] = [];
+  constructor(private httpClient: HttpClient, private feedbackService: CreateFeedbackService) { 
+    
+  }
+
 
   ngOnInit(): void {
+      
+
+    this.feedbackService.getPharmacies().subscribe((pharmacies: Pharmacy[]) => {
+      this.pharmacies = pharmacies;
+      console.log(this.pharmacies);    
+      
+  });
   }
 
 }
