@@ -8,8 +8,12 @@ import { PharmacyService } from './pharmacy-registration.service';
   providers: [PharmacyService]
 })
 export class PharmacyRegistrationComponent implements OnInit {
-  pharmacy = { idPharmacy: '4433', namePharmacy: 'Pharmacy4433', apiKey: '4433AA21', endpoint: 'www.pharmacy4433.rs'};
-
+ 
+  public namep : string = "";
+  public akey : string = "";
+  public endp : string = "";
+  public idp : string = "1234";
+  
   constructor(private pharmacyService: PharmacyService) { }
 
   ngOnInit(): void {
@@ -17,6 +21,7 @@ export class PharmacyRegistrationComponent implements OnInit {
   }
   
   public createPharmacy(){
+   // pharmacy = { idPharmacy: idp, namePharmacy: namep, apiKey: akey, endpoint: endp};
     this.pharmacyService.createNewPharmacy(this.pharmacy)
       .subscribe(
         data => {
