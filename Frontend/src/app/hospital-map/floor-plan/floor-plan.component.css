@@ -1,3 +1,4 @@
-.placeholder-class {
-    background-color: gray;
+.svg-floor{
+    object-fit: cover;
+    height: 100vh;
 }

@@ -45,6 +45,7 @@ export class D3Service {
     svg.append('text')
       .attr('x', coords.x)
       .attr('y', coords.y)
+      .attr('text-anchor', 'middle')
       .text(text)
       .style('fill', '#214975')
       .attr('font-size', '1.563rem');
