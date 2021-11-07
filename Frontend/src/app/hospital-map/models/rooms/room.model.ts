@@ -1,4 +1,4 @@
-enum RoomStatus {
+export enum RoomStatus {
     Occupied,
     Unoccupied,
     IsBeingRenovated,

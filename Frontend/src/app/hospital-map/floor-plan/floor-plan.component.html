@@ -29,7 +29,7 @@
         </div>
         <div class="room-info-outer-container d-flex flex-column">
             <div class="room-info-container d-flex flex-column justify-content-center align-items-center">
-                <div class="select-room-container align-self-center d-flex flex-column align-items-center">
+                <div *ngIf="!roomSelected" class="select-room-container align-self-center d-flex flex-column align-items-center">
                     <img class="mt-4" src="../../../assets/images/select-room.png" alt="Select a room">
                     <span class="title">Select a room</span>
                 </div>
@@ -37,12 +37,12 @@
                     <span class="title fw-bold me-2">Room info</span>
                     <img class="icon" (click)="showRoomInfoForm()" src="../../../assets/icons/edit-grey.png">
                 </div>
-                <div *ngIf="roomSelected" class="room-info">
-                    <span class="field-name d-flex flex-row mb-2">Name:&nbsp;<span class="field-info">1A</span></span>
-                    <span class="field-name d-flex flex-row mb-2">Room type:&nbsp;<span class="field-info">Operating room</span></span>
-                    <span class="field-name d-flex flex-row mb-2">Free beds:&nbsp;<span class="field-info">0</span></span>
+                <div *ngIf="roomSelected && selectedRoom" class="room-info">
+                    <span class="field-name d-flex flex-row mb-2">Name:&nbsp;<span class="field-info">{{selectedRoom.name}}</span></span>
+                    <span class="field-name d-flex flex-row mb-2">Room type:&nbsp;<span class="field-info">{{selectedRoom.type | roomTypeToString}}</span></span>
+                    <span class="field-name d-flex flex-row mb-2">Free beds:&nbsp;<span class="field-info">{{selectedRoom.freeBeds}}</span></span>
                     <span class="field-name d-flex flex-row mb-2">Doctor:&nbsp;<span class="field-info">Giovanni Giorgio</span></span>
-                    <span class="field-name d-flex flex-row mb-2">Status:&nbsp;<span class="field-info">Unocuppied</span></span>
+                    <span class="field-name d-flex flex-row mb-2">Status:&nbsp;<span class="field-info">{{selectedRoom.status | roomStatusToString}}</span></span>
                     <span class="field-name d-flex flex-column">Description:<p class="field-info">
                         Room where surgical
                         operations are carried out in

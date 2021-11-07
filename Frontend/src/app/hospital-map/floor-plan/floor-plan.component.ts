@@ -34,8 +34,10 @@ export class FloorPlanComponent implements OnInit {
           this.drawRooms();
           
           let rooms = this.d3Service.selectByClass('main-building-room');
-          rooms.on('click', function(){
-            console.log("Hello World");
+          let component = this;
+          rooms.on('click', function(d: any, i: any){
+            component.selectedRoom = i;
+            component.roomSelected = true;
           })
         }
       );
@@ -59,6 +61,7 @@ export class FloorPlanComponent implements OnInit {
   selectedFloorChanged(selectedFloor: number): void {
     this.selectedFloor = selectedFloor; 
     this.filterRooms();
+    this.roomSelected = false;
   }
 
   showMapView(): void{

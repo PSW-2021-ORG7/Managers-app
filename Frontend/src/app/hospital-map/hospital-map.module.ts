@@ -7,12 +7,16 @@ import { D3Service } from './shared/d3.service';
 import { FloorPlanComponent } from './floor-plan/floor-plan.component';
 import { FormsModule } from '@angular/forms';
 import { RoomInfoFormComponent } from './floor-plan/room-info-form/room-info-form.component';
+import { RoomTypeToStringPipe } from './floor-plan/room-type-to-string.pipe';
+import { RoomStatusToStringPipe } from './floor-plan/room-status-to-string.pipe';
 
 @NgModule({
   declarations: [
     HospitalMapComponent,
     FloorPlanComponent,
-    RoomInfoFormComponent
+    RoomInfoFormComponent,
+    RoomTypeToStringPipe,
+    RoomStatusToStringPipe
   ],
   imports: [
     CommonModule,
