@@ -1,19 +1,19 @@
 <app-integration></app-integration>
   <div id="PharmacyRegistration">
-    <form>
+    <form (submit)="send()">
       <div class="container">
         <h1>Pharmacy registration</h1>
         <p>Please fill in this form to create an account.</p>
         <hr>
       
         <label><b>Pharmacy Name</b></label>
-        <input type="text" placeholder="Enter Pharmacy Name" required>
+        <input type="text" placeholder="Enter Pharmacy Name" required (change)="selectChangeHandlerName($event)" [attr.aria-label]="namePharmacy">
       
         <label><b>API Key</b></label>
-        <input type="text" placeholder="Enter API Key" required>
+        <input type="text" placeholder="Enter API Key" required (change)="selectChangeHandlerApiKey($event)" [attr.aria-label]="apiKeyPharmacy">
       
         <label><b>Endpoint</b></label>
-        <input type="text" placeholder="Enter Endpoint" required>
+        <input type="text" placeholder="Enter Endpoint" required (change)="selectChangeHandlerEndpoint($event)" [attr.aria-label]="endpoint">
         <hr>
         <button type="submit" class="registerbtn">Register</button>
       </div>
