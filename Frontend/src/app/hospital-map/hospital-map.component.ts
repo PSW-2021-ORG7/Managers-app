@@ -41,7 +41,7 @@ export class HospitalMapComponent implements OnInit {
       .subscribe(
         data => {        
           this.applyBuildingData(this.mainBuilding, data[0]);
-          this.d3Service.addText(this.svg, this.mainBuilding.name, {x: 2008, y: 1350});
+          this.d3Service.addText(this.svg, this.mainBuilding.name, {x: 2008, y: 1350}, 'main-building-name');
           this.d3Service.drawPolygon(this.svg, this.mainBuilding, this.mainBuildingId);
           this.addNavigationToMainBuildingPlan();
         });
@@ -58,7 +58,7 @@ export class HospitalMapComponent implements OnInit {
       .subscribe(
         data => {
           this.buildingCoordinates = data,
-          this.d3Service.drawRectangles(this.svg, this.buildingCoordinates, this.mainBuildingId);
+          this.d3Service.drawMulticoloredRectangles(this.svg, this.buildingCoordinates, this.mainBuildingId);
         });
   }
 

@@ -18,7 +18,7 @@ export class D3Service {
     return svg;
   }
 
-  drawRectangles(svg:any, data: any[], className: string): void {
+  drawMulticoloredRectangles(svg:any, data: any[], className: string): void {
     svg.selectAll('.' + className)
       .data(data)
       .enter()
@@ -40,26 +40,35 @@ export class D3Service {
       .style('fill', 'transparent');
   }
 
+  drawPlainRectangles(svg:any, data: any[], className: string): void {
+    svg.selectAll('.' + className)
+      .data(data)
+      .enter()
+      .append('rect')
+      .attr('x', function (d: { x: any; }) { return d.x; })
+      .attr('y', function (d: { y: any; }) { return d.y; })
+      .attr('width', function (d: { width: any; }) { return d.width; })
+      .attr('height', function (d: { height: any; }) { return d.height; })
+      .attr('class', function (d: { floor: number; }) { return 'floor-' + d.floor + ' ' + className; })
+      .attr('fill', '#cccccc')
+      .attr('stroke', '#ffffff')
+      .attr('stroke-width', 8); 
+  }
   
-  addText(svg:any, text: string, coords: {x: number, y: number}) {
+  addText(svg:any, text: string, coords: {x: number, y: number}, className: string) {
     svg.append('text')
       .attr('x', coords.x)
       .attr('y', coords.y)
       .attr('text-anchor', 'middle')
       .text(text)
       .style('fill', '#214975')
-      .attr('font-size', '1.563rem');
+      .attr('font-size', '1.563rem')
+      .attr('class', className);
   }
 
   selectById(id: string) : any {
     let object = d3.selectAll('#' + id);
     return object;
-  }
-
-  addFillAndStroke(svg:any, className: string) {
-    svg.selectAll('.' + className)
-      .attr('fill', '#cccccc')
-      .attr('stroke', '#ffffff');
   }
 
 }

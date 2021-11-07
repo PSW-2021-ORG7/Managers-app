@@ -1,13 +1,10 @@
-import { RoomDimensions } from "./room-dimensions.model";
-
 enum RoomStatus {
     Occupied,
     Unoccupied,
     IsBeingRenovated,
     NotActive
 }
-
-enum RoomType {
+export enum RoomType {
     OperatingRoom,
     SurgeryRoom,
     ExaminationRoom,
@@ -20,16 +17,19 @@ enum RoomType {
 }
 
 export class Room {
-    private id: string;
-    private buildingId: string;
-    private name: string;
-    private status: RoomStatus;
-    private type: RoomType;
-    private freeBeds: number;
-    private floor: number;
-    private roomDimensions: RoomDimensions;
+    public id: string;
+    public buildingId: string;
+    public name: string;
+    public status: RoomStatus;
+    public type: RoomType;
+    public freeBeds: number;
+    public floor: number;
+    public x: number;
+    public y: number;
+    public width: number;
+    public height: number;
 
-    constructor(id: string, buildingId: string, name: string, status: RoomStatus, type: RoomType, freeBeds: number, floor: number, roomDimensions: RoomDimensions) {
+    constructor(id: string, buildingId: string, name: string, status: RoomStatus, type: RoomType, freeBeds: number, floor: number, x: number, y: number, width: number, height: number) {
         this.id = id;
         this.buildingId = buildingId;
         this.name = name;
@@ -37,6 +37,10 @@ export class Room {
         this.type = type;
         this.freeBeds = freeBeds;
         this.floor = floor;
-        this.roomDimensions = roomDimensions;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
+
 }
