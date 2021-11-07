@@ -16,6 +16,7 @@ export class FloorPlanComponent implements OnInit {
   svg: any;
   rooms: Room[] = [];
   selectedFloor: number = 0;
+  selectedRoom: Room | undefined;
   roomInfoFormVisible: boolean = false;
   roomSelected: boolean = false;
   @Output() notifyShowMapView: EventEmitter<any> = new EventEmitter<any>();
@@ -31,6 +32,11 @@ export class FloorPlanComponent implements OnInit {
         data => {
           this.rooms = data;
           this.drawRooms();
+          
+          let rooms = this.d3Service.selectByClass('main-building-room');
+          rooms.on('click', function(){
+            console.log("Hello World");
+          })
         }
       );
     });

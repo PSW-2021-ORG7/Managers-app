@@ -50,7 +50,7 @@ export class D3Service {
       .attr('width', function (d: { width: any; }) { return d.width; })
       .attr('height', function (d: { height: any; }) { return d.height; })
       .attr('class', function (d: { floor: number; }) { return 'floor-' + d.floor + ' ' + className; })
-      .attr('fill', '#cccccc')
+      .attr('fill', 'transparent')
       .attr('stroke', '#ffffff')
       .attr('stroke-width', 8); 
   }
@@ -68,6 +68,11 @@ export class D3Service {
 
   selectById(id: string) : any {
     let object = d3.selectAll('#' + id);
+    return object;
+  }
+
+  selectByClass(className: string) : any {
+    let object = d3.selectAll('.' + className);
     return object;
   }
 
