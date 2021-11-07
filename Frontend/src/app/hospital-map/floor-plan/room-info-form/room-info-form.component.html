@@ -1,0 +1,36 @@
+<form>
+    <div class="form-group d-flex flex-column mb-2">
+        <label class="form-label" for="name">Name</label>
+        <input type="text" class="form-control" id="name">
+    </div>
+    <div class="form-group d-flex flex-column mb-2">
+        <label class="form-label" for="roomType">Room type</label>
+        <select class="form-control" id="roomType">
+            <option>Room type 1</option>
+            <option>Room type 2</option>
+        </select>
+    </div>
+    <div class="form-group d-flex flex-column mb-2">
+        <label class="form-label" for="freeBeds">Free beds</label>
+        <select class="form-control" id="freeBeds">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+        </select>
+    </div>
+    <div class="form-group d-flex flex-column mb-2">
+        <label class="form-label" for="status">Status</label>
+        <select class="form-control" id="status">
+            <option>Ocuppied</option>
+            <option>Unocuppied</option>
+        </select>
+    </div>
+    <div class="form-group d-flex flex-column mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea rows="4" class="h-100"></textarea>
+    </div>
+    <div class="d-flex flex-row">
+        <button type="button" class="btn w-100 btn-secondary me-1" (click)="hideRoomInfoForm()">Cancel</button>
+        <button type="button" class="btn w-100 btn-primary ms-1">Update</button>
+    </div>
+</form>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room, RoomType } from '../models/rooms/room.model';
 import { D3Service } from '../shared/d3.service';
@@ -15,7 +15,9 @@ export class FloorPlanComponent implements OnInit {
   buildingId: string = '';
   svg: any;
   rooms: Room[] = [];
-  selectedFloor: any = 0;
+  selectedFloor: number = 0;
+  roomInfoFormVisible: boolean = false;
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {
     this.selectedFloor = 0;
@@ -48,8 +50,21 @@ export class FloorPlanComponent implements OnInit {
       .style('visibility', 'visible');
   }
 
-  selectedFloorChanged(e: any): void {
+  selectedFloorChanged(selectedFloor: number): void {
+    this.selectedFloor = selectedFloor; 
     this.filterRooms();
+  }
+
+  showMapView(): void{
+    this.notify.emit();
+  }
+
+  showRoomInfoForm(){
+    this.roomInfoFormVisible = true;
+  }
+
+  onNotifyHideRoomInfo(){
+    this.roomInfoFormVisible = false;
   }
 
   drawRoomNames(): void {

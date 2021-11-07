@@ -18,13 +18,13 @@ export class HospitalMapComponent implements OnInit {
 
   svgContainer: any;
   svgImage: any;
-  viewBox = {x: 1405, y: 790, w: document.documentElement.clientWidth, h: document.documentElement.clientHeight};
-  svgSize = {w: 4710 , h: 2650 };
+  viewBox = {x: 1400, y: 790, w: 1920, h: 1080};
+  svgSize = {w: 1920 , h: 1080 };
   isPanning = false;
   startPoint = {x: 0, y: 0};
   endPoint = {x: 0, y: 0};;
-  scale = 1;
-  showFloorPlan = false;
+  scale = this.svgSize.w / this.viewBox.w;
+  floorPlanVisible = false;
 
   constructor(private buildingsService: BuildingsService,
     private buildingCoordinatesService: BuildingCoordinatesService,
@@ -67,7 +67,7 @@ export class HospitalMapComponent implements OnInit {
     let component = this;
 
     mainBuilding.on('click', function () {
-      component.showFloorPlan = true;
+      component.floorPlanVisible = true;
     })
   }
 
@@ -81,7 +81,7 @@ export class HospitalMapComponent implements OnInit {
     var dh = h * Math.sign(e.deltaY) * 0.05;
     var dx = dw * mx / this.svgSize.w;
     var dy = dh * my / this.svgSize.h;
-    this.viewBox = {x: Math.max(1405, this.viewBox.x - dx), y: Math.max(790, this.viewBox.y - dy), w: Math.min(this.viewBox.w + dw, 1920), h: Math.min(this.viewBox.h + dh, 1080)};
+    this.viewBox = {x: Math.max(1400, this.viewBox.x - dx), y: Math.max(790, this.viewBox.y - dy), w: Math.min(this.viewBox.w + dw, 1920), h: Math.min(this.viewBox.h + dh, 1080)};
     this.scale = this.svgSize.w / this.viewBox.w;
     this.svgImage.setAttribute('viewBox', `${this.viewBox.x} ${this.viewBox.y} ${this.viewBox.w} ${this.viewBox.h}`);
   }
@@ -93,9 +93,9 @@ export class HospitalMapComponent implements OnInit {
 
   mouseMoveFn(e: any): void{
     if (this.isPanning){
-      this.endPoint = {x:e.x,y:e.y};
-      var dx = (this.startPoint.x - this.endPoint.x)/this.scale;
-      var dy = (this.startPoint.y - this.endPoint.y)/this.scale;
+      this.endPoint = {x:e.x, y:e.y};
+      var dx = (this.startPoint.x - this.endPoint.x) / this.scale;
+      var dy = (this.startPoint.y - this.endPoint.y) / this.scale;
       var movedViewBox = {x: this.viewBox.x + dx, y: this.viewBox.y + dy, w: this.viewBox.w, h:this.viewBox.h};
       this.svgImage.setAttribute('viewBox', `${movedViewBox.x} ${movedViewBox.y} ${movedViewBox.w} ${movedViewBox.h}`);
     }
@@ -106,7 +106,7 @@ export class HospitalMapComponent implements OnInit {
       this.endPoint = {x:e.x, y:e.y};
       var dx = (this.startPoint.x - this.endPoint.x) / this.scale;
       var dy = (this.startPoint.y - this.endPoint.y) / this.scale;
-      if(this.viewBox.x + dx + this.viewBox.w > 3325 || this.viewBox.x + dx < 1405)
+      if(this.viewBox.x + dx + this.viewBox.w > 3320 || this.viewBox.x + dx < 1400)
         dx = 0
       if(this.viewBox.y + dy + this.viewBox.h > 1870 || this.viewBox.y + dy < 790)
         dy = 0
@@ -118,6 +118,10 @@ export class HospitalMapComponent implements OnInit {
 
   mouseLeaveFn(e: any): void{
     this.isPanning = false;
+  }
+
+  onShowMapView(): void{
+    this.floorPlanVisible = false;
   }
 
 }

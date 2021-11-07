@@ -1,0 +1,31 @@
+.form-label{
+    color: #214975;
+    margin-bottom: 5px;
+}
+
+.form-control{
+    border: 1px solid #214975;
+}
+
+textarea{
+    resize: none;
+    border: 1px solid #214975;
+    border-radius: 5px;
+}
+
+.btn-secondary{
+    background-color: #a2a2a2;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-primary{
+    background-color: #214975;
+    font-weight: bold;
+}
+
+select {
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+}

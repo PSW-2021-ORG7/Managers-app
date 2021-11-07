@@ -12,20 +12,79 @@
 }
 
 .floor-container{
-    width: 9.07vw;
+    width: 11.57vw;
     background-color: white;
-    margin-left: 4.57vw;
+    margin-left: 2.78vw;
     border-radius: 5px;
 }
 
 .room-info-outer-container{
+    margin-right: 2.78vw;
+    width: 19.285vw;
+}
+
+.room-info-container{
     background-color: white;
-    height: 300px;
-    width: 250px;
     border-radius: 5px;
-    margin-right: 2vw;
+    margin-bottom: 20px;
 }
 
 .title{
     color: #214975;
+    font-size:  1.25rem;
+}
+
+.form-check-input{
+    width: 16px;
+    height: 16px;
+}
+
+.form-check-input:checked{
+    background-color: #214975;
+    border-color: #214975;
+}
+
+.icon{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.room-info{
+    width: 100%;
+    padding: 0 28px;
+}
+
+.field-name{
+    font-weight: bold;
+    color: #214975;   
+}
+
+.field-info{
+    font-weight: lighter;
+}
+
+.btn-success{
+    background-color: #66A182;
+    font-weight: bold;
+    border: none;
+}
+
+.backdrop{
+    position: absolute;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+.form-container{
+    width: 28.714vw;
+    height: 561px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.room-form{
+    padding: 0 28px;
 }
