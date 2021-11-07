@@ -5,19 +5,18 @@
   <div class="card-header text-white" style="background-color:#2a66a7 ; font-size: larger;">
     Feedback
   </div>
-  <form>
+  <form (submit)="send()">
   <ul class="list-group list-group-flush">
     <li class="list-group-item"  style="background-color:#f5f3f3;">Pharmacy:</li>
-    <select id="pharmacyName" required>
+    <select (change)="selectChangeHandlerId($event)">
         <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
           {{phar.namePharmacy}}
-        </option>
-       
+        </option>       
     </select>
     <li class="list-group-item" style="background-color:#f5f3f3; ">Content:</li>
-    <textarea placeholder="Enter Feedback Content" style="width:479px; height:120px;" required></textarea>
+    <textarea placeholder="Enter Feedback Content" style="width:479px; height:120px;" required (change)="selectChangeHandlerContent($event)"> {{contentFeedback}}</textarea>
     <hr>
-    <li class="list-group-item"  style="background-color:#f5f3f3;"><button type="submit" class="btn btn-secondary" style="text-align: center; display: grid; margin: auto; cursor: pointer;">Submit</button></li>
+    <li class="list-group-item"  style="background-color:#f5f3f3;"><button type="submit" class="btn btn-secondary" style="text-align: center; display: grid; margin: auto; cursor: pointer;" >Submit</button></li>
   </ul>
   </form>
 </div>

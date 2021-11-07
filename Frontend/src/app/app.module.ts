@@ -7,16 +7,6 @@ import { IntegrationModule } from './integration/integration.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
-export class Feedback{
-  constructor(
-    public idFeedback : string,
-    public idPharmacy : string,
-    public content : string
-  ) {
-    
-  }
-
-}
 
 @NgModule({
   declarations: [
