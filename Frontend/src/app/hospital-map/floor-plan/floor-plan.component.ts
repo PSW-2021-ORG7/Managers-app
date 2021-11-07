@@ -17,11 +17,11 @@ export class FloorPlanComponent implements OnInit {
   rooms: Room[] = [];
   selectedFloor: number = 0;
   roomInfoFormVisible: boolean = false;
-  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+  roomSelected: boolean = false;
+  @Output() notifyShowMapView: EventEmitter<any> = new EventEmitter<any>();
+  
 
-  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {
-    this.selectedFloor = 0;
-  }
+  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -56,7 +56,7 @@ export class FloorPlanComponent implements OnInit {
   }
 
   showMapView(): void{
-    this.notify.emit();
+    this.notifyShowMapView.emit();
   }
 
   showRoomInfoForm(){

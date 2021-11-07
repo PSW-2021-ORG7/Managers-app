@@ -88,3 +88,11 @@
 .room-form{
     padding: 0 28px;
 }
+
+.select-room-container{
+    height: 305px;
+}
+
+.select-room-container img{
+    width: 13.571vw;
+}
