@@ -56,7 +56,7 @@
     <div class="backdrop d-flex align-items-center justify-content-center" *ngIf="roomInfoFormVisible">
         <div class="form-container d-flex flex-column align-items-center">
             <span class="title mt-3 mb-2 fw-bold">Edit room info</span>
-            <app-room-info-form (notifyHideRoomInfo)="onNotifyHideRoomInfo()" class="w-100 room-form"></app-room-info-form>
+            <app-room-info-form [selectedRoom]='selectedRoom' (notifyHideRoomInfo)="onNotifyHideRoomInfo()" class="w-100 room-form"></app-room-info-form>
         </div>
     </div>
 </div>

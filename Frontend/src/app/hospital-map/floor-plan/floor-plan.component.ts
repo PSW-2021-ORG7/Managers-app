@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room, RoomType } from '../models/rooms/room.model';
 import { D3Service } from '../shared/d3.service';
@@ -16,7 +16,7 @@ export class FloorPlanComponent implements OnInit {
   svg: any;
   rooms: Room[] = [];
   selectedFloor: number = 0;
-  selectedRoom: Room | undefined;
+  @Input() selectedRoom: Room | undefined;
   roomInfoFormVisible: boolean = false;
   roomSelected: boolean = false;
   @Output() notifyShowMapView: EventEmitter<any> = new EventEmitter<any>();
