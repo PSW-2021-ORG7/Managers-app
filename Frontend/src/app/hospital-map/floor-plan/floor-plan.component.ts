@@ -75,18 +75,6 @@ export class FloorPlanComponent implements OnInit {
     this.roomInfoFormVisible = false;
   }
 
-  showMapView(): void{
-    this.notify.emit();
-  }
-
-  showRoomInfoForm(){
-    this.roomInfoFormVisible = true;
-  }
-
-  onNotifyHideRoomInfo(){
-    this.roomInfoFormVisible = false;
-  }
-
   drawRoomNames(): void {
     for (const room of this.rooms){
       this.d3Service.addText(this.svg, RoomType[room.type] + ' ' + room.name, { x: room.x + room.width/2, y: room.y + room.height/2 }, 'floor-' + room.floor + ' main-building-room');
