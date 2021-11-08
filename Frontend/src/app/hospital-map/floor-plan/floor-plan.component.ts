@@ -20,7 +20,6 @@ export class FloorPlanComponent implements OnInit {
   roomInfoFormVisible: boolean = false;
   roomSelected: boolean = false;
   @Output() notifyShowMapView: EventEmitter<any> = new EventEmitter<any>();
-  
 
   constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {}
 
@@ -66,6 +65,18 @@ export class FloorPlanComponent implements OnInit {
 
   showMapView(): void{
     this.notifyShowMapView.emit();
+  }
+
+  showRoomInfoForm(){
+    this.roomInfoFormVisible = true;
+  }
+
+  onNotifyHideRoomInfo(){
+    this.roomInfoFormVisible = false;
+  }
+
+  showMapView(): void{
+    this.notify.emit();
   }
 
   showRoomInfoForm(){
