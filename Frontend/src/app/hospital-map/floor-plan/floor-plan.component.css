@@ -6,14 +6,20 @@
 }
 
 .floor-container{
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
     width: 11.57vw;
     background-color: white;
-    margin-left: 2.78vw;
+    left: 2.78vw;
     border-radius: 5px;
 }
 
 .room-info-outer-container{
-    margin-right: 2.78vw;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 2.78vw;
     width: 19.285vw;
 }
 
