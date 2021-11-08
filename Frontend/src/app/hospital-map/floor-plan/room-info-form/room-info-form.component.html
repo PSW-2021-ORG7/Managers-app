@@ -1,36 +1,35 @@
-<form>
+<form *ngIf='selectedRoom'>
     <div class="form-group d-flex flex-column mb-2">
         <label class="form-label" for="name">Name</label>
-        <input type="text" class="form-control" id="name">
+        <input type="text" class="form-control" id="name" [(ngModel)]='selectedRoom.name' name='roomName'>
     </div>
     <div class="form-group d-flex flex-column mb-2">
         <label class="form-label" for="roomType">Room type</label>
-        <select class="form-control" id="roomType">
-            <option>Room type 1</option>
-            <option>Room type 2</option>
+        <select class="form-control" id="roomType" [(ngModel)]='selectedRoom.type' name='roomType'>
+            <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
         </select>
     </div>
     <div class="form-group d-flex flex-column mb-2">
         <label class="form-label" for="freeBeds">Free beds</label>
-        <select class="form-control" id="freeBeds">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
+        <select class="form-control" id="freeBeds" [(ngModel)]='selectedRoom.freeBeds' name='freeBeds'>
+            <option [ngValue] = 0>0</option>
+            <option [ngValue] = 1>1</option>
+            <option [ngValue] = 2>2</option>
+            <option [ngValue] = 3>3</option>
         </select>
     </div>
     <div class="form-group d-flex flex-column mb-2">
         <label class="form-label" for="status">Status</label>
-        <select class="form-control" id="status">
-            <option>Ocuppied</option>
-            <option>Unocuppied</option>
+        <select class="form-control" id="status" [(ngModel)]='selectedRoom.status' name='roomStatus'>
+            <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
         </select>
     </div>
     <div class="form-group d-flex flex-column mb-3">
         <label class="form-label" for="description">Description</label>
-        <textarea rows="4" class="h-100"></textarea>
+        <textarea rows="4" class="h-100">Room where surgical operations are carried out in an aseptic environment.</textarea>
     </div>
     <div class="d-flex flex-row">
         <button type="button" class="btn w-100 btn-secondary me-1" (click)="hideRoomInfoForm()">Cancel</button>
-        <button type="button" class="btn w-100 btn-primary ms-1">Update</button>
+        <button type="button" class="btn w-100 btn-primary ms-1" (click)="updateRoomInfo()">Update</button>
     </div>
 </form>

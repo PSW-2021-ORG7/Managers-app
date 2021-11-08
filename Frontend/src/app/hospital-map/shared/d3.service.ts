@@ -71,5 +71,10 @@ export class D3Service {
     return object;
   }
 
+  selectByClass(className: string) : any {
+    let object = d3.selectAll('.' + className);
+    return object;
+  }
+
 }
 

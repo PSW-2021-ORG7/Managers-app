@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RoomStatus, RoomType } from '../../models/rooms/room.model';
+import { RoomsService } from '../rooms.service';
 
 @Component({
   selector: 'app-room-info-form',
@@ -6,8 +8,25 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./room-info-form.component.css']
 })
 export class RoomInfoFormComponent implements OnInit {
-
-  constructor() { }
+  @Input() selectedRoom: any;
+  roomStatuses: RoomStatus[] = [
+    RoomStatus.Occupied,
+    RoomStatus.Unoccupied,
+    RoomStatus.IsBeingRenovated,
+    RoomStatus.NotActive
+  ]
+  roomTypes: RoomType[] = [
+    RoomType.OperatingRoom,
+    RoomType.SurgeryRoom,
+    RoomType.ExaminationRoom,
+    RoomType.EmergencyRoom,
+    RoomType.DoctorOffice,
+    RoomType.Restroom,
+    RoomType.Lift,
+    RoomType.Stairs,
+    RoomType.Storage
+  ]
+  constructor(private roomsService: RoomsService) { }
 
   ngOnInit(): void {
   }
@@ -16,6 +35,11 @@ export class RoomInfoFormComponent implements OnInit {
 
   hideRoomInfoForm(){
     this.notifyHideRoomInfo.emit();
+  }
+
+  updateRoomInfo(): void{
+    this.roomsService.updateRoom(this.selectedRoom).subscribe();
+    this.hideRoomInfoForm();
   }
 
 }

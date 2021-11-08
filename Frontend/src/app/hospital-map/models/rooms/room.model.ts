@@ -1,4 +1,4 @@
-enum RoomStatus {
+export enum RoomStatus {
     Occupied,
     Unoccupied,
     IsBeingRenovated,
@@ -42,5 +42,6 @@ export class Room {
         this.width = width;
         this.height = height;
     }
+
 
 }
