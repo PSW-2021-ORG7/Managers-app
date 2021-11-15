@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 * {
   box-sizing: border-box;
@@ -43,3 +44,9 @@ input[type=text] {
 .checkIfAvailableBtn{
   background-color: #66A182;
 }
+=======
+.form-control:focus {
+    border-color: #f3f5f7;
+    box-shadow: 0 0 0 0.2rem #70a9e6;;
+} 
+>>>>>>> b01ae11 (feat: Add form for urgent requests)

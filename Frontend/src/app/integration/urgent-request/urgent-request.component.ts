@@ -59,6 +59,7 @@ export class UrgentRequestComponent implements OnInit {
     };
     console.log(urgentRequest);
     alert("success");
+      quantity: this.quantity
+    };
   }
 
-}

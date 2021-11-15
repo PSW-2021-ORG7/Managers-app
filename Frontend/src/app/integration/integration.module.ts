@@ -10,8 +10,6 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './http-interceptor';
 import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
 
-
-
 @NgModule({
   declarations: [
     IntegrationComponent,
