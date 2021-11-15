@@ -1,0 +1,44 @@
+<app-integration></app-integration>
+<br>
+<form (submit)="send()">
+    <table class="form-group mx-sm-3 mb-2" style="border-collapse: separate; border-spacing: 0 15px;">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <label>Medicine: </label>&nbsp;
+            </td>
+            <td>
+                <select (change)="selectChangeHandlerMedicine($event)" class="form-control" style="max-width: fit-content;" required>
+                    <option value="1" selected>medicine 1</option>
+                    <option value="2">medicine 2</option>
+                    <option value="3">medicine 3</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label style="margin-right: 15%;">Dose: </label>
+            </td>
+            <td>
+                <input type="text" class="form-control" style="font-size: medium; max-width: 40%;" (change)="selectChangeHandlerDose($event)" [attr.aria-label]="dose" required>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Quantity: </label>&nbsp;
+            </td>
+            <td>
+                <input type="text" class="form-control" style="font-size: medium; max-width: 40%;" (change)="selectChangeHandlerQuantity($event)" [attr.aria-label]="quantity"required>
+            </td>
+        <tr>
+            <td>
+                <hr style="width:250%;text-align:left;margin-left:0"><button type="submit" class="btn btn-danger btn-secondary">Order</button>
+            </td>
+        </tr>
+    </table>
+
+    
+</form>
