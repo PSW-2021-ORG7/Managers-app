@@ -4,12 +4,14 @@ import { CreateFeedbackComponent } from './create-feedback/create-feedback.compo
 import { FeedbackComponent } from './feedback/feedback.component';
 import { IntegrationComponent } from './integration.component';
 import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-registration.component';
+import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
 
 const routes: Routes = [
   { path: '', component: IntegrationComponent },
   { path : 'pharmacy-registration', component: PharmacyRegistrationComponent },
   { path : 'feedback', component: FeedbackComponent },
-  { path : 'create-feedback', component: CreateFeedbackComponent }
+  { path : 'create-feedback', component: CreateFeedbackComponent },
+  { path: 'urgent-request', component: UrgentRequestComponent}
    
 ];
 
