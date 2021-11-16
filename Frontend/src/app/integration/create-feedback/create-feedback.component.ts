@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../authentication-service';
+import { TokenInterceptor } from '../http-interceptor';
 import { CreateFeedbackService } from './create-feedback.service';
 
 export class Pharmacy {
@@ -43,7 +45,7 @@ export class CreateFeedbackComponent implements OnInit {
   http: any;
   feedback: Feedback | undefined
 
-  constructor(private httpClient: HttpClient, private feedbackService: CreateFeedbackService) {
+  constructor(private httpClient: HttpClient, private feedbackService: CreateFeedbackService, private authService: AuthenticationService) {
 
   }
 
@@ -70,11 +72,22 @@ export class CreateFeedbackComponent implements OnInit {
 
   }
 
+  makeid(length: number) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+ charactersLength));
+   }
+   return result;
+}
+
   send(): void {
 
     this.feedback = {
-      idFeedback: "testWorks",
-      idHospital: this.selectedPharmacyId,
+      idFeedback: this.makeid(3),
+      idHospital: "H1",
       contentFeedback: this.contentFeedback
     };
 
@@ -85,8 +98,15 @@ export class CreateFeedbackComponent implements OnInit {
 
   addFeedback(feedback: Feedback) {
 
+    this.feedbackService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+      pharmacy = pharmacy;
+      this.authService.setApiKey(pharmacy.apiKeyPharmacy);
+
+    });
+    
+    
     console.log(feedback)
-    return this.httpClient.post('http://localhost:64677/api/feedback', feedback, httpOptions); // DOES NOT WORK
+    return this.httpClient.post('http://localhost:64677/api/feedback', feedback, httpOptions).subscribe(); 
 
   }
 
