@@ -6,7 +6,7 @@ import { HospitalMapComponent } from './hospital-map.component';
 import { D3Service } from './shared/services/d3.service';
 import { FloorPlanComponent } from './pages/floor-plan/floor-plan.component';
 import { FormsModule } from '@angular/forms';
-import { RoomInfoFormComponent } from './components/side-bar/side-bar.component';
+import { RoomInfoFormComponent } from './components/room-info-form/room-info-form.component';
 import { RoomTypeToStringPipe } from './shared/pipes/room-type-to-string.pipe';
 import { RoomStatusToStringPipe } from './shared/pipes/room-status-to-string.pipe';
 
