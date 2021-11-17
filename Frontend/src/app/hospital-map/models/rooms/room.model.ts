@@ -17,7 +17,7 @@ export enum RoomType {
 }
 
 export class Room {
-    public id: string;
+    public id: number;
     public buildingId: string;
     public name: string;
     public status: RoomStatus;
@@ -29,7 +29,7 @@ export class Room {
     public width: number;
     public height: number;
 
-    constructor(id: string, buildingId: string, name: string, status: RoomStatus, type: RoomType, freeBeds: number, floor: number, x: number, y: number, width: number, height: number) {
+    constructor(id: number, buildingId: string, name: string, status: RoomStatus, type: RoomType, freeBeds: number, floor: number, x: number, y: number, width: number, height: number) {
         this.id = id;
         this.buildingId = buildingId;
         this.name = name;

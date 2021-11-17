@@ -11,7 +11,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient) { }
 
-  getRooms(buildingId: string): Observable<Room[]> {
+  getRooms(buildingId: number): Observable<Room[]> {
     let params = new HttpParams().set('buildingId', buildingId)
     return this.http.get<Room[]>(this.baseUrl, { params: params });
   }

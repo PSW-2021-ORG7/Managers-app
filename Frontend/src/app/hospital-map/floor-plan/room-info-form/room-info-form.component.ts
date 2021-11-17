@@ -5,7 +5,7 @@ import { RoomsService } from '../rooms.service';
 @Component({
   selector: 'app-room-info-form',
   templateUrl: './room-info-form.component.html',
-  styleUrls: ['./room-info-form.component.css']
+  styleUrls: ['./room-info-form.component.scss']
 })
 export class RoomInfoFormComponent implements OnInit {
   @Input() selectedRoom: any;

@@ -7,11 +7,11 @@ import { D3Service } from './shared/d3.service';
 @Component({
   selector: 'app-hospital-map',
   templateUrl: './hospital-map.component.html',
-  styleUrls: ['./hospital-map.component.css'],
+  styleUrls: ['./hospital-map.component.scss'],
   providers: [BuildingsService, BuildingCoordinatesService]
 })
 export class HospitalMapComponent implements OnInit {
-  mainBuilding = { id: '', name: '', description: '', points: '2223.5 1051 2223.5 1405 2078.26 1405 2078.26 1462 1939.37 1462 1939.37 1405 1794.13 1405 1794.13 1434 1662.5 1434 1662.5 1022 1794.13 1022 1794.13 1051 2223.5 1051' }
+  mainBuilding = { id: 0, name: '', description: '', points: '2223.5 1051 2223.5 1405 2078.26 1405 2078.26 1462 1939.37 1462 1939.37 1405 1794.13 1405 1794.13 1434 1662.5 1434 1662.5 1022 1794.13 1022 1794.13 1051 2223.5 1051' }
   buildingCoordinates: any;
   svg: any;
   mainBuildingId: string = 'main-building';

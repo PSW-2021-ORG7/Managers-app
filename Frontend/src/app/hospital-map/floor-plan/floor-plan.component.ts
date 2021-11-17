@@ -4,15 +4,15 @@ import { Room, RoomType } from '../models/rooms/room.model';
 import { D3Service } from '../shared/d3.service';
 import { RoomsService } from './rooms.service';
 
-
 @Component({
   selector: 'app-floor-plan',
   templateUrl: './floor-plan.component.html',
-  styleUrls: ['./floor-plan.component.css'],
+  styleUrls: ['./floor-plan.component.scss'],
   providers: [RoomsService]
 })
+
 export class FloorPlanComponent implements OnInit {
-  buildingId: string = '';
+  @Input() buildingId: number = 0;
   svg: any;
   rooms: Room[] = [];
   selectedFloor: number = 0;
@@ -24,23 +24,19 @@ export class FloorPlanComponent implements OnInit {
   constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.buildingId = params['buildingId'];
-
-      this.roomsService.getRooms(this.buildingId).subscribe(
-        data => {
-          this.rooms = data;
-          this.drawRooms();
-          
-          let rooms = this.d3Service.selectByClass('main-building-room');
-          let component = this;
-          rooms.on('click', function(d: any, i: any){
-            component.selectedRoom = i;
-            component.roomSelected = true;
-          })
-        }
-      );
-    });
+    this.roomsService.getRooms(this.buildingId).subscribe(
+      data => {
+        this.rooms = data;
+        this.drawRooms();
+        
+        let rooms = this.d3Service.selectByClass('main-building-room');
+        let component = this;
+        rooms.on('click', function(d: any, i: any){
+          component.selectedRoom = i;
+          component.roomSelected = true;
+        })
+      }
+    );
   }
 
   private drawRooms() {
