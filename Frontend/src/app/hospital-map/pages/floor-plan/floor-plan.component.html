@@ -27,12 +27,12 @@
     <div class="room-info-outer-container d-flex flex-column">
         <div class="room-info-container d-flex flex-column justify-content-center align-items-center">
             <div *ngIf="!roomSelected" class="select-room-container align-self-center d-flex flex-column align-items-center">
-                <img class="mt-4" src="../../../assets/images/select-room.png" alt="Select a room">
+                <img class="mt-4" src="../../../../assets/images/select-room.png" alt="Select a room">
                 <span class="title">Select a room</span>
             </div>
             <div *ngIf="roomSelected" class="mt-3 mb-2 d-flex flex-row align-items-center">
                 <span class="title fw-bold me-2">Room info</span>
-                <img class="icon" (click)="showRoomInfoForm()" src="../../../assets/icons/edit-grey.png">
+                <img class="icon" (click)="showRoomInfoForm()" alt="Edit button" src="../../../../assets/icons/edit-grey.png">
             </div>
             <div *ngIf="roomSelected && selectedRoom" class="room-info">
                 <span class="field-name d-flex flex-row mb-2">Name:&nbsp;<span class="field-info">{{selectedRoom.name}}</span></span>
@@ -47,6 +47,7 @@
                 </span>
             </div>
         </div>
+        
         <button type="button" class="btn btn-success" (click)="showMapView()">Show map view</button>
     </div>
     <div class="backdrop d-flex align-items-center justify-content-center" *ngIf="roomInfoFormVisible">

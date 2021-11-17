@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BuildingCoordinatesService } from './shared/building-coordinates.service';
-import { BuildingsService } from './shared/buildings.service';
-import { D3Service } from './shared/d3.service';
+import { BuildingCoordinatesService } from './shared/services/building-coordinates.service';
+import { BuildingsService } from './shared/services/buildings.service';
+import { D3Service } from './shared/services/d3.service';
 
 @Component({
   selector: 'app-hospital-map',
   templateUrl: './hospital-map.component.html',
-  styleUrls: ['./hospital-map.component.css'],
+  styleUrls: ['./hospital-map.component.scss'],
   providers: [BuildingsService, BuildingCoordinatesService]
 })
 export class HospitalMapComponent implements OnInit {
-  mainBuilding = { id: '', name: '', description: '', points: '2223.5 1051 2223.5 1405 2078.26 1405 2078.26 1462 1939.37 1462 1939.37 1405 1794.13 1405 1794.13 1434 1662.5 1434 1662.5 1022 1794.13 1022 1794.13 1051 2223.5 1051' }
+  mainBuilding = { id: 0, name: '', description: '', points: '2223.5 1051 2223.5 1405 2078.26 1405 2078.26 1462 1939.37 1462 1939.37 1405 1794.13 1405 1794.13 1434 1662.5 1434 1662.5 1022 1794.13 1022 1794.13 1051 2223.5 1051' }
   buildingCoordinates: any;
   svg: any;
   mainBuildingId: string = 'main-building';
@@ -64,10 +64,10 @@ export class HospitalMapComponent implements OnInit {
 
   private addNavigationToMainBuildingPlan() {
     let mainBuilding = this.d3Service.selectById(this.mainBuildingId);
-    let component = this;
+    let self = this;
 
     mainBuilding.on('click', function () {
-      component.floorPlanVisible = true;
+      self.router.navigate(['floor-plan'], { relativeTo: self.route, queryParams: { buildingId: self.mainBuilding.id } })
     })
   }
 
@@ -118,10 +118,6 @@ export class HospitalMapComponent implements OnInit {
 
   mouseLeaveFn(e: any): void{
     this.isPanning = false;
-  }
-
-  onShowMapView(): void{
-    this.floorPlanVisible = false;
   }
 
 }

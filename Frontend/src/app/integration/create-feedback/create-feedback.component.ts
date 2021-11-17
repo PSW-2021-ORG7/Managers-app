@@ -33,7 +33,7 @@ const httpOptions = {
 @Component({
   selector: 'app-create-feedback',
   templateUrl: './create-feedback.component.html',
-  styleUrls: ['./create-feedback.component.css']
+  styleUrls: ['./create-feedback.component.scss']
 })
 export class CreateFeedbackComponent implements OnInit {
 

@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Room } from '../models/rooms/room.model';
+import { Room } from '../../models/rooms/room.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class RoomsService {
 
   constructor(private http: HttpClient) { }
 
-  getRooms(buildingId: string): Observable<Room[]> {
+  getRooms(buildingId: number): Observable<Room[]> {
     let params = new HttpParams().set('buildingId', buildingId)
     return this.http.get<Room[]>(this.baseUrl, { params: params });
   }

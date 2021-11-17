@@ -14,7 +14,7 @@ export class PharmacyRegistration{
 @Component({
   selector: 'app-pharmacy-registration',
   templateUrl: './pharmacy-registration.component.html',
-  styleUrls: ['./pharmacy-registration.component.css']
+  styleUrls: ['./pharmacy-registration.component.scss']
 })
 export class PharmacyRegistrationComponent implements OnInit {
 

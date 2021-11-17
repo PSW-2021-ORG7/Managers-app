@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FloorPlanComponent } from './floor-plan/floor-plan.component';
 import { HospitalMapComponent } from './hospital-map.component';
+import { FloorPlanComponent } from './pages/floor-plan/floor-plan.component';
 
 const routes: Routes = [
   { path: '', component: HospitalMapComponent },
