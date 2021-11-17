@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BuildingCoordinatesService } from './shared/building-coordinates.service';
-import { BuildingsService } from './shared/buildings.service';
-import { D3Service } from './shared/d3.service';
+import { BuildingCoordinatesService } from './shared/services/building-coordinates.service';
+import { BuildingsService } from './shared/services/buildings.service';
+import { D3Service } from './shared/services/d3.service';
 
 @Component({
   selector: 'app-hospital-map',

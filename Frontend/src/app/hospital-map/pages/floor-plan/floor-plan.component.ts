@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Room, RoomType } from '../models/rooms/room.model';
-import { D3Service } from '../shared/d3.service';
+import { Room, RoomType } from '../../models/rooms/room.model';
+import { D3Service } from '../../shared/services/d3.service';
 import { RoomsService } from './rooms.service';
 
 @Component({
