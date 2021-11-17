@@ -19,10 +19,10 @@
 
 .room-info-outer-container{
     position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    right: 2.78vw;
-    width: 19.285vw;
+    width: 22.07vw;
+    right: 0;
+    height: 100%;
+    background-color: white;
 }
 
 .room-info-container{
@@ -32,7 +32,7 @@
 }
 
 .title{
-    color: #214975;
+    color: color(blue);
     font-size:  1.25rem;
 }
 
@@ -43,70 +43,70 @@
 
 .form-check-input:checked{
     background-color: $main-color;
-    border-color: #214975;
+    border-color: color(blue);
 }
 
-.icon{
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
+// .icon{
+//     width: 20px;
+//     height: 20px;
+//     cursor: pointer;
+// }
 
-.room-info{
-    width: 100%;
-    padding: 0 28px;
-}
+// .room-info{
+//     width: 100%;
+//     padding: 0 28px;
+// }
 
-.field-name{
-    font-weight: bold;
-    color: #214975;   
-}
+// .field-name{
+//     font-weight: bold;
+//     color: color(blue);   
+// }
 
-.field-info{
-    font-weight: lighter;
-}
+// .field-info{
+//     font-weight: lighter;
+// }
 
-.btn-success{
-    background-color: #66A182;
-    font-weight: bold;
-    border: none;
-}
+// .btn-success{
+//     background-color: color(green);
+//     font-weight: bold;
+//     border: none;
+// }
 
-.backdrop{
-    position: absolute;
-    z-index: 3;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(30, 30, 30, 0.95);
-}
+// .backdrop{
+//     position: absolute;
+//     z-index: 3;
+//     width: 100vw;
+//     height: 100vh;
+//     background-color: rgba(30, 30, 30, 0.95);
+// }
 
-.form-container{
-    width: 28.714vw;
-    height: 561px;
-    background-color: white;
-    border-radius: 5px;
-}
+// .form-container{
+//     width: 28.714vw;
+//     height: 561px;
+//     background-color: white;
+//     border-radius: 5px;
+// }
 
-.room-form{
-    padding: 0 28px;
-}
+// .room-form{
+//     padding: 0 28px;
+// }
 
-.select-room-container{
-    height: 305px;
-}
+// .select-room-container{
+//     height: 305px;
+// }
 
-.select-room-container img{
-    width: 13.571vw;
-}
+// .select-room-container img{
+//     width: 13.571vw;
+// }
 
-#svg-container {
-    width: 100%;
-}
+// #svg-container {
+//     width: 100%;
+// }
 
-#svg-floor {
-    height: 100%;
-}
+// #svg-floor {
+//     height: 100%;
+// }
 
-#floor-plan {
-    background-color: rgba(0, 0, 0, .8);
-}
+// #floor-plan {
+//     background-color: rgba(0, 0, 0, .8);
+// }

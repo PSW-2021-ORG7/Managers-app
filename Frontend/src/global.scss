@@ -1,7 +1,36 @@
-body{
+@import 'src/styles/main.scss';
+
+body {
     font-family: 'Poppins', sans-serif !important;
 }
 
 #main-building{
     cursor: pointer;
 }
+
+.form-label{
+    color: color(darkgrey);
+    margin-bottom: 5px;
+}
+
+.form-control:focus{
+    color: color(blue);
+    box-shadow: none !important;
+    border: 2px solid color(darkgrey) !important;
+}
+
+select {
+    -webkit-appearance: menulist;
+    -moz-appearance: menulist;
+    appearance: menulist;
+}
+
+/* clears the 'X' from Internet Explorer */
+input[type=search]::-ms-clear {  display: none; width : 0; height: 0; }
+input[type=search]::-ms-reveal {  display: none; width : 0; height: 0; }
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }

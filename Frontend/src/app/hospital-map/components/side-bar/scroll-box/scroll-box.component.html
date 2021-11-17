@@ -1,0 +1,7 @@
+<div class="scroll-box">
+    <div *ngIf="rooms" >
+        <div *ngFor="let room of rooms">
+            <app-room-card *ngIf="room.floor == selectedFloor" [room]="room"></app-room-card>
+        </div>
+    </div>
+</div>

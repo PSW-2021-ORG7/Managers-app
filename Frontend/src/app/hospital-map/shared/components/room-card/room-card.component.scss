@@ -1,0 +1,28 @@
+@import 'src/styles/main.scss';
+
+.card{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+}
+    .card-title{
+        color: color(blue);
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .dot{
+        margin-right: 5px;
+    }
+
+    .status-text{
+        font-size: 14px;
+        color: green;
+    }
+
+    .floor-text{
+        font-size: 14px;
+        color: color(darkgrey);
+    }
