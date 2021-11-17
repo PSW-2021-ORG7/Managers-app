@@ -64,10 +64,10 @@ export class HospitalMapComponent implements OnInit {
 
   private addNavigationToMainBuildingPlan() {
     let mainBuilding = this.d3Service.selectById(this.mainBuildingId);
-    let component = this;
+    let self = this;
 
     mainBuilding.on('click', function () {
-      component.floorPlanVisible = true;
+      self.router.navigate(['floor-plan'], { relativeTo: self.route, queryParams: { buildingId: self.mainBuilding.id } })
     })
   }
 
@@ -118,10 +118,6 @@ export class HospitalMapComponent implements OnInit {
 
   mouseLeaveFn(e: any): void{
     this.isPanning = false;
-  }
-
-  onShowMapView(): void{
-    this.floorPlanVisible = false;
   }
 
 }

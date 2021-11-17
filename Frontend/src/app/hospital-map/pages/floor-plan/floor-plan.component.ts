@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Room, RoomType } from '../../models/rooms/room.model';
 import { D3Service } from '../../shared/services/d3.service';
 import { RoomsService } from '../../shared/services/rooms.service';
@@ -12,31 +12,34 @@ import { RoomsService } from '../../shared/services/rooms.service';
 })
 
 export class FloorPlanComponent implements OnInit {
-  @Input() buildingId: number = 0;
+  buildingId: number = 0;
   svg: any;
   rooms: Room[] = [];
   selectedFloor: number = 0;
   @Input() selectedRoom: Room | undefined;
   roomInfoFormVisible: boolean = false;
   roomSelected: boolean = false;
-  @Output() notifyShowMapView: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute) {}
+  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    this.roomsService.getRooms(this.buildingId).subscribe(
-      data => {
-        this.rooms = data;
-        this.drawRooms();
-        
-        let rooms = this.d3Service.selectByClass('main-building-room');
-        let component = this;
-        rooms.on('click', function(d: any, i: any){
-          component.selectedRoom = i;
-          component.roomSelected = true;
-        })
-      }
-    );
+
+    this.route.queryParams.subscribe(params => {
+        this.buildingId = params['buildingId'];
+        this.roomsService.getRooms(this.buildingId).subscribe(
+          data => {
+            this.rooms = data;
+            this.drawRooms();
+            
+            let rooms = this.d3Service.selectByClass('main-building-room');
+            let component = this;
+            rooms.on('click', function(d: any, i: any){
+              component.selectedRoom = i;
+              component.roomSelected = true;
+            })
+          }
+        );
+    });
   }
 
   private drawRooms() {
@@ -60,7 +63,7 @@ export class FloorPlanComponent implements OnInit {
   }
 
   showMapView(): void{
-    this.notifyShowMapView.emit();
+    this.router.navigate(['/hospital-map'], { relativeTo: this.route })
   }
 
   showRoomInfoForm(){
