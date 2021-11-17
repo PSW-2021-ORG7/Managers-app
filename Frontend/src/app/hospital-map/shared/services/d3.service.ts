@@ -6,16 +6,12 @@ import * as d3 from 'd3-selection';
 })
 export class D3Service {
 
-  constructor() { }
-
   createSvg(viewBox:string): any {
-    let svg = d3.select('div#canvas')
+    return d3.select('div#canvas')
       .append('svg')
       .attr('viewBox', viewBox)
       .attr('preserveAspectRatio', 'xMidYMid meet')
-      .append('g');
-
-    return svg;
+      .append('g');;
   }
 
   drawMulticoloredRectangles(svg:any, data: any[], className: string): void {
@@ -67,13 +63,11 @@ export class D3Service {
   }
 
   selectById(id: string) : any {
-    let object = d3.selectAll('#' + id);
-    return object;
+    return d3.selectAll('#' + id);
   }
 
   selectByClass(className: string) : any {
-    let object = d3.selectAll('.' + className);
-    return object;
+    return d3.selectAll('.' + className);;
   }
 
 }

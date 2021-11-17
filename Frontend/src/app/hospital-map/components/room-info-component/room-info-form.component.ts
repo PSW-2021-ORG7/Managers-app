@@ -1,13 +1,13 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RoomStatus, RoomType } from '../../models/rooms/room.model';
 import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
-  selector: 'app-room-info',
-  templateUrl: './room-info.component.html',
-  styleUrls: ['./room-info.component.scss']
+  selector: 'app-room-info-form',
+  templateUrl: './room-info-form.component.html',
+  styleUrls: ['./room-info-form.component.scss']
 })
-export class RoomInfoFormComponent{
+export class RoomInfoFormComponent implements OnInit {
   @Input() selectedRoom: any;
   roomStatuses: RoomStatus[] = [
     RoomStatus.Occupied,
@@ -27,6 +27,9 @@ export class RoomInfoFormComponent{
     RoomType.Storage
   ]
   constructor(private roomsService: RoomsService) { }
+
+  ngOnInit(): void {
+  }
 
   @Output() notifyHideRoomInfo: EventEmitter<any> = new EventEmitter<any>();
 
