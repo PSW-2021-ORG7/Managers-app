@@ -3,9 +3,9 @@ import { RoomStatus, RoomType } from '../../models/rooms/room.model';
 import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
-  selector: 'app-room-info',
-  templateUrl: './room-info.component.html',
-  styleUrls: ['./room-info.component.scss']
+  selector: 'app-side-bar',
+  templateUrl: './side-bar.component.html',
+  styleUrls: ['./side-bar.component.scss']
 })
 export class RoomInfoFormComponent{
   @Input() selectedRoom: any;
