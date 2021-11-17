@@ -11,7 +11,7 @@ export class D3Service {
       .append('svg')
       .attr('viewBox', viewBox)
       .attr('preserveAspectRatio', 'xMidYMid meet')
-      .append('g');;
+      .append('g');
   }
 
   drawMulticoloredRectangles(svg:any, data: any[], className: string): void {
@@ -67,7 +67,7 @@ export class D3Service {
   }
 
   selectByClass(className: string) : any {
-    return d3.selectAll('.' + className);;
+    return d3.selectAll('.' + className);
   }
 
 }
