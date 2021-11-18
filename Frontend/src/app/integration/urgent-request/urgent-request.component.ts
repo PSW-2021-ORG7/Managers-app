@@ -6,6 +6,7 @@ export class UrgentRequest {
     public medicine: string,
     public dose: string,
     public quantity: string,
+    public selectedPharmacy: string
   ){
 
   }
@@ -20,6 +21,7 @@ export class UrgentRequestComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   quantity: string = '';
+  selectedPharmacy: string = '';
   
   constructor(private httpClient: HttpClient) { }
 
@@ -41,15 +43,22 @@ export class UrgentRequestComponent implements OnInit {
     this.quantity = event.target.value;
     console.log(this.quantity);
   }
+
+  selectChangeHandlerSelectedPharmacy(event: any) {
+    this.selectedPharmacy = event.target.value;
+    console.log(this.selectedPharmacy);
+  }
   
 
   send(): void {
     var urgentRequest = {
       medicine: this.medicine,
       dose: this.dose,
-      quantity: this.quantity
+      quantity: this.quantity,
+      selectedPharmacy: this.selectedPharmacy
     };
     console.log(urgentRequest);
+    alert("success");
   }
 
 }
