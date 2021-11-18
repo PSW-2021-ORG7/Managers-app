@@ -9,6 +9,7 @@ import { CreateFeedbackComponent } from './create-feedback/create-feedback.compo
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './http-interceptor';
 import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
+import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UrgentRequestComponent } from './urgent-request/urgent-request.componen
     PharmacyRegistrationComponent,
     FeedbackComponent,
     CreateFeedbackComponent,
-    UrgentRequestComponent
+    UrgentRequestComponent,
+    MedicationSpecificationComponent
    
   ],
   imports: [

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { IntegrationComponent } from './integration.component';
+import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-registration.component';
 import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
 
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path : 'pharmacy-registration', component: PharmacyRegistrationComponent },
   { path : 'feedback', component: FeedbackComponent },
   { path : 'create-feedback', component: CreateFeedbackComponent },
-  { path: 'urgent-request', component: UrgentRequestComponent}
+  { path: 'urgent-request', component: UrgentRequestComponent },
+  { path: 'medication-specification', component: MedicationSpecificationComponent }
    
 ];
 
