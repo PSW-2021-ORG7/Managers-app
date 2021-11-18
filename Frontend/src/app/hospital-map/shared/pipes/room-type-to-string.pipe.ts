@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { RoomType } from '../models/rooms/room.model';
+import { RoomType } from '../../models/rooms/room.model';
 
 @Pipe({
   name: 'roomTypeToString'

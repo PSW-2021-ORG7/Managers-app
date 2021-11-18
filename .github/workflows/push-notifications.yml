@@ -1,0 +1,15 @@
+name: Notify on Merge
+on: 
+  push:
+    branches:
+      [master,develop]
+jobs:
+  slack-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Develop Merge
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

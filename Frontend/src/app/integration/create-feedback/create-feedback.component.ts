@@ -33,7 +33,7 @@ const httpOptions = {
 @Component({
   selector: 'app-create-feedback',
   templateUrl: './create-feedback.component.html',
-  styleUrls: ['./create-feedback.component.css']
+  styleUrls: ['./create-feedback.component.scss']
 })
 export class CreateFeedbackComponent implements OnInit {
 
@@ -103,6 +103,7 @@ export class CreateFeedbackComponent implements OnInit {
     
     
     console.log(feedback)
+    localStorage.setItem('ApiKey', JSON.stringify("XYZ"));
     return this.httpClient.post('http://localhost:64677/api/feedback', feedback, httpOptions).subscribe(); 
 
   }

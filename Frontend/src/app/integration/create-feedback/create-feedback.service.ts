@@ -17,7 +17,7 @@ export class CreateFeedbackService {
 
     getPharmacyByID(id: string): Observable<any> {
       
-      localStorage.setItem('ApiKey', JSON.stringify("XYZ"));
+      localStorage.setItem('ApiKey', JSON.stringify("ABC"));
       return this.http.get(this.baseUrl + "/" + id);
   }
 }

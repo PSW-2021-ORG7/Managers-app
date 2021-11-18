@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { RoomStatus } from '../models/rooms/room.model';
+import { RoomStatus } from '../../models/rooms/room.model';
 
 @Pipe({
   name: 'roomStatusToString'

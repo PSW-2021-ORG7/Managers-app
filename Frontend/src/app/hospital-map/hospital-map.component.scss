@@ -1,8 +1,11 @@
+@import 'src/styles/main.scss';
+
 #map {
     position: relative;
 }
 
 #map-background{
+    // @include background-svg($map-background);
     object-fit: cover;
     height: 100vh;
 }

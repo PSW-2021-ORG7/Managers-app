@@ -8,14 +8,17 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './http-interceptor';
-
+import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
+import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 
 @NgModule({
   declarations: [
     IntegrationComponent,
     PharmacyRegistrationComponent,
     FeedbackComponent,
-    CreateFeedbackComponent
+    CreateFeedbackComponent,
+    UrgentRequestComponent,
+    MedicationSpecificationComponent
    
   ],
   imports: [
