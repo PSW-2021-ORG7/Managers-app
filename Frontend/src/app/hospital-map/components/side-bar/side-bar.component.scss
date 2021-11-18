@@ -60,8 +60,9 @@
         }
     
     .button-wrapper{
-        cursor: pointer;
-        margin-right: 32px;
+        right: 32px;
+        position: absolute;
+        bottom: 10px;
     }
 
         .room-details-icon{

@@ -1,8 +1,8 @@
 <div class="scroll-box">
     <div *ngIf="rooms && mode=='rooms'" >
         <div *ngFor="let room of rooms">
-            <app-room-card *ngIf="!isSearchActive && room.floor == selectedFloor" [room]="room"></app-room-card>
-            <app-room-card *ngIf="isSearchActive && (room.name + (room.type | roomTypeToString)).includes(searchFilter)" [room]="room"></app-room-card>
+            <app-room-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="!isSearchActive && room.floor == selectedFloor" [room]="room"></app-room-card>
+            <app-room-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="isSearchActive && (room.name + (room.type | roomTypeToString)).toLowerCase().includes(searchFilter)" [room]="room"></app-room-card>
         </div>
     </div>
 </div>

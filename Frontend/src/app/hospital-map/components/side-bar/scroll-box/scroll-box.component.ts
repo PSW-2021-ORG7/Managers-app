@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Room } from 'src/app/hospital-map/models/rooms/room.model';
 
 @Component({
@@ -13,6 +13,11 @@ export class ScrollBoxComponent implements OnChanges{
   @Input() searchFilter: string = "";
   @Input() isSearchActive: boolean = false;
   @Input() mode: string = "rooms";
+  @Output() notifyDisplayRoom = new EventEmitter<number>();
+  
+  onNotifyDisplayRoom(roomId : number){
+    this.notifyDisplayRoom.emit(roomId);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedFloor']) {

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Room } from '../../models/rooms/room.model';
 
 @Component({
@@ -8,49 +8,44 @@ import { Room } from '../../models/rooms/room.model';
 })
 export class SideBarComponent implements OnChanges {
 
-  @Input() rooms: Room[] = [];
-  @Input() selectedFloor: number = 0;
-  roomSelectionColor: string = "#214975";
-  equipmentSelectionColor: string = "#a2a2a2";
-  roomsFontWeight: string = "bold";
-  equipmentFontWeight: string = "light";
-  searchInput: string = "";
-  searchFilter: string = "";
-  scrollBoxTitle: string = "Rooms on this floor"
-  mode: string = "rooms";
-  isSearchActive: boolean = false;
-
-  changeMode(mode: string){
-    this.mode = mode;
-    this.changeSearchElementsStyle(mode);
-  }
-
-  changeSearchElementsStyle(mode: string){
-    if(mode == "rooms"){
-      this.roomSelectionColor = "#214975";
-      this.roomsFontWeight = "bold"
-      this.equipmentSelectionColor = "#a2a2a2";
-      this.equipmentFontWeight = "lighter";
-      this.scrollBoxTitle = "Rooms on this floor";
-    } else if (mode == "equipment"){
-      this.roomSelectionColor = "#a2a2a2";
-      this.roomsFontWeight = "lighter";
-      this.equipmentSelectionColor = "#214975";
-      this.equipmentFontWeight = "bold";
-      this.scrollBoxTitle = "Equipment on this floor"
-    }
-  }
-
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedFloor']) {
         this.selectedFloor = changes.selectedFloor.currentValue;
+    }
+    else if (changes['isRoomSelected']) {
+      this.isRoomSelected = changes.isRoomSelected.currentValue;
+    }
+  }
+
+  @Input() rooms: Room[] = [];
+  @Input() selectedFloor: number = 0;
+  @Input() isRoomSelected: boolean = false;
+  searchInput: string = "";
+  searchFilter: string = "";
+  scrollBoxTitle: string = "Rooms on this floor";
+  mode: string = "rooms";
+  isSearchActive: boolean = false;
+
+  @Output() notifyDisplayRoom = new EventEmitter<number>();
+  
+  onNotifyDisplayRoom(roomId : number){
+    this.notifyDisplayRoom.emit(roomId);
+  }
+
+
+  changeMode(mode: string){
+    this.mode = mode;
+    if(mode == "rooms"){
+      this.scrollBoxTitle = "Rooms on this floor";
+    } else if (mode == "equipment"){
+      this.scrollBoxTitle = "Equipment on this floor"
     }
   }
 
   search() : void{
     if(this.searchInput != ""){
       this.isSearchActive = true;
-      this.searchFilter = this.searchInput;
+      this.searchFilter = this.searchInput.toLowerCase();
       this.scrollBoxTitle = "Search results";
     }
   }
@@ -66,5 +61,10 @@ export class SideBarComponent implements OnChanges {
     }
   }
   
+  showRoomDetails() : void{
+    if(this.isRoomSelected){
+      
+    }
+  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Room, RoomStatus } from 'src/app/hospital-map/models/rooms/room.model';
 
 @Component({
@@ -9,6 +9,7 @@ import { Room, RoomStatus } from 'src/app/hospital-map/models/rooms/room.model';
 export class RoomCardComponent {
 
   @Input() room!: Room;
+  @Output() notifyDisplayRoom = new EventEmitter<number>();
 
   roomStatusColor() : string{
     if(this.room.status == RoomStatus.Unoccupied)
@@ -20,4 +21,9 @@ export class RoomCardComponent {
     else 
       return "#214975";
   }
+
+  displayRoomOnMap(){
+    this.notifyDisplayRoom.emit(this.room.id);
+  }
+
 }

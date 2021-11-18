@@ -4,28 +4,21 @@
         <div class="floor-container d-flex flex-column justify-content-center align-items-center">
             <span class="title fw-bold mt-3 mb-2">Select floor</span>
             <form>
-                <div class="radio-btn d-flex flex-row mb-2">
-                    <input class="form-check-input me-2" name="floor" (change)="selectedFloorChanged(2)" type="radio" id="floor2">
-                    <label class="form-check-label" for="floor2">
-                        Floor 2
-                    </label>
-                </div>
-                <div class="radio-btn d-flex flex-row mb-2">
-                    <input class="form-check-input me-2" name="floor" (change)="selectedFloorChanged(1)" type="radio" id="floor1">
-                    <label class="form-check-label" for="floor1">
-                        Floor 1
-                    </label>
-                </div>
-                <div class="radio-btn d-flex flex-row mb-2">
-                    <input class="form-check-input me-2" name="floor" (change)="selectedFloorChanged(0)" type="radio" id="floor0" checked>
-                    <label class="form-check-label" for="floor0">
-                        Floor 0
-                    </label>
+                <div *ngIf="floors">
+                    <div *ngFor="let floor of floors">
+                        <div class="radio-btn d-flex flex-row mb-2">
+                            <input class="form-check-input me-2" checked name="floor" value="{{floor}}" [checked]="selectedFloor == floor" (change)="selectedFloorChanged(floor)" type="radio" id="{{'floor' + floor}}">
+                            <label class="form-check-label" for="{{'floor' + floor}}">
+                               <span *ngIf="floor > 0">Floor {{floor}}</span>
+                               <span *ngIf="floor == 0">Ground level</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-3"></div>
             </form>
         </div> 
         <app-primary-button (click)="showMapView()" text="Map view" color="#66A182"></app-primary-button>
     </div>
-    <app-side-bar *ngIf="rooms" [rooms]="rooms" [selectedFloor]="selectedFloor" class="room-info-outer-container d-flex flex-column"></app-side-bar>
+    <app-side-bar *ngIf="rooms" [rooms]="rooms" [selectedFloor]="selectedFloor" [isRoomSelected]="isRoomSelected" (notifyDisplayRoom)="onNotifyDisplayRoom($event)" class="room-info-outer-container d-flex flex-column"></app-side-bar>
 </div>

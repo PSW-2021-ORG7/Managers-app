@@ -57,11 +57,12 @@ export class D3Service {
       .attr('x', coords.x)
       .attr('y', coords.y)
       .attr('text-anchor', 'middle')
-      .text(text)
       .style('fill', '#214975')
       .attr('font-size', '1.563rem')
       .attr('class', className)
-      .attr('id', id);
+      .attr('id', id)
+      .attr('cursor', 'default')
+      .text(text);
   }
 
   selectById(id: string) : any {
