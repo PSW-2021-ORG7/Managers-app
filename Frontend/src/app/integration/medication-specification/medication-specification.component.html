@@ -1,0 +1,46 @@
+<app-integration></app-integration>
+<br>
+
+<div id="MedicationSpecification">
+    <form (submit)="send()">
+        <div class="container">
+            <table>
+                <h1 style="text-align: center;">Medication specification</h1>
+                <hr>
+
+                <tr>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Choose medicine </b></label>
+                        <input type="text" (change)="selectChangeHandlerMedicine($event)" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><b>Dose </b></label><br>
+                        <input type="text" style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" required>
+                    </td>
+                </tr>
+                <tr>
+                    <button type="button" class="btn btn-secondary checkIfAvailableBtn">Check if available</button><br><br>
+                </tr>
+                <tr>
+                    <label><b>Available in: </b></label><br>
+                    <select name="multipleSelect" id="multipleSelect" multiple (change)="selectChangeHandlerSelectedPharmacy($event)" required>
+                        <option value="option-1">Apoteka Jankovic</option>
+                        <option value="option-2">Apoteka Benu</option>
+                        <option value="option-3">Apoteka Laurus</option>
+                    </select>
+                </tr>
+                <tr>
+                    <hr>
+                    <button type="submit" class="btn btn-secondary requestSpecBtn">Request Specification</button>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+

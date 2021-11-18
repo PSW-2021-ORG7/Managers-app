@@ -7,6 +7,7 @@ import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-
 import { FeedbackComponent } from './feedback/feedback.component';
 import { CreateFeedbackComponent } from './create-feedback/create-feedback.component';
 import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
+import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UrgentRequestComponent } from './urgent-request/urgent-request.componen
     PharmacyRegistrationComponent,
     FeedbackComponent,
     CreateFeedbackComponent,
-    UrgentRequestComponent
+    UrgentRequestComponent,
+    MedicationSpecificationComponent
    
   ],
   imports: [
