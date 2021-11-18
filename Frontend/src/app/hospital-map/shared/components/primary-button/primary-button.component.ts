@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-primary-button',
@@ -8,5 +8,5 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PrimaryButtonComponent {
 
   @Input() text: string = "Button";
-
+  @Input() color: string = "#214975";
 }

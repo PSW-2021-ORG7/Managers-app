@@ -1,22 +1,24 @@
 @import 'src/styles/main.scss';
 
-.wrapper{
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    z-index: 1;
-}
-
-.floor-container{
+.floor-and-button-wrapper{
     position: absolute;
     top: 50%;
+    left: 2.78vw;
     transform: translate(0, -50%);
     width: 11.57vw;
-    background-color: white;
-    left: 2.78vw;
-    border-radius: 5px;
 }
 
+    .floor-container{
+        background-color: white;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+        .title{
+            color: color(blue);
+            font-size:  1.25rem;
+        }
+        
 .room-info-outer-container{
     position: absolute;
     width: 22.07vw;
@@ -24,89 +26,3 @@
     height: 100%;
     background-color: white;
 }
-
-.room-info-container{
-    background-color: white;
-    border-radius: 5px;
-    margin-bottom: 20px;
-}
-
-.title{
-    color: color(blue);
-    font-size:  1.25rem;
-}
-
-.form-check-input{
-    width: 16px;
-    height: 16px;
-}
-
-.form-check-input:checked{
-    background-color: $main-color;
-    border-color: color(blue);
-}
-
-// .icon{
-//     width: 20px;
-//     height: 20px;
-//     cursor: pointer;
-// }
-
-// .room-info{
-//     width: 100%;
-//     padding: 0 28px;
-// }
-
-// .field-name{
-//     font-weight: bold;
-//     color: color(blue);   
-// }
-
-// .field-info{
-//     font-weight: lighter;
-// }
-
-// .btn-success{
-//     background-color: color(green);
-//     font-weight: bold;
-//     border: none;
-// }
-
-// .backdrop{
-//     position: absolute;
-//     z-index: 3;
-//     width: 100vw;
-//     height: 100vh;
-//     background-color: rgba(30, 30, 30, 0.95);
-// }
-
-// .form-container{
-//     width: 28.714vw;
-//     height: 561px;
-//     background-color: white;
-//     border-radius: 5px;
-// }
-
-// .room-form{
-//     padding: 0 28px;
-// }
-
-// .select-room-container{
-//     height: 305px;
-// }
-
-// .select-room-container img{
-//     width: 13.571vw;
-// }
-
-// #svg-container {
-//     width: 100%;
-// }
-
-// #svg-floor {
-//     height: 100%;
-// }
-
-// #floor-plan {
-//     background-color: rgba(0, 0, 0, .8);
-// }

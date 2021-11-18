@@ -11,15 +11,15 @@
         </div>
     </div>
     <div class="search-container d-flex flex-row">
-        <input type="search" class="form-control search-field" id="searchInput" placeholder="Search">
-        <app-primary-button [text]="'Search'"></app-primary-button>
+        <input type="search" class="form-control search-field" [(ngModel)]="searchInput" id="searchInput" placeholder="Search">
+        <app-primary-button (click)="search()" [text]="'Search'"></app-primary-button>
     </div>
     <div class="display-container d-flex flex-column">
         <div class="d-flex flex-row justify-content-between display-title-wrapper">
-            <span class="fw-bold title">Rooms on this floor</span>
-            <span class="remove-filter align-self-end visually-hidden">Remove filter</span>
+            <span class="fw-bold title">{{scrollBoxTitle}}</span>
+            <span *ngIf="isSearchActive" (click)="removeFilter()" class="remove-filter align-self-end">Remove filter</span>
         </div>
-        <app-scroll-box *ngIf="rooms" class="scroll-box-container" [rooms]='rooms' [selectedFloor]='selectedFloor'></app-scroll-box>
+        <app-scroll-box *ngIf="rooms" class="scroll-box-container" [mode]='mode' [isSearchActive]="isSearchActive" [searchFilter]='searchFilter' [selectedFloor]='selectedFloor' [rooms]='rooms'></app-scroll-box>
     </div>
     <div class="button-wrapper d-flex flex-row justify-content-end">
         <svg class="room-details-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8H8V4H4V8ZM10 20H14V16H10V20ZM4 20H8V16H4V20ZM4 14H8V10H4V14ZM10 14H14V10H10V14ZM16 4V8H20V4H16ZM10 8H14V4H10V8ZM16 14H20V10H16V14ZM16 20H20V16H16V20Z" fill="#214975"/></svg>

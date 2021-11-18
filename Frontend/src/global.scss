@@ -19,6 +19,11 @@ body {
     border: 2px solid color(darkgrey) !important;
 }
 
+.form-check-input:checked{
+    background-color: color(blue) !important;
+    border-color: color(blue);
+}
+
 select {
     -webkit-appearance: menulist;
     -moz-appearance: menulist;
