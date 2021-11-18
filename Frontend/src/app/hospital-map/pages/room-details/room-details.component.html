@@ -1,0 +1,59 @@
+<div class="d-flex flex-column">
+    <div>
+        <button class="back-to-map-btn btn darkgray-text" [routerLink]="['/hospital-map']">
+            <svg width="22" height="8" viewBox="0 0 22 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 4.5C21.2761 4.5 21.5 4.27614 21.5 4C21.5 3.72386 21.2761 3.5 21 3.5L21 4.5ZM0.646446 3.64645C0.451185 3.84171 0.451185 4.15829 0.646446 4.35356L3.82843 7.53554C4.02369 7.7308 4.34027 7.7308 4.53553 7.53554C4.7308 7.34027 4.7308 7.02369 4.53553 6.82843L1.70711 4L4.53553 1.17157C4.7308 0.976312 4.7308 0.65973 4.53553 0.464468C4.34027 0.269205 4.02369 0.269205 3.82843 0.464468L0.646446 3.64645ZM21 3.5L1 3.5L1 4.5L21 4.5L21 3.5Z" fill="#A2A2A2"/>
+            </svg>
+            <span class="align-middle ms-1">Map view</span>
+        </button>
+    </div>
+
+    <div class="d-flex flex-column mx-5">
+        <div class="d-flex justify-content-between mt-3">
+            <div id="room-name" class="fw-bold blue-text mb-1">
+                <span class="align-middle">Operating room 1A</span> 
+                <button class="btn p-0 b-0 m-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 17.4601V20.5001C3 20.7801 3.22 21.0001 3.5 21.0001H6.54C6.67 21.0001 6.8 20.9501 6.89 20.8501L17.81 9.94006L14.06 6.19006L3.15 17.1001C3.05 17.2001 3 17.3201 3 17.4601ZM20.71 7.04006C21.1 6.65006 21.1 6.02006 20.71 5.63006L18.37 3.29006C17.98 2.90006 17.35 2.90006 16.96 3.29006L15.13 5.12006L18.88 8.87006L20.71 7.04006Z" fill="#214975"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="mb-1">
+                <span class="align-middle">o Status component<br/>goes here</span>
+            </div>
+        </div>
+        
+        <div class="fw-bold darkgray-text subhead mb-3"><img id="doctor-icon" src="../../../../assets/icons/doctor.jpg"><span class="align-middle ms-2">Dr. George Ross</span></div>
+        <p class="darkgray-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi ut perspiciatis optio illum reiciendis quisquam delectus, voluptate expedita! Eligendi ut repellendus unde consectetur ab adipisci laborum mollitia voluptatum possimus suscipit.</p>
+        
+        <div class="d-flex flex-row justify-content-between mb-1">
+            <h3 class="fw-bold blue-text subhead m-0 p-2 ps-0">Room equipment</h3>
+            <button class="btn fw-bold blue-text p-2 pe-0"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_27_24)">
+                <path d="M12 4.00003V2.21003C12 1.76003 11.46 1.54003 11.15 1.86003L8.35 4.65003C8.15 4.85003 8.15 5.16003 8.35 5.36003L11.14 8.15003C11.46 8.46003 12 8.24003 12 7.79003V6.00003C15.31 6.00003 18 8.69003 18 12C18 12.79 17.85 13.56 17.56 14.25C17.41 14.61 17.52 15.02 17.79 15.29C18.3 15.8 19.16 15.62 19.43 14.95C19.8 14.04 20 13.04 20 12C20 7.58003 16.42 4.00003 12 4.00003ZM12 18C8.69 18 6 15.31 6 12C6 11.21 6.15 10.44 6.44 9.75003C6.59 9.39003 6.48 8.98003 6.21 8.71003C5.7 8.20003 4.84 8.38003 4.57 9.05003C4.2 9.96003 4 10.96 4 12C4 16.42 7.58 20 12 20V21.79C12 22.24 12.54 22.46 12.85 22.14L15.64 19.35C15.84 19.15 15.84 18.84 15.64 18.64L12.85 15.85C12.54 15.54 12 15.76 12 16.21V18V18Z" fill="#214975"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_27_24">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+                </svg> 
+                <span class="ms-1">Make transfer</span>
+            </button>
+        </div>    
+    </div>
+
+    <!-- TODO: Add div with scroller -->
+    <div class="d-flex flex-column mx-5">
+        <div class="d-flex flex-row card rounded justify-content-between p-3 mb-3">
+            <div class="d-flex flex-column">
+                <span class="blue-text">Measuring tape</span>
+                <span class="darkgray-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat vel exercitationem, et corrupti eius eaque nulla nobis, deserunt repudiandae dignissimos? Sequi tenetur dolor distinctio perferendis!</span>
+            </div>
+            <div class="d-flex flex-column justify-content-center darkgray-text">
+                <span>Qty</span>
+                <span class="align-self-end">3</span>
+            </div>
+        </div>
+    </div>
+</div>     

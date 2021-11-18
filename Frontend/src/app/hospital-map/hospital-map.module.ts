@@ -13,6 +13,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { PrimaryButtonComponent } from './shared/components/primary-button/primary-button.component';
 import { ScrollBoxComponent } from './components/side-bar/scroll-box/scroll-box.component';
 import { RoomCardComponent } from './shared/components/room-card/room-card.component';
+import { RoomDetailsComponent } from './pages/room-details/room-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RoomCardComponent } from './shared/components/room-card/room-card.compo
     SideBarComponent,
     PrimaryButtonComponent,
     ScrollBoxComponent,
-    RoomCardComponent
+    RoomCardComponent,
+    RoomDetailsComponent
   ],
   imports: [
     CommonModule,
