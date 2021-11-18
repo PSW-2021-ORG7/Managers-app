@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Room, RoomStatus } from 'src/app/hospital-map/models/rooms/room.model';
 
 @Component({
