@@ -36,6 +36,7 @@ export class FloorPlanComponent implements OnInit {
             rooms.on('click', function(d: any, i: any){
               component.selectedRoom = i;
               component.roomSelected = true;
+              component.highlightRoom();
             })
           }
         );
@@ -76,10 +77,21 @@ export class FloorPlanComponent implements OnInit {
 
   drawRoomNames(): void {
     for (const room of this.rooms){
-      this.d3Service.addText(this.svg, RoomType[room.type] + ' ' + room.name, { x: room.x + room.width/2, y: room.y + room.height/2 }, 'floor-' + room.floor + ' main-building-room');
+      this.d3Service.addText(this.svg, RoomType[room.type] + ' ' + room.name, { x: room.x + room.width/2, y: room.y + room.height/2 }, 'floor-' + room.floor + ' main-building-room', 'room-' + room.id);
     }
     this.svg.selectAll('text')
       .style('font-size', '14px')
+  }
+
+  highlightRoom(): void {
+    this.svg.selectAll('.main-building-room')
+      .style('fill', '#cccccc');
+    this.svg.selectAll('text')
+      .style('fill', '#214975');
+    this.svg.selectAll('#room-' + this.selectedRoom?.id)
+      .style('fill', '#214975');
+    this.svg.selectAll('text#room-' + this.selectedRoom?.id)
+      .style('fill', '#ffffff');
   }
 
 }
