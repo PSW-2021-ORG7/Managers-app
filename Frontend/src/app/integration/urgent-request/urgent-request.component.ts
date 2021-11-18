@@ -7,6 +7,7 @@ export class UrgentRequest {
     public dose: string,
     public quantity: string,
     public selectedPharmacy: string
+
   ){
 
   }
@@ -17,6 +18,7 @@ export class UrgentRequest {
   templateUrl: './urgent-request.component.html',
   styleUrls: ['./urgent-request.component.css']
 })
+
 export class UrgentRequestComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
@@ -48,8 +50,8 @@ export class UrgentRequestComponent implements OnInit {
     this.selectedPharmacy = event.target.value;
     console.log(this.selectedPharmacy);
   }
-  
 
+  
   send(): void {
     var urgentRequest = {
       medicine: this.medicine,
@@ -59,6 +61,7 @@ export class UrgentRequestComponent implements OnInit {
     };
     console.log(urgentRequest);
     alert("success");
+    
   }
 
 }
