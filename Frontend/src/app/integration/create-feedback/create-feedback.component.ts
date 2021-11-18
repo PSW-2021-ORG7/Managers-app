@@ -1,7 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../authentication-service';
-import { TokenInterceptor } from '../http-interceptor';
 import { CreateFeedbackService } from './create-feedback.service';
 
 export class Pharmacy {
@@ -45,7 +43,7 @@ export class CreateFeedbackComponent implements OnInit {
   http: any;
   feedback: Feedback | undefined
 
-  constructor(private httpClient: HttpClient, private feedbackService: CreateFeedbackService, private authService: AuthenticationService) {
+  constructor(private httpClient: HttpClient, private feedbackService: CreateFeedbackService) {
 
   }
 
@@ -100,8 +98,7 @@ export class CreateFeedbackComponent implements OnInit {
 
     this.feedbackService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
       pharmacy = pharmacy;
-      this.authService.setApiKey(pharmacy.apiKeyPharmacy);
-
+     
     });
     
     
