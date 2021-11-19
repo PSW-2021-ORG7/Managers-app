@@ -30,7 +30,7 @@
                 <td>
                     <label><b>Quantity</b></label>&nbsp;<br>
                     <input type="text" style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerQuantity($event)" [attr.aria-label]="quantity"required><br>
-                    <button type="button" class="btn btn-secondary checkIfAvailableBtn">Check if available</button><br><br>
+                    <button type="button" (click) = "checkIfAvailable()" class="btn btn-secondary checkIfAvailableBtn">Check if available</button><br><br>
 
                     <select name="multipleSelect" id="multipleSelect" multiple (change)="selectChangeHandlerSelectedPharmacy($event)" [attr.aria-label]="selectedPharmacy" required>
                         <option value="option-1">Apoteka Jankovic</option>
