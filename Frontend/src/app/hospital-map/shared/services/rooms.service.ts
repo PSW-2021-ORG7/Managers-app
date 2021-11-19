@@ -16,6 +16,10 @@ export class RoomsService {
     return this.http.get<Room[]>(this.baseUrl, { params: params });
   }
 
+  getRoomWithEquipment(roomId: number): Observable<Room> {
+    return this.http.get<Room>(this.baseUrl + '/' + roomId + '/equipment')
+  }
+
   updateRoom(room: Room): Observable<Room> {
     return this.http.put<Room>(this.baseUrl + '/' + room.id, room);
   }

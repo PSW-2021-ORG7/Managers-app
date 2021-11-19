@@ -17,8 +17,7 @@ export class FloorPlanComponent implements OnInit {
   svg: any;
   rooms: Room[] = [];
   selectedFloor: number = 0;
-  @Input() selectedRoomId: number = -1;
-  roomInfoFormVisible: boolean = false;
+  selectedRoomId: number = -1;
   isRoomSelected: boolean = false;
   floors: number[] = [];
 
@@ -90,14 +89,6 @@ export class FloorPlanComponent implements OnInit {
 
   showMapView(): void{
     this.router.navigate(['/hospital-map'], { relativeTo: this.route })
-  }
-
-  showRoomInfoForm(){
-    this.roomInfoFormVisible = true;
-  }
-
-  onNotifyHideRoomInfo(){
-    this.roomInfoFormVisible = false;
   }
 
   drawRoomNames(): void {

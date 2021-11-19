@@ -1,0 +1,80 @@
+@import 'src/styles/main.scss';
+
+.back-to-map-btn{
+    margin-top: 18px;
+    margin-left: 40px;
+}
+
+.subhead{
+    font-size: 1.25rem;
+}
+
+#room-name{
+    font-size: 1.563rem;
+}
+
+.darkgray-text{
+    color: color(darkgray);
+}
+
+.blue-text{
+    color: color(blue);
+}
+
+#doctor-icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.card{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &:hover {
+        transition: all 0.3s ease-out;
+        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+        top: -3px;
+    }
+
+    &:before {
+        position: absolute;
+        z-index: -1;
+        top: -16px;
+        right: -16px;
+        height: 32px;
+        width: 32px;
+        transform: scale(2);
+        transform-origin: 50% 50%;
+        transition: all 0.3s ease-out;
+    }
+
+    &:hover:before {
+        transform: scale(2.15);
+        transition: all 0.3s ease-out;
+    }
+}
+
+.backdrop{
+    position: absolute;
+    z-index: 3;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+.form-container{
+    width: 28.714vw;
+    height: 561px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.room-form {
+    padding: 0 28px;
+}

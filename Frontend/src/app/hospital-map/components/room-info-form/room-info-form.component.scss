@@ -1,6 +1,8 @@
+@import 'src/styles/main.scss';
+
 textarea{
     resize: none;
-    border: 1px solid color(blue);
+    border: 1px solid color(darkgrey);
     border-radius: 5px;
 }
 

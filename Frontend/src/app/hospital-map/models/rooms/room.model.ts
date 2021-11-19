@@ -1,3 +1,5 @@
+import { Equipment } from "./equipment.model";
+
 export enum RoomStatus {
     Occupied,
     Unoccupied,
@@ -18,7 +20,7 @@ export enum RoomType {
 
 export class Room {
     public id: number;
-    public buildingId: string;
+    public buildingId: number;
     public name: string;
     public status: RoomStatus;
     public type: RoomType;
@@ -28,8 +30,9 @@ export class Room {
     public y: number;
     public width: number;
     public height: number;
+    public equipment: Equipment[];
 
-    constructor(id: number, buildingId: string, name: string, status: RoomStatus, type: RoomType, freeBeds: number, floor: number, x: number, y: number, width: number, height: number) {
+    constructor(id: number, buildingId: number, name: string, status: RoomStatus, type: RoomType, freeBeds: number, floor: number, x: number, y: number, width: number, height: number, equipment: Equipment[]) {
         this.id = id;
         this.buildingId = buildingId;
         this.name = name;
@@ -41,6 +44,7 @@ export class Room {
         this.y = y;
         this.width = width;
         this.height = height;
+        this.equipment = equipment;
     }
 
 

@@ -20,5 +20,5 @@
         </div> 
         <app-primary-button (click)="showMapView()" text="Map view" color="#66A182"></app-primary-button>
     </div>
-    <app-side-bar *ngIf="rooms" [rooms]="rooms" [selectedFloor]="selectedFloor" [isRoomSelected]="isRoomSelected" (notifyDisplayRoom)="onNotifyDisplayRoom($event)" class="room-info-outer-container d-flex flex-column"></app-side-bar>
+    <app-side-bar *ngIf="rooms" [rooms]="rooms" [selectedFloor]="selectedFloor" [isRoomSelected]="isRoomSelected" [selectedRoomId]="selectedRoomId" (notifyDisplayRoom)="onNotifyDisplayRoom($event)" class="room-info-outer-container d-flex flex-column"></app-side-bar>
 </div>
