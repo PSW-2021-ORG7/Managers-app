@@ -1,0 +1,56 @@
+@import 'src/styles/main.scss';
+
+.header-equipment-transfer{
+    height: 65px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+
+.back-to-map-view-btn img {
+    width: 24px;
+    transform: rotate(180deg);
+}
+
+.back-to-map-view-btn span{
+    color: #a2a2a2;
+}
+
+#move-equipment{
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+
+.steps{
+    padding: 0px, 5px, 20px, 20px;
+
+}
+.source-room-icon, .destination-room-icon, .time-icon{
+    margin-right: 5px;
+}
+
+.title-equipment-transfer{
+    height: 46px;
+}
+
+.search-container{
+    height: 33px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 50%
+}
+
+.subtitle-equipment-transfer h3{
+    font-size: 20px;
+}
+
+.select-view{
+    height: 71%;
+    background-color: #a2a2a2;
+}
+
+.searched-equipments{
+    width: 75%
+}
