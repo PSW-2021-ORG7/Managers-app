@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Room } from '../../models/rooms/room.model';
 
 @Component({
@@ -8,6 +9,8 @@ import { Room } from '../../models/rooms/room.model';
 })
 export class SideBarComponent implements OnChanges {
 
+  constructor(private router: Router){ }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedFloor']) {
         this.selectedFloor = changes.selectedFloor.currentValue;
@@ -15,11 +18,15 @@ export class SideBarComponent implements OnChanges {
     else if (changes['isRoomSelected']) {
       this.isRoomSelected = changes.isRoomSelected.currentValue;
     }
+    else if (changes['selectedRoomId']) {
+      this.selectedRoomId = changes.selectedRoomId.currentValue;
+    }
   }
 
   @Input() rooms: Room[] = [];
   @Input() selectedFloor: number = 0;
   @Input() isRoomSelected: boolean = false;
+  @Input() selectedRoomId: number = -1;
   searchInput: string = "";
   searchFilter: string = "";
   scrollBoxTitle: string = "Rooms on this floor";
@@ -31,7 +38,6 @@ export class SideBarComponent implements OnChanges {
   onNotifyDisplayRoom(roomId : number){
     this.notifyDisplayRoom.emit(roomId);
   }
-
 
   changeMode(mode: string){
     this.mode = mode;
@@ -63,7 +69,7 @@ export class SideBarComponent implements OnChanges {
   
   showRoomDetails() : void{
     if(this.isRoomSelected){
-      
+      this.router.navigate(['/hospital-map/rooms/' + this.selectedRoomId]);
     }
   }
 

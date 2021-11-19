@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Room } from '../../models/rooms/room.model';
+import { Room, RoomStatus } from '../../models/rooms/room.model';
 import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { RoomsService } from '../../shared/services/rooms.service';
 })
 export class RoomDetailsComponent implements OnInit {
   room!: Room;
+  roomInfoFormVisible: boolean = false;
 
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router) { }
 
@@ -23,6 +24,30 @@ export class RoomDetailsComponent implements OnInit {
           console.log(this.room);
       })
     })
+  }
+
+  onBackToMap(): void{
+    this.router.navigate(['/hospital-map/floor-plan'], { queryParams: {buildingId: this.room.buildingId}})
+  }
+
+  showRoomInfoForm(){
+    this.roomInfoFormVisible = true;
+  }
+
+  onNotifyHideRoomInfo(){
+    this.roomInfoFormVisible = false;
+  }
+
+  //TODO: Extract to component
+  roomStatusColor() : string{
+    if(this.room.status == RoomStatus.Unoccupied)
+      return "#66A182";
+    else if(this.room.status == RoomStatus.Occupied)
+      return "#D94848";
+    else if(this.room.status == RoomStatus.NotActive)
+      return "#A2A2A2";
+    else 
+      return "#214975";
   }
 
 }
