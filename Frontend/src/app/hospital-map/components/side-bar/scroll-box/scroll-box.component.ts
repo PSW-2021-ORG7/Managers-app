@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
 import { Room } from 'src/app/hospital-map/models/rooms/room.model';
 
 @Component({
@@ -9,6 +10,7 @@ import { Room } from 'src/app/hospital-map/models/rooms/room.model';
 export class ScrollBoxComponent implements OnChanges{
 
   @Input() rooms: Room[] = [];
+  @Input() equipment: RoomEquipment[] = [];
   @Input() selectedFloor: number = 0;
   @Input() searchFilter: string = "";
   @Input() isSearchActive: boolean = false;

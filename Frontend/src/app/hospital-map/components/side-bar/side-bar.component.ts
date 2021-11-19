@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { RoomEquipment } from '../../models/equipment/room-equipment.model';
 import { Room } from '../../models/rooms/room.model';
 
 @Component({
@@ -24,6 +25,7 @@ export class SideBarComponent implements OnChanges {
   }
 
   @Input() rooms: Room[] = [];
+  @Input() equipment: RoomEquipment[] = [];
   @Input() selectedFloor: number = 0;
   @Input() isRoomSelected: boolean = false;
   @Input() selectedRoomId: number = -1;

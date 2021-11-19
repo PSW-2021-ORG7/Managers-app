@@ -6,6 +6,9 @@
         </div>
     </div>
     <div *ngIf="mode=='equipment'">
-        <app-equipment-card></app-equipment-card>
+        <div *ngFor="let roomEquipment of equipment">
+            <app-equipment-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="!isSearchActive && roomEquipment.roomFloor == selectedFloor" [equipment]="roomEquipment"></app-equipment-card>
+            <app-equipment-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="isSearchActive && roomEquipment.equipmentItemName.toLowerCase().includes(searchFilter)" [equipment]="roomEquipment"></app-equipment-card>
+        </div>
     </div>
 </div>

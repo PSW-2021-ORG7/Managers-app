@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
 
 @Component({
   selector: 'app-equipment-card',
@@ -7,4 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EquipmentCardComponent {
 
+  @Input() equipment!: RoomEquipment;
+  @Output() notifyDisplayRoom = new EventEmitter<number>();
+
+  displayRoomOnMap(){
+    this.notifyDisplayRoom.emit(this.equipment.roomId);
+  }
 }
