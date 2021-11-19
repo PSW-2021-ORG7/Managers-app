@@ -9,6 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { RoomInfoFormComponent } from './components/room-info-form/room-info-form.component';
 import { RoomTypeToStringPipe } from './shared/pipes/room-type-to-string.pipe';
 import { RoomStatusToStringPipe } from './shared/pipes/room-status-to-string.pipe';
+import { SideBarComponent } from './components/side-bar/side-bar.component';
+import { PrimaryButtonComponent } from './shared/components/primary-button/primary-button.component';
+import { ScrollBoxComponent } from './components/side-bar/scroll-box/scroll-box.component';
+import { RoomCardComponent } from './shared/components/room-card/room-card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +20,11 @@ import { RoomStatusToStringPipe } from './shared/pipes/room-status-to-string.pip
     FloorPlanComponent,
     RoomInfoFormComponent,
     RoomTypeToStringPipe,
-    RoomStatusToStringPipe
+    RoomStatusToStringPipe,
+    SideBarComponent,
+    PrimaryButtonComponent,
+    ScrollBoxComponent,
+    RoomCardComponent
   ],
   imports: [
     CommonModule,

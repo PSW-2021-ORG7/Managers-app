@@ -46,20 +46,23 @@ export class D3Service {
       .attr('width', function (d: { width: any; }) { return d.width; })
       .attr('height', function (d: { height: any; }) { return d.height; })
       .attr('class', function (d: { floor: number; }) { return 'floor-' + d.floor + ' ' + className; })
+      .attr('id', function (d: { id: any; }) { return 'room-' + d.id; })
       .attr('fill', '#cccccc')
       .attr('stroke', '#ffffff')
       .attr('stroke-width', 8); 
   }
   
-  addText(svg:any, text: string, coords: {x: number, y: number}, className: string) {
+  addText(svg:any, text: string, coords: {x: number, y: number}, className: string, id: string) {
     svg.append('text')
       .attr('x', coords.x)
       .attr('y', coords.y)
       .attr('text-anchor', 'middle')
-      .text(text)
       .style('fill', '#214975')
       .attr('font-size', '1.563rem')
-      .attr('class', className);
+      .attr('class', className)
+      .attr('id', id)
+      .attr('cursor', 'default')
+      .text(text);
   }
 
   selectById(id: string) : any {

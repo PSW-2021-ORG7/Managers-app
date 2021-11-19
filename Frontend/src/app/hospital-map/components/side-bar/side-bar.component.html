@@ -1,0 +1,28 @@
+<div class="d-flex flex-column side-bar-container">
+    <div class="search-mode d-flex flex-row justify-content-between">
+        <span>Mode</span>
+        <div class="mode-button d-flex flex-row" (click)="changeMode('rooms')">
+            <svg class="room-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 13C8.66 13 10 11.66 10 10C10 8.34 8.66 7 7 7C5.34 7 4 8.34 4 10C4 11.66 5.34 13 7 13ZM19 7H13C11.9 7 11 7.9 11 9V14H3V6C3 5.45 2.55 5 2 5C1.45 5 1 5.45 1 6V19C1 19.55 1.45 20 2 20C2.55 20 3 19.55 3 19V17H21V19C21 19.55 21.45 20 22 20C22.55 20 23 19.55 23 19V11C23 8.79 21.21 7 19 7Z" attr.fill="{{mode=='rooms' ? '#214975' : '#a2a2a2'}}"/></svg>
+            <span [style.font-weight]="mode=='rooms' ? 'bold' : 'lighter'" [style.color]="mode=='rooms' ? '#214975' : '#a2a2a2'">Rooms</span>
+        </div>
+        <div class="mode-button d-flex flex-row" (click)="changeMode('equipment')">
+            <svg class="equipment-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13 16H11C10.45 16 10 15.55 10 15H3.01V19C3.01 20.1 3.91 21 5.01 21H19C20.1 21 21 20.1 21 19V15H14C14 15.55 13.55 16 13 16ZM20 7H16C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7H4C2.9 7 2 7.9 2 9V12C2 13.11 2.89 14 4 14H10V13C10 12.45 10.45 12 11 12H13C13.55 12 14 12.45 14 13V14H20C21.1 14 22 13.1 22 12V9C22 7.9 21.1 7 20 7ZM10 7C10 5.9 10.9 5 12 5C13.1 5 14 5.9 14 7H9.99H10Z" attr.fill="{{mode=='equipment' ? '#214975' : '#a2a2a2'}}"/></svg>
+            <span [style.font-weight]="mode=='equipment' ? 'bold' : 'lighter'" [style.color]="mode=='equipment' ? '#214975' : '#a2a2a2'">Equipment</span>
+        </div>
+    </div>
+    <div class="search-container d-flex flex-row">
+        <input type="search" (keyup.enter)="search()" class="form-control search-field" [(ngModel)]="searchInput" id="searchInput" placeholder="Search">
+        <app-primary-button (click)="search()" [text]="'Search'"></app-primary-button>
+    </div>
+    <div class="display-container d-flex flex-column">
+        <div class="d-flex flex-row justify-content-between display-title-wrapper">
+            <span class="fw-bold title">{{scrollBoxTitle}}</span>
+            <span *ngIf="isSearchActive" (click)="removeFilter()" class="remove-filter align-self-end">Remove filter</span>
+        </div>
+        <app-scroll-box *ngIf="rooms" class="scroll-box-container" (notifyDisplayRoom)="onNotifyDisplayRoom($event)" [mode]='mode' [isSearchActive]="isSearchActive" [searchFilter]='searchFilter' [selectedFloor]='selectedFloor' [rooms]='rooms'></app-scroll-box>
+    </div>
+    <div [style.cursor]="isRoomSelected ? 'pointer' : 'default'" (click)="showRoomDetails()" class="button-wrapper d-flex flex-row justify-content-end self">
+        <svg class="room-details-icon"  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 8H8V4H4V8ZM10 20H14V16H10V20ZM4 20H8V16H4V20ZM4 14H8V10H4V14ZM10 14H14V10H10V14ZM16 4V8H20V4H16ZM10 8H14V4H10V8ZM16 14H20V10H16V14ZM16 20H20V16H16V20Z" attr.fill="{{isRoomSelected ? '#214975' : '#a2a2a2'}}"/></svg>
+        <span [style.color]="isRoomSelected ? '#214975' : '#a2a2a2'" class="fw-bold title">Room details</span>
+    </div>
+</div>
