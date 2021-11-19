@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UrgentRequestService } from './urgent-request.service';
 
 export class UrgentRequest {
   constructor(
@@ -7,9 +8,7 @@ export class UrgentRequest {
     public dose: string,
     public quantity: string,
     public selectedPharmacy: string
-  ){
-
-  }
+  ) { }
 }
 
 @Component({
@@ -22,8 +21,9 @@ export class UrgentRequestComponent implements OnInit {
   dose: string = '';
   quantity: string = '';
   selectedPharmacy: string = '';
-  
-  constructor(private httpClient: HttpClient) { }
+  isAvailable: boolean = false;
+
+  constructor(private httpClient: HttpClient, private urgentRequestService: UrgentRequestService) { }
 
   ngOnInit(): void {
   }
@@ -48,18 +48,41 @@ export class UrgentRequestComponent implements OnInit {
     this.selectedPharmacy = event.target.value;
     console.log(this.selectedPharmacy);
   }
-  
+
+  checkIfAvailable(): void {
+
+    var urgentRequest = {
+      medicine: this.medicine,
+      dose: this.dose,
+      quantity: this.quantity,
+    };
+
+
+    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe((isAvailable: boolean) => {
+
+      this.isAvailable = isAvailable;
+      console.log(this.isAvailable);
+
+    });
+
+    if (this.isAvailable) {
+      alert("AVAILABLE!")
+    }
+    else {
+      alert("FAIL")
+    }
+  }
 
   send(): void {
     var urgentRequest = {
       medicine: this.medicine,
       dose: this.dose,
       quantity: this.quantity,
-      selectedPharmacy: this.selectedPharmacy
+      //selectedPharmacy: this.selectedPharmacy
     };
     console.log(urgentRequest);
     alert("success");
-      quantity: this.quantity
-    };
-  }
+    quantity: this.quantity
+  };
+}
 
