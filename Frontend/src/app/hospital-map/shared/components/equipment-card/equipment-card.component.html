@@ -1,0 +1,9 @@
+<div class="card d-flex flex-column" (click)="displayRoomOnMap()">
+    <span class="card-title">{{equipment.equipmentItemName}}</span>
+    <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row align-items-center">
+            <span class="floor-text">{{equipment.type | roomTypeToString}} {{equipment.roomName}}</span>
+        </div>
+        <span class="floor-text">{{equipment.quantity}}</span>
+    </div>
+</div>

@@ -1,8 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RoomEquipment } from '../../models/equipment/room-equipment.model';
 import { Room, RoomType } from '../../models/rooms/room.model';
 import { RoomTypeToStringPipe } from '../../shared/pipes/room-type-to-string.pipe';
 import { D3Service } from '../../shared/services/d3.service';
+import { EquipmentService } from '../../shared/services/equipment.service';
 import { RoomsService } from '../../shared/services/rooms.service';
 
 @Component({
@@ -16,12 +18,13 @@ export class FloorPlanComponent implements OnInit {
   buildingId: number = 0;
   svg: any;
   rooms: Room[] = [];
+  equipment: RoomEquipment[] = [];
   selectedFloor: number = 0;
   selectedRoomId: number = -1;
   isRoomSelected: boolean = false;
   floors: number[] = [];
 
-  constructor(private d3Service: D3Service, private roomsService: RoomsService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private d3Service: D3Service, private roomsService: RoomsService, private equipmentService: EquipmentService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
 
@@ -41,6 +44,12 @@ export class FloorPlanComponent implements OnInit {
           }
         );
     });
+
+    this.equipmentService.getEquipment().subscribe(
+      data => {
+        this.equipment = data;
+      }
+    )
   }
   
   onNotifyDisplayRoom(roomId : number){
