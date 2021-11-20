@@ -1,16 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MedicationSpecificationService } from './medication-specification.service';
 
 
 export class MedicationSpecification {
   constructor(
-    public medicine: string,
-    public dose: string,
-    public selectedPharmacy: string
+    public name: string,
+    public dosageinmg: string,
+    public quantity: number
+    //public selectedPharmacy: string
   ){
 
   }
 
+}
+
+export class Pharmacy {
+  constructor(
+    public idPharmacy: string,
+    public namePharmacy: string,
+    public apiKeyPharmacy: string,
+    public endpoint: string
+  ) {
+
+  }
 }
 
 @Component({
@@ -21,9 +34,9 @@ export class MedicationSpecification {
 export class MedicationSpecificationComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
-  selectedPharmacy: string = '';
+  selectedPharmacyId: string = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private medicationSpecificationService: MedicationSpecificationService) { }
 
   ngOnInit(): void {
   }
@@ -39,18 +52,43 @@ export class MedicationSpecificationComponent implements OnInit {
   }
 
   selectChangeHandlerSelectedPharmacy(event: any) {
-    this.selectedPharmacy = event.target.value;
-    console.log(this.selectedPharmacy);
+    this.selectedPharmacyId = event.target.value;
+    console.log(this.selectedPharmacyId);
   }
 
   send(): void {
     var medicationSpecification = {
-      medicine: this.medicine,
-      dose: this.dose,
-      selectedPharmacy: this.selectedPharmacy
+      name: this.medicine,
+      dosageinmg: this.dose,
+      quantity: 1
+      //selectedPharmacy: this.selectedPharmacy
     };
     console.log(medicationSpecification);
-    alert("success");
+    alert("WAIT")
+    
+    this.medicationSpecificationService.checkIfAvailable(medicationSpecification).subscribe(response => {
+      if(response){
+        alert("Medicine is available!")
+
+        this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+          pharmacy = pharmacy;
+          this.medicationSpecificationService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg,pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((medicine: any) => {
+            
+            console.log(medicine);
+            alert("Successfully returned medicine!")
+
+                       
+          });
+
+         
+        });
+
+      }
+      else{
+        alert("Medicine doesn't exist!")
+      }
+      
+    })
   }
 
 }

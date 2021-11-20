@@ -10,6 +10,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './http-interceptor';
 import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
 import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
+import { FormsModule }   from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { MedicationSpecificationComponent } from './medication-specification/med
   ],
   imports: [
     CommonModule,
-    IntegrationRoutingModule
+    IntegrationRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
