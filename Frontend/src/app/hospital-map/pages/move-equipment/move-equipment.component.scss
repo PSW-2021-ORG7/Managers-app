@@ -7,6 +7,7 @@
 }
 
 
+
 .back-to-map-view-btn img {
     width: 24px;
     transform: rotate(180deg);
@@ -76,4 +77,6 @@
     
 ::-webkit-scrollbar-thumb:hover {
     background: color(darkgrey);
+    height: 71%;
+    background-color: #a2a2a2;
 }
