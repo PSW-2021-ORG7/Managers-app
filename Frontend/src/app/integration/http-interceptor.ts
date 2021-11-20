@@ -8,7 +8,7 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
       const ApiKey = JSON.parse(localStorage.getItem('ApiKey') || '')
       const modifiedReq = req.clone({ 
-        headers: req.headers.set('ApiKey', ApiKey),
+        headers: req.headers.set('ApiKey', ApiKey),    
       });
     return next.handle(modifiedReq)
     .pipe();

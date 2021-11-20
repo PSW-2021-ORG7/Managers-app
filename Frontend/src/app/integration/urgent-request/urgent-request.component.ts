@@ -56,26 +56,23 @@ export class UrgentRequestComponent implements OnInit {
   checkIfAvailable(): void {
 
     var urgentRequest = {
-      medicine: this.medicine,
-      dose: this.dose,
-      quantity: this.quantity,
+      Name: this.medicine,
+      DosageInMg: this.dose,
+      Quantity: this.quantity,
       //selectedPharmacy: this.selectedPharmacy
     };
 
     
-    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe((isAvailable: boolean) => {
+    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
+      if(response){
+        alert("Medicine is available!")
+      }
+      else{
+        alert("Medicine doesn't exist!")
+      }
       
-      this.isAvailable = isAvailable;
-      console.log(this.isAvailable);
-
-    });
-    
-    if(this.isAvailable){
-      alert("AVAILABLE!")
-    }
-    else{
-      alert("FAIL")
-    }
+    })
+  
   }
 
   

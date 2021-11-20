@@ -11,6 +11,7 @@ export class PharmacyService {
     constructor(private http: HttpClient) { }
 
     createNewPharmacy(obj: any): Observable<any> {
+        localStorage.setItem('ApiKey', JSON.stringify("ABC"));    
         return this.http.post(this.baseUrl, obj);
     }
 }
