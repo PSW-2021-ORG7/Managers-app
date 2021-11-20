@@ -7,7 +7,6 @@
 }
 
 
-
 .back-to-map-view-btn img {
     width: 24px;
     transform: rotate(180deg);
@@ -47,10 +46,34 @@
 }
 
 .select-view{
-    height: 71%;
-    background-color: #a2a2a2;
+    height: 500px;
+    background-color: #fff;
 }
 
-.searched-equipments{
-    width: 75%
+.searched-elements{
+    display: grid !important;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 10px;
+    height:500px;
+    width: 70%;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    border: 1px solid white;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: color(lightgrey);
+    border-radius: 10px;
+}
+    
+::-webkit-scrollbar-thumb:hover {
+    background: color(darkgrey);
 }

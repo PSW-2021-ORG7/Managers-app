@@ -15,11 +15,14 @@ export class ScrollBoxComponent implements OnChanges{
   @Input() searchFilter: string = "";
   @Input() isSearchActive: boolean = false;
   @Input() mode: string = "rooms";
+
   @Output() notifyDisplayRoom = new EventEmitter<number>();
   
   onNotifyDisplayRoom(roomId : number){
     this.notifyDisplayRoom.emit(roomId);
   }
+
+
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedFloor']) {
