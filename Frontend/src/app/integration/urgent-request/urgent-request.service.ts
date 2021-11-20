@@ -10,7 +10,8 @@ export class UrgentRequestService {
 
     constructor(private http: HttpClient) { }
 
-    checkIfAvilable(obj: any): Observable<any> {
-        return this.http.get(this.baseUrl, obj);
+    checkIfAvilable(obj: any): Observable<boolean> {
+         localStorage.setItem('ApiKey', JSON.stringify("XYZ"));    
+        return this.http.post<boolean>(this.baseUrl, obj);
     }
 }

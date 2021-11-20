@@ -56,33 +56,27 @@ export class UrgentRequestComponent implements OnInit {
       dose: this.dose,
       quantity: this.quantity,
     };
+    
+    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
+          if (response) {
+            alert("Medicine is available!")
+          }
+          else {
+            alert("Medicine doesn't exist!")
+          }
 
-
-    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe((isAvailable: boolean) => {
-
-      this.isAvailable = isAvailable;
-      console.log(this.isAvailable);
-
-    });
-
-    if (this.isAvailable) {
-      alert("AVAILABLE!")
-    }
-    else {
-      alert("FAIL")
-    }
+        });
   }
 
-  send(): void {
-    var urgentRequest = {
-      medicine: this.medicine,
-      dose: this.dose,
-      quantity: this.quantity,
-      //selectedPharmacy: this.selectedPharmacy
-    };
-    console.log(urgentRequest);
-    alert("success");
-    quantity: this.quantity
+send(): void {
+  var urgentRequest = {
+    medicine: this.medicine,
+    dose: this.dose,
+    quantity: this.quantity,
   };
+  console.log(urgentRequest);
+  alert("success");
+    quantity: this.quantity
+};
 }
 
