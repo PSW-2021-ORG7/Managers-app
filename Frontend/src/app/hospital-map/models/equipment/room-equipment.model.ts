@@ -2,7 +2,7 @@ export class RoomEquipment {
     public id: number;
     public roomId: number;
     public roomName: string;
-    public type: number;
+    public roomType: number;
     public roomFloor: number;
     public equipmentItemId: number;
     public equipmentItemName: string;
@@ -13,7 +13,7 @@ export class RoomEquipment {
         this.id = id;
         this.roomId = roomId;
         this.roomName = roomName;
-        this.type = type;
+        this.roomType = type;
         this.roomFloor = roomFloor;
         this.equipmentItemId = equipmentItemId;
         this.equipmentItemName = equipmentItemName;

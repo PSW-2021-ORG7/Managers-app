@@ -22,6 +22,11 @@
     padding-left: 40px;
 }
 
+.remove-filter{
+    cursor: pointer;
+    color: color(darkgrey);
+    font-size: 14px;
+}
 
 .steps{
     padding: 0px, 5px, 20px, 20px;
@@ -29,6 +34,7 @@
 }
 .source-room-icon, .destination-room-icon, .time-icon{
     margin-right: 5px;
+    margin-left: 5px;
 }
 
 .title-equipment-transfer{
@@ -42,9 +48,15 @@
     width: 50%
 }
 
+
+.subtitle-equipment-transfer{
+    width: 70%;
+}
+
 .subtitle-equipment-transfer h3{
     font-size: 20px;
 }
+
 
 .select-view{
     height: 500px;
@@ -52,12 +64,14 @@
 }
 
 .searched-elements{
-    display: grid !important;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 10px;
     height:500px;
     width: 70%;
     overflow-x: hidden;
+}
+
+
+.transfer-equipment-card{
+    width: 33%;
 }
 
 ::-webkit-scrollbar {

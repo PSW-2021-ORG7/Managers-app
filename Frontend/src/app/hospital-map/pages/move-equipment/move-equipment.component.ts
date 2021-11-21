@@ -12,6 +12,16 @@ import { RoomsService } from '../../shared/services/rooms.service';
 })
 export class MoveEquipmentComponent implements OnInit, OnChanges {
 
+  equipment: RoomEquipment[] = [];
+  isEquipmentSelected: boolean = false;
+  selectedSourceRoomId: number = -1;
+
+  filteredEquipment: RoomEquipment[] = [];
+  mode: string = "move-equipment";
+  searchInput: string = "";
+  searchFilter: string = "";
+  scrollBoxTitle: string = "Select equipment for transfer";
+  isSearchActive: boolean = false;
 
   constructor(private equipmentService: EquipmentService, private route: ActivatedRoute, private router: Router) { }
   
@@ -19,10 +29,9 @@ export class MoveEquipmentComponent implements OnInit, OnChanges {
     this.equipmentService.getEquipment().subscribe(
       data => {
         this.equipment = data;
+        this.filteredEquipment = data;
       }
     )
-
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -30,38 +39,28 @@ export class MoveEquipmentComponent implements OnInit, OnChanges {
       this.isEquipmentSelected = changes.isEquipmentSelected.currentValue;
     }
   }
-
-  @Input() equipment: RoomEquipment[] = [];
-  @Input() isEquipmentSelected: boolean = false;
-  @Input() selectedSourceRoomId: number = -1;
-
-  mode: string = "move-equipment";
-  searchInput: string = "";
-  searchFilter: string = "";
-  scrollBoxTitle: string = "Select equipment for transfer";
-  isSearchActive: boolean = false;
  
   onBackToMap(): void{
     this.router.navigate(['/hospital-map/'])
   }
 
-
-
-
-
-
-
-
   search() : void{
     if(this.searchInput != ""){
-      this.isSearchActive = true;
       this.searchFilter = this.searchInput.toLowerCase();
       this.scrollBoxTitle = "Search results";
+      this.isSearchActive = true;
+
+      let equipment = this.equipment;
+      equipment = equipment.filter(param => param.equipmentItemName.toLowerCase().includes(this.searchFilter));
+      this.filteredEquipment = equipment;
     }
   }
 
-
-
+  removeFilter() : void{
+    this.isSearchActive = false;
+    this.searchInput = "";
+    this.filteredEquipment = this.equipment;
+  }
 
 
 }
