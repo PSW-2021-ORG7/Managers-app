@@ -34,6 +34,10 @@ export class RoomDetailsComponent implements OnInit {
     this.roomInfoFormVisible = true;
   }
 
+  showMakeTransfer(): void{
+    this.router.navigate(['/hospital-map/move-equipment']);
+  }
+
   onNotifyHideRoomInfo(){
     this.roomInfoFormVisible = false;
   }

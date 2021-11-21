@@ -75,4 +75,8 @@ export class SideBarComponent implements OnChanges {
     }
   }
 
+  showMakeTransfer(): void{
+      this.router.navigate(['/hospital-map/move-equipment']);
+  }
+
 }

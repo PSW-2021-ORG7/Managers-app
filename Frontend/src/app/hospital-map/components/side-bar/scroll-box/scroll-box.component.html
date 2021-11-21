@@ -11,4 +11,13 @@
             <app-equipment-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="isSearchActive && roomEquipment.equipmentItemName.toLowerCase().includes(searchFilter)" [equipment]="roomEquipment"></app-equipment-card>
         </div>
     </div>
+    <div  *ngIf="mode=='move-equipment'">
+        <div *ngFor="let roomEquipment of equipment">
+            <app-equipment-card class="cards" *ngIf="!isSearchActive" [equipment]="roomEquipment"></app-equipment-card>
+            <app-equipment-card class="cards" *ngIf="isSearchActive && roomEquipment.equipmentItemName.toLowerCase().includes(searchFilter)" [equipment]="roomEquipment"></app-equipment-card>
+        </div>
+    </div>
+
+
+
 </div>
