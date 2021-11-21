@@ -99,9 +99,13 @@ export class MedicationSpecificationComponent implements OnInit {
 
     this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
       pharmacy = pharmacy;
-      this.medicationSpecificationService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((medicine: any) => {
+      this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((flag: any) => {
 
-        console.log(medicine);
+        if(!flag){
+          alert("ERROR!")
+        } else {
+
+        }
         this.disableFields = false;
         this.pharmacies = [];
         alert("Successfully returned medicine!")

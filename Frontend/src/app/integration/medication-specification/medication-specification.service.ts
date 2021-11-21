@@ -28,4 +28,10 @@ export class MedicationSpecificationService {
         localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
         return this.http.get(endpoint + "medicine/find/" + name + "/" + dose);
     }
+
+    requestSpecification(name: string, dose: string, apiKey: string, endpoint: string): Observable<any>{
+
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));  
+        return this.http.get(endpoint + "medicine/request/" + name + "/" + dose);
+    }
 }
