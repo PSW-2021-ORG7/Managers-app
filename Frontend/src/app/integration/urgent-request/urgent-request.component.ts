@@ -52,6 +52,27 @@ export class UrgentRequestComponent implements OnInit {
   checkIfAvailable(): void {
 
     var urgentRequest = {
+      Name: this.medicine,
+      DosageInMg: this.dose,
+      Quantity: this.quantity,
+    };
+
+    
+    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
+      if(response){
+        alert("Medicine is available!")
+      }
+      else{
+        alert("Medicine doesn't exist!")
+      }
+      
+    })
+  
+  }
+
+  
+  send(): void {
+    var urgentRequest = {
       medicine: this.medicine,
       dose: this.dose,
       quantity: this.quantity,
@@ -67,16 +88,5 @@ export class UrgentRequestComponent implements OnInit {
 
         });
   }
-
-send(): void {
-  var urgentRequest = {
-    medicine: this.medicine,
-    dose: this.dose,
-    quantity: this.quantity,
-  };
-  console.log(urgentRequest);
-  alert("success");
-    quantity: this.quantity
-};
 }
 

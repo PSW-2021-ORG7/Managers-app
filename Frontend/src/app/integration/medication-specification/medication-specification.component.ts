@@ -9,7 +9,7 @@ export class MedicationSpecification {
     public dosageinmg: string,
     public quantity: number
     //public selectedPharmacy: string
-  ){
+  ) {
 
   }
 
@@ -35,6 +35,8 @@ export class MedicationSpecificationComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   selectedPharmacyId: string = '';
+  disableFields: boolean = false;
+  pharmacies: Pharmacy[] = [];
 
   constructor(private httpClient: HttpClient, private medicationSpecificationService: MedicationSpecificationService) { }
 
@@ -56,39 +58,60 @@ export class MedicationSpecificationComponent implements OnInit {
     console.log(this.selectedPharmacyId);
   }
 
+  checkIfAvailable(): void {
+
+    var medicationSpecification = {
+      name: this.medicine,
+      dosageinmg: this.dose,
+      quantity: 1
+    };
+
+    if (medicationSpecification.name == "" || medicationSpecification.dosageinmg == "") {
+      alert("Please fill both fields!")
+    } else {
+
+      this.medicationSpecificationService.checkIfAvailable(medicationSpecification).subscribe(response => {
+        if (response) {
+          alert("Medicine is available!")
+          this.medicationSpecificationService.getPharmacyByID("P1").subscribe(response =>{
+            console.log(response)
+            this.pharmacies.push(response)
+          })
+          this.disableFields = true
+        }
+        else {
+          alert("Medicine doesn't exist!")
+        }
+
+      })
+
+    }
+
+
+  }
+
   send(): void {
     var medicationSpecification = {
       name: this.medicine,
       dosageinmg: this.dose,
       quantity: 1
-      //selectedPharmacy: this.selectedPharmacy
     };
-    console.log(medicationSpecification);
-    alert("WAIT")
-    
-    this.medicationSpecificationService.checkIfAvailable(medicationSpecification).subscribe(response => {
-      if(response){
-        alert("Medicine is available!")
 
-        this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-          pharmacy = pharmacy;
-          this.medicationSpecificationService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg,pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((medicine: any) => {
-            
-            console.log(medicine);
-            alert("Successfully returned medicine!")
+    this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+      pharmacy = pharmacy;
+      this.medicationSpecificationService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((medicine: any) => {
 
-                       
-          });
+        console.log(medicine);
+        this.disableFields = false;
+        this.pharmacies = [];
+        alert("Successfully returned medicine!")
 
-         
-        });
 
-      }
-      else{
-        alert("Medicine doesn't exist!")
-      }
-      
-    })
+      });
+
+
+    });
+
   }
 
 }
