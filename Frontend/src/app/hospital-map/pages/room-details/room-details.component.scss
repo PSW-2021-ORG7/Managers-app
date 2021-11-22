@@ -5,6 +5,12 @@
     margin-left: 40px;
 }
 
+    .back-icon{
+        margin-right: 5px;
+        @include icon;
+        @include background-svg($back-icon);
+    }
+
 .subhead{
     font-size: 1.25rem;
 }

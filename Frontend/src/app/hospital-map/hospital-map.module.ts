@@ -16,6 +16,7 @@ import { RoomCardComponent } from './shared/components/room-card/room-card.compo
 import { RoomDetailsComponent } from './pages/room-details/room-details.component';
 import { EquipmentCardComponent } from './shared/components/equipment-card/equipment-card.component';
 import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.component';
+import { SelectedEquipmentComponent } from './pages/move-equipment/equipment-overview/equipment-overview.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.co
     RoomCardComponent,
     RoomDetailsComponent,
     EquipmentCardComponent,
-    MoveEquipmentComponent
+    MoveEquipmentComponent,
+    SelectedEquipmentComponent
   ],
   imports: [
     CommonModule,

@@ -9,9 +9,15 @@ import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipm
 export class EquipmentCardComponent {
 
   @Input() equipment!: RoomEquipment;
+  @Input() type: string = "map";
   @Output() notifyDisplayRoom = new EventEmitter<number>();
+  @Output() notifySelectedEquipment = new EventEmitter<RoomEquipment>();
 
-  displayRoomOnMap(){
+  displayRoomOnMap() : void{
     this.notifyDisplayRoom.emit(this.equipment.roomId);
+  }
+
+  showSelectedEquipment() : void{
+    this.notifySelectedEquipment.emit(this.equipment)
   }
 }
