@@ -1,96 +1,86 @@
 @import 'src/styles/main.scss';
 
-.header-equipment-transfer{
-    height: 65px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-
-
-.back-to-map-view-btn img {
-    width: 24px;
-    transform: rotate(180deg);
-}
-
-.back-to-map-view-btn span{
-    color: #a2a2a2;
-}
 
 #move-equipment{
     padding-right: 40px;
     padding-left: 40px;
 }
 
-.remove-filter{
-    cursor: pointer;
-    color: color(darkgrey);
-    font-size: 14px;
-}
+    .header-equipment-transfer{
+        height: 65px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 
-.steps{
-    padding: 0px, 5px, 20px, 20px;
+        .back-icon{
+            margin-right: 5px;
+            @include icon;
+            @include background-svg($back-icon);
+        }
 
-}
-.source-room-icon, .destination-room-icon, .time-icon{
-    margin-right: 5px;
-    margin-left: 5px;
-}
+        .back-to-map-btn span{
+            color: color(darkgrey);
+        }
 
-.title-equipment-transfer{
-    height: 46px;
-}
+        .steps{
+            padding: 0px 5px 20px 20px;
+        }
 
-.search-container{
-    height: 33px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 50%
-}
+            .source-room-icon, .destination-room-icon, .time-icon{
+                margin-right: 5px;
+                margin-left: 5px;
+            }
 
+    .title-equipment-transfer{
+        height: 46px;
+    }
 
-.subtitle-equipment-transfer{
-    width: 70%;
-}
+    .search-container{
+        height: 33px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 50%
+    }
 
-.subtitle-equipment-transfer h3{
-    font-size: 20px;
-}
-
-
-.select-view{
-    height: 500px;
-    background-color: #fff;
-}
-
-.searched-elements{
-    height:500px;
-    width: 70%;
-    overflow-x: hidden;
-}
+        .search-field{
+            margin-right: 12px;
+        }
 
 
-.transfer-equipment-card{
-    width: 33%;
-}
+    .subtitle-equipment-transfer{
+        width: 70%;
+    }
 
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
+        h3{
+            font-size: 20px;
+            color: color(darkgrey);
+        }
 
-::-webkit-scrollbar-track {
-    border: 1px solid white;
-    border-radius: 10px;
-}
+        .remove-filter{
+            cursor: pointer;
+            color: color(darkgrey);
+            font-size: 14px;
+        }
 
-::-webkit-scrollbar-thumb {
-    background: color(lightgrey);
-    border-radius: 10px;
-}
-    
-::-webkit-scrollbar-thumb:hover {
-    background: color(darkgrey);
-    height: 71%;
-    background-color: #a2a2a2;
-}
+
+    .select-view{
+        min-height: 500px;
+        background-color: #fff;
+    }
+
+        .searched-elements{
+            justify-content: space-between;
+            padding: 10px 10px 0 5px;
+            width: 70%;
+            overflow-x: hidden;
+            @include scrollbar;
+        }
+
+            .transfer-equipment-card{
+                width: 32%;
+            }
+
+        .selected-equipment{
+            width: 30%;
+            
+        }

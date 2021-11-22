@@ -63,9 +63,10 @@
         right: 32px;
         position: absolute;
         bottom: 10px;
+        cursor: pointer;
     }
 
-        .room-details-icon{
+        .room-details-icon, .make-transfer-icon{
             margin-left: 5px;
         }
 
