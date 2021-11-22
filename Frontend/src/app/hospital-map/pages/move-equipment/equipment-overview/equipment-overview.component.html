@@ -1,0 +1,40 @@
+<div class="d-flex flex-column equipment-overview">
+    <div class="title-equipment-transfer d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+            <h2 [style.font-weight]="'bold'" [style.color]="'#214975'" >Equipment transfer</h2>
+        </div>
+    </div> 
+    
+    <div class="search-container d-flex flex-row">
+        <input type="search" (keyup.enter)="search()" class="form-control search-field" [(ngModel)]="searchInput" id="searchInput" placeholder="Search">
+        <app-primary-button (click)="search()" [text]="'Search'"></app-primary-button>
+    </div>
+    
+    <div class="subtitle-equipment-transfer d-flex flex-row justify-content-between">
+        <h3 class="">Select equipment for transfer</h3>
+        <span class="align-middle remove-filter" *ngIf="isSearchActive" (click)="removeFilter()">Remove filter</span>
+    </div> 
+    
+    <div class="select-view d-flex flex-row">
+        <div [class.searched-elements-active-selected-equipment]="isSelectedEquipment" class="searched-elements d-flex flex-wrap align-content-start">
+            <div *ngFor="let roomEquipment of filteredEquipment" class="transfer-equipment-card">
+                <app-equipment-card (notifySelectedEquipment)="onNotifySelectedEquipment($event)" [type]="'equipment'" [equipment]="roomEquipment"></app-equipment-card>
+            </div>
+        </div>
+        <div [class.selected-equipment-active]="isSelectedEquipment" class="selected-equipment">
+            <div class="selected-equipment-card">
+                <span class="title fw-bold">Selected equipment</span>
+                <div *ngIf="selectedEquipment">
+                    <span class="subtitle">{{selectedEquipment.equipmentItemName}}</span>
+                    <div class="d-flex justify-content-between">
+                        <span class="room-info">{{selectedEquipment.roomType | roomTypeToString}} {{selectedEquipment.roomName}}</span>
+                        <span class="room-info">{{selectedEquipment.quantity}}</span>
+                    </div>
+                </div>
+                <span (click)="removeSelectedEquipment()" class="remove-item">Remove</span>
+            </div>
+            <app-primary-button class="mt-3" text="Continue"></app-primary-button>
+        </div>
+    </div>
+</div>
+

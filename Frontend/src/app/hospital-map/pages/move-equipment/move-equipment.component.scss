@@ -1,6 +1,5 @@
 @import 'src/styles/main.scss';
 
-
 #move-equipment{
     padding-right: 40px;
     padding-left: 40px;
@@ -18,9 +17,13 @@
             @include background-svg($back-icon);
         }
 
-        .back-to-map-btn span{
-            color: color(darkgrey);
+        .back-to-map-btn{
+            cursor: pointer;
         }
+
+            .back-to-map-btn span{
+                color: color(darkgrey);
+            }
 
         .steps{
             padding: 0px 5px 20px 20px;
@@ -30,57 +33,7 @@
                 margin-right: 5px;
                 margin-left: 5px;
             }
-
-    .title-equipment-transfer{
-        height: 46px;
+    
+    .equipment-overview{
+        height: 100%;
     }
-
-    .search-container{
-        height: 33px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        width: 50%
-    }
-
-        .search-field{
-            margin-right: 12px;
-        }
-
-
-    .subtitle-equipment-transfer{
-        width: 70%;
-    }
-
-        h3{
-            font-size: 20px;
-            color: color(darkgrey);
-        }
-
-        .remove-filter{
-            cursor: pointer;
-            color: color(darkgrey);
-            font-size: 14px;
-        }
-
-
-    .select-view{
-        min-height: 500px;
-        background-color: #fff;
-    }
-
-        .searched-elements{
-            justify-content: space-between;
-            padding: 10px 10px 0 5px;
-            width: 70%;
-            overflow-x: hidden;
-            @include scrollbar;
-        }
-
-            .transfer-equipment-card{
-                width: 32%;
-            }
-
-        .selected-equipment{
-            width: 30%;
-            
-        }
