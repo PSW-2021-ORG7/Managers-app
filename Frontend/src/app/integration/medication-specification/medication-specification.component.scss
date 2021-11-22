@@ -9,6 +9,7 @@
     padding: 16px;
     background-color: white;
     width: 130%;
+    border: 1px solid #212fad;
   }
   
   input[type=text]{
@@ -32,8 +33,12 @@
     box-shadow: 0 0 0 0.2rem #70a9e6;;
 } 
 
-.checkIfAvailableBtn{
+.checkIfAvailableBtn {
     background-color: #66A182;
+    width: 30%;
+}
+
+.cancelBtn {
     width: 30%;
 }
 
@@ -50,3 +55,10 @@
   .requestSpecBtn:hover {
     opacity: 1;
   }
+  input {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

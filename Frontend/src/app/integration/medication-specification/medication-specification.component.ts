@@ -8,11 +8,7 @@ export class MedicationSpecification {
     public name: string,
     public dosageinmg: string,
     public quantity: number
-    //public selectedPharmacy: string
-  ) {
-
-  }
-
+  ) { }
 }
 
 export class Pharmacy {
@@ -21,9 +17,7 @@ export class Pharmacy {
     public namePharmacy: string,
     public apiKeyPharmacy: string,
     public endpoint: string
-  ) {
-
-  }
+  ) { }
 }
 
 @Component({
@@ -31,6 +25,7 @@ export class Pharmacy {
   templateUrl: './medication-specification.component.html',
   styleUrls: ['./medication-specification.component.scss']
 })
+
 export class MedicationSpecificationComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
@@ -84,10 +79,12 @@ export class MedicationSpecificationComponent implements OnInit {
         }
 
       })
-
     }
+  }
 
-
+  cancel(): void { 
+    this.pharmacies = [];
+    this.disableFields = false;   
   }
 
   send(): void {
@@ -96,7 +93,7 @@ export class MedicationSpecificationComponent implements OnInit {
       dosageinmg: this.dose,
       quantity: 1
     };
-
+    
     this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
       pharmacy = pharmacy;
       this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
@@ -106,27 +103,23 @@ export class MedicationSpecificationComponent implements OnInit {
         if(response == ""){
           alert("ERROR!")
         } else {
-
+          this.disableFields = false;
+          this.pharmacies = [];
         }
-        this.disableFields = false;
-        this.pharmacies = [];
     
         this.medicationSpecificationService.downloadSpecification(response).subscribe(downloadResponse => {
           if(downloadResponse){
             alert("Successfully returned medicine!")
+            window.location.reload()
           }
           else{
             alert("Oops?")
           }
         })
-        
-
-
-      });
-
-
-    });
-
+      })
+    
+    })
+     
   }
 
 }
