@@ -35,5 +35,10 @@ export class MedicationSpecificationService {
         return this.http.get<string>(endpoint + "medicine/request/" + name + "/" + dose);
     }
 
-
+    downloadSpecification(fileName: string): Observable<any>{
+        
+        //To be adjusted for multiple pharmacies
+        localStorage.setItem('ApiKey', JSON.stringify("ABC"));
+        return this.http.get(this.baseUrlHospital + "/downloadSpec/" + fileName);
+    }
 }

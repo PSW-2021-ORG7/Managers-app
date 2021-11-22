@@ -111,7 +111,15 @@ export class MedicationSpecificationComponent implements OnInit {
         this.disableFields = false;
         this.pharmacies = [];
     
-        alert("Successfully returned medicine!")
+        this.medicationSpecificationService.downloadSpecification(response).subscribe(downloadResponse => {
+          if(downloadResponse){
+            alert("Successfully returned medicine!")
+          }
+          else{
+            alert("Oops?")
+          }
+        })
+        
 
 
       });
