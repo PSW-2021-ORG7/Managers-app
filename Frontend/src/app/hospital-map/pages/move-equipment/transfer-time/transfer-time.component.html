@@ -1,0 +1,81 @@
+<form class="transfer-time-form form-inline d-flex flex-row">
+
+    <div class="form-group hidden">
+        <div class="input-group">
+            <input name="datepicker"
+                    class="form-control"
+                    ngbDatepicker
+                    #datepicker="ngbDatepicker"
+                    [autoClose]="'outside'"
+                    (dateSelect)="onDateSelection($event)"
+                    [minDate]="fromDate!"
+                    [displayMonths]="2"
+                    [dayTemplate]="t"
+                    outsideDays="hidden"
+                    [startDate]="fromDate!"
+                    tabindex="-1">
+            <ng-template #t let-date let-focused="focused">
+                <span class="custom-day"
+                    [class.focused]="focused"
+                    [class.range]="isRange(date)"
+                    [class.faded]="isHovered(date) || isInside(date)"
+                    (mouseenter)="hoveredDate = date"
+                    (mouseleave)="hoveredDate = null">
+                {{ date.day }}
+                </span>
+            </ng-template>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="input-group">
+          <input #dpFromDate
+                 class="form-control" placeholder="yyyy-mm-dd"
+                 name="dpFromDate"
+                 [value]="formatter.format(fromDate)"
+                 (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                 <svg class="calendar" (click)="datepicker.toggle()"></svg>
+
+          <div class="input-group-append">
+
+          </div>
+        </div>
+      </div>
+      <div class="form-group ml-2">
+        <div class="input-group">
+          <input #dpToDate
+                 class="form-control" placeholder="yyyy-mm-dd"
+                 name="dpToDate"
+                 [value]="formatter.format(toDate)"
+                 (input)="toDate = validateInput(toDate, dpToDate.value)">
+                 <svg class="calendar" (click)="datepicker.toggle()"></svg>
+
+          <div class="input-group-append">
+
+          </div>
+        </div>
+    </div>
+
+    <div class="dropdown">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Durations
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="#">5 min</a></li>
+          <li><a class="dropdown-item" href="#">10 min</a></li>
+          <li><a class="dropdown-item" href="#">30 min</a></li>
+          <li><a class="dropdown-item" href="#">60 min</a></li>
+          <li><a class="dropdown-item" href="#">90 min</a></li>
+        </ul>
+      </div>
+    
+      <app-primary-button [text]="'Search'"></app-primary-button>
+
+</form>
