@@ -33,6 +33,20 @@
                 </td>
             </tr>
             <tr>
+                <td>
+                    <label><b>City</b></label>&nbsp;<br>
+                    <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerCity($event)" pattern="[a-zA-Z]" title="Please use numbers only" required><br>
+      
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><b>Location</b></label>&nbsp;<br>
+                    <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerLocation($event)" required><br>
+      
+                </td>
+            </tr>
+            <tr>
                     <button type="button" (click) = "checkIfAvailable()" class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
                     <button type="button" (click)="cancel()" class="btn btn-secondary cancelBtn">Cancel</button><br><br>
             </tr>

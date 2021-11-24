@@ -29,6 +29,8 @@ export class UrgentRequestComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   quantity: string = '';
+  city: string = '';
+  location: string = '';
   selectedPharmacyId: string = '';
   isAvailable: boolean = false;
   pharmacies: Pharmacy[] = [];
@@ -54,6 +56,16 @@ export class UrgentRequestComponent implements OnInit {
     console.log(this.quantity);
   }
 
+  selectChangeHandlerCity(event: any) {
+    this.city = event.target.value;
+    console.log(this.city);
+  }
+
+  selectChangeHandlerLocation(event: any) {
+    this.location = event.target.value;
+    console.log(this.location);
+  }
+
   selectChangeHandlerSelectedPharmacy(event: any) {
     this.selectedPharmacyId = event.target.value;
     console.log(this.selectedPharmacyId);
@@ -69,8 +81,8 @@ export class UrgentRequestComponent implements OnInit {
 
     if (urgentRequest.Name == "" || urgentRequest.DosageInMg == "" || urgentRequest.Quantity == "") {
       alert("Please fill all fields!")
-    } else {
-
+    } else{
+      this.pharmacies = [];
       this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
         if (response) {
           alert("Medicine is available in required quantity!")
@@ -101,29 +113,36 @@ export class UrgentRequestComponent implements OnInit {
       quantity: this.quantity
     };
 
-    this.urgentRequestService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-      pharmacy = pharmacy;
-      this.urgentRequestService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
+    if(this.selectedPharmacyId == ""){
+      alert("Please select pharmacy!")
+    }else{
 
-        console.log("Returned medicine:")
-        console.log(med)
-        console.log(med.MedicineId)
+      this.urgentRequestService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+        pharmacy = pharmacy;
+        this.urgentRequestService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
+      
+          console.log("Returned medicine:")
+          console.log(med)
+          console.log(med.MedicineId)
+          
+          console.log("Sent request:")
+          var inventoryUpdate = {
+            medicineId: med.MedicineId,
+            quantity: this.quantity
+          };
+          console.log(inventoryUpdate);
 
-        console.log("Sent request:")
-        var inventoryUpdate = {
-          medicineId: med.MedicineId,
-          quantity: this.quantity
-        };
-        console.log(inventoryUpdate);
-
-        this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-          if (response) alert("Successfully updated pharmacy inventory!")
-          else alert("Failed to update pharmacy inventory!")
-        });
-
+          this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
+            if(response){
+              alert("Successfully updated pharmacy inventory!")
+              window.location.reload()
+            }else{
+              alert("Failed to update pharmacy inventory!")
+            }
+          });        
+        })   
       })
-
-    })
+    }       
   }
 }
 

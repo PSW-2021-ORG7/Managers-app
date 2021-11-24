@@ -64,7 +64,7 @@ export class MedicationSpecificationComponent implements OnInit {
     if (medicationSpecification.name == "" || medicationSpecification.dosageinmg == "") {
       alert("Please fill both fields!")
     } else {
-
+      this.pharmacies = [];
       this.medicationSpecificationService.checkIfAvailable(medicationSpecification).subscribe(response => {
         if (response) {
           alert("Medicine is available!")
@@ -93,33 +93,34 @@ export class MedicationSpecificationComponent implements OnInit {
       dosageinmg: this.dose,
       quantity: 1
     };
-    
-    this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-      pharmacy = pharmacy;
-      this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-        
-        console.log("Returned file name: " + response)
 
-        if(response == ""){
-          alert("ERROR!")
-        } else {
-          this.disableFields = false;
-          this.pharmacies = [];
-        }
-    
-        this.medicationSpecificationService.downloadSpecification(response).subscribe(downloadResponse => {
-          if(downloadResponse){
-            alert("Successfully returned medicine!")
-            window.location.reload()
+    if(this.selectedPharmacyId == ''){
+      alert("Please select pharmacy!")
+    }else{    
+      this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+        pharmacy = pharmacy;
+        this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
+          
+          console.log("Returned file name: " + response)
+
+          if(response == ""){
+            alert("ERROR!")
+          } else {
+            this.disableFields = false;
+            this.pharmacies = [];
           }
-          else{
-            alert("Oops?")
-          }
-        })
+      
+          this.medicationSpecificationService.downloadSpecification(response).subscribe(downloadResponse => {
+            if(downloadResponse){
+              alert("Successfully returned medicine!")
+              window.location.reload()
+            }
+            else{
+              alert("Oops?")
+            }
+          })
+        })      
       })
-    
-    })
-     
+    } 
   }
-
 }
