@@ -4,10 +4,7 @@ import { UrgentRequestService } from './urgent-request.service';
 
 export class Medicine {
   constructor(
-    public MedicineId: number,
-    public dose: string,
-    public quantity: string,
-    public selectedPharmacy: string
+    public Id: number
   ) { }
 }
 
@@ -69,7 +66,7 @@ export class UrgentRequestComponent implements OnInit {
 
     if (urgentRequest.Name == "" || urgentRequest.DosageInMg == "" || urgentRequest.Quantity == "") {
       alert("Please fill all fields!")
-    } else{
+    } else {
       this.pharmacies = [];
       this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
         if (response) {
@@ -95,42 +92,45 @@ export class UrgentRequestComponent implements OnInit {
   }
 
   send(): void {
+
     var medicationSpecification = {
       name: this.medicine,
       dosageinmg: this.dose,
       quantity: this.quantity
     };
 
-    if(this.selectedPharmacyId == ""){
+    if (this.selectedPharmacyId == "") {
       alert("Please select pharmacy!")
-    }else{
+    } else {
 
       this.urgentRequestService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
         pharmacy = pharmacy;
         this.urgentRequestService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
-      
+
           console.log("Returned medicine:")
           console.log(med)
-          console.log(med.MedicineId)
-          
+
           console.log("Sent request:")
           var inventoryUpdate = {
-            medicineId: med.MedicineId,
+            medicineId: med.Id,
             quantity: this.quantity
           };
           console.log(inventoryUpdate);
 
           this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-            if(response){
+            if (response) {
               alert("Successfully updated pharmacy inventory!")
-              window.location.reload()
-            }else{
-              alert("Failed to update pharmacy inventory!")
+              this.urgentRequestService.UpdateHospitalInventory(med, +this.quantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
+                if (response) alert("Successfully updated hospital inventory!")
+                else alert("Failed to update hospital inventory!")
+              });
             }
-          });        
-        })   
+
+            else alert("Failed to update pharmacy inventory!")
+          });
+        })
       })
-    }       
+    }
   }
 }
 
