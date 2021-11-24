@@ -8,21 +8,18 @@ import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipme
   styleUrls: ['./transfer-time.component.scss']
 })
 
-export class TransferTimeComponent /*implements OnInit, OnChange*/{
+export class TransferTimeComponent{
 
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
-  jsFromDate!: Date;
-  jsToDate!: Date;
-  minDate!:NgbDate; // for the calendar
+  tsFromDate!: Date;
+  tsToDate!: Date;
+  minDate!:NgbDate;
 
 
   isTransferTimeSelected: boolean = false;
-  //availableDates: TimeSlots[] = [];
   @Input() equipmentTransfer!: EquipmentTransfer;
-  //@Output() selectFreeTimeSlot = new EventEmitter();
-
 
   constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
     this.fromDate = calendar.getToday();
@@ -39,6 +36,7 @@ export class TransferTimeComponent /*implements OnInit, OnChange*/{
       this.toDate = null;
       this.fromDate = date;
     }
+
   }
 
   isHovered(date: NgbDate) {
@@ -58,15 +56,12 @@ export class TransferTimeComponent /*implements OnInit, OnChange*/{
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  ngbDatetoDateCoverter(fromDate: NgbDate, toDate: NgbDate): void{
-    this.jsFromDate = new Date(fromDate.year, fromDate.month - 1, fromDate.day);
-    this.jsToDate = new Date(toDate.year, toDate.month - 1, toDate.day);
+  ngbDatetoDateCoverter(date: NgbDate): Date{
+    let convDate = new Date(date.year, date.month - 1, date.day);
+    return convDate;
   }
 
-
-  search() : void{
-   
-  }
+ 
 
 }
 
