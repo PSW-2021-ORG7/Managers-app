@@ -29,8 +29,6 @@ export class UrgentRequestComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   quantity: string = '';
-  city: string = '';
-  location: string = '';
   selectedPharmacyId: string = '';
   isAvailable: boolean = false;
   pharmacies: Pharmacy[] = [];
@@ -54,16 +52,6 @@ export class UrgentRequestComponent implements OnInit {
   selectChangeHandlerQuantity(event: any) {
     this.quantity = event.target.value;
     console.log(this.quantity);
-  }
-
-  selectChangeHandlerCity(event: any) {
-    this.city = event.target.value;
-    console.log(this.city);
-  }
-
-  selectChangeHandlerLocation(event: any) {
-    this.location = event.target.value;
-    console.log(this.location);
   }
 
   selectChangeHandlerSelectedPharmacy(event: any) {

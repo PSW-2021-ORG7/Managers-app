@@ -14,14 +14,14 @@
                 </tr>
                 <tr>
                     <td>
-                        <label><b>Choose medicine </b></label>
+                        <label><b>Medicine </b></label>
                         <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><b>Dose </b></label><br>
-                        <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required>
+                        <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
                     </td>
                 </tr>
                 <tr>

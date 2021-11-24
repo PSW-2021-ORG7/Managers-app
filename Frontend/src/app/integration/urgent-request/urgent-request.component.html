@@ -23,27 +23,13 @@
             <tr>
                 <td>
                     <label><b>Dose</b></label>&nbsp;<br>
-                    <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required><br>
+                    <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
                 </td>
             </tr>
             <tr>
                 <td>
                     <label><b>Quantity</b></label>&nbsp;<br>
                     <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerQuantity($event)" pattern="[0-9]" title="Please use numbers only" required><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label><b>City</b></label>&nbsp;<br>
-                    <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerCity($event)" pattern="[a-zA-Z]" title="Please use numbers only" required><br>
-      
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label><b>Location</b></label>&nbsp;<br>
-                    <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerLocation($event)" required><br>
-      
                 </td>
             </tr>
             <tr>
