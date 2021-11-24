@@ -4,7 +4,7 @@ import { UrgentRequestService } from './urgent-request.service';
 
 export class Medicine {
   constructor(
-    public MedicineId: string,
+    public MedicineId: number,
     public dose: string,
     public quantity: string,
     public selectedPharmacy: string

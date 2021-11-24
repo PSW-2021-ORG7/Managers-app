@@ -28,7 +28,7 @@ export class UrgentRequestService {
     return this.http.get(endpoint + "medicine/find/" + name + "/" + dose);
 }
 
-  updatePharmacyInventory(obj: any, idMedicine: string, apiKey: string, endpoint: string): Observable<any>{
+  updatePharmacyInventory(obj: any, idMedicine: number, apiKey: string, endpoint: string): Observable<any>{
 
     localStorage.setItem('ApiKey', JSON.stringify(apiKey));  
     return this.http.put(endpoint + "inventory/" + idMedicine, obj);
