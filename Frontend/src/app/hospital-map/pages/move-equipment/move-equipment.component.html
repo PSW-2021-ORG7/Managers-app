@@ -25,6 +25,7 @@
     </div>
     <app-equipment-overview *ngIf="mode=='move-equipment'" class="equipment-overview" [equipmentTransfer]="equipmentTransfer" (confirmQuantityEvent)="confirmEquipmentQuantity()"></app-equipment-overview>
     <app-destination-room-overview *ngIf="mode=='destination-room'" class="equipment-overview" [equipmentTransfer]="equipmentTransfer" (selectDestinationRoomEvent)="selectDestinationRoom()"></app-destination-room-overview>
+    <app-transfer-time *ngIf="mode=='transfer-time'" class="equipment-overview" [equipmentTransfer]="equipmentTransfer" ></app-transfer-time>
 </div>
 
 

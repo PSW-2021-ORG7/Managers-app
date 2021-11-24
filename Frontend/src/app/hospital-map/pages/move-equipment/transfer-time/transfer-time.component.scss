@@ -1,5 +1,57 @@
 @import 'src/styles/main.scss';
 
+.equipment-overview{
+    overflow-y: hidden;
+}
+
+    .title-equipment-transfer{
+        height: 46px;
+    }
+
+    .search-container{
+        height: 33px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 100%
+    }
+
+        .search-field{
+            margin-right: 12px;
+        }
+
+
+    .subtitle-equipment-transfer{
+        width: 100%;
+    }
+
+        h3{
+            font-size: 20px;
+            color: color(darkgrey);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .remove-filter{
+            cursor: pointer;
+            color: color(darkgrey);
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+
+    .select-view{
+        background-color: #fff;
+        position: relative;
+        height: 72vh;
+    }
+
+        .searched-elements{
+            padding: 10px 10px 0 5px;
+            width: 100%;
+            @include scrollbar;
+            gap: 10px;
+        }
+
 
 
 .form-group.hidden {
@@ -43,3 +95,9 @@
         @include background-svg($calendar-icon);
         z-index: 100;
     }
+
+.duration{
+    margin-top: -32px;
+    margin-left: 5px;
+    margin-right: 5px;
+}

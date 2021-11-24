@@ -1,81 +1,104 @@
-<form class="transfer-time-form form-inline d-flex flex-row">
+<div class="d-flex flex-column equipment-overview">
+  <div class="title-equipment-transfer d-flex flex-row justify-content-between">
+      <div class="d-flex flex-row">
+          <h2 [style.font-weight]="'bold'" [style.color]="'#214975'" >Equipment transfer</h2>
+      </div>
+  </div> 
+  
+  <div class="search-container d-flex flex-row justify-content-between">
 
-    <div class="form-group hidden">
-        <div class="input-group">
-            <input name="datepicker"
-                    class="form-control"
-                    ngbDatepicker
-                    #datepicker="ngbDatepicker"
-                    [autoClose]="'outside'"
-                    (dateSelect)="onDateSelection($event)"
-                    [minDate]="fromDate!"
-                    [displayMonths]="2"
-                    [dayTemplate]="t"
-                    outsideDays="hidden"
-                    [startDate]="fromDate!"
-                    tabindex="-1">
-            <ng-template #t let-date let-focused="focused">
-                <span class="custom-day"
-                    [class.focused]="focused"
-                    [class.range]="isRange(date)"
-                    [class.faded]="isHovered(date) || isInside(date)"
-                    (mouseenter)="hoveredDate = date"
-                    (mouseleave)="hoveredDate = null">
-                {{ date.day }}
-                </span>
-            </ng-template>
-        </div>
-    </div>
+    <form class="transfer-time-form form-inline d-flex flex-row">
 
-
-    <div class="form-group">
-        <div class="input-group">
-          <input #dpFromDate
-                 class="form-control" placeholder="yyyy-mm-dd"
-                 name="dpFromDate"
-                 [value]="formatter.format(fromDate)"
-                 (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
-                 <svg class="calendar" (click)="datepicker.toggle()"></svg>
-
-          <div class="input-group-append">
-
+      <div class="form-group hidden">
+          <div class="input-group">
+              <input name="datepicker"
+                      class="form-control"
+                      ngbDatepicker
+                      #datepicker="ngbDatepicker"
+                      [autoClose]="'outside'"
+                      (dateSelect)="onDateSelection($event)"
+                      [minDate]="minDate!"
+                      [displayMonths]="2"
+                      [dayTemplate]="t"
+                      outsideDays="hidden"
+                      [startDate]="fromDate!"
+                      tabindex="-1">
+              <ng-template #t let-date let-focused="focused">
+                  <span class="custom-day"
+                      [class.focused]="focused"
+                      [class.range]="isRange(date)"
+                      [class.faded]="isHovered(date) || isInside(date)"
+                      (mouseenter)="hoveredDate = date"
+                      (mouseleave)="hoveredDate = null">
+                  {{ date.day }}
+                  </span>
+              </ng-template>
+          </div>
+      </div>
+  
+  
+      <div class="form-group">
+          <div class="input-group">
+            <input #dpFromDate
+                   class="form-control" placeholder="yyyy-mm-dd"
+                   name="dpFromDate"
+                   [value]="formatter.format(fromDate)"
+                   (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                   <svg class="calendar" (click)="datepicker.toggle()"></svg>
+  
+            <div class="input-group-append">
+  
+            </div>
           </div>
         </div>
-      </div>
-      <div class="form-group ml-2">
-        <div class="input-group">
-          <input #dpToDate
-                 class="form-control" placeholder="yyyy-mm-dd"
-                 name="dpToDate"
-                 [value]="formatter.format(toDate)"
-                 (input)="toDate = validateInput(toDate, dpToDate.value)">
-                 <svg class="calendar" (click)="datepicker.toggle()"></svg>
-
-          <div class="input-group-append">
-
+        <div class="form-group ml-2">
+          <div class="input-group">
+            <input #dpToDate
+                   class="form-control" placeholder="yyyy-mm-dd"
+                   name="dpToDate"
+                   [value]="formatter.format(toDate)"
+                   (input)="toDate = validateInput(toDate, dpToDate.value)">
+                   <svg class="calendar" (click)="datepicker.toggle()"></svg>
+  
+            <div class="input-group-append">
+  
+            </div>
           </div>
-        </div>
-    </div>
-
-    <div class="dropdown">
-        <button
-          class="btn btn-primary dropdown-toggle"
-          type="button"
-          id="dropdownMenuButton"
-          data-mdb-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Durations
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="#">5 min</a></li>
-          <li><a class="dropdown-item" href="#">10 min</a></li>
-          <li><a class="dropdown-item" href="#">30 min</a></li>
-          <li><a class="dropdown-item" href="#">60 min</a></li>
-          <li><a class="dropdown-item" href="#">90 min</a></li>
-        </ul>
       </div>
-    
-      <app-primary-button [text]="'Search'"></app-primary-button>
+  
+      <div class="duration form-group d-flex flex-column mb-2">
+        <label class="form-label" for="freeTimeSlots">Duration</label>
+        <select class="form-control" id="freeTimeSlots" name='freeTimeSlots'>
+            <option [ngValue] = 15>15 min</option>
+            <option [ngValue] = 30>30 min</option>
+            <option [ngValue] = 45>45 min</option>
+            <option [ngValue] = 60>60 min</option>
+        </select>
+      </div>
 
-</form>
+      <app-primary-button (click)="search()" [text]="'Search'"></app-primary-button>
+  
+    </form>
+
+    <app-primary-button class="schedule-transfer-btn align-right" [text]="'Schedule transfer'"></app-primary-button>
+
+  </div>
+  
+  <div class="subtitle-equipment-transfer d-flex flex-row justify-content-between">
+      <h3 class="">Available dates</h3>
+      <span class="align-middle remove-filter">Show first 50 results</span>
+  </div> 
+  
+  <div class="select-view d-flex flex-row">
+      <div class="searched-elements d-flex flex-wrap align-content-start">
+      
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
