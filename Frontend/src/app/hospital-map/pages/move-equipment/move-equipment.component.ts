@@ -23,5 +23,9 @@ export class MoveEquipmentComponent {
   confirmEquipmentQuantity(){
     this.mode = "destination-room";
   }
+
+  selectDestinationRoom(){
+    this.mode = "transfer-time";
+  }
   
 }
