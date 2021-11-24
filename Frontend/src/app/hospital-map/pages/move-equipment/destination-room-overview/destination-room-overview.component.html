@@ -1,0 +1,25 @@
+<div class="d-flex flex-column equipment-overview">
+    <div class="title-equipment-transfer d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row">
+            <h2 [style.font-weight]="'bold'" [style.color]="'#214975'" >Equipment transfer</h2>
+        </div>
+    </div> 
+    
+    <div class="search-container d-flex flex-row">
+        <input type="search" (keyup.enter)="search()" class="form-control search-field" [(ngModel)]="searchInput" id="searchInput" placeholder="Search">
+        <app-primary-button (click)="search()" [text]="'Search'"></app-primary-button>
+    </div>
+    
+    <div class="subtitle-equipment-transfer d-flex flex-row justify-content-between">
+        <h3 class="">Select destination room</h3>
+        <span class="align-middle remove-filter" *ngIf="isSearchActive" (click)="removeFilter()">Remove filter</span>
+    </div> 
+    
+    <div class="select-view d-flex flex-row">
+        <div class="searched-elements d-flex flex-wrap align-content-start">
+            <div *ngFor="let room of filteredRooms" class="transfer-equipment-card">
+                <app-room-card [room]="room" (click)="selectDestinationRoom(room.id)"></app-room-card>
+            </div>
+        </div>
+    </div>
+</div>
