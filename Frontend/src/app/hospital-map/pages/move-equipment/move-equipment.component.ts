@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { EquipmentTransfer } from '../../models/equipment/equipment-transfer.model';
+import { RoomEquipment } from '../../models/equipment/room-equipment.model';
 
 
 @Component({
@@ -10,11 +12,16 @@ import { Router } from '@angular/router';
 export class MoveEquipmentComponent {
   
   mode: string = "move-equipment";
+  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, 1, -1, -1, new Date());
 
   constructor(private router: Router) { }
   
   onBackToMap(): void{
     this.router.navigate(['/hospital-map/'])
+  }
+
+  confirmEquipmentQuantity(){
+    this.mode = "destination-room";
   }
   
 }
