@@ -11,6 +11,7 @@ margin: 0 auto;
   padding: 16px;
   background-color: white;
   width: 130%;
+  border: 1px solid #212fad;
 }
 
 input[type=text]{
@@ -41,12 +42,29 @@ input[type=text] {
   opacity: 1;
 }
 
-.checkIfAvailableBtn{
+.checkIfAvailableBtn {
   background-color: #66A182;
+  width: 30%;
+}
+
+.cancelBtn {
+  width: 30%;
 }
 =======
 .form-control:focus {
     border-color: #f3f5f7;
     box-shadow: 0 0 0 0.2rem #70a9e6;;
 } 
+<<<<<<< HEAD
 >>>>>>> b01ae11 (feat: Add form for urgent requests)
+=======
+
+.background {
+  background-image: url('../../../assets/images/integration.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+  width: 100%;
+  height: 1024px;
+}
+>>>>>>> 39821fb (refactor: Refactored interface)

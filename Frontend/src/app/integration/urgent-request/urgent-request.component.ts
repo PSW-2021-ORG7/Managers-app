@@ -32,6 +32,7 @@ export class UrgentRequestComponent implements OnInit {
   selectedPharmacyId: string = '';
   isAvailable: boolean = false;
   pharmacies: Pharmacy[] = [];
+  disableFields: boolean = false;
 
   constructor(private httpClient: HttpClient, private urgentRequestService: UrgentRequestService) { }
 
@@ -47,7 +48,6 @@ export class UrgentRequestComponent implements OnInit {
     this.dose = event.target.value;
     console.log(this.dose);
   }
-
 
   selectChangeHandlerQuantity(event: any) {
     this.quantity = event.target.value;
@@ -67,30 +67,34 @@ export class UrgentRequestComponent implements OnInit {
       Quantity: this.quantity,
     };
 
+    if (urgentRequest.Name == "" || urgentRequest.DosageInMg == "" || urgentRequest.Quantity == "") {
+      alert("Please fill all fields!")
+    } else {
 
-    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
-      if (response) {
-        alert("Medicine is available in required quantity!")
-        this.urgentRequestService.getPharmacyByID("P1").subscribe(response => {
-          console.log(response)
-          this.pharmacies.push(response)
-        })
-      }
-      else {
-        alert("Medicine doesn't exist or not available in desired quantity!")
-      }
+      this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
+        if (response) {
+          alert("Medicine is available in required quantity!")
+          this.urgentRequestService.getPharmacyByID("P1").subscribe(response => {
+            console.log(response)
+            this.pharmacies.push(response)
+          })
+          this.disableFields = true
+        }
+        else {
+          alert("Medicine doesn't exist or not available in desired quantity!")
+        }
 
-    })
+      })
+    }
 
   }
 
-  send(): void {
-    var urgentRequest = {
-      medicine: this.medicine,
-      dose: this.dose,
-      quantity: this.quantity,
-    };
+  cancel(): void {
+    this.pharmacies = [];
+    this.disableFields = false;
+  }
 
+  send(): void {
     var medicationSpecification = {
       name: this.medicine,
       dosageinmg: this.dose,
@@ -120,16 +124,6 @@ export class UrgentRequestComponent implements OnInit {
       })
 
     })
-
-    this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
-      if (response) {
-        alert("Medicine is available!")
-      }
-      else {
-        alert("Medicine doesn't exist!")
-      }
-
-    });
   }
 }
 
