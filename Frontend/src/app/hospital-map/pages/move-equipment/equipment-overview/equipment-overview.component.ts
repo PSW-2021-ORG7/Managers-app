@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
 import { EquipmentService } from 'src/app/hospital-map/shared/services/equipment.service';
@@ -19,7 +19,8 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   scrollBoxTitle: string = "Select equipment for transfer";
   isSearchActive: boolean = false;
   selectedEquipment!: RoomEquipment;
-  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, -1, 1, -1);
+  @Input() equipmentTransfer!: EquipmentTransfer;
+  @Output() confirmQuantityEvent = new EventEmitter();
 
   constructor(private equipmentService: EquipmentService) { }
 
@@ -87,6 +88,10 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
     if(newValue > this.selectedEquipment.quantity) {
       this.equipmentTransfer.quantity = this.selectedEquipment.quantity;
     }
+  }
+
+  confirmQuantity(){
+    this.confirmQuantityEvent.emit();
   }
 
 }

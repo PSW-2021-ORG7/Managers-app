@@ -1,15 +1,17 @@
 export class EquipmentTransfer {
-    public id: number;
     public sourceRoomId: number;
     public destinationRoomId: number;
     public quantity: number;
     public equipmentId: number;
+    public transferDuration: number;
+    public transferDate: Date;
 
-    constructor(id: number, sourceRoomId: number, destinationRoomId: number, quantity: number, equipmentId: number) {
-        this.id = id;
+    constructor(sourceRoomId: number, destinationRoomId: number, quantity: number, equipmentId: number, transferDuration: number, transferDate: Date) {
         this.sourceRoomId = sourceRoomId;
         this.destinationRoomId = destinationRoomId;
         this.quantity = quantity;
         this.equipmentId = equipmentId;
+        this.transferDuration = transferDuration;
+        this.transferDate = transferDate;
     }
 }
