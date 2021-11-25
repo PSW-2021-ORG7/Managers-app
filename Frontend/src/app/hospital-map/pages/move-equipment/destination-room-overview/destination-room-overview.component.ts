@@ -40,6 +40,7 @@ export class DestinationRoomOverviewComponent implements OnInit {
   public updateEquipmentTransfer(obj: EquipmentTransfer) {
     this.equipmentTransfer  = obj;
     this.selectedRoomId = this.equipmentTransfer.destinationRoomId;
+    this.filteredRooms = this.rooms.filter(x => {return x.id != this.equipmentTransfer.sourceRoomId;})
   }
 
   search() : void{
@@ -47,17 +48,16 @@ export class DestinationRoomOverviewComponent implements OnInit {
       this.searchFilter = this.searchInput.toLowerCase();
       this.scrollBoxTitle = "Search results";
       this.isSearchActive = true;
-
       let rooms = this.rooms;
       rooms = rooms.filter(param => (this.roomTypeToStringPipe.transform(param.type) + param.name).toLowerCase().includes(this.searchFilter));
-      this.filteredRooms = rooms;
+      this.filteredRooms = rooms.filter(x => {return x.id != this.equipmentTransfer.sourceRoomId;})
     }
   }
 
   removeFilter() : void{
     this.isSearchActive = false;
     this.searchInput = "";
-    this.filteredRooms = this.rooms;
+    this.filteredRooms = this.rooms.filter(x => {return x.id != this.equipmentTransfer.sourceRoomId;})
   }
 
   selectDestinationRoom(id: number) : void{
