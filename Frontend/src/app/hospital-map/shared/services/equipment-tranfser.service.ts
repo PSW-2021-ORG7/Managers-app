@@ -22,7 +22,7 @@ export class EquipmentTransferService {
     return this.http.get<Date[]>(this.baseUrl + "/availableTimeSlots", {params});
   }
   
-  postEquipmentTransfer(equipmentTransfer: EquipmentTransfer): void {
-    this.http.post<EquipmentTransfer>(this.baseUrl + '/transfers/', equipmentTransfer);
+  postEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer> {
+    return this.http.post<EquipmentTransfer>(this.baseUrl + '/transfers', equipmentTransfer);
   }
 }

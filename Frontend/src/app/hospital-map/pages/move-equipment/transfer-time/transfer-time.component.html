@@ -64,7 +64,7 @@
       </div>
       <app-primary-button class="search-button" (click)="searchAvailableTimeSlots()" [isBtnDisabled]="isSearchDisabled" [text]="'Search'"></app-primary-button>
     </form>
-    <app-primary-button class="schedule-transfer-button align-right" [isBtnDisabled]="true" [text]="'Schedule transfer'"></app-primary-button>
+    <app-primary-button class="schedule-transfer-button align-right" [isBtnDisabled]="!timeSlotSelected" [text]="'Schedule transfer'" (click)="scheduleTransfer()"></app-primary-button>
   </div>
   
   <div class="w-100 d-flex flex-row align-items-center justify-content-between">
@@ -75,7 +75,7 @@
 
   <div class="searched-elements" *ngIf="timeSlots">
     <div *ngFor="let timeSlot of timeSlots">
-      <div class="card d-flex flex-row mb-3 align-items-center justify-content-between">
+      <div class="card d-flex flex-row mb-3 align-items-center justify-content-between" (click)="selectTimeSlot(timeSlot)" >
         <span>{{timeSlot.start | date: 'fullDate'}}</span>
         <span>{{timeSlot.start | date: 'shortTime'}}</span>
       </div>

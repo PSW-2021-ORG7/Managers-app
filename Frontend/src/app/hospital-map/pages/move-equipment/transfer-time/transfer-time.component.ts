@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { EquipmentTransferService } from 'src/app/hospital-map/shared/services/equipment-tranfser.service';
@@ -20,8 +21,10 @@ export class TransferTimeComponent implements OnInit{
   transferStartDate : string = "";
   transferEndDate: string = "";
   timeSlots: any[] = [];
+  timeSlotSelected: boolean = false;
+  selectedTimeSlot: any = null;
 
-  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private equipmentTransferService: EquipmentTransferService) {
+  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private equipmentTransferService: EquipmentTransferService, private router: Router) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.minDate = calendar.getToday();
@@ -91,6 +94,20 @@ export class TransferTimeComponent implements OnInit{
         this.timeSlots = data;
       }
     )
+    this.timeSlotSelected = false;
+  }
+
+  selectTimeSlot(timeSlot: any): void{
+    this.equipmentTransfer.transferDate = timeSlot.start;
+    this.timeSlotSelected = true;
+    this.selectedTimeSlot = timeSlot;
+  }
+
+  scheduleTransfer() : void{
+    if(this.timeSlotSelected) {
+      this.equipmentTransferService.postEquipmentTransfer(this.equipmentTransfer).subscribe();
+      this.router.navigate(['/hospital-map/']);
+    }
   }
 
 }
