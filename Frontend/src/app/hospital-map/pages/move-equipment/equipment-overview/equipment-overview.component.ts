@@ -19,8 +19,10 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   scrollBoxTitle: string = "Select equipment for transfer";
   isSearchActive: boolean = false;
   selectedEquipment!: RoomEquipment;
+  selectedEquipmentId: number = -1;
   @Input() equipmentTransfer!: EquipmentTransfer;
   @Output() confirmQuantityEvent = new EventEmitter();
+  @Output() equipmentTransferChanged = new EventEmitter();
 
   constructor(private equipmentService: EquipmentService) { }
 
@@ -59,14 +61,19 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
 
   onNotifySelectedEquipment(selectedEquipment: RoomEquipment): void{
     this.selectedEquipment = selectedEquipment;
+    this.selectedEquipmentId = selectedEquipment.id;
     this.equipmentTransfer.sourceRoomId = selectedEquipment.roomId;
     this.equipmentTransfer.equipmentId = selectedEquipment.id;
     this.equipmentTransfer.quantity = 1;
+    this.equipmentTransfer.destinationRoomId = -1;
+    this.equipmentTransfer.transferDate = new Date(-8640000000000000);
+    this.equipmentTransferChanged.emit();
     this.isSelectedEquipment = true;
   }
 
   removeSelectedEquipment(): void{
     this.isSelectedEquipment = false;
+    this.selectedEquipmentId = -1;
   }
 
   decreaseQuantity(): void{

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { Room } from 'src/app/hospital-map/models/rooms/room.model';
 import { RoomTypeToStringPipe } from 'src/app/hospital-map/shared/pipes/room-type-to-string.pipe';
@@ -13,12 +13,12 @@ import { RoomsService } from 'src/app/hospital-map/shared/services/rooms.service
 export class DestinationRoomOverviewComponent implements OnInit {
 
   rooms: Room[] = [];
-  isRoomSelected: boolean = false;
   filteredRooms: Room[] = [];
   searchInput: string = "";
   searchFilter: string = "";
   scrollBoxTitle: string = "Select destination room";
   isSearchActive: boolean = false;
+  selectedRoomId: number = -1;
   @Input() equipmentTransfer!: EquipmentTransfer;
   @Output() selectDestinationRoomEvent = new EventEmitter();
 
@@ -37,10 +37,9 @@ export class DestinationRoomOverviewComponent implements OnInit {
     )
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if(changes['isRoomSelected']){
-      this.isRoomSelected = changes.isEquipmentSelected.currentValue;
-    }
+  public updateEquipmentTransfer(obj: EquipmentTransfer) {
+    this.equipmentTransfer  = obj;
+    this.selectedRoomId = this.equipmentTransfer.destinationRoomId;
   }
 
   search() : void{
@@ -63,6 +62,7 @@ export class DestinationRoomOverviewComponent implements OnInit {
 
   selectDestinationRoom(id: number) : void{
     this.equipmentTransfer.destinationRoomId = id;
+    this.selectedRoomId = id;
     this.selectDestinationRoomEvent.emit();
   }
 

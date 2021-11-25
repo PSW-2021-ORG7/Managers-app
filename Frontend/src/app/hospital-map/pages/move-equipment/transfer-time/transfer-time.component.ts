@@ -35,6 +35,11 @@ export class TransferTimeComponent implements OnInit{
     this.checkIfCanSearch();
   }
 
+  public removeTimeSlots() {
+    this.timeSlots  = [];
+    this.timeSlotSelected = false;
+  }
+
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
       this.fromDate = date;

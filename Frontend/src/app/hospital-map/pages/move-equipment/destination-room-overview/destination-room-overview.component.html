@@ -12,7 +12,7 @@
     
     <div class="searched-elements">
         <div *ngFor="let room of filteredRooms" class="room-card-wrapper">
-            <app-room-card [room]="room" (click)="selectDestinationRoom(room.id)"></app-room-card>
+            <app-room-card [room]="room" (click)="selectDestinationRoom(room.id)" [selectedRoomId]="selectedRoomId"></app-room-card>
         </div>
     </div>
 </div>

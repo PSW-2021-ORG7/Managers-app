@@ -1,11 +1,11 @@
-<div class="card d-flex flex-column" (click)="displayRoomOnMap()">
-    <span class="card-title">{{room.type | roomTypeToString}} {{room.name}}</span>
+<div class="card d-flex flex-column" [style.background]="isCardSelected ? '#214975' : '#fff'" (click)="displayRoomOnMap()">
+    <span class="card-title" [style.color]="isCardSelected ? '#fff' : '#214975'">{{room.type | roomTypeToString}} {{room.name}}</span>
     <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-row align-items-center">
             <svg class="dot" height="15" width="15"><circle cx="7.5" cy="7.5" r="6" attr.fill="{{roomStatusColor()}}" /></svg>
             <span class="status-text" [style.color]="roomStatusColor()">{{room.status | roomStatusToString}}</span>
         </div>
-        <span *ngIf="room.floor == 0" class="floor-text">Ground level</span>
-        <span *ngIf="room.floor > 0" class="floor-text">Floor {{room.floor}}</span>
+        <span [style.color]="isCardSelected ? '#fff' : '#a2a2a2'" *ngIf="room.floor == 0" class="floor-text">Ground level</span>
+        <span [style.color]="isCardSelected ? '#fff' : '#a2a2a2'" *ngIf="room.floor > 0" class="floor-text">Floor {{room.floor}}</span>
     </div>
 </div>
