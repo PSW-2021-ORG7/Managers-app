@@ -9,4 +9,5 @@ export class PrimaryButtonComponent {
 
   @Input() text: string = "Button";
   @Input() color: string = "#214975";
+  @Input() isBtnDisabled: boolean = false;
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HospitalMapRoutingModule } from './hospital-map-routing.module';
 import { HospitalMapComponent } from './hospital-map.component';
@@ -18,6 +19,7 @@ import { EquipmentCardComponent } from './shared/components/equipment-card/equip
 import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.component';
 import { SelectedEquipmentComponent } from './pages/move-equipment/equipment-overview/equipment-overview.component';
 import { DestinationRoomOverviewComponent } from './pages/move-equipment/destination-room-overview/destination-room-overview.component';
+import { TransferTimeComponent } from './pages/move-equipment/transfer-time/transfer-time.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,16 @@ import { DestinationRoomOverviewComponent } from './pages/move-equipment/destina
     EquipmentCardComponent,
     MoveEquipmentComponent,
     SelectedEquipmentComponent,
-    DestinationRoomOverviewComponent
+    DestinationRoomOverviewComponent,
+    TransferTimeComponent
+    
   ],
   imports: [
     CommonModule,
     HospitalMapRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbDatepickerModule,
+    NgbDropdownModule
   ],
   providers: [D3Service]
 })

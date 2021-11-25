@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { EquipmentTransfer } from '../../models/equipment/equipment-transfer.model';
-import { RoomEquipment } from '../../models/equipment/room-equipment.model';
 
 
 @Component({
@@ -12,7 +11,7 @@ import { RoomEquipment } from '../../models/equipment/room-equipment.model';
 export class MoveEquipmentComponent {
   
   mode: string = "move-equipment";
-  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, 1, -1, -1, new Date());
+  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, 1, -1, -1, "", "");
 
   constructor(private router: Router) { }
   

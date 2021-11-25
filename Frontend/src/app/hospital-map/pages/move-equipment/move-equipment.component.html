@@ -23,8 +23,18 @@
             </div>
         </div>
     </div>
-    <app-equipment-overview *ngIf="mode=='move-equipment'" class="equipment-overview" [equipmentTransfer]="equipmentTransfer" (confirmQuantityEvent)="confirmEquipmentQuantity()"></app-equipment-overview>
-    <app-destination-room-overview *ngIf="mode=='destination-room'" class="equipment-overview" [equipmentTransfer]="equipmentTransfer" (selectDestinationRoomEvent)="selectDestinationRoom()"></app-destination-room-overview>
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-row justify-content-between">
+            <div class="d-flex flex-row">
+                <h2 [style.font-weight]="'bold'" [style.color]="'#214975'" >Equipment transfer</h2>
+            </div>
+        </div> 
+        <app-equipment-overview *ngIf="mode=='move-equipment'" class="functionalities-view" [equipmentTransfer]="equipmentTransfer" (confirmQuantityEvent)="confirmEquipmentQuantity()"></app-equipment-overview>
+        <app-destination-room-overview *ngIf="mode=='destination-room'" class="functionalities-view" [equipmentTransfer]="equipmentTransfer" (selectDestinationRoomEvent)="selectDestinationRoom()"></app-destination-room-overview>
+        <app-transfer-time *ngIf="mode=='transfer-time'" class="functionalities-view" [equipmentTransfer]="equipmentTransfer" ></app-transfer-time>
+       
+    </div>
+    
 </div>
 
 
