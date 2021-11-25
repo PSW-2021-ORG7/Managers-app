@@ -1,11 +1,9 @@
 @import 'src/styles/main.scss';
 
 .card{
+    width: 100%;
     padding: 10px 20px;
-    margin-bottom: 20px;
     height: 94px;
-    gap: 18px;
-    perspective: 1000px;
     @include card;
 }
 

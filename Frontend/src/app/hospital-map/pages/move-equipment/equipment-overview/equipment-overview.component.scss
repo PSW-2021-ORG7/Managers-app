@@ -38,11 +38,13 @@
     .select-view{
         background-color: #fff;
         position: relative;
-        height: 72vh;
+        height: 69vh;
     }
 
         .searched-elements{
-            justify-content: space-between;
+            display: grid;
+            grid-gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             padding: 10px 10px 0 5px;
             width: 100%;
             @include scrollbar;
@@ -53,10 +55,6 @@
             width: 75%;
             transition: width 0.4s ease;
         }
-
-            .transfer-equipment-card{
-                width: 32%;
-            }
 
         .selected-equipment{
             position: absolute;

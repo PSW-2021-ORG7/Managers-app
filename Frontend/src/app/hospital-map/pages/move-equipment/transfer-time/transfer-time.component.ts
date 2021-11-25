@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
+import { EquipmentTransferService } from 'src/app/hospital-map/shared/services/equipment-tranfser.service';
 
 @Component({
   selector: 'app-transfer-time',
@@ -8,23 +9,25 @@ import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipme
   styleUrls: ['./transfer-time.component.scss']
 })
 
-export class TransferTimeComponent{
+export class TransferTimeComponent implements OnInit{
 
+  @Input() equipmentTransfer!: EquipmentTransfer;
   hoveredDate: NgbDate | null = null;
   fromDate: NgbDate | null;
   toDate: NgbDate | null;
-  tsFromDate!: Date;
-  tsToDate!: Date;
   minDate!:NgbDate;
+  isSearchDisabled: boolean = true;
+  timeSlots: any[] = [];
 
-
-  isTransferTimeSelected: boolean = false;
-  @Input() equipmentTransfer!: EquipmentTransfer;
-
-  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter) {
+  constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private equipmentTransferService: EquipmentTransferService) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
     this.minDate = calendar.getToday();
+  }
+
+  ngOnInit(){
+    this.convertDatesToString();
+    this.checkIfCanSearch();
   }
 
   onDateSelection(date: NgbDate) {
@@ -36,7 +39,8 @@ export class TransferTimeComponent{
       this.toDate = null;
       this.fromDate = date;
     }
-
+    this.convertDatesToString();
+    this.checkIfCanSearch();
   }
 
   isHovered(date: NgbDate) {
@@ -56,12 +60,40 @@ export class TransferTimeComponent{
     return parsed && this.calendar.isValid(NgbDate.from(parsed)) ? NgbDate.from(parsed) : currentValue;
   }
 
-  ngbDatetoDateCoverter(date: NgbDate): Date{
-    let convDate = new Date(date.year, date.month - 1, date.day);
-    return convDate;
+  private convertDatesToString(): void{
+    let fromDateString = "";
+    let toDateString = "";
+    if(this.fromDate != null)
+      fromDateString = this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day;
+    else
+      fromDateString = "";
+    if(this.toDate != null)
+      toDateString = this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day;
+    else
+      toDateString = "";
+      this.equipmentTransfer.transferStartDate = fromDateString;
+      this.equipmentTransfer.transferEndDate = toDateString;
   }
 
- 
+  onDurationChange(newValue : number): void{
+    this.equipmentTransfer.transferDuration = newValue;
+    this.checkIfCanSearch();
+  }
+
+  checkIfCanSearch(): void{
+    if(this.equipmentTransfer.transferDuration != -1 && this.equipmentTransfer.transferStartDate != "" && this.equipmentTransfer.transferEndDate != "")
+      this.isSearchDisabled = false;
+    else
+      this.isSearchDisabled = true;
+  }
+
+  searchAvailableTimeSlots(): void{
+    this.equipmentTransferService.getAvailableTimeSlots(this.equipmentTransfer).subscribe(
+      data => {
+        this.timeSlots = data;
+      }
+    )
+  }
 
 }
 

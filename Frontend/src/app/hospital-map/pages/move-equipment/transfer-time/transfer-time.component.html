@@ -52,7 +52,7 @@
         </div>
       </div>
       <div class="duration">
-        <select class="form-control duration-select" id="freeTimeSlots" name='freeTimeSlots'>
+        <select class="form-control duration-select" [ngModel]="equipmentTransfer.transferDuration" (ngModelChange)="onDurationChange($event)" id="freeTimeSlots" name='freeTimeSlots'>
             <option value="" disabled selected>Duration</option>
             <option [ngValue] = 15>15 min</option>
             <option [ngValue] = 30>30 min</option>
@@ -62,9 +62,9 @@
             <option [ngValue] = 120>120 min</option>
         </select>
       </div>
-      <app-primary-button class="search-button" [text]="'Search'"></app-primary-button>
+      <app-primary-button class="search-button" (click)="searchAvailableTimeSlots()" [isBtnDisabled]="isSearchDisabled" [text]="'Search'"></app-primary-button>
     </form>
-    <app-primary-button class="schedule-transfer-button align-right" [text]="'Schedule transfer'"></app-primary-button>
+    <app-primary-button class="schedule-transfer-button align-right" [isBtnDisabled]="true" [text]="'Schedule transfer'"></app-primary-button>
   </div>
   
   <div class="w-100 d-flex flex-row align-items-center justify-content-between">
@@ -72,9 +72,14 @@
       <span class="align-middle remove-filter">Showing first 100 results</span>
   </div> 
   
-  <div class="select-view d-flex flex-row">
-      <div class="searched-elements d-flex flex-wrap align-content-start">
-      
+
+  <div class="searched-elements" *ngIf="timeSlots">
+    <div *ngFor="let timeSlot of timeSlots">
+      <div class="card d-flex flex-row mb-3 align-items-center justify-content-between">
+        <span>{{timeSlot.start | date: 'fullDate'}}</span>
+        <span>{{timeSlot.start | date: 'shortTime'}}</span>
       </div>
+    </div>
   </div>
+
 </div>

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Router } from '@angular/router';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
 import { EquipmentService } from 'src/app/hospital-map/shared/services/equipment.service';
@@ -23,7 +22,7 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   @Input() equipmentTransfer!: EquipmentTransfer;
   @Output() confirmQuantityEvent = new EventEmitter();
 
-  constructor(private equipmentService: EquipmentService, private router: Router) { }
+  constructor(private equipmentService: EquipmentService) { }
 
   ngOnInit(): void {
     this.equipmentService.getEquipment().subscribe(

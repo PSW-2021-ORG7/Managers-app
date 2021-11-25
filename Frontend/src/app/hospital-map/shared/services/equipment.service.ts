@@ -13,4 +13,5 @@ export class EquipmentService {
   getEquipment(): Observable<any> {
     return this.http.get(this.baseUrl);
   }
+  
 }

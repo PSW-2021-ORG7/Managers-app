@@ -78,4 +78,8 @@ ngb-datepicker {
     .custom-select{
         border-color: color(lightgrey);
     }
+
+    .ngb-dp-day disabled{
+        color: color(lightgrey);
+    }
 }

@@ -10,11 +10,9 @@
         <span class="align-middle remove-filter" *ngIf="isSearchActive" (click)="removeFilter()">Remove filter</span>
     </div> 
     
-    <div class="select-view d-flex flex-row">
-        <div class="searched-elements d-flex flex-wrap align-content-start">
-            <div *ngFor="let room of filteredRooms" class="transfer-equipment-card">
-                <app-room-card [room]="room" (click)="selectDestinationRoom(room.id)"></app-room-card>
-            </div>
+    <div class="searched-elements">
+        <div *ngFor="let room of filteredRooms" class="room-card-wrapper">
+            <app-room-card [room]="room" (click)="selectDestinationRoom(room.id)"></app-room-card>
         </div>
     </div>
 </div>
