@@ -1,42 +1,34 @@
 @import 'src/styles/main.scss';
 
-.equipment-overview{
+.transfer-time-overview{
     overflow-y: hidden;
 }
 
-    .title-equipment-transfer{
-        height: 46px;
-    }
-
     .search-container{
-        height: 33px;
         margin-top: 10px;
         margin-bottom: 10px;
         width: 100%
     }
 
-        .search-field{
-            margin-right: 12px;
+        .custom-date-picker{
+            border: 0px;
+            height: 33px;
+            box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06);
+            margin-right: 20px;
         }
 
-
-    .subtitle-equipment-transfer{
-        width: 100%;
+    h3{
+        font-size: 20px;
+        color: color(darkgrey);
+        font-weight: bold;
+        margin-top: 10px;
     }
 
-        h3{
-            font-size: 20px;
-            color: color(darkgrey);
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .remove-filter{
-            cursor: pointer;
-            color: color(darkgrey);
-            font-size: 14px;
-            margin-top: 10px;
-        }
+    .remove-filter{
+        cursor: pointer;
+        color: color(darkgrey);
+        font-size: 14px;
+    }
 
 
     .select-view{
@@ -52,52 +44,81 @@
             gap: 10px;
         }
 
-
-
-.form-group.hidden {
-    width: 0;
-    margin: 0;
-    border: none;
-    padding: 0;
-}
-.custom-day {
-    text-align: center;
-    padding: 0.185rem 0.25rem;
-    display: inline-block;
-    height: 2rem;
-    width: 2rem;
-}
-.custom-day.focused {
-    background-color: #e6e6e6;
-}
-.custom-day.range, .custom-day:hover {
-    background-color: rgb(2, 117, 216);
-    color: white;
-}
-.custom-day.faded {
-    background-color: rgba(2, 117, 216, 0.5);
-}
-
-.input-group{
-    position: relative;
-}
-
-    input{
-        background-color: white !important;
+    .transfer-time-form{
+        padding-left: 6px;
     }
 
-    .calendar{
+        .form-group.hidden {
+            width: 0;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
 
-        position: absolute;
-        @include icon;
-        right: 16px;
-        top: 5px;
-        @include background-svg($calendar-icon);
-        z-index: 100;
+        .custom-day {
+            text-align: center;
+            padding: 0.185rem 0.25rem;
+            display: inline-block;
+            height: 2rem;
+            width: 2rem;
+        }
+
+        .custom-day.focused {
+            background-color: #e6e6e6;
+        }
+
+        .custom-day.range, .custom-day:hover {
+            background-color: color(blue);
+            color: white;
+            border: 0px;
+        }
+
+        .custom-day.faded {
+            background-color: rgba(54, 112, 176, 0.3);
+        }
+
+        .input-group{
+            position: relative;
+        }
+
+            input{
+                background-color: white !important;
+            }
+
+            .calendar{
+                position: absolute;
+                @include icon;
+                right: 26px;
+                top: 6px;
+                @include background-svg($calendar-icon);
+                z-index: 100;
+            }
+
+
+        .duration{
+            width: 136px;
+            height: 33px;
+            margin-right: 20px;
+            position: relative;
+            
+            select{
+                height: 33px;
+                padding: 4px 10px;
+                -moz-appearance: none;
+                -webkit-appearance: none;
+                appearance: none;
+                @include background-svg($select-arrow);
+                background-repeat: no-repeat;
+                background-position: right 5px top 50%;
+            }
+        }
+
+        .search-button{
+            width: 92px;
+        }
+
+    .schedule-transfer-button{
+        width: 220px;
     }
 
-.duration{
-    margin-top: -32px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
+        
