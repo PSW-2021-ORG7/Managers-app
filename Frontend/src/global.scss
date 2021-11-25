@@ -44,7 +44,7 @@ a{
     text-decoration: none !important;
 }
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: $base-font-family }
 
 
 ngb-datepicker {
@@ -74,12 +74,5 @@ ngb-datepicker {
     .btn-link{
         color: color(blue);
     }
-    
-    .custom-select{
-        border-color: color(lightgrey);
-    }
 
-    .ngb-dp-day disabled{
-        color: color(lightgrey);
-    }
 }

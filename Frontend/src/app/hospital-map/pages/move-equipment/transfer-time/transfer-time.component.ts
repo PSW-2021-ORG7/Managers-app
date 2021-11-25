@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {NgbDate, NgbCalendar, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { EquipmentTransferService } from 'src/app/hospital-map/shared/services/equipment-tranfser.service';
@@ -65,14 +65,10 @@ export class TransferTimeComponent implements OnInit{
     let toDateString = "";
     if(this.fromDate != null)
       fromDateString = this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day;
-    else
-      fromDateString = "";
     if(this.toDate != null)
       toDateString = this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day;
-    else
-      toDateString = "";
-      this.equipmentTransfer.transferStartDate = fromDateString;
-      this.equipmentTransfer.transferEndDate = toDateString;
+    this.equipmentTransfer.transferStartDate = fromDateString;
+    this.equipmentTransfer.transferEndDate = toDateString;
   }
 
   onDurationChange(newValue : number): void{
