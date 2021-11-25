@@ -11,7 +11,7 @@ import { EquipmentTransfer } from '../../models/equipment/equipment-transfer.mod
 export class MoveEquipmentComponent {
   
   mode: string = "move-equipment";
-  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, 1, -1, -1, "", "");
+  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, 1, -1, -1, new Date());
 
   constructor(private router: Router) { }
   

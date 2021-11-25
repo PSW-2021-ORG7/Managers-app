@@ -17,6 +17,8 @@ export class TransferTimeComponent implements OnInit{
   toDate: NgbDate | null;
   minDate!:NgbDate;
   isSearchDisabled: boolean = true;
+  transferStartDate : string = "";
+  transferEndDate: string = "";
   timeSlots: any[] = [];
 
   constructor(private calendar: NgbCalendar, public formatter: NgbDateParserFormatter, private equipmentTransferService: EquipmentTransferService) {
@@ -67,8 +69,8 @@ export class TransferTimeComponent implements OnInit{
       fromDateString = this.fromDate.year + "-" + this.fromDate.month + "-" + this.fromDate.day;
     if(this.toDate != null)
       toDateString = this.toDate.year + "-" + this.toDate.month + "-" + this.toDate.day;
-    this.equipmentTransfer.transferStartDate = fromDateString;
-    this.equipmentTransfer.transferEndDate = toDateString;
+    this.transferStartDate = fromDateString;
+    this.transferEndDate = toDateString;
   }
 
   onDurationChange(newValue : number): void{
@@ -77,14 +79,14 @@ export class TransferTimeComponent implements OnInit{
   }
 
   checkIfCanSearch(): void{
-    if(this.equipmentTransfer.transferDuration != -1 && this.equipmentTransfer.transferStartDate != "" && this.equipmentTransfer.transferEndDate != "")
+    if(this.equipmentTransfer.transferDuration != -1 && this.transferStartDate != "" && this.transferEndDate != "")
       this.isSearchDisabled = false;
     else
       this.isSearchDisabled = true;
   }
 
   searchAvailableTimeSlots(): void{
-    this.equipmentTransferService.getAvailableTimeSlots(this.equipmentTransfer).subscribe(
+    this.equipmentTransferService.getAvailableTimeSlots(this.equipmentTransfer, this.transferStartDate, this.transferEndDate).subscribe(
       data => {
         this.timeSlots = data;
       }
