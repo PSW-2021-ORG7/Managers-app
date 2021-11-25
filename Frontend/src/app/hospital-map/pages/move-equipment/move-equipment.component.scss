@@ -25,13 +25,26 @@
                 color: color(darkgrey);
             }
 
-        .steps{
-            padding: 0px 5px 20px 20px;
+        .step{
+            &:hover{
+                cursor: pointer;
+            }
         }
 
-            .source-room-icon, .destination-room-icon, .time-icon{
-                margin-right: 5px;
-                margin-left: 5px;
+            .location-icon{
+                margin: 0 5px;
+                @include icon;
+                @include background-svg($location-icon);
+            }
+
+            .checkmark-icon{
+                margin: 0 5px;
+                @include icon;
+                @include background-svg($checkmark-icon);
+            }
+
+            .number-icon{
+                margin: 0 5px;
             }
     
     .functionalities-view{

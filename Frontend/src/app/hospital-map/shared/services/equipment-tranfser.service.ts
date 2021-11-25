@@ -12,14 +12,17 @@ export class EquipmentTransferService {
   constructor(private http: HttpClient) { }
 
 
-  getAvailableTimeSlots(equipmentTransfer : EquipmentTransfer): Observable<Date[]> {
+  getAvailableTimeSlots(equipmentTransfer : EquipmentTransfer, transferStartDate: string, transferEndDate: string): Observable<Date[]> {
     let params = new HttpParams()
-    .set('start', equipmentTransfer.transferStartDate)
-    .set('end', equipmentTransfer.transferEndDate)
+    .set('start', transferStartDate)
+    .set('end', transferEndDate)
     .set('duration', equipmentTransfer.transferDuration)
     .set('srcRoomId', equipmentTransfer.sourceRoomId)
     .set('dstRoomId', equipmentTransfer.destinationRoomId);
     return this.http.get<Date[]>(this.baseUrl + "/availableTimeSlots", {params});
   }
   
+  postEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer> {
+    return this.http.post<EquipmentTransfer>(this.baseUrl + '/transfers', equipmentTransfer);
+  }
 }

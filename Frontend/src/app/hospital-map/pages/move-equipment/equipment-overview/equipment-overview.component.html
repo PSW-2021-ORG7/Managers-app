@@ -12,8 +12,8 @@
     
     <div class="select-view d-flex flex-row">
         <div [class.searched-elements-active-selected-equipment]="isSelectedEquipment" class="searched-elements">
-            <div *ngFor="let roomEquipment of filteredEquipment">
-                <app-equipment-card (notifySelectedEquipment)="onNotifySelectedEquipment($event)" [type]="'equipment'" [equipment]="roomEquipment"></app-equipment-card>
+            <div *ngFor="let equipment of filteredEquipment;">
+                <app-equipment-card (notifySelectedEquipment)="onNotifySelectedEquipment($event)" [type]="'transfer'" [equipment]="equipment" [selectedEquipmentId]="selectedEquipmentId"></app-equipment-card>
             </div>
         </div>
         <div [class.selected-equipment-active]="isSelectedEquipment" class="selected-equipment">

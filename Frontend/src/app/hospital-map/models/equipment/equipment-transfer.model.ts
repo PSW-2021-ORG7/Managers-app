@@ -4,16 +4,14 @@ export class EquipmentTransfer {
     public quantity: number;
     public equipmentId: number;
     public transferDuration: number;
-    public transferStartDate: string;
-    public transferEndDate: string;
+    public transferDate: Date;
 
-    constructor(sourceRoomId: number, destinationRoomId: number, quantity: number, equipmentId: number, transferDuration: number, transferStartDate: string, transferEndDate: string) {
+    constructor(sourceRoomId: number, destinationRoomId: number, quantity: number, equipmentId: number, transferDuration: number, transferDate: Date){
         this.sourceRoomId = sourceRoomId;
         this.destinationRoomId = destinationRoomId;
         this.quantity = quantity;
         this.equipmentId = equipmentId;
         this.transferDuration = transferDuration;
-        this.transferStartDate = transferStartDate;
-        this.transferEndDate = transferEndDate;
+        this.transferDate = transferDate;
     }
 }

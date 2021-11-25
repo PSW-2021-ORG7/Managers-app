@@ -45,6 +45,7 @@
             display: grid;
             grid-gap: 20px;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-rows: minmax(100px, 102px);
             padding: 10px 10px 0 5px;
             width: 100%;
             @include scrollbar;
