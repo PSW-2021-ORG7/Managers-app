@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 * {
   box-sizing: border-box;
 }
@@ -50,14 +48,11 @@ input[type=text] {
 .cancelBtn {
   width: 30%;
 }
-=======
+
 .form-control:focus {
     border-color: #f3f5f7;
     box-shadow: 0 0 0 0.2rem #70a9e6;;
 } 
-<<<<<<< HEAD
->>>>>>> b01ae11 (feat: Add form for urgent requests)
-=======
 
 .background {
   background-image: url('../../../assets/images/integration.jpg');
@@ -67,4 +62,3 @@ input[type=text] {
   width: 100%;
   height: 1024px;
 }
->>>>>>> 39821fb (refactor: Refactored interface)
