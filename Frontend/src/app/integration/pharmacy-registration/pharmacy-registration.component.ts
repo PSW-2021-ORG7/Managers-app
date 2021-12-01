@@ -46,21 +46,9 @@ export class PharmacyRegistrationComponent implements OnInit {
     console.log(this.endpoint);
   }
 
-  makeid(length: number) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
-}
-
   send() : void {
 
     var registration = {
-      idPharmacy: this.makeid(3),
       namePharmacy: this.namePharmacy,
       apiKeyPharmacy: this.apiKeyPharmacy,
       endpoint: this.endpoint};

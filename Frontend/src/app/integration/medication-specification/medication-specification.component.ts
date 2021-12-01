@@ -98,7 +98,7 @@ export class MedicationSpecificationComponent implements OnInit {
       alert("Please select pharmacy!")
     }else{    
       this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-        pharmacy = pharmacy;
+
         this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
           
           console.log("Returned file name: " + response)
@@ -116,7 +116,7 @@ export class MedicationSpecificationComponent implements OnInit {
               window.location.reload()
             }
             else{
-              alert("Oops?")
+              alert("Failed to download specification!")
             }
           })
         })      
