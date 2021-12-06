@@ -12,7 +12,10 @@ import { UrgentRequestComponent } from './urgent-request/urgent-request.componen
 import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
+=======
+>>>>>>> 7890b2d (feat: Added page for pharmacy profile)
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 
 @NgModule({
@@ -23,7 +26,10 @@ import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.co
     CreateFeedbackComponent,
     UrgentRequestComponent,
     MedicationSpecificationComponent,
+<<<<<<< HEAD
     PrescriptionsComponent
+=======
+>>>>>>> 7890b2d (feat: Added page for pharmacy profile)
     PharmacyProfileComponent
    
   ],

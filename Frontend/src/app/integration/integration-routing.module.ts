@@ -17,7 +17,8 @@ const routes: Routes = [
   { path: 'urgent-request', component: UrgentRequestComponent },
   { path: 'medication-specification', component: MedicationSpecificationComponent },
   { path: 'prescriptions', component: PrescriptionsComponent},
-  { path: 'pharmacy-profile', component: PharmacyProfileComponent} 
+  { path: 'pharmacy-profile', component: PharmacyProfileComponent},
+  { path: 'pharmacy-profile', component: PharmacyProfileComponent}
 ];
 
 @NgModule({
