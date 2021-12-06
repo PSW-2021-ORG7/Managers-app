@@ -104,7 +104,6 @@ export class UrgentRequestComponent implements OnInit {
     } else {
 
       this.urgentRequestService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-        pharmacy = pharmacy;
         this.urgentRequestService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
 
           console.log("Returned medicine:")

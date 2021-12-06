@@ -7,13 +7,13 @@
         <p>Please fill in this form to create an account.</p>
         <hr>
       
-        <label><b>Pharmacy Name</b></label>
+        <label><strong>Pharmacy Name</strong></label>
         <input type="text" placeholder="Enter Pharmacy Name" required (change)="selectChangeHandlerName($event)" [attr.aria-label]="namePharmacy">
       
-        <label><b>API Key</b></label>
+        <label><strong>API Key</strong></label>
         <input type="text" placeholder="Enter API Key" required (change)="selectChangeHandlerApiKey($event)" [attr.aria-label]="apiKeyPharmacy">
       
-        <label><b>Endpoint</b></label>
+        <label><strong>Endpoint</strong></label>
         <input type="text" placeholder="Enter Endpoint" required (change)="selectChangeHandlerEndpoint($event)" [attr.aria-label]="endpoint">
         <hr>
         <button type="submit" class="registerbtn">Register</button>
