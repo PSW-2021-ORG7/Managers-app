@@ -13,6 +13,7 @@ import { MedicationSpecificationComponent } from './medication-specification/med
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
+import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PrescriptionsComponent } from './prescriptions/prescriptions.component'
     UrgentRequestComponent,
     MedicationSpecificationComponent,
     PrescriptionsComponent
+    PharmacyProfileComponent
    
   ],
   imports: [
