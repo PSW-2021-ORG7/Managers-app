@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { UrgentRequestService } from './urgent-request.service';
 
 export class Medicine {
@@ -31,7 +32,7 @@ export class UrgentRequestComponent implements OnInit {
   pharmacies: Pharmacy[] = [];
   disableFields: boolean = false;
 
-  constructor(private httpClient: HttpClient, private urgentRequestService: UrgentRequestService) { }
+  constructor(private httpClient: HttpClient, private medicationSpecificationService: MedicationSpecificationService, private urgentRequestService: UrgentRequestService) { }
 
   ngOnInit(): void {
   }
@@ -68,10 +69,10 @@ export class UrgentRequestComponent implements OnInit {
       alert("Please fill all fields!")
     } else {
       this.pharmacies = [];
-      this.urgentRequestService.checkIfAvilable(urgentRequest).subscribe(response => {
+      this.medicationSpecificationService.checkIfAvailable(urgentRequest).subscribe(response => {
         if (response) {
           alert("Medicine is available in required quantity!")
-          this.urgentRequestService.getPharmacyByID("P1").subscribe(response => {
+          this.medicationSpecificationService.getPharmacyByID("P1").subscribe(response => {
             console.log(response)
             this.pharmacies.push(response)
           })
@@ -103,8 +104,8 @@ export class UrgentRequestComponent implements OnInit {
       alert("Please select pharmacy!")
     } else {
 
-      this.urgentRequestService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-        this.urgentRequestService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
+      this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+        this.medicationSpecificationService.findMedicineByNameAndDose(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
 
           console.log("Returned medicine:")
           console.log(med)

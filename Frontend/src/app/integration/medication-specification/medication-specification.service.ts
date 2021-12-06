@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class MedicationSpecificationService {
-    private baseUrl: string = 'http://localhost:64677/inventory/check'
+    private baseUrl: string = 'http://localhost:64677/inventory/check/'
     private baseUrlHospital: string = 'http://localhost:44298/api/pharmacy';
 
     constructor(private http: HttpClient) { }
