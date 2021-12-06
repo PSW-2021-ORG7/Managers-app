@@ -61,7 +61,7 @@
                 <tr>
                     <td>
                         <label><strong>Notes</strong></label><br>
-                        <textarea style="width:479px; height:120px;"></textarea>
+                        <textarea [ngModel]="notes" (change)="onNotesTextChange($event)" style="width:479px; height:120px;">{{notes}}</textarea>
                     </td>
                 </tr>
 

@@ -29,11 +29,12 @@ export class PharmacyProfileComponent implements OnInit {
   pharmacyCity: string = "Pharmacy City Goes Here"
   pharmacyWebsite: string = "Pharmacy Website goes here"
 
+  notes: string = "";
+
 
   constructor(private pharmacyService: PharmacyProfileService,private medicineService: MedicationSpecificationService ) {}
 
   ngOnInit(): void {
-
     //Ucitaj apoteke
     this.pharmacyService.getPharmacies().subscribe((pharmacies: Pharmacy[]) => {
       this.pharmacies = pharmacies;
@@ -48,17 +49,27 @@ export class PharmacyProfileComponent implements OnInit {
 
   viewProfile(): void{
 
+    if(localStorage.getItem(this.selectedPharmacyId) == null)
+        this.notes = ""
+        else
+        this.notes = JSON.parse(localStorage.getItem(this.selectedPharmacyId) || '')
+
     if(this.selectedPharmacyId == "") alert ("Please select pharmacy!")
     else {
       this.medicineService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-        
-        console.log(pharmacy)
-        
+             
         this.pharmacyName = pharmacy.namePharmacy
         this.pharmacyAddress = pharmacy.address
         this.pharmacyCity = pharmacy.city
         this.pharmacyWebsite = pharmacy.endpoint
+                
       });
     }
+  }
+
+  onNotesTextChange(event: any){
+    this.notes = event.target.value;
+    console.log(this.notes)
+    localStorage.setItem(this.selectedPharmacyId, JSON.stringify(this.notes));
   }
 }
