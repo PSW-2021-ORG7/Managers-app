@@ -1,0 +1,50 @@
+<app-integration></app-integration>
+<br>
+
+<div id="MedicationSpecification" class="background">
+        <form (submit)="send()">
+        <div class="container">
+            <table>
+                <caption style="text-align:left"></caption>
+                <h1 style="text-align: center;">Medication specification</h1>
+                <hr>
+
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Medicine </strong></label>
+                        <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Dose </strong></label><br>
+                        <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
+                    </td>
+                </tr>
+                <tr>
+                    <button type="button" (click)="checkIfAvailable()" class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
+                    <button type="button" (click)="cancel()" class="btn btn-secondary cancelBtn">Cancel</button><br><br>
+                </tr>
+                <tr>
+                    <label><strong>Available in: </strong></label><br>
+                    
+                    <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple (change)="selectChangeHandlerSelectedPharmacy($event)" title="Please select pharmacy" required>
+                        <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
+                            {{phar.namePharmacy}}
+                        </option>
+                    </select>
+                    
+                </tr>
+                <tr>
+                    <hr>
+                    <button type="submit" class="btn btn-secondary requestSpecBtn">Request Specification</button>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+

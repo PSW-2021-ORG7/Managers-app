@@ -16,7 +16,6 @@ export class Pharmacy {
 
 export class Feedback {
   constructor(
-    public idFeedback: string,
     public idHospital: string,
     public contentFeedback: string,
   ) {
@@ -73,8 +72,8 @@ export class CreateFeedbackComponent implements OnInit {
   send(): void {
 
     this.feedback = {
-      idFeedback: "testWorks",
-      idHospital: this.selectedPharmacyId,
+      //generating id
+      idHospital: "H1",
       contentFeedback: this.contentFeedback
     };
 
@@ -85,8 +84,11 @@ export class CreateFeedbackComponent implements OnInit {
 
   addFeedback(feedback: Feedback) {
 
+   /*this.feedbackService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+
+    });*/
     console.log(feedback)
-    return this.httpClient.post('http://localhost:64677/api/feedback', feedback, httpOptions); // DOES NOT WORK
+    return this.httpClient.post('http://localhost:64677/api/feedback', feedback, httpOptions).subscribe(); 
 
   }
 

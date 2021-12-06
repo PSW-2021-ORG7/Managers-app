@@ -6,11 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PharmacyService {
-    private baseUrl: string = 'http://localhost:44298/api/pharmacies';
+    private baseUrl: string = 'http://localhost:44298/api/pharmacy';
 
     constructor(private http: HttpClient) { }
 
     createNewPharmacy(obj: any): Observable<any> {
+        localStorage.setItem('ApiKey', JSON.stringify("ABC"));    
         return this.http.post(this.baseUrl, obj);
     }
 }

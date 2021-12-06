@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { PharmacyService } from './pharmacy-registration.service';
 
 export class PharmacyRegistration{
   constructor(
@@ -22,9 +23,12 @@ export class PharmacyRegistrationComponent implements OnInit {
   apiKeyPharmacy: string = '';
   endpoint: string = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private pharmacyService: PharmacyService) { }
 
+ 
   ngOnInit(): void {
+
+    
   }
 
   selectChangeHandlerName (event: any){
@@ -50,6 +54,7 @@ export class PharmacyRegistrationComponent implements OnInit {
       endpoint: this.endpoint};
       
       console.log(registration);
+      this.pharmacyService.createNewPharmacy(registration).subscribe();
 
   }
 

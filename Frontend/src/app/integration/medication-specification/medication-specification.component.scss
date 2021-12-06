@@ -1,25 +1,21 @@
-
- * {
+* {
     box-sizing: border-box;
   }
   form {
-	width: 300px;
-	margin: 0 auto;
-}
-
-.container {
+  width: 300px;
+  margin: 0 auto;
+  }
+  .container {
     padding: 16px;
     background-color: white;
     width: 130%;
     border: 1px solid #212fad;
-    margin-top: 8%;
-}
-
+  }
   
-input[type=text]{
+  input[type=text]{
     background: #8a8787;
-}
-input[type=text]:focus {
+  }
+  input[type=text]:focus {
     background-color: #A2A2A2;
     outline: none;
   }
@@ -31,8 +27,23 @@ input[type=text]:focus {
     border: none;
     background: #f1f1f1;
   }
-  .registerbtn {
-    background-color: #214975;
+
+.form-control:focus {
+    border-color: #f3f5f7;
+    box-shadow: 0 0 0 0.2rem #70a9e6;;
+} 
+
+.checkIfAvailableBtn {
+    background-color: #66A182;
+    width: 30%;
+}
+
+.cancelBtn {
+    width: 30%;
+}
+
+.requestSpecBtn {
+    background-color: #214975;;
     color: white;
     padding: 16px 20px;
     margin: 8px 0;
@@ -41,10 +52,16 @@ input[type=text]:focus {
     width: 100%;
     opacity: 0.9;
   }
-  .registerbtn:hover {
+  .requestSpecBtn:hover {
     opacity: 1;
   }
-
+  input {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
   .background {
     background-image: url('../../../assets/images/integration.jpg');
     background-repeat: no-repeat;
