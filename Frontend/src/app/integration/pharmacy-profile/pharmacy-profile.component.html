@@ -8,20 +8,16 @@
             <h5>Choose pharmacy</h5>
         </div>
 
-        <ul class="list-unstyled components">
-            <li>
-                <a href="#">Pharmacy 1</a>
-            </li>
-            <li>
-                <a href="#">Pharmacy 2</a>
-            </li>
-            <li>
-                <a href="#">Pharmacy 3</a>
-            </li>
-        </ul>
+
+        <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+            (change)="selectChangeHandlerId($event)" title="Please select pharmacy" required>
+            <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
+                {{phar.namePharmacy}}
+            </option>
+        </select>
 
         <ul class="list-unstyled CTAs">
-            <button class="btn btn-secondary btn-medium;">View profile</button>
+            <button  (click)="viewProfile()" class="btn btn-secondary btn-medium;">View profile</button>
         </ul>
     </nav>
 
@@ -29,7 +25,7 @@
     <div id="content">
 
         <div class="left">
-           
+
             <table>
                 <caption style="text-align:left"></caption>
                 <h1>Pharmacy profile</h1>
@@ -41,25 +37,25 @@
                 <tr>
                     <td>
                         <label><strong>Name</strong></label>
-                        <p>Pharmacy name</p>
+                        <p>{{pharmacyName}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>Adress</strong></label>
-                        <p>Pharmacy adress</p>
+                        <p>{{pharmacyAddress}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>City</strong></label>
-                        <p>Pharmacy city</p>
+                        <p>{{pharmacyCity}}</p>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>Website</strong></label>
-                        <p>Pharmacy website</p>
+                        <p>{{pharmacyWebsite}}</p>
                     </td>
                 </tr>
                 <tr>
@@ -70,13 +66,14 @@
                 </tr>
 
             </table>
-            
+
         </div>
         <div class="right">
             <img src="../../../assets/images/integration-background.jpg" alt="pharmacy_pic" width="200" height="200">
             <button class="btn btn-secondary"
-            style="text-align: center; display: grid; cursor: pointer; margin-left: 40%; margin-top: 2%;">Add picture</button>
-            
+                style="text-align: center; display: grid; cursor: pointer; margin-left: 40%; margin-top: 2%;">Add
+                picture</button>
+
         </div>
     </div>
 </div>
