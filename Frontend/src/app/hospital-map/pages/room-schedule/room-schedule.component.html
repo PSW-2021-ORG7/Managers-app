@@ -1,0 +1,17 @@
+<div id="room-schedule" class="vh-100 d-flex flex-column">
+
+    <div class="back-to-room-details d-flex flex-row">
+        <div class="back-to-room-details-btn" (click)="onBackToRoomDetails()">
+            <svg class="back-icon"></svg>
+            <span class="align-middle ms-1">Room details</span>
+        </div>
+    </div>
+
+    <h2>Room schedule - Operating room 1A</h2>
+
+    <!-- <button (click)="toggleWeekends()">toggle weekends</button> -->
+    <div class="calendar-wrapper">
+        <app-calendar></app-calendar>
+    </div>
+</div>
+

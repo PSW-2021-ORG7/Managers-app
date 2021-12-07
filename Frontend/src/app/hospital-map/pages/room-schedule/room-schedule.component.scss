@@ -1,0 +1,36 @@
+@import 'src/styles/main.scss';
+
+#room-schedule{
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+    .back-to-room-details{
+        margin-top: 20px;
+    }
+
+        .back-icon{
+            margin-right: 5px;
+            @include icon;
+            @include background-svg($back-icon);
+        }
+
+        .back-to-room-details-btn{
+            cursor: pointer;
+        }
+
+            .back-to-room-details-btn span{
+                color: color(darkgrey);
+            }
+    
+    h2{
+        font-weight: bold;
+        font-size: 1.953rem;
+        color: color(blue);
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .calendar-wrapper{
+        height: 83.625%;
+    }

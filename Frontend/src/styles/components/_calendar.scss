@@ -1,0 +1,48 @@
+@import '../main.scss';
+
+.fc .fc-button-primary{
+  background-color: color(blue);
+  border-color: color(blue);
+  border-radius: 5px;
+  box-shadow: none !important;
+  border: none;
+
+  &:active{
+    background-color: color(darkblue);
+    border-color: color(darkblue);
+    box-shadow: none !important;
+    border: none;
+  }
+
+}
+
+.fc .fc-toolbar-title{
+  font-size: $subhead-size;
+  font-weight: bold;
+  color: color(darkgrey);
+}
+
+.fc .fc-col-header-cell-cushion{
+  color: color(blue);
+}
+
+.fc-scroller-harness .fc-scroller{
+  @include scrollbar;
+
+  &::-webkit-scrollbar-track {
+    border: 0px;
+    background-color: rgb(252, 252, 252);
+  }
+}
+
+.fc .fc-highlight{
+  background-color: rgba(115, 165, 220, 0.15);
+}
+
+.fc .fc-timegrid-col.fc-day-today{
+  background-color: rgba(115, 165, 220, 0.15);
+}
+
+.fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th{
+  border-color: color(lightgrey);
+}
