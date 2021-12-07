@@ -6,7 +6,11 @@ import { Observable } from 'rxjs';
 export class TokenInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-      const ApiKey = JSON.parse(localStorage.getItem('ApiKey') || '')
+
+    var ApiKey = "";
+    if(localStorage.getItem('ApiKey') != null){
+      ApiKey = JSON.parse(localStorage.getItem('ApiKey') || '')
+    } 
       const modifiedReq = req.clone({ 
         headers: req.headers.set('ApiKey', ApiKey),    
       });
