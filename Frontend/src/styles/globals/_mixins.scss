@@ -1,3 +1,5 @@
+@import "svgs";
+
 @mixin icon {
     height: 24px;
     width: 24px;
@@ -61,4 +63,16 @@
         transform: scale(2.15);
         transition: all 0.3s ease-out;
     }
+}
+
+@mixin drop-down-list{
+
+    padding: 4px 10px;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    @include background-svg($select-arrow);
+    background-repeat: no-repeat;
+    background-position: right 5px top 50%;
+
 }

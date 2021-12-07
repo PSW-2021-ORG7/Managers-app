@@ -20,6 +20,7 @@ import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.co
 import { SelectedEquipmentComponent } from './pages/move-equipment/equipment-overview/equipment-overview.component';
 import { DestinationRoomOverviewComponent } from './pages/move-equipment/destination-room-overview/destination-room-overview.component';
 import { TransferTimeComponent } from './pages/move-equipment/transfer-time/transfer-time.component';
+import { RoomRenovationComponent } from './pages/room-renovation/room-renovation.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TransferTimeComponent } from './pages/move-equipment/transfer-time/tran
     MoveEquipmentComponent,
     SelectedEquipmentComponent,
     DestinationRoomOverviewComponent,
-    TransferTimeComponent
+    TransferTimeComponent,
+    RoomRenovationComponent
     
   ],
   imports: [

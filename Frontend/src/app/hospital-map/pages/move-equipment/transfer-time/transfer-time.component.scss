@@ -87,15 +87,9 @@
             margin-right: 20px;
             position: relative;
             
-            select{
+            .duration-select{
                 height: 33px;
-                padding: 4px 10px;
-                -moz-appearance: none;
-                -webkit-appearance: none;
-                appearance: none;
-                @include background-svg($select-arrow);
-                background-repeat: no-repeat;
-                background-position: right 5px top 50%;
+                @include drop-down-list;
             }
         }
 
