@@ -34,31 +34,55 @@
                 <tr>
                     <td>
                         <label><strong>Name</strong></label>
-                        <p>{{pharmacyName}}</p>
+                        <br>
+                        <input stype="text" [disabled]='disableFields' [(ngModel)]="pharmacyName" style = "width: 90%;" placeholder="Edit name...">
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <label><strong>Adress</strong></label>
-                        <p>{{pharmacyAddress}}</p>
+                        <label><strong>Address</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyAddress" style = "width: 90%;" placeholder="Edit address...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Contact</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyContact" style = "width: 90%;" placeholder="Edit Contact...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>E-Mail</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyEmail" style = "width: 90%;" placeholder="Edit E-mail...">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>City</strong></label>
-                        <p>{{pharmacyCity}}</p>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyCity" style = "width: 90%;" placeholder="Edit city...">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>Website</strong></label>
-                        <p>{{pharmacyWebsite}}</p>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyWebsite" style = "width: 90%;" placeholder="Edit website...">
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>Notes</strong></label><br>
-                        <textarea [ngModel]="notes" (change)="onNotesTextChange($event)" style="width:479px; height:120px;">{{notes}}</textarea>
+                        <textarea [disabled]='disableFields' [(ngModel)]="notes" style="width:90%; height:120px;" placeholder="Write notes..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button [disabled]='disableFields' type="button" (click)="saveChanges()" class="btn btn-secondary saveChangesBtn">Save</button>&nbsp;
+                        <button [disabled]='disableFields' type="button" (click)="cancelChanges()" class="btn btn-secondary cancelChangesBtn">Cancel</button>&nbsp;
                     </td>
                 </tr>
 

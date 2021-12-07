@@ -28,6 +28,10 @@ a:focus {
     display: flex;
     width: 100%;
     align-items: stretch;
+    background-image: url('../../../assets/images/integration.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 #sidebar {
@@ -94,6 +98,28 @@ ul.CTAs a {
 
 .right {
     margin-top: 5%;
+}
+
+select {
+    overflow-y: auto;
+    background: none;
+    border: none;
+    outline: none;
+    
+}
+
+option {
+    text-align: center;
+    color: white;    
+}
+
+.saveChangesBtn {
+    background-color: #66A182;
+    width: 30%;
+}
+
+.cancelChangesBtn {
+    width: 30%;
 }
 
 @media (max-width: 768px) {

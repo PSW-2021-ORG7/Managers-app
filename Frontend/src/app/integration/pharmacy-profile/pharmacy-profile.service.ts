@@ -16,4 +16,9 @@ export class PharmacyProfileService {
         return this.http.get(this.baseUrlHospital);
       }
 
+    updatePharmacy(object: any, id: string): Observable<any> {
+        localStorage.setItem('ApiKey', JSON.stringify("ABC"));
+        return this.http.put(this.baseUrlHospital + "/" + id, object)
+    }
+
 }

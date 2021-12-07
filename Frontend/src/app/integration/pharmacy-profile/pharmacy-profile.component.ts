@@ -9,7 +9,10 @@ export class Pharmacy {
     public apiKeyPharmacy: string,
     public endpoint: string,
     public address: string,
-    public city: string
+    public city: string,
+    public contact: string,
+    public email: string,
+    public notes: string
   ) { }
 }
 
@@ -22,17 +25,21 @@ export class Pharmacy {
 export class PharmacyProfileComponent implements OnInit {
 
   pharmacies: Pharmacy[] = [];
-  selectedPharmacyId: string = "";
+  selectedPharmacyId: string = ""
+  apiKeyPharmacy: string= ""
 
-  pharmacyName: string = "Pharmacy Name Goes Here"
-  pharmacyAddress: string = "Pharmacy Address Goes Here"
-  pharmacyCity: string = "Pharmacy City Goes Here"
-  pharmacyWebsite: string = "Pharmacy Website goes here"
+  pharmacyName: string = ""
+  pharmacyAddress: string = ""
+  pharmacyCity: string = ""
+  pharmacyWebsite: string = ""
+  pharmacyContact: string = ""
+  pharmacyEmail: string = ""
+  notes: string = ""
+  disableFields: boolean = true
 
-  notes: string = "";
 
 
-  constructor(private pharmacyService: PharmacyProfileService,private medicineService: MedicationSpecificationService ) {}
+  constructor(private pharmacyService: PharmacyProfileService, private medicineService: MedicationSpecificationService) { }
 
   ngOnInit(): void {
     //Ucitaj apoteke
@@ -44,32 +51,61 @@ export class PharmacyProfileComponent implements OnInit {
   selectChangeHandlerId(event: any) {
     this.selectedPharmacyId = event.target.value;
     console.log(this.selectedPharmacyId)
-   
+
   }
 
-  viewProfile(): void{
+  viewProfile(): void {
 
-    if(localStorage.getItem(this.selectedPharmacyId) == null)
-        this.notes = ""
-        else
-        this.notes = JSON.parse(localStorage.getItem(this.selectedPharmacyId) || '')
-
-    if(this.selectedPharmacyId == "") alert ("Please select pharmacy!")
+    this.disableFields = false;
+    if (this.selectedPharmacyId == "") alert("Please select pharmacy!")
     else {
       this.medicineService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-             
+
+        this.apiKeyPharmacy = pharmacy.apiKeyPharmacy
         this.pharmacyName = pharmacy.namePharmacy
         this.pharmacyAddress = pharmacy.address
         this.pharmacyCity = pharmacy.city
         this.pharmacyWebsite = pharmacy.endpoint
-                
+        this.pharmacyContact = pharmacy.contact
+        this.pharmacyEmail = pharmacy.email
+        this.notes = pharmacy.notes
+
       });
     }
   }
 
-  onNotesTextChange(event: any){
-    this.notes = event.target.value;
-    console.log(this.notes)
-    localStorage.setItem(this.selectedPharmacyId, JSON.stringify(this.notes));
+  saveChanges(): void {
+ 
+    var pharmacy = {
+      idPharmacy: +this.selectedPharmacyId,
+      apiKeyPharmacy: this.apiKeyPharmacy,
+      namePharmacy: this.pharmacyName,
+      endpoint: this.pharmacyWebsite,
+      address: this.pharmacyAddress,
+      city: this.pharmacyCity,
+      contact: this.pharmacyContact,
+      email: this.pharmacyEmail,
+      notes: this.notes
+    }
+    console.log(pharmacy)
+    this.pharmacyService.updatePharmacy(pharmacy, this.selectedPharmacyId).subscribe(response => {
+      if (response) {
+        alert("Successfully updated pharmacy!")
+        window.location.reload()
+      }
+      else alert("Failed to update pharmacy... :(")
+    });
+
+  }
+
+  cancelChanges(): void {
+    this.disableFields = true;
+    this.pharmacyName = ""
+    this.pharmacyWebsite = ""
+    this.pharmacyAddress = ""
+    this.pharmacyCity = ""
+    this.pharmacyContact = ""
+    this.pharmacyEmail = ""
+    this.notes = ""
   }
 }
