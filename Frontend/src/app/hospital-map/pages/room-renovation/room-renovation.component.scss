@@ -1,65 +1,87 @@
 @import 'src/styles/main.scss';
 
-.renovation-side-bar{
-    height: 100vh;
-    width: 35.71vw;
-
+.room-renovation{
+    overflow-y: hidden;
 }
 
-
-
-    .back-to-room-details-btn{
-        margin-top: 18px;
-        margin-left: 40px;
+    .renovation-side-bar{
+        height: 100vh;
+        width: 35.71%;
     }
 
-        .back-icon{
+        .back-to-room-details-btn{
+            margin-top: 18px;
+            margin-left: 40px;
+        }
+
+            .back-icon{
+                margin-right: 5px;
+                @include icon;
+                @include background-svg($back-icon);
+            }
+
+        .subhead{
+            font-size: 1.25rem;
+        }
+
+        .title, .subtitle{
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .renovation-type{
+            margin-bottom: 30px !important;
+        }
+        
+        #room-name{
+            font-size: 1.563rem;
+        }
+        
+        .darkgray-text{
+            color: color(darkgray);
+        }
+        
+        .blue-text{
+            color: color(blue);
+        }
+
+        .form-container{
+            width: 100%;
+            height: 561px;
+            background-color: white;
+            border-radius: 5px;
+        }
+
+            .form-control{
+                height: 33px;
+            }
+
+            .form-group select{
+                @include drop-down-list;
+            }
+
+            .form-group{
+                margin-bottom: 10px;
+            }
+
+        #status{
+            margin-bottom: 20px;
+        }
+
+        .new-room-info, .new-room-1-info, .new-room-2-info{
+            width: 100%;
+        }
+
+        .new-room-1-info{
             margin-right: 5px;
-            @include icon;
-            @include background-svg($back-icon);
         }
 
-    .subhead{
-        font-size: 1.25rem;
-    }
-    
-    #room-name{
-        font-size: 1.563rem;
-    }
-    
-    .darkgray-text{
-        color: color(darkgray);
-    }
-    
-    .blue-text{
-        color: color(blue);
-    }
-
-    .form-container{
-        width: 28.714vw;
-        height: 561px;
-        background-color: white;
-        border-radius: 5px;
-
-    }
-
-        .form-group select{
-            @include drop-down-list;
+        .new-room-2-info{
+            margin-left: 5px;
         }
 
-
-    .btn-secondary{
-        background-color: color(darkgrey);
-        font-weight: bold;
-        border: none;
-    }
-    
-    .btn-primary{
-        background-color: color(blue);
-        font-weight: bold;
-    }
-
-    .new-room-info{
-        margin: 5px;
-        width: 100%;
+    .map-display-wrapper{
+        width: 64.29%;
+        height: 100vh;
+        background-color: #282828;
     }

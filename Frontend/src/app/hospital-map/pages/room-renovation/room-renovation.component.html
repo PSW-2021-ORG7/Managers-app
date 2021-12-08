@@ -1,147 +1,117 @@
-<div class="d-flex flex-column" *ngIf="room">
-    
+<div class="room-renovation d-flex flex-row vh-100" *ngIf="room">
     <div class="renovation-side-bar d-flex flex-column">
-    
         <div>
             <button class="back-to-room-details-btn btn darkgray-text" (click)="onBackToRoomDetails()">
                 <svg class="back-icon"></svg>
                 <span class="align-middle ms-1">Room details</span>
             </button>
         </div>
-
         <div class="d-flex flex-column mx-5">
             <div class="d-flex justify-content-between mt-3">
                 <div id="room-name" class="fw-bold blue-text mb-1">
-                    <span class="align-middle">Renovation</span>
+                    <span class="align-middle title">Renovation</span>
                 </div>
             </div>
             <div class="fw-bold darkgray-text subhead ">
-                <span class="align-left ">Renovation of {{ room.type | roomTypeToString }} {{ room.name }}</span>
+                <span class="align-left subtitle">Renovation of {{ room.type | roomTypeToString }} {{ room.name }}</span>
             </div>
-            
             <div class="d-flex flex-row justify-content-between mb-2">
                 <div class="form-container d-flex flex-column align-item-center">
-
                     <form>
-                        <div class="form-group d-flex flex-column mb-2">
+                        <div class="renovation-type form-group d-flex flex-column">
                             <label class="form-label" for="renovationType">Renovation type</label>
-                            <select class="form-control" id="renovationType" [(ngModel)]='renovationType' name='renovationType'>
-                                <option [ngValue]= "0" disabled selected> Select type </option>
-                                <option [ngValue] = "1">Merge</option>
-                                <option [ngValue] = "2">Split</option>
+                            <select class="form-control" id="renovationType" [(ngModel)]='renovationType' (ngModelChange)="onRenovationTypeChange()" name='renovationType'>
+                                <option [ngValue]="'null'" disabled selected> Select type </option>
+                                <option [ngValue]="'merge'">Merge</option>
+                                <option [ngValue]="'split'">Split</option>
                             </select>
                         </div>
                     </form>
-                    <!-- RenovationType = 1 = MERGE -->
-                    <form *ngIf="renovationType==1">
+                    <!-- RenovationType = MERGE -->
+                    <form *ngIf="renovationType=='merge'">
                         <div class="fw-bold darkgray-text subhead ">
-                            <span class="align-left "> Merged room information </span>
+                            <span class="align-left subtitle"> Merged room information </span>
                         </div>
-                        <div class="form-group d-flex flex-column mb-1">
-                            <label class="form-label" for="roomToMergeWith">Select room to merge with</label>
-                            <select class="form-control" id="roomToMergeWith" name='roomToMergeWith'>
-                                <!-- TODO: Options - roomToMergeWith -->
+                        <div class="form-group d-flex flex-column">
+                            <label class="form-label" for="room-to-merge-with">Select room to merge with</label>
+                            <select class="form-control" id="room-to-merge-with">
                             </select>
-                                <!-- TODO: [(NgModel)] for every div -->
-                            <div class="form-group d-flex flex-column mb-1">
-                                <label class="form-label" for="name">Room name</label>
-                                <input type="text" class="form-control" id="name" name='roomName'>
-                            </div>
-                            <div class="form-group d-flex flex-column mb-1">
-                                <label class="form-label" for="roomType">Room type</label>
-                                <select class="form-control" id="roomType" name='roomType'>
-                                    <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group d-flex flex-column mb-3">
-                                <label class="form-label" for="status">Status</label>
-                                <select class="form-control" id="status" name='roomStatus'>
-                                    <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
-                                </select>
-                            </div>
-                            <div class="d-flex flex-row">
-                                <!-- TODO: (click)next  -->
-                                <button type="button" class="btn w-100 btn-primary mb-2" >Next</button>
-                            </div>
                         </div>
-                    </form>
-
-                    <!-- RenovationType = 2 = SPLIT -->
-                    <form *ngIf="renovationType==2">
-                        <div class=" d-flex align-items-center justify-content-between">
-
-                            <div class=" new-room-info form-group d-flex flex-column mb-2">
-
-                                <div class="fw-bold darkgray-text subhead ">
-                                    <span class="align-left "> New room info 1 </span>
-                                </div>
-
-                                    <!-- TODO: [(NgModel)] for every div -->
-                                <div class="form-group d-flex flex-column mb-1">
-                                    <label class="form-label" for="name">Room name</label>
-                                    <input type="text" class="form-control" id="name" name='roomName'>
-                                </div>
-                                <div class="form-group d-flex flex-column mb-1">
-                                    <label class="form-label" for="roomType">Room type</label>
-                                    <select class="form-control" id="roomType" name='roomType'>
-                                        <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group d-flex flex-column mb-1">
-                                    <label class="form-label" for="status">Status</label>
-                                    <select class="form-control" id="status" name='roomStatus'>
-                                        <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-                            <div class="new-room-info form-group d-flex flex-column mb-2">
-
-                                <div class="fw-bold darkgray-text subhead ">
-                                    <span class="align-left "> New room info 1 </span>
-                                </div>
-
-                                    <!-- TODO: [(NgModel)] for every div -->
-                                <div class="form-group d-flex flex-column mb-1">
-                                    <label class="form-label" for="name">Room name</label>
-                                    <input type="text" class="form-control" id="name" name='roomName'>
-                                </div>
-                                <div class="form-group d-flex flex-column mb-1">
-                                    <label class="form-label" for="roomType">Room type</label>
-                                    <select class="form-control" id="roomType" name='roomType'>
-                                        <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group d-flex flex-column mb-1">
-                                    <label class="form-label" for="status">Status</label>
-                                    <select class="form-control" id="status" name='roomStatus'>
-                                        <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
-                                    </select>
-                                </div>
-
-                            </div>
-
-          
-
+                        <div class="form-group d-flex flex-column">
+                            <label class="form-label" for="mergedRoomName">Room name</label>
+                            <input type="text" class="form-control" id="mergedRoomName" name='mergedRoomName'>
                         </div>
-
+                        <div class="form-group d-flex flex-column">
+                            <label class="form-label" for="merged-room-type">Room type</label>
+                            <select class="form-control" id="merged-room-type">
+                                <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group d-flex flex-column">
+                            <label class="form-label" for="merged-room-status">Status</label>
+                            <select class="form-control" id="merged-room-status">
+                                <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
+                            </select>
+                        </div>
                         <div class="d-flex flex-row">
-                            <!-- TODO: (click)next  -->
-                            <button type="button" class="btn w-100 btn-primary mb-2" >Next</button>
+                            <app-primary-button class="w-100" text="Next"></app-primary-button>
                         </div>
-                        
                     </form>
-
-
-
-
+                    <!-- RenovationType = SPLIT -->
+                    <form *ngIf="renovationType=='split'">
+                        <div class=" d-flex align-items-center justify-content-between">
+                            <div class="new-room-1-info d-flex flex-column">
+                                <div class="fw-bold darkgray-text subhead ">
+                                    <span class="align-left subtitle"> New room 1 info</span>
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label" for="new-room-1-name">Room name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="newRoom1Name" (ngModelChange)="updateRoomText()" name="New Room 1" id="new-room-1-name">
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label" for="new-room-1-type">Room type</label>
+                                    <select class="form-control" id="new-room-1-type">
+                                        <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label" for="new-room-1-status">Status</label>
+                                    <select class="form-control" id="new-room-1-status">
+                                        <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="new-room-2-info d-flex flex-column">
+                                <div class="fw-bold darkgray-text subhead ">
+                                    <span class="align-left subtitle"> New room 2 info</span>
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label" for="new-room-2-name">Room name</label>
+                                    <input type="text" class="form-control" [(ngModel)]="newRoom2Name" (ngModelChange)="updateRoomText()" name="New Room 2" id="new-room-2-name">
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label" for="new-room-2-type">Room type</label>
+                                    <select class="form-control" id="new-room-2-type">
+                                        <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group d-flex flex-column">
+                                    <label class="form-label" for="new-room-2-status">Status</label>
+                                    <select class="form-control" id="new-room-2-status">
+                                        <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-row">
+                            <app-primary-button class="w-100" text="Next"></app-primary-button>
+                        </div>
+                    </form>
                 </div>
-
             </div>    
         </div>
-
-
-
-
     </div>
+    <div class="map-display-wrapper d-flex align-items-center">
+        <svg id="svg-floor" xmlns="http://www.w3.org/2000/svg" viewBox="215 0 1400 1080"><defs><style>.cls-1{fill:#282828;opacity:0.95;}.cls-2{fill:#3a3a3a;stroke:#4c4c4c;stroke-width:8px;}.cls-2,.cls-3{stroke-miterlimit:10;}.cls-3{fill:#b2b2b2;stroke:#fff;stroke-width:18px;}.cls-4{fill:#fff;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect class="cls-1" width="1920" height="1080"/><rect class="cls-2" x="902" y="850" width="240" height="98.14"/><polygon class="cls-3" points="1393 237 1393 849 650 849 650 900 422 900 422 187 650 187 650 237 1393 237"/><path class="cls-4" d="M1019.23,851s.23-35.77,35.77-35.77V851"/><path class="cls-4" d="M1018.77,851s-.23-35.77-35.77-35.77V851"/></g></g></svg>
+    </div>
+</div>

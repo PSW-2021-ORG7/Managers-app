@@ -54,6 +54,7 @@ export class D3Service {
   
   addText(svg:any, text: string, coords: {x: number, y: number}, className: string, id: string) {
     svg.append('text')
+      .data(text)
       .attr('x', coords.x)
       .attr('y', coords.y)
       .attr('text-anchor', 'middle')
