@@ -41,7 +41,7 @@ export class RoomRenovationComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       let roomId = params['id'];
-      this.roomsService.getRoomWithEquipment(roomId).subscribe(
+      this.roomsService.getRoom(roomId).subscribe(
         data => {
           this.room = data;
           this.roomsService.getRooms(this.room.buildingId).subscribe(
