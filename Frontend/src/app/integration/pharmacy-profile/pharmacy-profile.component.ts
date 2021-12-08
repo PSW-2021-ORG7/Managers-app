@@ -12,7 +12,8 @@ export class Pharmacy {
     public city: string,
     public contact: string,
     public email: string,
-    public notes: string
+    public notes: string,
+    public photo: string
   ) { }
 }
 
@@ -26,7 +27,7 @@ export class PharmacyProfileComponent implements OnInit {
 
   pharmacies: Pharmacy[] = [];
   selectedPharmacyId: string = ""
-  apiKeyPharmacy: string= ""
+  apiKeyPharmacy: string = ""
 
   pharmacyName: string = ""
   pharmacyAddress: string = ""
@@ -35,6 +36,7 @@ export class PharmacyProfileComponent implements OnInit {
   pharmacyContact: string = ""
   pharmacyEmail: string = ""
   notes: string = ""
+  photo: string = ""
   disableFields: boolean = true
 
 
@@ -48,6 +50,8 @@ export class PharmacyProfileComponent implements OnInit {
     });
   }
 
+  url = "../../../assets/images/integration.jpg"
+  
   selectChangeHandlerId(event: any) {
     this.selectedPharmacyId = event.target.value;
     console.log(this.selectedPharmacyId)
@@ -60,7 +64,6 @@ export class PharmacyProfileComponent implements OnInit {
     if (this.selectedPharmacyId == "") alert("Please select pharmacy!")
     else {
       this.medicineService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-
         this.apiKeyPharmacy = pharmacy.apiKeyPharmacy
         this.pharmacyName = pharmacy.namePharmacy
         this.pharmacyAddress = pharmacy.address
@@ -69,13 +72,14 @@ export class PharmacyProfileComponent implements OnInit {
         this.pharmacyContact = pharmacy.contact
         this.pharmacyEmail = pharmacy.email
         this.notes = pharmacy.notes
+        this.photo = pharmacy.photo
 
       });
     }
   }
 
   saveChanges(): void {
- 
+
     var pharmacy = {
       idPharmacy: +this.selectedPharmacyId,
       apiKeyPharmacy: this.apiKeyPharmacy,
@@ -85,7 +89,8 @@ export class PharmacyProfileComponent implements OnInit {
       city: this.pharmacyCity,
       contact: this.pharmacyContact,
       email: this.pharmacyEmail,
-      notes: this.notes
+      notes: this.notes,
+      photo: this.photo
     }
     console.log(pharmacy)
     this.pharmacyService.updatePharmacy(pharmacy, this.selectedPharmacyId).subscribe(response => {
@@ -98,6 +103,16 @@ export class PharmacyProfileComponent implements OnInit {
 
   }
 
+  onFileChanged(event: any) {
+    if (event.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0])
+      reader.onload = (event: any) => {
+        this.url = event.target.result;
+      }
+    }
+  }
+
   cancelChanges(): void {
     this.disableFields = true;
     this.pharmacyName = ""
@@ -107,5 +122,6 @@ export class PharmacyProfileComponent implements OnInit {
     this.pharmacyContact = ""
     this.pharmacyEmail = ""
     this.notes = ""
+    this.photo = ""
   }
 }
