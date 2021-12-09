@@ -1,0 +1,114 @@
+
+<app-integration></app-integration>
+<br>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <br>
+            <h5>Choose prescription</h5>
+        </div>
+
+
+        <select  class="prescription" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+           title="Please select prescription" required>
+            <option>
+               Prescription 1
+            </option>
+        </select>
+
+        <ul class="list-unstyled CTAs">
+            <button style="margin-left: 5%;" class="btn btn-secondary btn-medium;">View prescription</button>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div class="left">
+
+            <table>
+                <caption style="text-align:left"></caption>
+                <h1>Prescriptions</h1>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Patient's name</strong></label>
+                        <br>
+                        <label>Mika Mikic</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Duration in days</strong></label>
+                        <br>
+                        <label>4</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Times per day</strong></label>
+                        <br>
+                        <label>2</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Description</strong></label>
+                        <br>
+                        <label>description...</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Doctor's name</strong></label>
+                        <br>
+                        <label>Milan Milic</label>
+                    </td>
+                </tr>
+                <hr>
+                <tr>
+                    <td>
+                        <label><strong>Medicine</strong></label>
+                        <br>
+                        <label>brufen</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Dose</strong></label>
+                        <br>
+                        <label>400</label>&nbsp;<label>mg</label><br><br>
+                    </td>
+                </tr>
+                <tr>
+                    <button type="button" class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
+                    <button type="button" class="btn btn-secondary cancelBtn">Cancel</button><br><br>
+                </tr>
+               
+                <tr>
+                    <label><strong>Available in: </strong></label><br>
+                    
+                    <select class="pharmacies" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple  title="Please select pharmacy" required>
+                        <option>
+                            Apoteka 1
+                        </option>
+                    </select><br><br>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-secondary sendBtn">Send</button>&nbsp;
+                        <button type="button" class="btn btn-secondary cancelBtn">Cancel</button>&nbsp;
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+</div>
