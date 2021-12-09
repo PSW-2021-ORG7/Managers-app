@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoomEquipment } from '../../models/equipment/room-equipment.model';
 import { Room, RoomType } from '../../models/rooms/room.model';

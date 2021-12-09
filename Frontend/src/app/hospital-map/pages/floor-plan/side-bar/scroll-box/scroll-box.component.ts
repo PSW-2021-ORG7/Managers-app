@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
-import { Room } from 'src/app/hospital-map/models/rooms/room.model';
+import { RoomEquipment } from '@hospital-map//models/equipment/room-equipment.model';
+import { Room } from '@hospital-map/models/rooms/room.model';
 
 @Component({
   selector: 'app-scroll-box',
