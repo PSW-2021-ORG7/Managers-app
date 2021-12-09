@@ -34,13 +34,7 @@ export class FloorPlanComponent implements OnInit {
           data => {
             this.rooms = data;
             this.drawRooms();
-            let maxFloor = 0;
-            for(const room of data){
-              if(room.floor > maxFloor)
-                maxFloor = room.floor;
-            }
-            this.floors = Array(maxFloor+1).fill(0).map((x,i)=>i);
-            this.floors.reverse();
+            this.countNumberOfFloors(this.rooms);
           }
         );
     });
@@ -66,6 +60,16 @@ export class FloorPlanComponent implements OnInit {
     this.drawRoomNames();
     this.addClickEventToRooms();
     this.filterRooms();   
+  }
+
+  private countNumberOfFloors(rooms : Room[]) {
+    let maxFloor = 0;
+    for(const room of rooms){
+      if(room.floor > maxFloor)
+        maxFloor = room.floor;
+    }
+    this.floors = Array(maxFloor+1).fill(0).map((x,i)=>i);
+    this.floors.reverse();
   }
 
   private addClickEventToRooms(){

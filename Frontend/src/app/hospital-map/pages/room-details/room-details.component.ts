@@ -38,6 +38,11 @@ export class RoomDetailsComponent implements OnInit {
     this.router.navigate(['/hospital-map/move-equipment']);
   }
 
+  showRoomRenovation(): void{
+    this.router.navigate(['/hospital-map/room-renovation/' + this.room.id])
+  }
+
+
   onNotifyHideRoomInfo(){
     this.roomInfoFormVisible = false;
   }
