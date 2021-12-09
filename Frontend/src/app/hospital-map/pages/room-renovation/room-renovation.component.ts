@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NewRoomInfo } from '@app/hospital-map/models/renovations/new-room-info.model';
+import { SplitRenovation } from '@app/hospital-map/models/renovations/split-renovation.model';
+import { RenovationService } from '@app/hospital-map/shared/services/renovation.service';
 import { Room, RoomStatus, RoomType } from '../../models/rooms/room.model';
 import { RoomTypeToStringPipe } from '../../shared/pipes/room-type-to-string.pipe';
 import { D3Service } from '../../shared/services/d3.service';
@@ -15,6 +18,7 @@ export class RoomRenovationComponent implements OnInit {
   roomsOnThisFloor : Room[] = [];
   room!: Room;
   renovationType: string = "null";
+  equipmentDestination: string = "first";
   roomStatuses: RoomStatus[] = [
     RoomStatus.Occupied,
     RoomStatus.Unoccupied,
@@ -35,8 +39,9 @@ export class RoomRenovationComponent implements OnInit {
   svg : any;
   newRoom1Name : string = "New room 1";
   newRoom2Name : string = "New room 2";
+  splitRenovation: SplitRenovation = new SplitRenovation(-1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date(), '');
 
-  constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private d3Service: D3Service) { }
+  constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private d3Service: D3Service, private renovationService: RenovationService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -57,6 +62,7 @@ export class RoomRenovationComponent implements OnInit {
   
   onRenovationTypeChange(): void {
       if(this.renovationType == "split"){
+        this.splitRenovation.roomId = this.room.id;
         this.drawSplitLine();
         this.updateRoomText();
       }
@@ -127,6 +133,21 @@ export class RoomRenovationComponent implements OnInit {
     this.svg.selectAll('text#room-' + this.room.id)
       .style('fill', '#ffffff')
       .style('font-size', '14px');
+  }
+
+  scheduleRenovation() {
+    if(this.renovationType == 'split'){
+      this.splitRenovation.firstNewRoomInfo.roomName = this.newRoom1Name;
+      this.splitRenovation.secondNewRoomInfo.roomName = this.newRoom2Name;
+      if(this.equipmentDestination == 'first'){
+        this.splitRenovation.equipmentDestination = this.newRoom1Name;
+      } else {
+        this.splitRenovation.equipmentDestination = this.newRoom2Name;
+      }
+
+      this.renovationService.postSplitRenovation(this.splitRenovation).subscribe();
+      this.router.navigate(['/hospital-map/']);
+    }
   }
 
 }
