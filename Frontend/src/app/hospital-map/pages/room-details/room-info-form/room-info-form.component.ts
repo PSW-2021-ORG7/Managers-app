@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RoomStatus, RoomType } from '../../models/rooms/room.model';
-import { RoomsService } from '../../shared/services/rooms.service';
+import { RoomStatus, RoomType } from '@hospital-map/models/rooms/room.model';
+import { RoomsService } from '@hospital-map/shared/services/rooms.service';
 
 @Component({
   selector: 'app-room-info-form',

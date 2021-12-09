@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { RoomEquipment } from '../../models/equipment/room-equipment.model';
-import { Room } from '../../models/rooms/room.model';
+import { RoomEquipment } from '@hospital-map/models/equipment/room-equipment.model';
+import { Room } from '@hospital-map/models/rooms/room.model';
 
 @Component({
   selector: 'app-side-bar',
