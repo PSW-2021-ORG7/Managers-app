@@ -45,6 +45,10 @@ export class RoomRenovationComponent implements OnInit {
   selectedRoomId : number = -1;
   mergedRoomName : string = "New room";
   splitRenovation: SplitRenovation = new SplitRenovation(-1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date(), '');
+  roomsForMerge : Room[] = [];
+  selectedRoom! : Room;
+  selectedRoomId : number = -1;
+  mergedRoomName : string = "New room";
 
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private d3Service: D3Service, private renovationService: RenovationService) { }
 
@@ -71,6 +75,7 @@ export class RoomRenovationComponent implements OnInit {
         this.splitRenovation.roomId = this.room.id;
         this.unhighlightMerge();
         this.splitRenovation.roomId = this.room.id;
+        this.unhighlightMerge();
         this.drawSplitLine();
         this.updateRoomText();
       }
@@ -286,6 +291,120 @@ export class RoomRenovationComponent implements OnInit {
       this.renovationService.postSplitRenovation(this.splitRenovation).subscribe();
       this.router.navigate(['/hospital-map/']);
     }
+  }
+  
+  getRoomsForMerge(){
+    this.roomsForMerge = []
+    for(let room of this.roomsOnThisFloor) {
+      if(this.room.id != room.id) {
+        if(this.room.y == room.y && this.room.height == room.height) {
+          let distance1 = (this.room.x + this.room.width + 5) - room.x
+          let distance2 = (room.x + room.width + 5) - this.room.x
+          if(distance1 > 0 && distance1 < 10)
+            this.roomsForMerge.push(room)
+          if(distance2 > 0 && distance2 < 10)
+            this.roomsForMerge.push(room)
+        }
+        if(this.room.x == room.x && this.room.width == room.width) {
+          let distance1 = (this.room.y + this.room.height + 5) - room.y
+          let distance2 = (room.y + room.height + 5) - this.room.y
+          if(distance1 > 0 && distance1 < 10)
+            this.roomsForMerge.push(room)
+          if(distance2 > 0 && distance2 < 10)
+            this.roomsForMerge.push(room)
+        }
+      }
+    }
+  }
+
+  mergeRoomSelected(){
+    this.unhighlightMerge();
+    this.selectedRoomId = this.selectedRoom.id;
+    this.higlightMerge();
+    this.drawMergeLine();
+    this.drawMergedRoomName();
+  }
+
+  drawMergeLine(){
+    this.d3Service.selectById('room-merge-line').remove();
+    let roomSvg = this.d3Service.selectById("svg-floor");
+    if(this.selectedRoom.x > this.room.x && this.selectedRoom.y == this.room.y) {
+      roomSvg.append('line')
+        .attr('id', "room-merge-line")
+        .style("stroke", "#214975")
+        .style("stroke-width", 10)
+        .attr("x1", this.room.x + this.room.width )
+        .attr("y1", this.room.y + 4) 
+        .attr("x2", this.room.x + this.room.width)
+        .attr("y2", this.room.y + this.room.height - 4);
+    }
+    else if(this.selectedRoom.x < this.room.x && this.selectedRoom.y == this.room.y) {
+      roomSvg.append('line')
+        .attr('id', "room-merge-line")
+        .style("stroke", "#214975")
+        .style("stroke-width", 10)
+        .attr("x1", this.room.x)
+        .attr("y1", this.room.y + 4) 
+        .attr("x2", this.room.x)
+        .attr("y2", this.room.y + this.room.height - 4);
+    }
+    else if(this.selectedRoom.y > this.room.y && this.selectedRoom.x == this.room.x) {
+      roomSvg.append('line')
+        .attr('id', "room-merge-line")
+        .style("stroke", "#214975")
+        .style("stroke-width", 12)
+        .attr("x1", this.room.x + 4)
+        .attr("y1", this.room.y + this.room.height) 
+        .attr("x2", this.room.x + this.room.width - 4)
+        .attr("y2", this.room.y + this.room.height);
+    }
+    else {
+      roomSvg.append('line')
+        .attr('id', "room-merge-line")
+        .style("stroke", "#214975")
+        .style("stroke-width", 12)
+        .attr("x1", this.room.x + 4)
+        .attr("y1", this.room.y) 
+        .attr("x2", this.room.x + this.room.width - 4)
+        .attr("y2", this.room.y);
+    }
+  }
+
+  drawMergedRoomName(){
+    this.svg.selectAll('text#room-' + this.room.id)
+      .remove();
+    if(this.selectedRoom.x > this.room.x && this.selectedRoom.y == this.room.y) {
+      this.d3Service.addText(this.svg, this.mergedRoomName, { x: this.room.x + this.room.width - 50, y: this.room.y + this.room.height/2 }, 'floor-' + this.room.floor + ' main-building-room', 'room-' + this.room.id);
+    }
+    else if(this.selectedRoom.x < this.room.x && this.selectedRoom.y == this.room.y) {
+      this.d3Service.addText(this.svg, this.mergedRoomName, { x: this.room.x + 50, y: this.room.y + this.room.height/2 }, 'floor-' + this.room.floor + ' main-building-room', 'room-' + this.room.id);
+    }
+    else if(this.selectedRoom.y > this.room.y && this.selectedRoom.x == this.room.x) {
+      this.d3Service.addText(this.svg, this.mergedRoomName, { x: this.room.x + this.room.width/2, y: this.room.y + this.room.height }, 'floor-' + this.room.floor + ' main-building-room', 'room-' + this.room.id);
+    }
+    else {
+      this.d3Service.addText(this.svg, this.mergedRoomName, { x: this.room.x + this.room.width/2, y: this.room.y }, 'floor-' + this.room.floor + ' main-building-room', 'room-' + this.room.id);
+    }
+    this.svg.selectAll('text#room-' + this.room.id)
+      .style('fill', '#ffffff')
+      .style('font-size', '14px');
+  }
+
+  higlightMerge() : void{
+    this.svg.selectAll('#room-' + this.selectedRoom.id)
+      .style('fill', '#214975');
+    this.svg.selectAll('text#room-' + this.selectedRoom.id)
+      .style('fill', '#214975');
+    this.svg.selectAll('text#room-' + this.room.id)
+      .style('fill', '#214975');
+  }
+
+  unhighlightMerge() : void{
+    this.svg.selectAll('#room-' + this.selectedRoomId)
+      .style('fill', '#cccccc');
+    this.svg.selectAll('text#room-' + this.selectedRoomId)
+      .style('fill', '#214975');
+    this.d3Service.selectById('room-merge-line').remove();
   }
 
 }
