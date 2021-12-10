@@ -34,12 +34,13 @@
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="room-to-merge-with">Select room to merge with</label>
-                            <select class="form-control" id="room-to-merge-with">
+                            <select class="form-control" id="room-to-merge-with" [(ngModel)]='selectedRoom' (ngModelChange)="mergeRoomSelected()" name='roomToMergeWith'>
+                                <option *ngFor="let room of roomsForMerge" [ngValue]="room">{{ room.type | roomTypeToString }} {{ room.name }}</option>
                             </select>
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="mergedRoomName">Room name</label>
-                            <input type="text" class="form-control" id="mergedRoomName" name='mergedRoomName'>
+                            <input type="text" class="form-control" [(ngModel)]="mergedRoomName" (ngModelChange)="drawMergedRoomName()" id="mergedRoomName" name='mergedRoomName'>
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="merged-room-type">Room type</label>
