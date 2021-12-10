@@ -44,6 +44,7 @@ export class RoomRenovationComponent implements OnInit {
   selectedRoom! : Room;
   selectedRoomId : number = -1;
   mergedRoomName : string = "New room";
+  splitRenovation: SplitRenovation = new SplitRenovation(-1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date(), '');
 
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private d3Service: D3Service, private renovationService: RenovationService) { }
 
@@ -69,6 +70,7 @@ export class RoomRenovationComponent implements OnInit {
       if(this.renovationType == "split"){
         this.splitRenovation.roomId = this.room.id;
         this.unhighlightMerge();
+        this.splitRenovation.roomId = this.room.id;
         this.drawSplitLine();
         this.updateRoomText();
       }
@@ -269,6 +271,21 @@ export class RoomRenovationComponent implements OnInit {
     this.svg.selectAll('text#room-' + this.selectedRoomId)
       .style('fill', '#214975');
     this.d3Service.selectById('room-merge-line').remove();
+  }
+
+  scheduleRenovation() {
+    if(this.renovationType == 'split'){
+      this.splitRenovation.firstNewRoomInfo.roomName = this.newRoom1Name;
+      this.splitRenovation.secondNewRoomInfo.roomName = this.newRoom2Name;
+      if(this.equipmentDestination == 'first'){
+        this.splitRenovation.equipmentDestination = this.newRoom1Name;
+      } else {
+        this.splitRenovation.equipmentDestination = this.newRoom2Name;
+      }
+
+      this.renovationService.postSplitRenovation(this.splitRenovation).subscribe();
+      this.router.navigate(['/hospital-map/']);
+    }
   }
 
 }
