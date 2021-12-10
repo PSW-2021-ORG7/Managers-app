@@ -26,4 +26,8 @@ export class EquipmentTransferService {
   postEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer> {
     return this.http.post<EquipmentTransfer>(this.baseUrl + '/transfers', equipmentTransfer);
   }
+
+  getTransfersForRoom(roomId: number) : Observable<EquipmentTransfer[]>{
+    return this.http.get<EquipmentTransfer[]>(this.baseUrl + '/transfers/room/' + roomId);
+  }
 }

@@ -39,8 +39,16 @@
   background-color: rgba(115, 165, 220, 0.15);
 }
 
-.fc .fc-timegrid-col.fc-day-today{
-  background-color: rgba(115, 165, 220, 0.15);
+.fc-day-today{
+  background-color: rgba(115, 165, 220, 0.04) !important;
+}
+
+.fc-daygrid-day-number{
+  color: color(blue);
+
+  &:hover{
+    color: color(blue);
+  }
 }
 
 .fc-theme-standard .fc-scrollgrid, .fc-theme-standard td, .fc-theme-standard th{

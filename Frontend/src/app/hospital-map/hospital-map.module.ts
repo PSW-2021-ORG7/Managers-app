@@ -27,6 +27,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarComponent } from './shared/components/calendar/calendar.component';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -61,7 +62,8 @@ FullCalendarModule.registerPlugins([
     FormsModule,
     NgbDatepickerModule,
     NgbDropdownModule,
-    FullCalendarModule
+    FullCalendarModule,
+    NgxSpinnerModule
   ],
   providers: [D3Service]
 })
