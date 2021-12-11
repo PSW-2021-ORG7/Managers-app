@@ -34,27 +34,28 @@
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="room-to-merge-with">Select room to merge with</label>
-                            <select class="form-control" id="room-to-merge-with">
+                            <select class="form-control" id="room-to-merge-with" [(ngModel)]='selectedRoom' (ngModelChange)="mergeRoomSelected()" name='roomToMergeWith'>
+                                <option *ngFor="let room of roomsForMerge" [ngValue]="room">{{ room.type | roomTypeToString }} {{ room.name }}</option>
                             </select>
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="mergedRoomName">Room name</label>
-                            <input type="text" class="form-control" id="mergedRoomName" name='mergedRoomName'>
+                            <input type="text" class="form-control" [(ngModel)]="mergeRenovation.newRoomInfo.roomName" (ngModelChange)="drawMergedRoomName()" id="mergedRoomName" name='mergedRoomName'>
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="merged-room-type">Room type</label>
-                            <select class="form-control" id="merged-room-type">
+                            <select class="form-control" id="merged-room-type" [(ngModel)]="mergeRenovation.newRoomInfo.roomType" (ngModelChange)="drawMergedRoomName()" name="newRoomType">
                                 <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
                             </select>
                         </div>
                         <div class="form-group d-flex flex-column">
                             <label class="form-label" for="merged-room-status">Status</label>
-                            <select class="form-control" id="merged-room-status">
+                            <select class="form-control" id="merged-room-status" [(ngModel)]="mergeRenovation.newRoomInfo.roomStatus" name="newRoomStatus">
                                 <option *ngFor="let roomStatus of roomStatuses" [ngValue]="roomStatus">{{roomStatus | roomStatusToString}}</option>
                             </select>
                         </div>
                         <div class="d-flex flex-row">
-                            <app-primary-button class="w-100 next-button" text="Next"></app-primary-button>
+                            <app-primary-button [isBtnDisabled]="isMergeButtonDisabled()" class="w-100 next-button" text="Next" (click)="scheduleRenovation()"></app-primary-button>
                         </div>
                     </form>
                     <!-- RenovationType = SPLIT -->
@@ -66,11 +67,11 @@
                                 </div>
                                 <div class="form-group d-flex flex-column">
                                     <label class="form-label" for="new-room-1-name">Room name</label>
-                                    <input type="text" class="form-control" [(ngModel)]="newRoom1Name" (ngModelChange)="updateRoomText()" name="New Room 1" id="new-room-1-name">
+                                    <input type="text" class="form-control" [(ngModel)]="splitRenovation.firstNewRoomInfo.roomName" (ngModelChange)="drawSplitText()" name="New Room 1" id="new-room-1-name">
                                 </div>
                                 <div class="form-group d-flex flex-column">
                                     <label class="form-label" for="new-room-1-type">Room type</label>
-                                    <select class="form-control" id="new-room-1-type" name="firstNewRoomType" [(ngModel)]="splitRenovation.firstNewRoomInfo.roomType">
+                                    <select class="form-control" id="new-room-1-type" name="firstNewRoomType" [(ngModel)]="splitRenovation.firstNewRoomInfo.roomType" (ngModelChange)="drawSplitText()">
                                         <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
                                     </select>
                                 </div>
@@ -87,11 +88,11 @@
                                 </div>
                                 <div class="form-group d-flex flex-column">
                                     <label class="form-label" for="new-room-2-name">Room name</label>
-                                    <input type="text" class="form-control" [(ngModel)]="newRoom2Name" (ngModelChange)="updateRoomText()" name="New Room 2" id="new-room-2-name">
+                                    <input type="text" class="form-control" [(ngModel)]="splitRenovation.secondNewRoomInfo.roomName" (ngModelChange)="drawSplitText()" name="New Room 2" id="new-room-2-name">
                                 </div>
                                 <div class="form-group d-flex flex-column">
                                     <label class="form-label" for="new-room-2-type">Room type</label>
-                                    <select class="form-control" id="new-room-2-type" name="secondNewRoomType" [(ngModel)]="splitRenovation.secondNewRoomInfo.roomType">
+                                    <select class="form-control" id="new-room-2-type" name="secondNewRoomType" [(ngModel)]="splitRenovation.secondNewRoomInfo.roomType" (ngModelChange)="drawSplitText()">
                                         <option *ngFor="let roomType of roomTypes" [ngValue]="roomType">{{roomType | roomTypeToString}}</option>
                                     </select>
                                 </div>
@@ -114,7 +115,7 @@
                             </select>
                         </div>
                         <div class="d-flex flex-row">
-                            <app-primary-button class="w-100 next-button" text="Schedule" (click)="scheduleRenovation()"></app-primary-button>
+                            <app-primary-button [isBtnDisabled]="isSplitButtonDisabled()" class="w-100 next-button" text="Next" (click)="scheduleRenovation()"></app-primary-button>
                         </div>
                     </form>
                 </div>
