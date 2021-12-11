@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateFeedbackService {
-    private baseUrl: string = 'http://localhost:44298/api/pharmacy';
+    private baseUrl: string = environment.baseUrlIntegration + 'api/pharmacy';
     constructor(private http: HttpClient) { }
 
     getPharmacies(): Observable<any> {

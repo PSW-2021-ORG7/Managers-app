@@ -1,13 +1,14 @@
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, JsonpInterceptor } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class FeedbackService {
-    private baseUrl: string = 'http://localhost:44298/api/pharmacy';
-    private baseUrlFeedback: string = 'http://localhost:44298/api/feedback/find/';
+    private baseUrl: string = environment.baseUrlIntegration + 'api/pharmacy';
+    private baseUrlFeedback: string = environment.baseUrlIntegration + 'api/feedback/find/';
 
     constructor(private http: HttpClient) { }
 
