@@ -102,7 +102,7 @@
                 <tr>
                     <td>
                         <button type="button" [disabled]='disableSend' class="btn btn-secondary sendBtn">Send (HTTP)</button>&nbsp;
-                        <button type="button" [disabled]='disableSend' class="btn btn-secondary sendBtn">Send (SFTP)</button>&nbsp;
+                        <button type="button" [disabled]='disableSend' (click) = "sendSFTP()" class="btn btn-secondary sendBtn">Send (SFTP)</button>&nbsp;
                     </td>
                 </tr>
 

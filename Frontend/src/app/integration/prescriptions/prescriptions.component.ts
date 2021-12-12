@@ -46,6 +46,7 @@ export class PrescriptionsComponent implements OnInit {
   disableSend: boolean = true
 
   idPrescription: number = 0
+  medicineId: number = 0
   patient: string = "Patient"
   patientJMBG: string = "JMBG"
   doctor: string = "Doctor"
@@ -81,6 +82,7 @@ export class PrescriptionsComponent implements OnInit {
 
     this.disableFields = false
     this.prescriptionService.getPrescriptionyByID(this.selectedPrescriptionId).subscribe((prescription: Prescription) => {
+      this.medicineId = prescription.medicineId
       this.patient = prescription.patient
       this.patientJMBG = prescription.patientJMBG
       this.doctor = prescription.doctor
@@ -88,7 +90,7 @@ export class PrescriptionsComponent implements OnInit {
       this.timesPerDay = prescription.timesPerDay
       this.description = prescription.description
 
-      this.prescriptionService.getMedicineById(prescription.medicineId).subscribe((medicine: Medicine) => {
+      this.prescriptionService.getMedicineById(this.medicineId).subscribe((medicine: Medicine) => {
         console.log(medicine)
         this.medicineObj = medicine
         this.medicine = medicine.name + " " + medicine.dosageInMilligrams
@@ -117,6 +119,34 @@ export class PrescriptionsComponent implements OnInit {
       } 
       else alert("Medicine not available...")
     });
+
+  }
+
+  sendSFTP(): void{
+
+    var prescription = {
+     id: this.selectedPrescriptionId,
+     patient: this.patient,
+     patientJMBG: this.patientJMBG,
+     doctor: this.doctor,
+     medicineId: this.medicineId,
+     durationInDays: this.durationInDays,
+     timesPerDay: this.timesPerDay,
+     description: this.description,      
+    };
+
+    this.medicationspec.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
+
+      this.prescriptionService.sendPrescriptionSFTP(prescription, "ABC").subscribe((filename: string) => {
+        alert("Successfully uploaded file!")
+        this.prescriptionService.downloadPrescriptionSFTP(filename, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
+          if(response) alert("Successfully downloaded file on pharmacy!")
+          else alert(":(")
+        });
+      });
+    });
+
+    
 
   }
 

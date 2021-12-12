@@ -35,4 +35,17 @@ export class PrescriptionService {
     return this.http.get(this.baseUrlHospitalMedicine + "/" + id )
   }
 
+  sendPrescriptionSFTP(obj: any, apiKey: string): Observable<any>{
+
+    localStorage.setItem('ApiKey', JSON.stringify(apiKey));  
+    return this.http.post(this.baseUrlHospital + "/SFTP", obj);
+}
+
+  downloadPrescriptionSFTP(fileName: string, apiKey: string, endpoint: string): Observable<any>{
+    
+    //To be adjusted for multiple pharmacies
+    localStorage.setItem('ApiKey', JSON.stringify(apiKey));
+    return this.http.get(endpoint + "medicine/downloadPrescription/" + fileName);
+  }
+
 }
