@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { PrescriptionService } from './prescriptions.service';
 
 export class Prescription {
@@ -11,6 +12,15 @@ export class Prescription {
     public durationInDays: number,
     public timesPerDay: number,
     public description: string,
+  ) { }
+}
+
+export class Pharmacy {
+  constructor(
+    public idPharmacy: number,
+    public namePharmacy: string,
+    public apiKeyPharmacy: string,
+    public endpoint: string
   ) { }
 }
 
@@ -29,19 +39,23 @@ export class Medicine {
 export class PrescriptionsComponent implements OnInit {
 
   prescriptions: Prescription[] = []
+  pharmacies: Pharmacy[] = []
   selectedPrescriptionId: string = ""
+  selectedPharmacyId: string = ""
   disableFields: boolean = true
+  disableSend: boolean = true
 
   idPrescription: number = 0
   patient: string = "Patient"
   patientJMBG: string = "JMBG"
   doctor: string = "Doctor"
   medicine: string = "Medicine 0" //Medicine name & dose
+  medicineObj: Medicine = {name:"", dosageInMilligrams: 0}
   durationInDays: number = 0
   timesPerDay: number = 0
   description: string = "Description"
 
-  constructor(private prescriptionService: PrescriptionService) { }
+  constructor(private prescriptionService: PrescriptionService, private medicationspec: MedicationSpecificationService) { }
 
   ngOnInit(): void {
 
@@ -57,6 +71,12 @@ export class PrescriptionsComponent implements OnInit {
 
   }
 
+  selectChangeHandlerSelectedPharmacy(event: any) {
+    this.selectedPharmacyId = event.target.value;
+    this.disableSend = false
+    console.log(this.selectedPharmacyId);
+  }
+
   viewPrescription(): void{
 
     this.disableFields = false
@@ -70,9 +90,32 @@ export class PrescriptionsComponent implements OnInit {
 
       this.prescriptionService.getMedicineById(prescription.medicineId).subscribe((medicine: Medicine) => {
         console.log(medicine)
+        this.medicineObj = medicine
         this.medicine = medicine.name + " " + medicine.dosageInMilligrams
       });
 
+    });
+
+  }
+
+  checkIfAvailable(): void{
+    
+    var medicationSpecification = {
+      name: this.medicineObj.name,
+      dosageinmg: this.medicineObj.dosageInMilligrams,
+      quantity: 1
+    };
+
+    this.medicationspec.checkIfAvailable(medicationSpecification).subscribe(response => {
+      if(response){
+
+        alert("Medicine available!")
+        this.medicationspec.getPharmacyByID("1").subscribe(response =>{
+          console.log(response)
+          this.pharmacies.push(response)
+        });
+      } 
+      else alert("Medicine not available...")
     });
 
   }
