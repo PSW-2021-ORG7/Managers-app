@@ -18,7 +18,7 @@ export class RenovationService {
   }
 
   postMergeRenovation(mergeRenovation: MergeRenovation) : Observable<MergeRenovation> {
-    return this.http.post<MergeRenovation>(this.baseUrl + 'mergeRenovations', mergeRenovation)
+    return this.http.post<MergeRenovation>(this.baseUrl + 'mergeRenovations', mergeRenovation);
   }
 
   getSplitRenovationsForRoom(roomId: number): Observable<SplitRenovation[]> {

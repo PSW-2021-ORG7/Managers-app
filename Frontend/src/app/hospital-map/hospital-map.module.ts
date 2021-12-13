@@ -19,7 +19,6 @@ import { EquipmentCardComponent } from './shared/components/equipment-card/equip
 import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.component';
 import { SelectedEquipmentComponent } from './pages/move-equipment/equipment-overview/equipment-overview.component';
 import { DestinationRoomOverviewComponent } from './pages/move-equipment/destination-room-overview/destination-room-overview.component';
-import { TransferTimeComponent } from './pages/move-equipment/transfer-time/transfer-time.component';
 import { RoomRenovationComponent } from './pages/room-renovation/room-renovation.component';
 import { RoomScheduleComponent } from './pages/room-schedule/room-schedule.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -30,6 +29,7 @@ import { CalendarComponent } from './shared/components/calendar/calendar.compone
 import { NgxSpinnerModule } from "ngx-spinner";
 import { OptionalDialogComponent } from './shared/components/optional-dialog/optional-dialog.component';
 import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
+import { AvailableTimeSlotsComponent } from './shared/components/available-time-slots/available-time-slots.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -53,12 +53,13 @@ FullCalendarModule.registerPlugins([
     MoveEquipmentComponent,
     SelectedEquipmentComponent,
     DestinationRoomOverviewComponent,
-    TransferTimeComponent,
     RoomRenovationComponent,
     RoomScheduleComponent,
     CalendarComponent,
     OptionalDialogComponent,
     InfoDialogComponent,    
+    RoomRenovationComponent,
+    AvailableTimeSlotsComponent
   ],
   imports: [
     CommonModule,

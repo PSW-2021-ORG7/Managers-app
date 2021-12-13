@@ -1,4 +1,4 @@
-<div class="room-renovation d-flex flex-row vh-100" *ngIf="room">
+<div class="room-renovation d-flex flex-row vh-100" *ngIf="room && !isTimeSlotScreenVisible">
     <div class="renovation-side-bar d-flex flex-column">
         <div>
             <button class="back-to-room-details-btn btn darkgray-text" (click)="onBackToRoomDetails()">
@@ -55,7 +55,7 @@
                             </select>
                         </div>
                         <div class="d-flex flex-row">
-                            <app-primary-button [isBtnDisabled]="isMergeButtonDisabled()" class="w-100 next-button" text="Next" (click)="scheduleRenovation()"></app-primary-button>
+                            <app-primary-button [isBtnDisabled]="isMergeButtonDisabled()" class="w-100 next-button" text="Next" (click)="displayTimeSlotScreen()"></app-primary-button>
                         </div>
                     </form>
                     <!-- RenovationType = SPLIT -->
@@ -109,13 +109,13 @@
                         </div>
                         <div class="renovation-type form-group d-flex flex-column">
                             <label class="form-label" for="equipmentDestination">Renovation type</label>
-                            <select class="form-control" id="equipmentDestination" [(ngModel)]='equipmentDestination' name="equipmentDestination">
+                            <select class="form-control" id="equipmentDestination" [(ngModel)]='splitRenovation.equipmentDestination' name="equipmentDestination">
                                 <option [ngValue]="'first'">All to first room</option>
                                 <option [ngValue]="'second'">All to second room</option>
                             </select>
                         </div>
                         <div class="d-flex flex-row">
-                            <app-primary-button [isBtnDisabled]="isSplitButtonDisabled()" class="w-100 next-button" text="Next" (click)="scheduleRenovation()"></app-primary-button>
+                            <app-primary-button [isBtnDisabled]="isSplitButtonDisabled()" class="w-100 next-button" text="Next" (click)="displayTimeSlotScreen()"></app-primary-button>
                         </div>
                     </form>
                 </div>
@@ -125,4 +125,13 @@
     <div class="map-display-wrapper d-flex align-items-center">
         <svg id="svg-floor" xmlns="http://www.w3.org/2000/svg" viewBox="215 0 1400 1080"><defs><style>.cls-1{fill:#282828;opacity:0.95;}.cls-2{fill:#3a3a3a;stroke:#4c4c4c;stroke-width:8px;}.cls-2,.cls-3{stroke-miterlimit:10;}.cls-3{fill:#b2b2b2;stroke:#fff;stroke-width:18px;}.cls-4{fill:#fff;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><rect class="cls-1" width="1920" height="1080"/><rect class="cls-2" x="902" y="850" width="240" height="98.14"/><polygon class="cls-3" points="1393 237 1393 849 650 849 650 900 422 900 422 187 650 187 650 237 1393 237"/><path class="cls-4" d="M1019.23,851s.23-35.77,35.77-35.77V851"/><path class="cls-4" d="M1018.77,851s-.23-35.77-35.77-35.77V851"/></g></g></svg>
     </div>
+</div>
+<div *ngIf="isTimeSlotScreenVisible" class="available-time-slots-wrapper">
+    <div class="back-to-room-details d-flex flex-row" (click)="onBackToRoomDetails()">
+        <svg class="back-icon"></svg>
+        <span class="align-middle ms-1">Room details</span>
+    </div>
+    <h2 [style.font-weight]="'bold'" [style.color]="'#214975'">Schedule renovation</h2>
+    <app-available-time-slots *ngIf="renovationType=='merge'" [mergeRenovation]="mergeRenovation" class="h-100"></app-available-time-slots>
+    <app-available-time-slots *ngIf="renovationType=='split'" [splitRenovation]="splitRenovation" class="h-100"></app-available-time-slots>
 </div>
