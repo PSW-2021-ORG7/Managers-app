@@ -41,6 +41,10 @@ export class CalendarComponent implements OnInit, OnChanges{
     },
     eventBorderColor : "#ffffff",
     expandRows: true,
+    eventClick: function(info) {
+      console.log(info.event)
+      alert('Are you sure you want to cancel event : ' + info.event.title + " with id " + info.event.id);
+    }
   };
 
   ngOnInit(): void {
@@ -87,6 +91,7 @@ export class CalendarComponent implements OnInit, OnChanges{
     for(let renovation of this.mergeRenovations){
       this.events.push(
         new CalendarEvent(
+          renovation.id!.toString() + "merge",
           "Merge of rooms " + renovation.firstOldRoomId + " & " + renovation.secondOldRoomId,
           renovation.start,
           renovation.end,
@@ -100,6 +105,7 @@ export class CalendarComponent implements OnInit, OnChanges{
     for(let renovation of this.splitRenovations){
       this.events.push(
         new CalendarEvent(
+          renovation.id!.toString() + "split",
           "Split of room " + renovation.roomId,
           renovation.start,
           renovation.end,
@@ -120,6 +126,7 @@ export class CalendarComponent implements OnInit, OnChanges{
       destinationRoomText = transfer.destinationRoomName + " " + "WC";
       this.events.push(
         new CalendarEvent(
+          transfer.id!.toString() + "transfer",
           "Transfer: " + sourceRoomText + " -> " + destinationRoomText,
           transfer.transferDate,
           new Date(new Date(transfer.transferDate).getTime() + transfer.transferDuration*60000),
