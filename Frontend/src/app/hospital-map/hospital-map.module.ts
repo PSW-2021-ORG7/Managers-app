@@ -28,6 +28,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { CalendarComponent } from './shared/components/calendar/calendar.component';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { OptionalDialogComponent } from './shared/components/optional-dialog/optional-dialog.component';
+import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -54,7 +56,9 @@ FullCalendarModule.registerPlugins([
     TransferTimeComponent,
     RoomRenovationComponent,
     RoomScheduleComponent,
-    CalendarComponent,    
+    CalendarComponent,
+    OptionalDialogComponent,
+    InfoDialogComponent,    
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MergeRenovation } from '@app/hospital-map/models/renovations/merge-renovation.model';
 import { SplitRenovation } from '@app/hospital-map/models/renovations/split-renovation.model';
@@ -28,4 +28,27 @@ export class RenovationService {
   getMergeRenovationsForRoom(roomId: number): Observable<MergeRenovation[]> {
     return this.http.get<MergeRenovation[]>(this.baseUrl + 'mergeRenovations/' + roomId);
   }
+
+  deleteSplitRenovation(splitRenovation: SplitRenovation): Observable<SplitRenovation> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: 
+      splitRenovation    
+    } 
+    return this.http.delete<SplitRenovation>(this.baseUrl + 'splitRenovations', options);
+  }
+
+  deleteMergeRenovation(mergeRenovation: MergeRenovation): Observable<MergeRenovation> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: 
+      mergeRenovation    
+    } 
+    return this.http.delete<MergeRenovation>(this.baseUrl + 'mergeRenovations', options);
+  }
+
 }

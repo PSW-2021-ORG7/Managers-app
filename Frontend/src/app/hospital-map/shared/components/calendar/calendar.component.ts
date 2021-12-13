@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import {DOCUMENT} from '@angular/common'
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
@@ -8,6 +8,7 @@ import { SplitRenovation } from '@app/hospital-map/models/renovations/split-reno
 import { MergeRenovation } from '@app/hospital-map/models/renovations/merge-renovation.model';
 import { RoomTypeToStringPipe } from '../../pipes/room-type-to-string.pipe';
 import { RoomType } from '@app/hospital-map/models/rooms/room.model';
+import { RenovationService } from '../../services/renovation.service';
 
 @Component({
   selector: 'app-calendar',
@@ -21,8 +22,12 @@ export class CalendarComponent implements OnInit, OnChanges{
   @Input() mergeRenovations: MergeRenovation[] = [];
   events : CalendarEvent[] = [];
   @ViewChild('roomschedulecalendar') fullCalendar! : FullCalendarComponent;
+  descriptionText: string="";
+  selectedEventId: string="";
+  showOptionalDialog: boolean = false;
+  
 
-  constructor(@Inject(DOCUMENT) private document: Document, private equipmentTransferService: EquipmentTransferService) { }
+  constructor(@Inject(DOCUMENT) private document: Document, private equipmentTransferService: EquipmentTransferService, private renovationService: RenovationService) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
@@ -41,9 +46,24 @@ export class CalendarComponent implements OnInit, OnChanges{
     },
     eventBorderColor : "#ffffff",
     expandRows: true,
-    eventClick: function(info) {
-      console.log(info.event)
-      alert('Are you sure you want to cancel event : ' + info.event.title + " with id " + info.event.id);
+    eventClick:(info)=>{
+      if(info.event.start != null){
+        var eventStartTime = new Date(info.event.start);
+        var range = eventStartTime.valueOf() - Date.now().valueOf();
+        console.log(info.event.start);
+        console.log(eventStartTime);
+        console.log(eventStartTime.valueOf());
+        console.log(range);
+        if(range >= 24*60*60*1000){
+          this.descriptionText = info.event.title
+          this.showOptionalDialog = true;
+          this.selectedEventId = info.event.id;
+      }
+
+      }
+
+      //console.log(info.event)
+      //alert('Are you sure you want to cancel event : ' + info.event.title + " with id " + info.event.id);
     }
   };
 
@@ -133,6 +153,18 @@ export class CalendarComponent implements OnInit, OnChanges{
           "#214975"
         )
       );
+    }
+  }
+
+  onNotifyCancelButton(){
+    this.showOptionalDialog = false;
+  }
+
+  onNotifyConfirmButton(){
+    this.showOptionalDialog = false;
+    if(this.selectedEventId.includes("transfer")){
+      let selectedEquipmentTransfer = this.equipmentTransfers.filter(o=>{return o.id==parseInt(this.selectedEventId.slice(0,-8))})[0];
+      this.equipmentTransferService.deleteEquipmentTransfer(selectedEquipmentTransfer).subscribe();
     }
   }
 
