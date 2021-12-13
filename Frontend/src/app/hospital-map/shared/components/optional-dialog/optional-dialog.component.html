@@ -1,0 +1,16 @@
+<div class="optional-dialog d-flex flex-column">
+
+    <div class="dialog-title fw-bold darkgray-text subhead d-flex flex-row justify-content-center">
+        {{title}}
+    </div>
+
+    <div class="dialog-description d-flex flex-row justify-content-center">
+        {{description}}
+    </div>
+
+    <div class="dialog-buttons d-flex flex-row justify-content-center">
+        <app-primary-button class="dialog-button" [text]="cancelText" (click)="cancelButton()" color="#a2a2a2"></app-primary-button>
+        <app-primary-button class="dialog-button" [text]="confirmText" (click)="confirmButton()" color="#214975"></app-primary-button>
+    </div>
+
+</div>     

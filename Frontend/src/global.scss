@@ -42,6 +42,11 @@ input[type="search"]::-webkit-search-results-decoration { display: none; }
 
 a{
     text-decoration: none !important;
+    color: color(blue) !important;
+
+    &:hover{
+        color: color(blue) !important;
+    }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: $base-font-family }
@@ -73,6 +78,11 @@ ngb-datepicker {
 
     .btn-link{
         color: color(blue);
+    }
+
+    .fc-prev-button, .fc-next-button{
+        background-color: #b1d583;
+        background-image: none;
     }
 
 }

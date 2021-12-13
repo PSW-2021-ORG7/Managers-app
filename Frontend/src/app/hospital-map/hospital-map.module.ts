@@ -21,6 +21,21 @@ import { SelectedEquipmentComponent } from './pages/move-equipment/equipment-ove
 import { DestinationRoomOverviewComponent } from './pages/move-equipment/destination-room-overview/destination-room-overview.component';
 import { TransferTimeComponent } from './pages/move-equipment/transfer-time/transfer-time.component';
 import { RoomRenovationComponent } from './pages/room-renovation/room-renovation.component';
+import { RoomScheduleComponent } from './pages/room-schedule/room-schedule.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { CalendarComponent } from './shared/components/calendar/calendar.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { OptionalDialogComponent } from './shared/components/optional-dialog/optional-dialog.component';
+import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -39,15 +54,20 @@ import { RoomRenovationComponent } from './pages/room-renovation/room-renovation
     SelectedEquipmentComponent,
     DestinationRoomOverviewComponent,
     TransferTimeComponent,
-    RoomRenovationComponent
-    
+    RoomRenovationComponent,
+    RoomScheduleComponent,
+    CalendarComponent,
+    OptionalDialogComponent,
+    InfoDialogComponent,    
   ],
   imports: [
     CommonModule,
     HospitalMapRoutingModule,
     FormsModule,
     NgbDatepickerModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    FullCalendarModule,
+    NgxSpinnerModule
   ],
   providers: [D3Service]
 })

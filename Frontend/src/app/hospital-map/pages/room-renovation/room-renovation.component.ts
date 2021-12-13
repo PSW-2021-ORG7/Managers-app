@@ -41,8 +41,8 @@ export class RoomRenovationComponent implements OnInit {
   roomsForMerge : Room[] = [];
   selectedRoom! : Room;
   selectedRoomId : number = -1;
-  splitRenovation: SplitRenovation = new SplitRenovation(-1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date(), '');
-  mergeRenovation: MergeRenovation = new MergeRenovation(-1, -1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date());
+  splitRenovation: SplitRenovation = new SplitRenovation(-1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(2021, 12, 16, 14, 30, 0), new Date(2021, 12, 22, 10, 0, 0), '');
+  mergeRenovation: MergeRenovation = new MergeRenovation(-1, -1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(2021, 12, 17, 17, 30, 0), new Date(2021, 12, 20, 10, 0, 0));
 
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private d3Service: D3Service, private renovationService: RenovationService) { }
 

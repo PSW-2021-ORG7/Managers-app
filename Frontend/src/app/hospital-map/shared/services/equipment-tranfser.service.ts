@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -20,10 +20,28 @@ export class EquipmentTransferService {
     .set('duration', equipmentTransfer.transferDuration)
     .set('srcRoomId', equipmentTransfer.sourceRoomId)
     .set('dstRoomId', equipmentTransfer.destinationRoomId);
-    return this.http.get<Date[]>(this.baseUrl + "/availableTimeSlots", {params});
+    return this.http.get<Date[]>(this.baseUrl + "availableTimeSlots", {params});
   }
   
   postEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer> {
-    return this.http.post<EquipmentTransfer>(this.baseUrl + '/transfers', equipmentTransfer);
+    return this.http.post<EquipmentTransfer>(this.baseUrl + 'transfers', equipmentTransfer);
+  }
+
+  getTransfersForRoom(roomId: number) : Observable<EquipmentTransfer[]>{
+    return this.http.get<EquipmentTransfer[]>(this.baseUrl + 'transfers/room/' + roomId);
+  }
+
+  deleteEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: 
+      equipmentTransfer    
+    } 
+
+    return this.http.delete<EquipmentTransfer>(this.baseUrl + 'transfers', options);
+    //this.http.request('delete', this.baseUrl + 'transfers', {body: equipmentTransfer});
+    //this.http.delete<EquipmentTransfer>(this.baseUrl + 'transfers');
   }
 }

@@ -50,7 +50,12 @@
 						],
 						"styles": [
 							"src/global.scss",
-							"node_modules/bootstrap/dist/css/bootstrap.min.css"
+							"node_modules/bootstrap/dist/css/bootstrap.min.css",
+							{
+								"input" : "src/styles/components/_calendar.scss",
+								"bundleName" : "custom-calendar",
+								"inject": false
+							}
 						],
 						"scripts": []
 					},

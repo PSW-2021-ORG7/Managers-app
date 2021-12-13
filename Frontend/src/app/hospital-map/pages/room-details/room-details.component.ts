@@ -42,6 +42,9 @@ export class RoomDetailsComponent implements OnInit {
     this.router.navigate(['/hospital-map/room-renovation/' + this.room.id])
   }
 
+  showRoomSchedule(): void{
+    this.router.navigate(['/hospital-map/room-schedule/' + this.room.id])
+  }
 
   onNotifyHideRoomInfo(){
     this.roomInfoFormVisible = false;
