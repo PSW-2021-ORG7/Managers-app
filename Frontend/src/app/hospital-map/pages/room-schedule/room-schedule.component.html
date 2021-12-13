@@ -11,7 +11,7 @@
         <h2>Room schedule - {{getRoomText()}}</h2>
     
         <div class="calendar-wrapper">
-            <app-calendar [equipmentTransfers]="equipmentTransfers"></app-calendar>
+            <app-calendar [equipmentTransfers]="equipmentTransfers" [splitRenovations]="splitRenovations" [mergeRenovations]="mergeRenovations"></app-calendar>
         </div>
     </div>
     <div *ngIf="!room" class="d-flex flex-row align-items-center justify-content-center w-100 vh-100">

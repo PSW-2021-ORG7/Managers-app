@@ -14,10 +14,18 @@ export class RenovationService {
   constructor(private http: HttpClient) { }
 
   postSplitRenovation(splitRenovation: SplitRenovation): Observable<SplitRenovation> {
-    return this.http.post<SplitRenovation>(this.baseUrl + '/splitRenovations', splitRenovation);
+    return this.http.post<SplitRenovation>(this.baseUrl + 'splitRenovations', splitRenovation);
   }
 
   postMergeRenovation(mergeRenovation: MergeRenovation) : Observable<MergeRenovation> {
-    return this.http.post<MergeRenovation>(this.baseUrl + '/mergeRenovations', mergeRenovation)
+    return this.http.post<MergeRenovation>(this.baseUrl + 'mergeRenovations', mergeRenovation)
+  }
+
+  getSplitRenovationsForRoom(roomId: number): Observable<SplitRenovation[]> {
+    return this.http.get<SplitRenovation[]>(this.baseUrl + 'splitRenovations/' + roomId);
+  }
+
+  getMergeRenovationsForRoom(roomId: number): Observable<MergeRenovation[]> {
+    return this.http.get<MergeRenovation[]>(this.baseUrl + 'mergeRenovations/' + roomId);
   }
 }

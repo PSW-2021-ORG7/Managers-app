@@ -1,5 +1,8 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MergeRenovation } from '@app/hospital-map/models/renovations/merge-renovation.model';
+import { SplitRenovation } from '@app/hospital-map/models/renovations/split-renovation.model';
+import { RenovationService } from '@app/hospital-map/shared/services/renovation.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { EquipmentTransfer } from '../../models/equipment/equipment-transfer.model';
 import { Room, RoomType } from '../../models/rooms/room.model';
@@ -18,8 +21,10 @@ export class RoomScheduleComponent implements OnInit{
   room! : Room;
   showServerErrorMessage : boolean = false;
   equipmentTransfers : EquipmentTransfer[] = [];
+  splitRenovations: SplitRenovation[] = [];
+  mergeRenovations: MergeRenovation[] = [];
 
-  constructor(private equipmentTransferService: EquipmentTransferService, private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) { }
+  constructor(private renovationService : RenovationService, private equipmentTransferService: EquipmentTransferService, private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private spinner: NgxSpinnerService) { }
   
   ngOnInit(): void {
     this.spinner.show();
@@ -38,7 +43,18 @@ export class RoomScheduleComponent implements OnInit{
         data => {
           this.equipmentTransfers = data;
           this.spinner.hide();
-          this.showServerErrorMessage = true;
+        }
+      );
+      this.renovationService.getSplitRenovationsForRoom(this.roomId).subscribe(
+        data => {
+          this.splitRenovations = data;
+          this.spinner.hide();
+        }
+      );
+      this.renovationService.getMergeRenovationsForRoom(this.roomId).subscribe(
+        data => {
+          this.mergeRenovations = data;
+          this.spinner.hide();
         }
       );
     });

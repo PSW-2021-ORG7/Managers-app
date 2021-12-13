@@ -4,6 +4,10 @@ import {DOCUMENT} from '@angular/common'
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { EquipmentTransferService } from '../../services/equipment-tranfser.service';
 import { CalendarEvent } from 'src/app/hospital-map/models/calendar/calendar-event.model';
+import { SplitRenovation } from '@app/hospital-map/models/renovations/split-renovation.model';
+import { MergeRenovation } from '@app/hospital-map/models/renovations/merge-renovation.model';
+import { RoomTypeToStringPipe } from '../../pipes/room-type-to-string.pipe';
+import { RoomType } from '@app/hospital-map/models/rooms/room.model';
 
 @Component({
   selector: 'app-calendar',
@@ -13,7 +17,9 @@ import { CalendarEvent } from 'src/app/hospital-map/models/calendar/calendar-eve
 export class CalendarComponent implements OnInit, OnChanges{
 
   @Input() equipmentTransfers: EquipmentTransfer[] = [];
-  filteredTransfers : CalendarEvent[] = [];
+  @Input() splitRenovations: SplitRenovation[] = [];
+  @Input() mergeRenovations: MergeRenovation[] = [];
+  events : CalendarEvent[] = [];
   @ViewChild('roomschedulecalendar') fullCalendar! : FullCalendarComponent;
 
   constructor(@Inject(DOCUMENT) private document: Document, private equipmentTransferService: EquipmentTransferService) { }
@@ -31,9 +37,10 @@ export class CalendarComponent implements OnInit, OnChanges{
     selectable: true,
     allDaySlot: false,
     events: (fetchInfo, sucessCallback, failureCallback) => {
-      sucessCallback(this.filteredTransfers);
+      sucessCallback(this.events);
     },
-    eventColor: '#214975'
+    eventBorderColor : "#ffffff",
+    expandRows: true,
   };
 
   ngOnInit(): void {
@@ -60,16 +67,63 @@ export class CalendarComponent implements OnInit, OnChanges{
         this.fullCalendar.getApi().refetchEvents();
       }
     }
+    if(changes['splitRenovations']){
+      this.splitRenovations = changes.splitRenovations.currentValue;
+      this.filterSplitRenovations();
+      if(this.fullCalendar){
+        this.fullCalendar.getApi().refetchEvents();
+      }
+    }
+    if(changes['mergeRenovations']){
+      this.mergeRenovations = changes.mergeRenovations.currentValue;
+      this.filterMergeRenovations();
+      if(this.fullCalendar){
+        this.fullCalendar.getApi().refetchEvents();
+      }
+    }
+  }
+
+  private filterMergeRenovations() : void {
+    for(let renovation of this.mergeRenovations){
+      this.events.push(
+        new CalendarEvent(
+          "Merge of rooms " + renovation.firstOldRoomId + " & " + renovation.secondOldRoomId,
+          renovation.start,
+          renovation.end,
+          "#623FC8"
+        )
+      );
+    }
+  }
+
+  private filterSplitRenovations() : void {
+    for(let renovation of this.splitRenovations){
+      this.events.push(
+        new CalendarEvent(
+          "Split of room " + renovation.roomId,
+          renovation.start,
+          renovation.end,
+          "#66A182"
+        )
+      );
+    }
   }
 
   private filterTransfers() : void {
-    this.filteredTransfers = [];
     for(let transfer of this.equipmentTransfers){
-      this.filteredTransfers.push(
+      const roomTypePipe = new RoomTypeToStringPipe();
+      let sourceRoomText =  roomTypePipe.transform(transfer.sourceRoomType) + " " + transfer.sourceRoomName;
+      if(transfer.sourceRoomType == RoomType.Restroom)
+      sourceRoomText = transfer.sourceRoomName + " " + "WC";
+      let destinationRoomText =  roomTypePipe.transform(transfer.destinationRoomType) + " " + transfer.destinationRoomName;
+      if(transfer.destinationRoomType == RoomType.Restroom)
+      destinationRoomText = transfer.destinationRoomName + " " + "WC";
+      this.events.push(
         new CalendarEvent(
-          "Transfer " + transfer.sourceRoomId + " -> " + transfer.destinationRoomId,
+          "Transfer: " + sourceRoomText + " -> " + destinationRoomText,
           transfer.transferDate,
-          new Date(new Date(transfer.transferDate).getTime() + transfer.transferDuration*60000)
+          new Date(new Date(transfer.transferDate).getTime() + transfer.transferDuration*60000),
+          "#214975"
         )
       );
     }

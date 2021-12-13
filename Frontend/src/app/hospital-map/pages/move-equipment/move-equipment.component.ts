@@ -14,7 +14,7 @@ export class MoveEquipmentComponent {
   
   completedSteps: number = 0;
   mode: string = "equipment-overview";
-  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, -1, 1, -1, -1, new Date());
+  equipmentTransfer: EquipmentTransfer = new EquipmentTransfer(-1, "", 0, -1, "", 0, 1, -1, -1, new Date());
   @ViewChild(DestinationRoomOverviewComponent,{static: false}) destinationRoomComponent : any;
   @ViewChild(TransferTimeComponent,{static: false}) transferTimeComponent : any;
 
