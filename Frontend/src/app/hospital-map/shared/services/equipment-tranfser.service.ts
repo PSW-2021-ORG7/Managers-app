@@ -12,7 +12,6 @@ export class EquipmentTransferService {
 
   constructor(private http: HttpClient) { }
 
-
   getAvailableTimeSlots(equipmentTransfer : EquipmentTransfer, transferStartDate: string, transferEndDate: string): Observable<Date[]> {
     let params = new HttpParams()
     .set('start', transferStartDate)
@@ -39,9 +38,6 @@ export class EquipmentTransferService {
       body: 
       equipmentTransfer    
     } 
-
     return this.http.delete<EquipmentTransfer>(this.baseUrl + 'transfers', options);
-    //this.http.request('delete', this.baseUrl + 'transfers', {body: equipmentTransfer});
-    //this.http.delete<EquipmentTransfer>(this.baseUrl + 'transfers');
   }
 }

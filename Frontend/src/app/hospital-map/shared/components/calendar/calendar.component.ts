@@ -69,18 +69,12 @@ export class CalendarComponent implements OnInit, OnChanges{
 
   ngOnInit(): void {
     const headEl = this.document.getElementsByTagName('head')[0];
+    const newLinkEl = this.document.createElement('link');
+    newLinkEl.id = 'custom-calendar';
+    newLinkEl.rel = "stylesheet";
+    newLinkEl.href = 'custom-calendar.css';
 
-    const existingLinkEl = this.document.getElementById('custom-calendar') as HTMLLinkElement;
-    if(existingLinkEl){
-      existingLinkEl.href = 'custom-calendar.css';
-    } else {
-      const newLinkEl = this.document.createElement('link');
-      newLinkEl.id = 'custom-calendar';
-      newLinkEl.rel = "stylesheet";
-      newLinkEl.href = 'custom-calendar.css';
-  
-      headEl.appendChild(newLinkEl);
-    }
+    headEl.appendChild(newLinkEl);
   }
 
   ngOnChanges(changes: SimpleChanges) {
