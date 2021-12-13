@@ -1,5 +1,4 @@
 import { RoomType } from "../rooms/room.model";
-import { Optional } from '@angular/core'; 
 
 export class EquipmentTransfer {
     public id?: number;
@@ -15,8 +14,7 @@ export class EquipmentTransfer {
     public transferDate: Date;
 
     constructor(sourceRoomId: number, sourceRoomName: string, sourceRoomType: RoomType, destinationRoomId: number, destinationRoomName: string, destinationRoomType: RoomType, quantity: number, equipmentId: number, transferDuration: number, transferDate: Date, id?: number){
-
-            this.id = id;
+        this.id = id;
         this.sourceRoomId = sourceRoomId;
         this.sourceRoomName = sourceRoomName;
         this.sourceRoomType = sourceRoomType;
