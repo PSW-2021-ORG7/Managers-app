@@ -61,9 +61,6 @@ export class CalendarComponent implements OnInit, OnChanges{
       }
 
       }
-
-      //console.log(info.event)
-      //alert('Are you sure you want to cancel event : ' + info.event.title + " with id " + info.event.id);
     }
   };
 
@@ -157,8 +154,14 @@ export class CalendarComponent implements OnInit, OnChanges{
   onNotifyConfirmButton(){
     this.showOptionalDialog = false;
     if(this.selectedEventId.includes("transfer")){
-      let selectedEquipmentTransfer = this.equipmentTransfers.filter(o=>{return o.id==parseInt(this.selectedEventId.slice(0,-8))})[0];
+      let selectedEquipmentTransfer = this.equipmentTransfers.filter(o=>{return o.id == parseInt(this.selectedEventId.slice(0,-8))})[0];
       this.equipmentTransferService.deleteEquipmentTransfer(selectedEquipmentTransfer).subscribe();
+    } else if(this.selectedEventId.includes("merge")){
+      let selectedMergeRenovation = this.mergeRenovations.filter(r=>{return r.id == parseInt(this.selectedEventId.slice(0,-5))})[0];
+      this.renovationService.deleteMergeRenovation(selectedMergeRenovation).subscribe();
+    } else if(this.selectedEventId.includes("split")){
+      let selectedSplitRenovation = this.splitRenovations.filter(r=>{return r.id == parseInt(this.selectedEventId.slice(0,-5))})[0];
+      this.renovationService.deleteSplitRenovation(selectedSplitRenovation).subscribe(); 
     }
   }
 

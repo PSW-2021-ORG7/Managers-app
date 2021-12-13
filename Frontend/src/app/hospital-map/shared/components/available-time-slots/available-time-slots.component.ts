@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MergeRenovation } from '@app/hospital-map/models/renovations/merge-renovation.model';
@@ -157,11 +158,11 @@ export class AvailableTimeSlotsComponent implements OnInit{
   }
   
   displaySuccessDialog(data: object): void {
-    throw new Error('Method not implemented.');
+    alert("Successfuly scheduled renovation!");
   }
 
-  displayErrorDialog(error: any): void {
-    throw new Error('Method not implemented.');
+  displayErrorDialog(error: HttpErrorResponse): void {
+    alert(error.error);
   }
 
 }
