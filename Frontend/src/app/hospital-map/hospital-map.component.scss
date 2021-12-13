@@ -1,0 +1,23 @@
+@import 'src/styles/main.scss';
+
+#map {
+    position: relative;
+}
+
+#map-background{
+    // @include background-svg($map-background);
+    object-fit: cover;
+    height: 100vh;
+}
+
+.back-to-homepage-btn{
+    position: absolute;
+    z-index: 3;
+    margin-top: 18px;
+    margin-left: 40px;
+}
+
+.back-to-homepage-btn img {
+    width: 24px;
+    transform: rotate(180deg);
+}

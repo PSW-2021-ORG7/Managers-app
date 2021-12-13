@@ -1,0 +1,18 @@
+@import 'src/styles/main.scss';
+
+.card{
+    width: 100%;
+    padding: 10px 20px;
+    height: 94px;
+    @include card;
+}
+
+    .card-title{
+        height: 43px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .floor-text{
+        font-size: 14px;
+    }

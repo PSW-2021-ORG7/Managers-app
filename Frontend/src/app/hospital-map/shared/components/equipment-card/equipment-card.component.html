@@ -1,0 +1,9 @@
+<div class="card d-flex flex-column" [style.background]="isCardSelected ? '#214975' : '#fff'" (click)="type == 'transfer' ? showSelectedEquipment() : displayRoomOnMap()">
+    <span class="card-title" [style.color]="isCardSelected ? '#fff' : '#214975'">{{equipment.equipmentItemName}}</span>
+    <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-row align-items-center">
+            <span class="floor-text" [style.color]="isCardSelected ? '#fff' : '#a2a2a2'">{{equipment.roomType | roomTypeToString}} {{equipment.roomName}}</span>
+        </div>
+        <span class="floor-text" [style.color]="isCardSelected ? '#fff' : '#214975'">{{equipment.quantity}}</span>
+    </div>
+</div>

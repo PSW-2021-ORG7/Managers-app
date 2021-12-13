@@ -1,0 +1,14 @@
+<div class="scroll-box">
+    <div *ngIf="rooms && mode=='rooms'" >
+        <div *ngFor="let room of rooms" class="mb-3">
+            <app-room-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="!isSearchActive && room.floor == selectedFloor" [room]="room"></app-room-card>
+            <app-room-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="isSearchActive && (room.name + (room.type | roomTypeToString)).toLowerCase().includes(searchFilter)" [room]="room"></app-room-card>
+        </div>
+    </div>
+    <div *ngIf="mode=='equipment'">
+        <div *ngFor="let roomEquipment of equipment" class="mb-3">
+            <app-equipment-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="!isSearchActive && roomEquipment.roomFloor == selectedFloor" [equipment]="roomEquipment"></app-equipment-card>
+            <app-equipment-card (notifyDisplayRoom)="onNotifyDisplayRoom($event)" *ngIf="isSearchActive && roomEquipment.equipmentItemName.toLowerCase().includes(searchFilter)" [equipment]="roomEquipment"></app-equipment-card>
+        </div>
+    </div>
+</div>

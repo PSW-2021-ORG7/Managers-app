@@ -1,0 +1,23 @@
+@import 'src/styles/main.scss';
+
+.card{
+    padding: 10px 20px;
+    @include card;
+}
+    .card-title{
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .dot{
+        margin-right: 5px;
+    }
+
+    .status-text{
+        font-size: 14px;
+        color: green;
+    }
+
+    .floor-text{
+        font-size: 14px;
+    }

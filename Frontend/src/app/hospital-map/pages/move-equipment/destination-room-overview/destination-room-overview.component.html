@@ -1,0 +1,18 @@
+<div class="d-flex flex-column destination-room-overview">
+    
+    <div class="search-container d-flex flex-row">
+        <input type="search" (keyup.enter)="search()" class="form-control search-field" [(ngModel)]="searchInput" id="searchInput" placeholder="Search">
+        <app-primary-button (click)="search()" [text]="'Search'"></app-primary-button>
+    </div>
+    
+    <div class="subtitle-equipment-transfer d-flex flex-row justify-content-between">
+        <h3 class="">Select destination room</h3>
+        <span class="align-middle remove-filter" *ngIf="isSearchActive" (click)="removeFilter()">Remove filter</span>
+    </div> 
+    
+    <div class="searched-elements">
+        <div *ngFor="let room of filteredRooms" class="room-card-wrapper">
+            <app-room-card [room]="room" (click)="selectDestinationRoom(room.id)" [selectedRoomId]="selectedRoomId"></app-room-card>
+        </div>
+    </div>
+</div>

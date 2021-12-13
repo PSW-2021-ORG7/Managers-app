@@ -1,0 +1,18 @@
+@import 'src/styles/main.scss';
+
+textarea{
+    resize: none;
+    border: 1px solid color(darkgrey);
+    border-radius: 5px;
+}
+
+.btn-secondary{
+    background-color: color(darkgrey);
+    font-weight: bold;
+    border: none;
+}
+
+.btn-primary{
+    background-color: color(blue);
+    font-weight: bold;
+}

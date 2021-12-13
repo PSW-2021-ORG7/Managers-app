@@ -1,0 +1,16 @@
+@import "src/styles/main.scss";
+
+.btn-primary{
+    height: 33px;
+    border: none;
+    padding: 3px 12px;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.btn-primary:hover{
+    background-color: color(darkblue);
+    box-shadow: none;
+}
