@@ -13,6 +13,8 @@ import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
+import { TenderComponent } from './tender/tender.component';
+import { ViewTendersComponent } from './view-tenders/view-tenders.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.co
     UrgentRequestComponent,
     MedicationSpecificationComponent,
     PrescriptionsComponent,
-    PharmacyProfileComponent
+    PharmacyProfileComponent,
+    TenderComponent,
+    ViewTendersComponent
    
   ],
   imports: [

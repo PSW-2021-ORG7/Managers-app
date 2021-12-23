@@ -1,0 +1,50 @@
+<app-integration></app-integration>
+<br>
+
+<div id="Tender" class="background">
+    <div class="viewTenders">
+        <button class="btn btn-secondary btn-medium" title="View all active tenders" routerLink="/integration/view-tenders">View active tenders</button>
+    </div>
+    <form (submit)="send()">
+      <div class="container">
+          <table>
+            <caption style="text-align:left"></caption>
+            <h1 style="text-align:center;">Tender</h1>
+            <hr>
+            <tr>
+                <th scope="col"></th>        
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>Medicine</strong></label>
+                    <input type="text" (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>Dose</strong></label>&nbsp;<br>
+                    <input type="text" (change)="selectChangeHandlerDose($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>Quantity</strong></label>&nbsp;<br>
+                    <input type="text" (change)="selectChangeHandlerQuantity($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>End date</strong></label>&nbsp;<br>
+                    <input type="date" (change)="selectChangeHandlerDate($event)" style="width: 100%; height: 150%;" title="Please select date"><br>
+                </td>
+            </tr>
+           
+            
+            <hr>
+            <button type="submit" class="btn btn-secondary submitButton">Submit</button>
+           
+        </table>
+      </div>   
+    </form>
+</div>
+
