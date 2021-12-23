@@ -1,0 +1,113 @@
+
+<app-integration></app-integration>
+<br>
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <br>
+            <h5>Choose prescription</h5>
+        </div>
+
+
+        <select  class="prescription" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+           title="Please select prescription" required (change)="selectChangeHandlerId($event)">
+           <option *ngFor="let prescription of prescriptions" [value]="prescription.idPrescription">
+            {{prescription.patientJMBG}}
+        </option>
+        </select>
+
+        <ul class="list-unstyled CTAs">
+            <button (click)="viewPrescription()" style="margin-left: 5%;" class="btn btn-secondary btn-medium;">View prescription</button>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div class="left">
+
+            <table>
+                <caption style="text-align:left"></caption>
+                <h1>Prescriptions</h1>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label (ngModel)= "patient"><strong>Patient's name</strong></label>
+                        <br>
+                        <label>{{patient}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>JMBG</strong></label>
+                        <br>
+                        <label (ngModel)= "patientJMBG">{{patientJMBG}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Duration in days</strong></label>
+                        <br>
+                        <label (ngModel)= "durationInDays">{{durationInDays}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Times per day</strong></label>
+                        <br>
+                        <label (ngModel)= "timesPerDay">{{timesPerDay}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Description</strong></label>
+                        <br>
+                        <label (ngModel)= "description">{{description}}</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Doctor's name</strong></label>
+                        <br>
+                        <label (ngModel)= "doctor">{{doctor}}</label>
+                    </td>
+                </tr>
+                <hr>
+                <tr>
+                    <td>
+                        <label><strong>Medicine</strong></label>
+                        <br>
+                        <label (ngModel)= "medicine">{{medicine}} mg</label>
+                    </td>
+                </tr>
+                <tr>
+                    <button type="button" (click) = "checkIfAvailable()" [disabled]='disableFields' class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
+                </tr>
+               
+                <tr>
+                    <label><strong>Available in: </strong></label><br>
+                    
+                    <select style="width:120%;max-width:100%;" name="multipleSelect" (change)="selectChangeHandlerSelectedPharmacy($event)" id="multipleSelect" multiple  title="Please select pharmacy" required>
+                        <option class = "pharmacies" *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
+                            {{phar.namePharmacy}}
+                        </option>
+                    </select><br><br>
+                    
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" [disabled]='disableSend' class="btn btn-secondary sendBtn">Send (HTTP)</button>&nbsp;
+                        <button type="button" [disabled]='disableSend' (click) = "sendSFTP()" class="btn btn-secondary sendBtn">Send (SFTP)</button>&nbsp;
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    </div>
+</div>

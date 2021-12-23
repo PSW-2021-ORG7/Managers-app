@@ -12,6 +12,7 @@ import { UrgentRequestComponent } from './urgent-request/urgent-request.componen
 import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FeedbackComponent,
     CreateFeedbackComponent,
     UrgentRequestComponent,
-    MedicationSpecificationComponent
+    MedicationSpecificationComponent,
+    PrescriptionsComponent
    
   ],
   imports: [
