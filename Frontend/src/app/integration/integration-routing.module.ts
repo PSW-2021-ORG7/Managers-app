@@ -7,7 +7,9 @@ import { MedicationSpecificationComponent } from './medication-specification/med
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-registration.component';
 import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
+import { TenderComponent } from './tender/tender.component';
 import { UrgentRequestComponent } from './urgent-request/urgent-request.component';
+import { ViewTendersComponent } from './view-tenders/view-tenders.component';
 
 const routes: Routes = [
   { path: '', component: IntegrationComponent },
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'medication-specification', component: MedicationSpecificationComponent },
   { path: 'prescriptions', component: PrescriptionsComponent},
   { path: 'pharmacy-profile', component: PharmacyProfileComponent},
-  { path: 'pharmacy-profile', component: PharmacyProfileComponent}
+  { path: 'pharmacy-profile', component: PharmacyProfileComponent},
+  { path: 'tender', component: TenderComponent},
+  { path: 'view-tenders', component: ViewTendersComponent}
 ];
 
 @NgModule({
