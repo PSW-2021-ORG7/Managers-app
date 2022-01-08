@@ -10,6 +10,7 @@ export class TenderComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   quantity: string = '';
+  manufacturer: string = '';
   date: string = '';
   disableFields: boolean = false;
   
@@ -33,6 +34,11 @@ export class TenderComponent implements OnInit {
     console.log(this.quantity);
   }
 
+  selectChangeHandlerManufacturer(event: any) {
+    this.manufacturer = event.target.value;
+    console.log(this.manufacturer);
+  }
+
   selectChangeHandlerDate(event: any) {
     this.date = event.target.value;
     console.log(this.quantity);
@@ -43,9 +49,10 @@ export class TenderComponent implements OnInit {
       name: this.medicine,
       dosageimg: this.dose,
       quantity: this.quantity,
+      manufacturer: this.manufacturer,
       date: this.date
     };
-    if(this.medicine == "" || this.dose == "" || this.quantity == "" || this.date ==""){
+    if(this.medicine == "" || this.dose == "" || this.quantity == "" || this.manufacturer =="" || this.date ==""){
         alert("Please fill all fields!")
     }else {
         console.log(tender)
