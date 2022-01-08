@@ -15,6 +15,7 @@ import { PrescriptionsComponent } from './prescriptions/prescriptions.component'
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 import { TenderComponent } from './tender/tender.component';
 import { ViewTendersComponent } from './view-tenders/view-tenders.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ViewTendersComponent } from './view-tenders/view-tenders.component';
     CommonModule,
     IntegrationRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
