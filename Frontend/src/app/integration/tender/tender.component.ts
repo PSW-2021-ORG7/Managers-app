@@ -1,13 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { TenderService } from './tender.service';
 
 export class TenderRequestItem {
   constructor(
     public Id: number,
-    public MedicienName: string,
+    public MedicineName: string,
     public DosageInMilligrams: number,
     public Manufacturer: string,
     public RequiredQuantity: number,
+  ) { }
+}
+
+export class TenderRequest {
+  constructor(
+    public requestedItems: TenderRequestItem[] 
   ) { }
 }
 
@@ -28,9 +35,9 @@ export class TenderComponent implements OnInit {
   selectedItemId: string = "";
   deletedItemsCount: number = 0;
 
-  tenderRequest: TenderRequestItem[] = [];
+  requestedItems: TenderRequestItem[] = [];
   
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private tenderService: TenderService) { }
 
   ngOnInit(): void {
   }
@@ -69,8 +76,8 @@ export class TenderComponent implements OnInit {
 
   addItem(): void {
     var tender = {
-      Id: this.tenderRequest.length + this.deletedItemsCount + 1,
-      MedicienName: this.medicine,
+      Id: this.requestedItems.length + this.deletedItemsCount + 1,
+      MedicineName: this.medicine,
       DosageInMilligrams: +this.dose,
       Manufacturer: this.manufacturer,
       RequiredQuantity: +this.quantity     
@@ -79,7 +86,7 @@ export class TenderComponent implements OnInit {
     if(this.validate()) 
     {
         if(this.checkEqual(tender)) alert("Item already exists on the list!")
-        else this.tenderRequest.push(tender);             
+        else this.requestedItems.push(tender);             
     }    
   }
 
@@ -87,8 +94,8 @@ export class TenderComponent implements OnInit {
 
     var ret = false;
 
-    this.tenderRequest.forEach(function(item){
-      if(tender.MedicienName == item.MedicienName && tender.DosageInMilligrams == item.DosageInMilligrams
+    this.requestedItems.forEach(function(item){
+      if(tender.MedicineName == item.MedicineName && tender.DosageInMilligrams == item.DosageInMilligrams
         && tender.Manufacturer == item.Manufacturer){
           ret = true;
         }
@@ -98,9 +105,9 @@ export class TenderComponent implements OnInit {
 
   removeItem(): void {
     
-    this.tenderRequest.forEach((item, index) => {
+    this.requestedItems.forEach((item, index) => {
       if(+this.selectedItemId == item.Id){
-        this.tenderRequest.splice(index, 1)    
+        this.requestedItems.splice(index, 1)    
         this.deletedItemsCount++
         alert("Successfully deleted item!")    
       }
@@ -112,7 +119,7 @@ export class TenderComponent implements OnInit {
 
     var tender = {
       Id: +this.selectedItemId,
-      MedicienName: this.medicine,
+      MedicineName: this.medicine,
       DosageInMilligrams: +this.dose,
       Manufacturer: this.manufacturer,
       RequiredQuantity: +this.quantity     
@@ -120,9 +127,9 @@ export class TenderComponent implements OnInit {
 
     if(this.validate())
     {     
-      this.tenderRequest.forEach((item, index) => {
+      this.requestedItems.forEach((item, index) => {
         if(+this.selectedItemId == item.Id){
-          this.tenderRequest.splice(index, 1, tender)
+          this.requestedItems.splice(index, 1, tender)
           alert("Successfully updated item!")    
         }          
     });     
@@ -140,16 +147,29 @@ export class TenderComponent implements OnInit {
 
   setFields(id: string): void{
 
-    this.tenderRequest.forEach((item, index) => {
+    this.requestedItems.forEach((item, index) => {
       if(+id == item.Id){
-        this.medicine = item.MedicienName
+        this.medicine = item.MedicineName
         this.dose = item.DosageInMilligrams.toString()
         this.quantity = item.RequiredQuantity.toString()
         this.manufacturer = item.Manufacturer  
       }
         
-  });     
-      
+  });      
+  }
+
+  openTender(): void{
+    if(this.requestedItems.length == 0) alert ("No items were added!")
+    else{
+
+      var tenderRequest = {
+        requestedItems: this.requestedItems 
+      }
+
+      console.log(tenderRequest)
+      this.tenderService.sendTenderRequest(tenderRequest, "ABC").subscribe(response => {
+      })
+    }
   }
 
   validate(): boolean{
