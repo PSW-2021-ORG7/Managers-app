@@ -1,5 +1,214 @@
 <app-integration></app-integration>
 <br>
 <div id="ViewTenders" class="background">
-    <button title="Previous page" class="btn btn-secondary btn-medium" style="margin-left: 3%; width: 7%;" routerLink="/integration/tender">Back</button>
+    <nav id="sidebar">
+        <button title="Previous page" class="btn btn-secondary btn-medium" style="margin-left: 20%; margin-top: 10%; margin-bottom: 4%; width: 50%;" routerLink="/integration/tender">Back</button>
+        <div class="sidebar-header">
+            <br>
+            <h5 style="text-align: center;">Choose tender</h5>
+        </div>
+        <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+             title="Please select tender" required>
+            <option>
+                Tender 1
+            </option>
+            <option>
+                Tender 2
+            </option>
+            <option>
+                Tender 3
+            </option>
+        </select>
+
+        <ul class="list-unstyled CTAs">
+            <button class="btn btn-secondary btn-medium;" style="margin-left: 20%;">View
+                offers</button>
+        </ul>
+    </nav>
+    <div id="content">
+        <div class="card-deck mb-3 text-center" style="width: 35rem;">
+            <div class="card mb-4 box-shadow">
+               <div class="card-header" >
+                <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                    Jankovic
+                </button>
+               </div>
+               
+                <div class="card-body" id="collapseExample" style="background: #8e8f8f80">
+                    <div class="card card-body">
+                      <div  class="card-body" [ngbCollapse]="isCollapsed">
+                          <table  style="text-align: left;">
+                                <tr>
+                                    <td><strong>
+                                        Medicine name: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                         Brufen
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Dosage in milligrams: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                         400
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Manufacturer: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                        Mylan
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Available quantity: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                         2
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Missing quantity: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                         0
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Price for single entity: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                        320
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Price for all available entities: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                        640
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>
+                                        Price for all required entities: 
+                                    </strong></td>&nbsp;
+                                    <td>
+                                        640
+                                    </td>
+                                </tr>
+                          </table>
+                      </div>
+                    </div>
+                    <label style="text-align: left; margin-top: 2%;"><strong>
+                        Total price: 
+                    </strong></label>&nbsp;
+                    <label style="text-align: left;">
+                         640
+                    </label><br>
+                    <button class="btn btn-secondary btn-medium" style="background: #66A182; margin-top: 2%;" title="Accept an offer">Accept</button>
+    
+                </div>        
+            </div>          
+        </div>
+        
+        <div class="card-deck mb-3 text-center" style="width: 35rem;">
+            <div class="card mb-4 box-shadow">
+               <div class="card-header">
+                <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+                    [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+                    Benu
+                </button>
+               </div>
+               
+                <div class="card-body" id="collapseExample" style="background: #8e8f8f80">
+                    <div class="card card-body">
+                      <div class="card-body" [ngbCollapse]="isCollapsed">
+                        <table style="text-align: left;">
+                            <tr>
+                                <td><strong>
+                                    Medicine name: 
+                                </strong></td>&nbsp;
+                                <td>
+                                     Brufen
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Dosage in milligrams: 
+                                </strong></td>&nbsp;
+                                <td>
+                                     600
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Manufacturer: 
+                                </strong></td>&nbsp;
+                                <td>
+                                    Mylan
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Available quantity: 
+                                </strong></td>&nbsp;
+                                <td>
+                                     5
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Missing quantity: 
+                                </strong></td>&nbsp;
+                                <td>
+                                     0
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Price for single entity: 
+                                </strong></td>&nbsp;
+                                <td>
+                                    360
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Price for all available entities: 
+                                </strong></td>&nbsp;
+                                <td>
+                                    1800
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>
+                                    Price for all required entities: 
+                                </strong></td>&nbsp;
+                                <td>
+                                    1800
+                                </td>
+                            </tr>
+                      </table>
+                      </div>
+                    </div>
+                    <label style="text-align: left; margin-top: 2%;"><strong>
+                        Total price: 
+                    </strong></label>&nbsp;
+                    <label style="text-align: left;">
+                         1800
+                    </label><br>
+                    <button class="btn btn-secondary btn-medium" style="background: #66A182; margin-top: 2%;" title="Accept an offer">Accept</button>
+                </div>        
+            </div>
+           
+        </div>  
+        
+    </div>
 </div>
