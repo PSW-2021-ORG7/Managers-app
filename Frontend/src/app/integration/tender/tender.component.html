@@ -9,21 +9,35 @@
       <div class="container">
           <table>
             <caption style="text-align:left"></caption>
-            <h1 style="text-align:center;">Tender</h1>
+            <h1 style="text-align:left;">Tender</h1>
             <hr>
             <tr>
-                <th scope="col"></th>        
+                <th scope="col"></th> 
+                <th scope="col"></th>       
             </tr>
             <tr>
                 <td>
                     <label><strong>Medicine</strong></label>
                     <input type="text" (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
                 </td>
+                <td>
+                    <div class="form2">
+                        <label><strong>Requested items  </strong></label>
+                        <select style="width:120%; max-width:100%; outline: none; overflow-y: auto; background: none;" name="multipleSelect" id="multipleSelect" multiple title="Please select item" required>
+                            <option>Item 1</option>
+                            <option>Item 2</option>
+                            <option>Item 3</option>
+                        </select>
+                    </div>   
+                </td>
             </tr>
             <tr>
                 <td>
                     <label><strong>Dose</strong></label>&nbsp;<br>
                     <input type="text" (change)="selectChangeHandlerDose($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-secondary submitButton btn-medium">Open Tender</button>
                 </td>
             </tr>
             <tr>
@@ -34,17 +48,26 @@
             </tr>
             <tr>
                 <td>
+                    <label><strong>Manufacturer</strong></label>&nbsp;<br>
+                    <input type="text" (change)="selectChangeHandlerManufacturer($event)" style="font-size: medium;" pattern="[a-zA-Z]" title="Please use letters only" required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
                     <label><strong>End date</strong></label>&nbsp;<br>
                     <input type="date" (change)="selectChangeHandlerDate($event)" style="width: 100%; height: 150%;" title="Please select date"><br>
                 </td>
             </tr>
-           
-            
+            <tr>
+                <br>
+                <button class="btn btn-secondary btn-medium" style="width:100px;">Add</button>
+            </tr>
             <hr>
-            <button type="submit" class="btn btn-secondary submitButton">Submit</button>
+           
            
         </table>
-      </div>   
+      </div>
+
     </form>
 </div>
 

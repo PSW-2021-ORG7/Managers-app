@@ -1,9 +1,14 @@
-* {
-    box-sizing: border-box;
-  }
+
   form {
-  width: 300px;
-  margin: 0 auto;
+    width: 800px;
+    margin-left: 3%;
+  }
+  .form2 {
+    margin-left: 30%;
+    width: 350px;
+    max-height: 250px;
+    margin-top: 2%;
+    margin-right: 2%;
   }
   .container {
     padding: 16px;
@@ -11,8 +16,7 @@
     width: 110%;
     border: 1px solid #212fad;
     margin-top: 8%;
-    justify-content: center;
-    align-items: center;
+    float: left;
   }
   
   input[type=text]{
@@ -40,10 +44,9 @@
     color: white;
     background-color: #214975;
     padding: 16px 20px;
-    margin: 8px 0;
     border: none;
-    cursor: pointer;
-    width: 100%;
+    cursor:pointer;
+    margin-left: 30%;
     opacity: 0.9;
   }
   .submitButton:hover {
@@ -60,7 +63,7 @@
 }
 
 .viewTenders {
-    display: flex;
+    margin-left: 3%;
     justify-content: center;
     align-items: center;
    
