@@ -11,6 +11,7 @@ import { RoomsService } from '../../shared/services/rooms.service';
 export class RoomDetailsComponent implements OnInit {
   room!: Room;
   roomInfoFormVisible: boolean = false;
+  menuVisible: boolean = false;
 
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router) { }
 
@@ -60,6 +61,10 @@ export class RoomDetailsComponent implements OnInit {
       return "#A2A2A2";
     else 
       return "#214975";
+  }
+
+  toggleMenu(): void{
+    this.menuVisible = !this.menuVisible;
   }
 
 }
