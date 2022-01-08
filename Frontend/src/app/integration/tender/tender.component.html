@@ -24,8 +24,8 @@
                     <div class="form2">
                         <label><strong>Requested items  </strong></label>
                         <select (change)="selectChangeHandlerSelectedItem($event)" style="width:120%; max-width:100%; outline: none; overflow-y: auto; background: none;" name="multipleSelect" id="multipleSelect" multiple title="Please select item" required>
-                            <option class = "requestedItems" *ngFor="let item of tenderRequest" [value]="item.Id">
-                             {{item.Id}} {{item.Manufacturer}} | {{item.MedicienName}} {{item.DosageInMilligrams}}mg x {{item.RequiredQuantity}}
+                            <option class = "requestedItems" *ngFor="let item of requestedItems" [value]="item.Id">
+                             {{item.Id}} {{item.Manufacturer}} | {{item.MedicineName}} {{item.DosageInMilligrams}}mg x {{item.RequiredQuantity}}
                             </option>
                         </select>
                         <div class="editItems" *ngIf = "this.showItemEditRemoveButtons">
@@ -48,7 +48,7 @@
                     <input type="text" [(ngModel)]="dose" name="dose" (change)="selectChangeHandlerDose($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
                 </td>
                 <td>
-                    <button [disabled]='disableFields' type="submit" class="btn btn-secondary submitButton btn-medium">Open Tender</button>
+                    <button (click)="openTender()" class="btn btn-secondary submitButton btn-medium">Open Tender</button>
                 </td>
             </tr>
             <tr>
