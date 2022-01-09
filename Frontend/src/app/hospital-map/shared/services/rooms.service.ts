@@ -31,8 +31,4 @@ export class RoomsService {
     return this.http.put<Room>(this.baseUrl + '/' + room.id, room);
   }
 
-  getDoctorForRoom(roomId: number): Observable<Doctor> {
-    let id = roomId;
-    return this.http.get<Doctor>(environment.baseUrlHospital + "?roomId=" + roomId);
-  }
 }
