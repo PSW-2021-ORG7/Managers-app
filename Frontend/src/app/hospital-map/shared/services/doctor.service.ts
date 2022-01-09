@@ -14,8 +14,11 @@ export class DoctorService {
     constructor(private http: HttpClient) { }
 
     getDoctorForRoom(roomId: number): Observable<Doctor> {
-        let id = roomId;
         return this.http.get<Doctor>(this.baseUrl + "?roomId=" + roomId);
+    }
+
+    getDoctor(id: number): Observable<Doctor>{
+        return this.http.get<Doctor>(this.baseUrl + "/" + id);
     }
     
 }

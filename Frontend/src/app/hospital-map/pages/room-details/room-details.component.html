@@ -54,8 +54,8 @@
         <svg class="close-icon" (click)="toggleMenu()"></svg>
         <div [ngClass]="{'hidden-overlay' : !menuVisible}" class="d-flex flex-column">
             <span class="menu-title">Choose action</span>
-            <div class="nav-items-menu" (click)="showRoomInfoForm();toggleMenu()">
-                <div class="nav-item-menu">
+            <div class="nav-items-menu">
+                <div class="nav-item-menu" (click)="showRoomInfoForm();toggleMenu()">
                     <svg class="edit-room-info-icon me-2"></svg>
                     <span>Edit room info</span>
                 </div>
@@ -71,7 +71,7 @@
                     <svg class="room-schedule-icon me-2"></svg>
                     <span>Room schedule</span>
                 </div>
-                <div class="nav-item-menu">
+                <div class="nav-item-menu" (click)="showManageDoctor()">
                     <svg class="manage-doctor-icon me-2"></svg>
                     <span>Manage doctor</span>
                 </div>

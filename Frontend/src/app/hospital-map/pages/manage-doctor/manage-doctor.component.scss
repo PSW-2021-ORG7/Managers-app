@@ -1,0 +1,61 @@
+@import 'src/styles/main.scss';
+@import 'src/styles/components/manage-doctor.scss';
+
+#manage-doctor{
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+    .back-icon{
+        margin-right: 5px;
+        @include icon;
+        @include background-svg($back-icon);
+    }
+
+    .back-to-room-details-btn{
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+        .back-to-room-details-btn span{
+            color: color(darkgrey);
+        }
+
+    .toolbar{
+        margin-top: 20px;
+    }
+
+        .assign-holiday-btn{
+            color: color(blue);
+            cursor: pointer;
+            margin-right: 40px;
+        }
+
+            .holiday-icon{
+                @include background-svg($holiday);
+                @include icon;
+            }
+
+        .assign-on-call-shift-btn{
+            color: color(blue);
+            cursor: pointer;
+            margin-right: 40px;
+        }
+
+            .on-call-shift-icon{
+                @include background-svg($on-call-shift);
+                @include icon;
+            }
+        
+        .assign-shift-btn{
+            color: color(blue);
+            cursor: pointer;
+        }
+
+            .shift-icon{
+                @include background-svg($shift);
+                @include icon;
+            }
+    hr{
+        background-color: color(darkgray);
+    }

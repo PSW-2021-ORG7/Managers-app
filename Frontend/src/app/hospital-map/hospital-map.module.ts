@@ -25,11 +25,13 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { CalendarComponent } from './shared/components/calendar/calendar.component';
+import { RoomScheduleCalendarComponent } from './pages/room-schedule/room-schedule-calendar/room-schedule-calendar.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { OptionalDialogComponent } from './shared/components/optional-dialog/optional-dialog.component';
 import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
 import { AvailableTimeSlotsComponent } from './shared/components/available-time-slots/available-time-slots.component';
+import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.component';
+import { DoctorScheduleCalendarComponent } from './pages/manage-doctor/doctor-schedule-calendar/doctor-schedule-calendar.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -55,11 +57,13 @@ FullCalendarModule.registerPlugins([
     DestinationRoomOverviewComponent,
     RoomRenovationComponent,
     RoomScheduleComponent,
-    CalendarComponent,
+    RoomScheduleCalendarComponent,
     OptionalDialogComponent,
     InfoDialogComponent,    
     RoomRenovationComponent,
-    AvailableTimeSlotsComponent
+    AvailableTimeSlotsComponent,
+    ManageDoctorComponent,
+    DoctorScheduleCalendarComponent
   ],
   imports: [
     CommonModule,

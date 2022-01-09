@@ -1,0 +1,26 @@
+<div id="manage-doctor" class="d-flex flex-column">
+    <div class="back-to-room-details-btn" (click)="onBack()">
+        <svg class="back-icon"></svg>
+        <span *ngIf="roomId != ''" class="align-middle ms-1">Room details</span>
+        <span *ngIf="roomId == ''" class="align-middle ms-1">Map view</span>
+    </div>
+    <div class="toolbar d-flex align-items-center justify-content-between">
+        <h2 *ngIf="doctor">Manage Dr. {{doctor.name}} {{doctor.surname}}</h2>
+        <div class="d-flex">
+            <div class="assign-holiday-btn">
+                <svg class="holiday-icon"></svg>
+                <span class="align-middle ms-1 button-text fw-bold">Assign holiday</span>
+            </div>
+            <div class="assign-on-call-shift-btn">
+                <svg class="on-call-shift-icon"></svg>
+                <span class="align-middle ms-1 button-text fw-bold">Assign on-call shift</span>
+            </div>
+            <div class="assign-shift-btn">
+                <svg class="shift-icon"></svg>
+                <span class="align-middle ms-1 button-text fw-bold">Assign shift</span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <app-doctor-schedule-calendar></app-doctor-schedule-calendar>
+</div>

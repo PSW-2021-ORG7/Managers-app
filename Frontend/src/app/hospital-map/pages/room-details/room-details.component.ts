@@ -55,6 +55,13 @@ export class RoomDetailsComponent implements OnInit {
     this.router.navigate(['/hospital-map/room-schedule/' + this.room.id])
   }
 
+  showManageDoctor(): void{
+    if(this.doctor != null && this.room != null)
+      this.router.navigate(['/hospital-map/manage-doctor/' + this.doctor.id], { state: { roomId: this.room.id } })
+    else
+      alert("This room doesn't have a doctor!");
+  }
+
   onNotifyHideRoomInfo(){
     this.roomInfoFormVisible = false;
   }
