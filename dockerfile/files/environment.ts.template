@@ -1,0 +1,6 @@
+export const environment = {
+    production: true,
+    baseUrlHospital: '${HOSPITAL_API_HOST}',
+    baseUrlIntegration: '${INTEGRATION_API_HOST}',
+    baseUrlPharmacy: '${PHARMACY_API_HOST}'
+};
