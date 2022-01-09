@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Doctor } from '@app/hospital-map/models/doctor/doctor.model';
+import { DoctorService } from '@app/hospital-map/shared/services/doctor.service';
 import { Room, RoomStatus } from '../../models/rooms/room.model';
 import { RoomsService } from '../../shared/services/rooms.service';
 
@@ -10,10 +12,11 @@ import { RoomsService } from '../../shared/services/rooms.service';
 })
 export class RoomDetailsComponent implements OnInit {
   room!: Room;
+  doctor!: Doctor;
   roomInfoFormVisible: boolean = false;
   menuVisible: boolean = false;
 
-  constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private roomsService: RoomsService, private doctorService: DoctorService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -22,6 +25,11 @@ export class RoomDetailsComponent implements OnInit {
       this.roomsService.getRoomWithEquipment(roomId).subscribe(
         data => {
           this.room = data;
+          console.log(this.room);
+      })
+      this.doctorService.getDoctorForRoom(roomId).subscribe(
+        data => {
+          this.doctor = data;
           console.log(this.room);
       })
     })

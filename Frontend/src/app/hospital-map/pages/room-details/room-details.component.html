@@ -20,7 +20,7 @@
             <svg class="menu-icon" (click)="toggleMenu()"></svg>
         </div>
         
-        <div class="fw-bold darkgray-text subhead mb-3 mt-2"><img id="doctor-icon" src="../../../../assets/icons/doctor.jpg" alt="D"><span class="align-middle ms-2">Dr. George Ross</span></div>
+        <div *ngIf="doctor" class="fw-bold darkgray-text subhead mb-3 mt-2"><img id="doctor-icon" src="../../../../assets/icons/doctor.jpg" alt="D"><span class="align-middle ms-2">{{doctor.name}} {{doctor.surname}}</span></div>
         <p class="darkgray-text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nisi sapiente facilis fugit, reprehenderit tempora, soluta illum accusamus perferendis enim quae suscipit quia nihil culpa labore rem dolore dicta quam eaque.</p>
         
         <div class="d-flex flex-row justify-content-between mb-1">
