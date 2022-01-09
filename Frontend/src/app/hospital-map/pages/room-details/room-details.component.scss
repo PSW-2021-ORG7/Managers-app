@@ -1,4 +1,5 @@
 @import 'src/styles/main.scss';
+@import 'src/styles/components/room-details.scss';
 
 .back-to-map-btn{
     margin-top: 18px;
@@ -25,6 +26,11 @@
 
 .blue-text{
     color: color(blue);
+}
+
+.menu-icon{
+    @include background-svg($menu-icon);
+    @include icon;
 }
 
 #doctor-icon{
@@ -67,11 +73,11 @@
 }
 
 .backdrop{
-    position: absolute;
+    position: fixed;
     z-index: 3;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(30, 30, 30, 0.95);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(27, 31, 35, 0.42);
 }
 
 .form-container{
@@ -84,3 +90,97 @@
 .room-form {
     padding: 0 28px;
 }
+
+.overlay{
+    position: fixed;
+    top: 0;
+    z-index: 101;
+    height: 100%;
+    background-color: rgba(27, 31, 35, 0.42);
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.2s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+    .hidden-overlay{
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    .menu-container{
+        background-color: white;
+        position: relative;
+        animation: expand-width 0.3s ease-in-out forwards;
+    }
+
+    @keyframes expand-width {
+        0% {
+            width: 0%;
+        }
+        100% {
+            width: 26%;
+        }
+    }
+
+        .close-icon{
+            @include background-svg($close);
+            @include icon;
+            position: absolute;
+            top: 76px;
+            right: 40px;
+            display: flex;
+            align-self: end;
+        }
+
+        .menu-title{
+            display: inline-block;
+            margin-top: 76px;
+            color: color(darkgray);
+
+        }
+
+        .nav-items-menu{
+            display: flex;
+            flex-direction: column;
+            margin-top: 30px;
+        }
+
+            .nav-item-menu{
+                margin-bottom: 20px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                color: color(blue);
+                font-weight: bold;
+                cursor: pointer;
+            }
+
+            .edit-room-info-icon{
+                @include background-svg($edit-room-info);
+                @include icon;
+            }
+
+            .make-transfer-icon{
+                @include background-svg($make-transfer);
+                @include icon; 
+            }
+
+            .renovate-room-icon{
+                @include background-svg($renovate-room);
+                @include icon;
+            }
+
+            .room-schedule-icon{
+                @include background-svg($room-schedule);
+                @include icon;
+            }
+
+            .manage-doctor-icon{
+                @include background-svg($manage-doctor);
+                @include icon;
+            }
+
+            .doctor-workload-icon{
+                @include background-svg($doctor-workload);
+                @include icon;
+            }
