@@ -25,7 +25,7 @@
                         <label><strong>Requested items  </strong></label>
                         <select (change)="selectChangeHandlerSelectedItem($event)" style="width:120%; max-width:100%; outline: none; overflow-y: auto; background: none;" name="multipleSelect" id="multipleSelect" multiple title="Please select item" required>
                             <option class = "requestedItems" *ngFor="let item of requestedItems" [value]="item.Id">
-                             {{item.Id}} {{item.Manufacturer}} | {{item.MedicineName}} {{item.DosageInMilligrams}}mg x {{item.RequiredQuantity}}
+                             {{item.MedicineName}} {{item.DosageInMilligrams}}mg x {{item.RequiredQuantity}}
                             </option>
                         </select>
                         <div class="editItems" *ngIf = "this.showItemEditRemoveButtons">
@@ -55,12 +55,6 @@
                 <td>
                     <label><strong>Quantity</strong></label>&nbsp;<br>
                     <input type="text" [(ngModel)]="quantity" name="quantity" (change)="selectChangeHandlerQuantity($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required><br>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <label><strong>Manufacturer</strong></label>&nbsp;<br>
-                    <input type="text" [(ngModel)]="manufacturer" name="manufacturer" (change)="selectChangeHandlerManufacturer($event)" style="font-size: medium;" pattern="[a-zA-Z]" title="Please use letters only" required><br>
                 </td>
             </tr>
             <tr>

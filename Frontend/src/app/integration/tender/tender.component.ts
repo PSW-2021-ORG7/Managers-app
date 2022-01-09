@@ -7,7 +7,6 @@ export class TenderRequestItem {
     public Id: number,
     public MedicineName: string,
     public DosageInMilligrams: number,
-    public Manufacturer: string,
     public RequiredQuantity: number,
   ) { }
 }
@@ -27,7 +26,6 @@ export class TenderComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   quantity: string = '';
-  manufacturer: string = '';
   date: string = '';
   disableFields: boolean = true;
   
@@ -57,11 +55,6 @@ export class TenderComponent implements OnInit {
     console.log(this.quantity);
   }
 
-  selectChangeHandlerManufacturer(event: any) {
-    this.manufacturer = event.target.value;
-    console.log(this.manufacturer);
-  }
-
   selectChangeHandlerDate(event: any) {
     this.date = event.target.value;
     console.log(this.quantity);
@@ -79,7 +72,6 @@ export class TenderComponent implements OnInit {
       Id: this.requestedItems.length + this.deletedItemsCount + 1,
       MedicineName: this.medicine,
       DosageInMilligrams: +this.dose,
-      Manufacturer: this.manufacturer,
       RequiredQuantity: +this.quantity     
     };
 
@@ -95,10 +87,10 @@ export class TenderComponent implements OnInit {
     var ret = false;
 
     this.requestedItems.forEach(function(item){
-      if(tender.MedicineName == item.MedicineName && tender.DosageInMilligrams == item.DosageInMilligrams
-        && tender.Manufacturer == item.Manufacturer){
+      if(tender.MedicineName == item.MedicineName && tender.DosageInMilligrams == item.DosageInMilligrams)
+      {
           ret = true;
-        }
+      }
     })
     return ret;
   }
@@ -121,7 +113,6 @@ export class TenderComponent implements OnInit {
       Id: +this.selectedItemId,
       MedicineName: this.medicine,
       DosageInMilligrams: +this.dose,
-      Manufacturer: this.manufacturer,
       RequiredQuantity: +this.quantity     
     };
 
@@ -141,7 +132,6 @@ export class TenderComponent implements OnInit {
     this.medicine = ""
     this. dose = "",
     this.quantity = "",
-    this.manufacturer = "",
     this.showItemEditRemoveButtons = false
   }
 
@@ -151,8 +141,7 @@ export class TenderComponent implements OnInit {
       if(+id == item.Id){
         this.medicine = item.MedicineName
         this.dose = item.DosageInMilligrams.toString()
-        this.quantity = item.RequiredQuantity.toString()
-        this.manufacturer = item.Manufacturer  
+        this.quantity = item.RequiredQuantity.toString() 
       }
         
   });      
@@ -175,7 +164,7 @@ export class TenderComponent implements OnInit {
   validate(): boolean{
     var ret = true;
 
-    if(this.medicine == "" || this.dose == "" || this.quantity == "" || this.manufacturer == ""){
+    if(this.medicine == "" || this.dose == "" || this.quantity == ""){
       alert("Please fill all fields!")
       ret = false
     }
