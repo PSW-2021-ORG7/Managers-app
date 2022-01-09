@@ -11,8 +11,8 @@ import { DoctorService } from '@app/hospital-map/shared/services/doctor.service'
 export class ManageDoctorComponent implements OnInit {
 
   roomId: string = "";
-  doctorId: number = 0
   doctor!: Doctor;
+  assignShiftDialogVisible: boolean = true;
 
   constructor(private doctorService: DoctorService, private route: ActivatedRoute, private router: Router) {
     if(router.getCurrentNavigation()?.extras.state?.roomId)
@@ -21,7 +21,6 @@ export class ManageDoctorComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.doctorId = params['id'];
       this.doctorService.getDoctor(parseInt(params['id'])).subscribe(
         data => {
           this.doctor = data;
@@ -36,6 +35,15 @@ export class ManageDoctorComponent implements OnInit {
       this.router.navigate(['/hospital-map/rooms/' + this.roomId]);
     else
       this.router.navigate(['/hospital-map/'])
+  }
+
+  toggleAssignShiftDialog(): void{
+    this.assignShiftDialogVisible = !this.assignShiftDialogVisible;
+  }
+
+  onNotifyCloseDialog(message: string): void{
+    if(message == "close")
+      this.assignShiftDialogVisible = false;
   }
 
 }

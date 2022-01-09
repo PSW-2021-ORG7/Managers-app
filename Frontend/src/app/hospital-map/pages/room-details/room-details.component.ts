@@ -25,12 +25,10 @@ export class RoomDetailsComponent implements OnInit {
       this.roomsService.getRoomWithEquipment(roomId).subscribe(
         data => {
           this.room = data;
-          console.log(this.room);
       })
       this.doctorService.getDoctorForRoom(roomId).subscribe(
         data => {
           this.doctor = data;
-          console.log(this.room);
       })
     })
   }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HospitalMapRoutingModule } from './hospital-map-routing.module';
@@ -32,6 +32,7 @@ import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog
 import { AvailableTimeSlotsComponent } from './shared/components/available-time-slots/available-time-slots.component';
 import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.component';
 import { DoctorScheduleCalendarComponent } from './pages/manage-doctor/doctor-schedule-calendar/doctor-schedule-calendar.component';
+import { AssignShiftDialogComponent } from './pages/manage-doctor/assign-shift-dialog/assign-shift-dialog.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -63,7 +64,8 @@ FullCalendarModule.registerPlugins([
     RoomRenovationComponent,
     AvailableTimeSlotsComponent,
     ManageDoctorComponent,
-    DoctorScheduleCalendarComponent
+    DoctorScheduleCalendarComponent,
+    AssignShiftDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -74,6 +76,9 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     NgxSpinnerModule
   ],
-  providers: [D3Service]
+  providers: [
+    D3Service,
+    DatePipe
+  ]
 })
 export class HospitalMapModule { }

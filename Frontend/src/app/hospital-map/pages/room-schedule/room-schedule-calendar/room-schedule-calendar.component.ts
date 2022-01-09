@@ -50,10 +50,6 @@ export class RoomScheduleCalendarComponent implements OnInit, OnChanges{
       if(info.event.start != null){
         var eventStartTime = new Date(info.event.start);
         var range = eventStartTime.valueOf() - Date.now().valueOf();
-        console.log(info.event.start);
-        console.log(eventStartTime);
-        console.log(eventStartTime.valueOf());
-        console.log(range);
         if(range >= 24*60*60*1000){
           this.descriptionText = info.event.title
           this.showOptionalDialog = true;

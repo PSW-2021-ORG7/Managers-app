@@ -17,10 +17,13 @@
             </div>
             <div class="assign-shift-btn">
                 <svg class="shift-icon"></svg>
-                <span class="align-middle ms-1 button-text fw-bold">Assign shift</span>
+                <span class="align-middle ms-1 button-text fw-bold" (click)="toggleAssignShiftDialog()">Assign shift</span>
             </div>
         </div>
     </div>
     <hr>
     <app-doctor-schedule-calendar></app-doctor-schedule-calendar>
+</div>
+<div *ngIf="assignShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
+    <app-assign-shift-dialog [isVisible]="assignShiftDialogVisible" (notifyCloseDialog)="onNotifyCloseDialog($event)"></app-assign-shift-dialog>
 </div>
