@@ -64,7 +64,7 @@ export class TenderComponent implements OnInit {
 
   selectChangeHandlerDate(event: any) {
     this.date = event.target.value;
-    console.log(this.quantity);
+    console.log(this.date);
   }
 
   selectChangeHandlerSelectedItem(event: any) {
@@ -156,7 +156,7 @@ export class TenderComponent implements OnInit {
 
   openTender(): void{
     if(this.requestedItems.length == 0) alert ("No items were added!")
-    else if(this.date <= (new Date())){
+    else if(this.date < new Date()){
      alert("Invalid date!")
     }
     else{   
