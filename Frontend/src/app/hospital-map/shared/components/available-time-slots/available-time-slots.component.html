@@ -1,0 +1,94 @@
+<div class="d-flex flex-column time-overview">
+    <div class="search-container d-flex flex-row justify-content-between">
+      <form class="time-form form-inline d-flex flex-row">
+        <div class="form-group hidden">
+            <div class="input-group">
+                <input name="datepicker"
+                        class="form-control custom-date-picker"
+                        ngbDatepicker
+                        #datepicker="ngbDatepicker"
+                        [autoClose]="'outside'"
+                        (dateSelect)="onDateSelection($event)"
+                        [minDate]="minDate!"
+                        [displayMonths]="2"
+                        [dayTemplate]="t"
+                        outsideDays="hidden"
+                        [startDate]="fromDate!"
+                        tabindex="-1">
+                <ng-template #t let-date let-focused="focused">
+                    <span class="custom-day"
+                        [class.focused]="focused"
+                        [class.range]="isRange(date)"
+                        [class.faded]="isHovered(date) || isInside(date)"
+                        (mouseenter)="hoveredDate = date"
+                        (mouseleave)="hoveredDate = null">
+                    {{ date.day }}
+                    </span>
+                </ng-template>
+            </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input #dpFromDate
+                    class="form-control custom-date-picker" placeholder="From"
+                    name="dpFromDate"
+                    [value]="formatter.format(fromDate)"
+                    (input)="fromDate = validateInput(fromDate, dpFromDate.value)">
+                    <svg class="calendar" (click)="datepicker.toggle()"></svg>
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+        <div class="form-group ml-2">
+          <div class="input-group">
+            <input #dpToDate
+                    class="form-control custom-date-picker" placeholder="To"
+                    name="dpToDate"
+                    [value]="formatter.format(toDate)"
+                    (input)="toDate = validateInput(toDate, dpToDate.value)">
+                    <svg class="calendar" (click)="datepicker.toggle()"></svg>
+            <div class="input-group-append">
+            </div>
+          </div>
+        </div>
+        <div class="duration">
+          <select class="form-control duration-select" [ngModel]="durationString" (ngModelChange)="onDurationChange($event)" id="freeTimeSlots" name='freeTimeSlots'>
+              <option value="" disabled selected>Duration</option>
+              <option *ngIf="equipmentTransfer" [ngValue]="'0.00:15:00'">15 min</option>
+              <option *ngIf="equipmentTransfer" [ngValue]="'0.00:30:00'">30 min</option>
+              <option *ngIf="equipmentTransfer" [ngValue]="'0.01:00:00'">60 min</option>
+              <option *ngIf="equipmentTransfer" [ngValue]="'0.01:30:00'">90 min</option>
+              <option *ngIf="equipmentTransfer" [ngValue]="'0.02:00:00'">120 min</option>
+              <option *ngIf="equipmentTransfer" [ngValue]="'0.03:00:00'">180 min</option>
+
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'1.00:00:00'">1 day</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'2.00:00:00'">2 days</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'3.00:00:00'">3 days</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'4.00:00:00'">4 days</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'5.00:00:00'">5 days</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'6.00:00:00'">6 days</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'7.00:00:00'">7 day</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'8.00:00:00'">8 days</option>
+              <option *ngIf="mergeRenovation || splitRenovation" [ngValue]="'9.00:00:00'">9 days</option>
+          </select>
+        </div>
+        <app-primary-button class="search-button" (click)="searchAvailableTimeSlots()" [isBtnDisabled]="isSearchDisabled" [text]="'Search'"></app-primary-button>
+      </form>
+      <app-primary-button class="schedule-transfer-button align-right" [isBtnDisabled]="!isTimeSlotSelected" [text]="'Schedule'" (click)="schedule()"></app-primary-button>
+    </div>
+    
+    <div class="w-100 d-flex flex-row align-items-center justify-content-between">
+        <h3>Available dates</h3>
+        <span class="align-middle remove-filter">Showing first 100 results</span>
+    </div> 
+  
+    <div class="searched-elements" *ngIf="timeSlots">
+      <div *ngFor="let timeSlot of timeSlots">
+        <div class="card d-flex flex-row mb-3 align-items-center justify-content-between" (click)="selectTimeSlot(timeSlot)" >
+          <span>{{timeSlot.start | date: 'fullDate'}}<span *ngIf="mergeRenovation || splitRenovation"> - {{timeSlot.end | date: 'fullDate'}}</span></span>
+          <span *ngIf="equipmentTransfer">{{timeSlot.start | date: 'shortTime'}} - {{timeSlot.end | date: 'shortTime'}}</span>
+        </div>
+      </div>
+    </div>
+  
+  </div>

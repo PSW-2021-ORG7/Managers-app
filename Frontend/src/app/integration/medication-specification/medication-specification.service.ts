@@ -7,8 +7,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class MedicationSpecificationService {
+
     private baseUrl: string = environment.baseUrlPharmacy + 'inventory/check/'
     private baseUrlHospital: string = environment.baseUrlIntegration + 'api/pharmacy';
+
 
     constructor(private http: HttpClient) { }
 

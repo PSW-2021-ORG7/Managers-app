@@ -1,0 +1,108 @@
+<app-integration></app-integration>
+<br>
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <br>
+            <h5>Choose pharmacy</h5>
+        </div>
+        <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+            (change)="selectChangeHandlerId($event)" title="Please select pharmacy" required>
+            <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
+                {{phar.namePharmacy}}
+            </option>
+        </select>
+
+        <ul class="list-unstyled CTAs">
+            <button (click)="viewProfile()" class="btn btn-secondary btn-medium;" style="margin-left: 20%;">View
+                profile</button>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+        <div class="left">
+            <table>
+                <caption style="text-align:left"></caption>
+                <h1>Pharmacy profile</h1>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Name</strong></label>
+                        <br>
+                        <input stype="text" [disabled]='disableFields' [(ngModel)]="pharmacyName" style="width: 90%;"
+                            placeholder="Edit name...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Address</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyAddress" style="width: 90%;"
+                            placeholder="Edit address...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Contact</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyContact" style="width: 90%;"
+                            placeholder="Edit Contact...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>E-Mail</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyEmail" style="width: 90%;"
+                            placeholder="Edit E-mail...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>City</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyCity" style="width: 90%;"
+                            placeholder="Edit city...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Website</strong></label>
+                        <br>
+                        <input type="text" [disabled]='disableFields' [(ngModel)]="pharmacyWebsite" style="width: 90%;"
+                            placeholder="Edit website...">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label><strong>Notes</strong></label><br>
+                        <textarea [disabled]='disableFields' [(ngModel)]="notes" style="width:90%; height:120px;"
+                            placeholder="Write notes..."></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button [disabled]='disableFields' type="button" (click)="saveChanges()"
+                            class="btn btn-secondary saveChangesBtn">Save</button>&nbsp;
+                        <button [disabled]='disableFields' type="button" (click)="cancelChanges()"
+                            class="btn btn-secondary cancelChangesBtn">Cancel</button>&nbsp;
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="right">
+            <img [src]="url" height="200" alt="photo">
+            <br>
+            <input [disabled]='disableFields' [(ngModel)]="photo" type="file" (change)="onFileChanged($event)" height="200" required
+                style="text-align: center; display: grid; cursor: pointer; margin-left: 25%; margin-top: 2%;">
+
+        </div>
+    </div>
+</div>

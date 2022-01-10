@@ -81,3 +81,16 @@
         height: 100vh;
         background-color: #282828;
     }
+    
+.available-time-slots-wrapper{
+    padding: 20px 30px;
+}
+
+    .back-to-room-details{
+        color: color(darkgray);
+        margin-bottom: 20px;
+
+        &:hover{
+            cursor: pointer;
+        }
+    }

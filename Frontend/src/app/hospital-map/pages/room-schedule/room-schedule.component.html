@@ -1,0 +1,27 @@
+<div id="room-schedule" class="d-flex flex-column">
+
+    <div *ngIf="room" class="vh-100 d-flex flex-column">
+        <div class="back-to-room-details d-flex flex-row">
+            <div class="back-to-room-details-btn" (click)="onBackToRoomDetails()">
+                <svg class="back-icon"></svg>
+                <span class="align-middle ms-1">Room details</span>
+            </div>
+        </div>
+    
+        <h2>Room schedule - {{getRoomText()}}</h2>
+    
+        <div class="calendar-wrapper">
+            <app-room-schedule-calendar [equipmentTransfers]="equipmentTransfers" [splitRenovations]="splitRenovations" [mergeRenovations]="mergeRenovations"></app-room-schedule-calendar>
+        </div>
+    </div>
+    <div *ngIf="!room" class="d-flex flex-row align-items-center justify-content-center w-100 vh-100">
+        <p *ngIf="showServerErrorMessage">Unable to fetch room from server.</p>
+        <ngx-spinner
+            bdColor="rgb(255, 255, 255)"
+            size="default"
+            color="rgb(33, 73, 117)"
+            type="ball-clip-rotate-multiple"
+            >
+        </ngx-spinner>
+    </div>
+</div>

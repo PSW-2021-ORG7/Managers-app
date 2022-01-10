@@ -1,0 +1,6 @@
+<full-calendar #roomschedulecalendar id="custom-calendar" [options]="calendarOptions"></full-calendar>
+
+<div class="backdrop d-flex align-items-center justify-content-center" *ngIf="showOptionalDialog">
+    <app-optional-dialog title="Delete event?" [description]="'Are you sure you want to delete \n' + descriptionText + '?'" cancelText="Cancel" confirmText="Yes"
+    (notifyCancelButton)="onNotifyCancelButton()" (notifyConfirmButton)="onNotifyConfirmButton()" ></app-optional-dialog>
+</div>

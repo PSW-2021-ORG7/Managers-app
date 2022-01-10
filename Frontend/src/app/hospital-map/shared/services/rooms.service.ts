@@ -1,5 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { Doctor } from '@app/hospital-map/models/doctor/doctor.model';
+>>>>>>> develop
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Room } from '../../models/rooms/room.model';
@@ -8,6 +12,10 @@ import { Room } from '../../models/rooms/room.model';
   providedIn: 'root'
 })
 export class RoomsService {
+<<<<<<< HEAD
+=======
+  
+>>>>>>> develop
   private baseUrl: string = environment.baseUrlHospital + 'rooms';
 
   constructor(private http: HttpClient) { }
@@ -28,4 +36,8 @@ export class RoomsService {
   updateRoom(room: Room): Observable<Room> {
     return this.http.put<Room>(this.baseUrl + '/' + room.id, room);
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
 }

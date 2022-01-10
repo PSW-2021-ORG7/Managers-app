@@ -5,8 +5,8 @@
 export const environment = {
   production: false,
   baseUrlHospital: 'https://localhost:44342/api/',
-  baseUrlIntegration: 'https://localhost:44298/',
-  baseUrlPharmacy: 'https://localhost:64677/',
+  baseUrlIntegration: 'http://localhost:44298/',
+  baseUrlPharmacy: 'http://localhost:64677/',
 };
 
 /*

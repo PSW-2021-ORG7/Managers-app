@@ -1,0 +1,29 @@
+<div class="d-flex flex-column container align-items-center">
+    <h5>Assign shift</h5>
+    <div class="d-flex mb-3">
+        <span class="grey-text subtitle">Pick a shift</span>
+        <div class="d-flex align-items-center create-new-shift">
+            <span class="green-text">or create new shift</span>
+            <svg class="exit-icon"></svg>
+        </div>
+    </div>
+    <div class="scroll-box">
+        <div *ngIf="shifts">
+            <div *ngFor="let shift of shifts" class="card d-flex flex-column" (click)="selectShift(shift.id)" [style.background]="selectedShiftId == shift.id ? '#214975' : '#fff'">
+                <div class="d-flex justify-content-between">
+                    <span class="card-title" [style.color]="selectedShiftId == shift.id ? '#fff' : '#214975'">{{shift.start | date:'EEEE'}}</span>
+                    <span class="card-title" [style.color]="selectedShiftId == shift.id ? '#fff' : '#214975'">{{shift.name}}</span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="card-subtitle" [style.color]="selectedShiftId == shift.id ? '#fff' : '#a2a2a2'">{{shift.start | date:'longDate'}}</span>
+                    <span class="card-subtitle" [style.color]="selectedShiftId == shift.id ? '#fff' : '#a2a2a2'">{{shift.start | date:'shortTime'}} - {{shift.end | date:'shortTime'}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-100 d-flex">
+        <button class="cancel-btn w-50 me-2" (click)="onCancelClick()">Cancel</button>
+        <app-primary-button (click)="assignShift()" [text]="'Assign'" [isBtnDisabled]="!isShiftSelected" class="w-50 ms-2"></app-primary-button>
+    </div>
+</div>
+

@@ -23,7 +23,6 @@ export class RoomRenovationComponent implements OnInit {
   roomStatuses: RoomStatus[] = [
     RoomStatus.Occupied,
     RoomStatus.Unoccupied,
-    RoomStatus.IsBeingRenovated,
     RoomStatus.NotActive
   ];
   roomTypes: RoomType[] = [
@@ -43,6 +42,7 @@ export class RoomRenovationComponent implements OnInit {
   selectedRoomId : number = -1;
   splitRenovation: SplitRenovation = new SplitRenovation(-1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date(), '');
   mergeRenovation: MergeRenovation = new MergeRenovation(-1, -1, new NewRoomInfo('', RoomType.OperatingRoom, RoomStatus.Occupied), new Date(), new Date());
+  isTimeSlotScreenVisible: boolean = false;
 
   constructor(private roomsService: RoomsService, private route: ActivatedRoute, private router: Router, private d3Service: D3Service, private renovationService: RenovationService) { }
 
@@ -294,20 +294,8 @@ export class RoomRenovationComponent implements OnInit {
     return false;
   }
 
-  scheduleRenovation() {
-    if(this.renovationType == 'split'){
-      if(this.equipmentDestination == 'first'){
-        this.splitRenovation.equipmentDestination = this.splitRenovation.firstNewRoomInfo.roomName;
-      } else {
-        this.splitRenovation.equipmentDestination = this.splitRenovation.secondNewRoomInfo.roomName;
-      }
-      this.renovationService.postSplitRenovation(this.splitRenovation).subscribe();
-      this.router.navigate(['/hospital-map/']);
-
-    } else if(this.renovationType == 'merge') {
-      this.renovationService.postMergeRenovation(this.mergeRenovation).subscribe();
-      this.router.navigate(['/hospital-map/']);
-    }
+  displayTimeSlotScreen() : void{
+    this.isTimeSlotScreenVisible = true;
   }
 
 }

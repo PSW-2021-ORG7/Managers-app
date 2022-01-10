@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HospitalMapRoutingModule } from './hospital-map-routing.module';
@@ -19,8 +19,26 @@ import { EquipmentCardComponent } from './shared/components/equipment-card/equip
 import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.component';
 import { SelectedEquipmentComponent } from './pages/move-equipment/equipment-overview/equipment-overview.component';
 import { DestinationRoomOverviewComponent } from './pages/move-equipment/destination-room-overview/destination-room-overview.component';
-import { TransferTimeComponent } from './pages/move-equipment/transfer-time/transfer-time.component';
 import { RoomRenovationComponent } from './pages/room-renovation/room-renovation.component';
+import { RoomScheduleComponent } from './pages/room-schedule/room-schedule.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { RoomScheduleCalendarComponent } from './pages/room-schedule/room-schedule-calendar/room-schedule-calendar.component';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { OptionalDialogComponent } from './shared/components/optional-dialog/optional-dialog.component';
+import { InfoDialogComponent } from './shared/components/info-dialog/info-dialog.component';
+import { AvailableTimeSlotsComponent } from './shared/components/available-time-slots/available-time-slots.component';
+import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.component';
+import { DoctorScheduleCalendarComponent } from './pages/manage-doctor/doctor-schedule-calendar/doctor-schedule-calendar.component';
+import { AssignShiftDialogComponent } from './pages/manage-doctor/assign-shift-dialog/assign-shift-dialog.component';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -38,17 +56,29 @@ import { RoomRenovationComponent } from './pages/room-renovation/room-renovation
     MoveEquipmentComponent,
     SelectedEquipmentComponent,
     DestinationRoomOverviewComponent,
-    TransferTimeComponent,
-    RoomRenovationComponent
-    
+    RoomRenovationComponent,
+    RoomScheduleComponent,
+    RoomScheduleCalendarComponent,
+    OptionalDialogComponent,
+    InfoDialogComponent,    
+    RoomRenovationComponent,
+    AvailableTimeSlotsComponent,
+    ManageDoctorComponent,
+    DoctorScheduleCalendarComponent,
+    AssignShiftDialogComponent,
   ],
   imports: [
     CommonModule,
     HospitalMapRoutingModule,
     FormsModule,
     NgbDatepickerModule,
-    NgbDropdownModule
+    NgbDropdownModule,
+    FullCalendarModule,
+    NgxSpinnerModule
   ],
-  providers: [D3Service]
+  providers: [
+    D3Service,
+    DatePipe
+  ]
 })
 export class HospitalMapModule { }

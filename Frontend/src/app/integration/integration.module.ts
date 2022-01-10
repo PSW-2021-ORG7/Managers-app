@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { IntegrationRoutingModule } from './integration-routing.module';
 import { IntegrationComponent } from './integration.component';
 import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-registration.component';
@@ -12,6 +11,8 @@ import { UrgentRequestComponent } from './urgent-request/urgent-request.componen
 import { MedicationSpecificationComponent } from './medication-specification/medication-specification.component';
 import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
+import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     FeedbackComponent,
     CreateFeedbackComponent,
     UrgentRequestComponent,
-    MedicationSpecificationComponent
+    MedicationSpecificationComponent,
+    PrescriptionsComponent,
+    PharmacyProfileComponent
    
   ],
   imports: [

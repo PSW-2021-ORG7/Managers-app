@@ -1,0 +1,30 @@
+@import "src/styles/main";
+
+.optional-dialog{
+    width: 530px;  // 27.604%
+    height: 210px; // 10.937%
+    background: white;
+    @include card;
+}
+    .dialog-title{
+        margin: 20px;
+    }
+    
+    .subhead{
+    font-size: 1.25rem;
+    }
+
+    .dialog-description{
+        margin: 10px;
+        white-space: pre-line;
+        text-align: center;
+        
+    }
+
+    .dialog-buttons{
+        margin: 10px;
+    }
+
+    .dialog-button{
+        padding: 10px;
+    }

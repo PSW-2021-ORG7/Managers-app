@@ -68,7 +68,7 @@ export class MedicationSpecificationComponent implements OnInit {
       this.medicationSpecificationService.checkIfAvailable(medicationSpecification).subscribe(response => {
         if (response) {
           alert("Medicine is available!")
-          this.medicationSpecificationService.getPharmacyByID("P1").subscribe(response =>{
+          this.medicationSpecificationService.getPharmacyByID("1").subscribe(response =>{
             console.log(response)
             this.pharmacies.push(response)
           })
