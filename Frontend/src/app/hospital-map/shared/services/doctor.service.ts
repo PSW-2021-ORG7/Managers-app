@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 })
 export class DoctorService {
 
-    private baseUrl: string = environment.baseUrlHospital + 'doctor';
+    private baseUrl: string = environment.baseUrlHospital + 'doctors';
 
     constructor(private http: HttpClient) { }
 
