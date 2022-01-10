@@ -23,7 +23,7 @@
     </nav>
 
     <div>
-        <span style="text-align: left;" *ngIf="this.showTenderInfo">
+        <span style="text-align: left;" *ngIf="this.showTenderInfo && this.selectedTenderId != ''">
 
             <label style="margin-left: 3%;" (ngModel)="selectedTenderStartDate">
                 <strong>
