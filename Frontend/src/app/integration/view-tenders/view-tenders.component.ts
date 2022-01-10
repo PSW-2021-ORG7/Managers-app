@@ -51,6 +51,7 @@ export class Pharmacy {
 })
 
 export class ViewTendersComponent implements OnInit {
+  showTenderInfo: boolean = false;
 
   selectedTenderId: string = ""
   tenders: Tender[] = []
@@ -89,7 +90,7 @@ export class ViewTendersComponent implements OnInit {
   }
 
   viewOffers(): void{
-    
+    this.showTenderInfo = true;
     this.tenderViewService.getTenderById(this.selectedTenderId, "ABC").subscribe((tender: Tender) => {
       console.log(tender);
       this.selectedTenderStartDate = tender.startDate.toString();
