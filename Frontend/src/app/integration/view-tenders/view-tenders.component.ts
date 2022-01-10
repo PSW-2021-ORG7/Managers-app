@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { TenderViewService } from './view-tenders.service';
 
 export class TenderOffer {
   constructor(
@@ -55,9 +56,14 @@ export class ViewTendersComponent implements OnInit {
 
   tenderOffers: TenderOffer[] = []
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private tenderViewService: TenderViewService) { }
 
   ngOnInit(): void {
+
+    this.tenderViewService.getAllOffersByTenderId("8", "ABC").subscribe((tenderOffer: TenderOffer[]) => {
+      console.log(tenderOffer);
+    });
+
   }
 
   selectChangeHandlerId(event: any) {
