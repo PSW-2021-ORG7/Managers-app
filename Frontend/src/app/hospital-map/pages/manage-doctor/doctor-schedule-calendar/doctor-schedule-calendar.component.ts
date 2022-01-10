@@ -1,16 +1,30 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { CalendarEvent } from '@app/hospital-map/models/calendar/calendar-event.model';
-import { CalendarOptions } from '@fullcalendar/angular';
+import { Holiday } from '@app/hospital-map/models/shift/holiday.model';
+import { OnCallShift } from '@app/hospital-map/models/shift/on-call-shift.model';
+import { Shift } from '@app/hospital-map/models/shift/shift.model';
+import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
+import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-doctor-schedule-calendar',
   templateUrl: './doctor-schedule-calendar.component.html',
   styleUrls: ['./doctor-schedule-calendar.component.scss']
 })
-export class DoctorScheduleCalendarComponent implements OnInit {
+export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
+
+  @Input() shifts: Shift[] = [];
+  @Input() onCallShifts    : OnCallShift[] = [];
+  @Input() holidays: Holiday[] = [];
 
   events : CalendarEvent[] = [];
+  @ViewChild('doctorschedulecalendar') fullCalendar!: FullCalendarComponent;
+  descriptionText: string="";
+  selectedEventId: string="";
+  showOptionalDialog: boolean = false;
+
+  constructor(@Inject(DOCUMENT) private document: Document, private shiftService: ShiftService) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -46,7 +60,6 @@ export class DoctorScheduleCalendarComponent implements OnInit {
       // }
   };
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     const headEl = this.document.getElementsByTagName('head')[0];
@@ -57,5 +70,87 @@ export class DoctorScheduleCalendarComponent implements OnInit {
 
     headEl.appendChild(newLinkEl);
   }
+
+  
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['shifts']) {
+      this.shifts = changes.shifts.currentValue;
+      this.filterShifts();
+      if(this.fullCalendar){
+        this.fullCalendar.getApi().refetchEvents();
+      }
+    }
+  
+    if(changes['onCallShifts']){
+      this.onCallShifts = changes.onCallShifts.currentValue;
+      this.filterOnCallShifts();
+      if(this.fullCalendar){
+        this.fullCalendar.getApi().refetchEvents();
+      }
+    }
+
+    if(changes['holidays']){
+      this.holidays = changes.holidays.currentValue;
+      this.filterHolidays();
+      if(this.fullCalendar){
+        this.fullCalendar.getApi().refetchEvents();
+      }
+    }
+  }
+
+
+
+  private filterShifts() : void {
+    for(let shift of this.shifts){
+      this.events.push(
+        new CalendarEvent(
+          shift.id!.toString() + "shift",
+          shift.name,
+          shift.start,
+          shift.end,
+          "#66A182"
+        )
+      );
+    }
+  }
+
+  private filterOnCallShifts() : void {
+    for(let shift of this.shifts){
+      this.events.push(
+        new CalendarEvent(
+          shift.id!.toString() + "OnCallShift",
+          shift.name,
+          shift.start,
+          shift.end,
+          "#ffc700"
+        )
+      );
+    }
+  }
+
+  private filterHolidays() : void {
+    for(let holiday of this.holidays){
+      this.events.push(
+        new CalendarEvent(
+          holiday.id!.toString() + "holiday",
+          "Holiday ",
+          holiday.start,
+          holiday.end,
+          "#6F10CE"
+        )
+      );
+    }
+  }
+
+
+
+
+
+
+
+  
+
+
+
 
 }
