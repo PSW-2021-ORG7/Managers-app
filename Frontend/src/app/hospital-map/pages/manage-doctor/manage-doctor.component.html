@@ -14,7 +14,7 @@
         <div class="d-flex">
             <div class="assign-holiday-btn">
                 <svg class="holiday-icon"></svg>
-                <span class="align-middle ms-1 button-text fw-bold">Assign holiday</span>
+                <span class="align-middle ms-1 button-text fw-bold" (click)="toggleAssignHolidayDialog()">Assign holiday</span>
             </div>
             <div class="assign-on-call-shift-btn">
                 <svg class="on-call-shift-icon"></svg>
@@ -31,4 +31,7 @@
 </div>
 <div *ngIf="assignShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
     <app-assign-shift-dialog [doctorsShifts]="shifts" [doctorId]="doctorId" [isVisible]="assignShiftDialogVisible" (notifyFromAssignShiftDialog)="onNotifyFromAssignShiftDialog($event)"></app-assign-shift-dialog>
+</div>
+<div *ngIf="assignHolidayDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
+    <app-assign-holiday-dialog [doctorsHolidays]="holidays" [doctorId]="doctorId" [isVisible]="assignHolidayDialogVisible" (notifyCloseHolidayDialog)="onNotifyCloseHolidayDialog()" (notifyReload)="reload()"></app-assign-holiday-dialog>
 </div>

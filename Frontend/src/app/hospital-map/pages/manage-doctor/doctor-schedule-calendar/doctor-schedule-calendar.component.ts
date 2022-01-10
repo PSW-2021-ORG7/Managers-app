@@ -150,6 +150,4 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
       );
     }
   }
-
-
 }

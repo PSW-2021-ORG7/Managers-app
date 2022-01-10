@@ -12,7 +12,7 @@ export class HolidayService {
 
   constructor(private http: HttpClient) { }
 
-  getHolidays(doctorId: string): Observable<Holiday[]> {
+  getHolidays(doctorId: number): Observable<Holiday[]> {
     let params = new HttpParams().set('doctorId', doctorId)
     return this.http.get<Holiday[]>(this.baseUrl, { params: params });
   }

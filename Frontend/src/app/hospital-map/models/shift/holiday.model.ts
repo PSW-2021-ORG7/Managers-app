@@ -6,8 +6,7 @@ export class Holiday{
     public doctorId: number;
     public description: string;
 
-    constructor(id: number, start: Date, end: Date, doctorId: number, description: string){
-        this.id = id;
+    constructor(start: Date, end: Date, doctorId: number, description: string){
         this.start = start;
         this.end = end;
         this.doctorId = doctorId;
