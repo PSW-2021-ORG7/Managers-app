@@ -11,9 +11,9 @@ export class TenderOffer {
     public pharmacy: string,
     public tenderOfferItems: TenderOfferItems[],
     public priceForAllAvailable: string,
-    public priceForAllRequired: string,    
+    public priceForAllRequired: string,
     public totalNumberMissingMedicine: string,
-  ){}
+  ) { }
 }
 
 export class TenderOfferItems {
@@ -23,7 +23,7 @@ export class TenderOfferItems {
     public availableQuantity: number,
     public missingQuantity: number,
     public priceForSingleEntity: number
-  ){}
+  ) { }
 }
 
 export class Tender {
@@ -34,14 +34,17 @@ export class Tender {
     public startDate: Date,
     public endDate: Date,
     public idWinnerPharmacy: number
-  ){}
+  ) { }
 }
 
 export class Pharmacy {
   constructor(
+    public idPharmacy: number,
     public namePharmacy: string,
     public address: string,
-    public city: string
+    public city: string,
+    public apiKeyPharmacy: string,
+    public endpoint: string
   ) { }
 }
 
@@ -61,15 +64,15 @@ export class ViewTendersComponent implements OnInit {
   dosageInMilligrams: number = 0
   availableQuantity: number = 0
   missingQuantity: number = 0
-  priceForSingleEntity: number = 0 
+  priceForSingleEntity: number = 0
 
   tenderOfferItems: TenderOfferItems[] = []
-  priceForAllAvailable: string = "" 
-  priceForAllRequired: string = "" 
+  priceForAllAvailable: string = ""
+  priceForAllRequired: string = ""
   totalNumberMissingMedicine: string = ""
 
   tenderOffers: TenderOffer[] = []
-  
+
   selectedTenderStartDate: Date = new Date()
   selectedTenderEndDate: Date = new Date()
 
@@ -90,45 +93,65 @@ export class ViewTendersComponent implements OnInit {
 
   }
 
-  viewOffers(): void{
+  viewOffers(): void {
     this.showTenderInfo = true;
     this.tenderViewService.getTenderById(this.selectedTenderId, "ABC").subscribe((tender: Tender) => {
       console.log(tender);
       this.selectedTenderStartDate = tender.startDate;
       this.selectedTenderEndDate = tender.endDate;
-      
+
       this.tenderViewService.getAllOffersByTenderId(this.selectedTenderId, "ABC").subscribe((tenderOffers: TenderOffer[]) => {
         this.tenderOffers = tenderOffers;
-  
+
         this.tenderOffers.forEach((item, index) => {
           this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
             item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
           });
-      });
-  
+        });
+
       });
     });
   }
 
-  closeTender(){
+  closeTender() {
     //TO DO:
   }
-  
-  acceptOffer(): void {
 
-    var tenderOfferItems = {
-      medicineName: this.medicineName,
-      dosageInMilligrams: this.dosageInMilligrams,
-      availableQuantity: this.availableQuantity,
-      missingQuantity: this.missingQuantity,
-      priceForSingleEntity: this.priceForSingleEntity,
-    };
+  acceptOffer(id: number): void {
 
-    var tenderOffer = {
-      tenderOfferItems: this.tenderOfferItems,
-      priceForAllAvailable : this.priceForAllAvailable,
-      priceForAllRequired: this.priceForAllRequired,
-    };
+    var idWinnerPharmacy = 0;
+    this.tenderOffers.forEach((item) => {
+      if (item.idTenderOffer == id)
+        idWinnerPharmacy = +item.idPharmacy
+    });
+
+    this.informPharmacies(idWinnerPharmacy)
+
+    this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
+      if (response) alert("Successfully set winner!")
+    });
+  }
+
+  informPharmacies(idWinnerPharmacy: number): void {
+
+    this.tenderOffers.forEach((item) => {
+      this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
+        console.log(pharmacy)
+        var pharmacyLocation = item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
+        if (pharmacy.idPharmacy != idWinnerPharmacy) {
+          var message = "We are sorry to inform you that you did not win Tender with ID: " + this.selectedTenderId
+            + " ( " + pharmacyLocation + " )";
+          //this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
+        }
+        else {
+          var message = "Congratulations! You won Tender with ID: " + this.selectedTenderId
+            + " ( " + pharmacyLocation + " )";
+          this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
+        }
+        console.log(message);
+      });
+
+    });
 
   }
 

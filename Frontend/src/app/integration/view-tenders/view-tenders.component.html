@@ -43,7 +43,7 @@
 
         </span>
         <ngb-accordion style="width: 35rem; height: 5rem; margin-left: 3%;" *ngFor="let offer of tenderOffers">
-            <ngb-panel title="Tender Offer ID: {{offer.pharmacy}}">
+            <ngb-panel title="Offer from {{offer.pharmacy}}">
                 <ng-template ngbPanelContent>
                     <div class="card-body" id="collapseExample" style="background: #8e8f8f80">
                         <div class="card card-body" *ngFor="let item of offer.tenderOfferItems">
@@ -111,7 +111,7 @@
                     <label style="text-align: left;">
                         {{offer.totalNumberMissingMedicine}}
                     </label><br>
-                    <button (click)="acceptOffer()" class="btn btn-secondary btn-medium"
+                    <button id= "{{offer.idTenderOffer}}" (click)="acceptOffer(offer.idTenderOffer)" class="btn btn-secondary btn-medium"
                         style="background: #66A182; margin-top: 2%;" title="Accept an offer">Accept</button>
 
                 </ng-template>

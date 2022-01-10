@@ -25,4 +25,14 @@ export class TenderViewService {
         return this.http.get(environment.baseUrlIntegration + "api/tendering/" + id);
     }
 
+    setWinner(idTender: number, idWinner: number, apiKey: string): Observable<boolean>{
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
+        return this.http.put<boolean>(environment.baseUrlIntegration + "api/tendering/setWinner/" + idTender + "/" + idWinner, null);
+    }
+
+    sendMessage(message: string, endpoint: string, apiKey: string): Observable<string>{
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
+        return this.http.post<string>(endpoint + "tendering/message", JSON.stringify(message));
+    }
+
 }
