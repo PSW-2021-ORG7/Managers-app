@@ -124,7 +124,10 @@ export class ViewTendersComponent implements OnInit {
   }
 
   closeTender() {
-    //TO DO:
+    this.tenderViewService.closeTender(+this.selectedTenderId).subscribe(response => {
+      if(response) alert ("Successfully closed tender!")
+      else alert("Failed to close tender.")
+    }, error => alert("Failed to close tender."))
   }
 
   acceptOffer(idSelectedOffer: number): void {
