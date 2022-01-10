@@ -7,7 +7,7 @@
             routerLink="/integration/tender">Back</button>
         <div class="sidebar-header">
             <br>
-            <h5 style="text-align: center;">Choose tender</h5>
+            <h5 style="text-align: center;">Active Tenders</h5>
         </div>
         <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
             title="Please select tender" required (change)="selectChangeHandlerId($event)">
@@ -23,27 +23,23 @@
     </nav>
 
     <div>
-        <tr>
-            <td><label style="margin-left: 30%;" (ngModel)="selectedTenderStartDate"><strong>
-                        Tender Opened on:
-                    </strong></label></td>&nbsp;
-            <td>
-                {{selectedTenderStartDate}}
-            </td>
-        </tr>
-        <tr>
-            <td><label style="margin-left: 30%;" (ngModel)="selectedTenderEndDate"><strong>
-                        Tender Closes on:
-                    </strong></label></td>&nbsp;
-            <td>
-                {{selectedTenderEndDate}}
-            </td>
-        </tr>
+        <span style="text-align: left;" *ngIf = "this.showTenderInfo">
 
-        <ul class="list-unstyled CTAs">
-            <button (click)="closeTender()" class="btn btn-secondary btn-medium;" style="margin-left: 20%;">Close Tender</button>
-        </ul>
+            <label style="margin-left: 3%;" (ngModel)="selectedTenderStartDate">
+                <strong>
+                    Tender Opened on:
+                </strong>
+            </label> &nbsp;
+            <label>{{selectedTenderStartDate}}</label>
 
+            <label style="margin-left: 3%;" (ngModel)="selectedTenderEndDate"><strong>
+                    Tender Closes on:
+                </strong></label>&nbsp;
+            <label> {{selectedTenderEndDate}} </label><br><br>
+
+            <button (click)="closeTender()" class="btn btn-outline-danger btn-medium;" style="margin-left: 3%;">Close Tender</button>
+            
+        </span>
         <ngb-accordion style="width: 35rem; height: 5rem; margin-left: 3%;" *ngFor="let offer of tenderOffers">
             <ngb-panel title="Tender Offer ID: {{offer.pharmacy}}">
                 <ng-template ngbPanelContent>
