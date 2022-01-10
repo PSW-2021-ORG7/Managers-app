@@ -125,7 +125,10 @@ export class ViewTendersComponent implements OnInit {
 
   closeTender() {
     this.tenderViewService.closeTender(+this.selectedTenderId).subscribe(response => {
-      if(response) alert ("Successfully closed tender!")
+      if(response){
+        alert ("Successfully closed tender!")
+        window.location.reload();
+      }
       else alert("Failed to close tender.")
     }, error => alert("Failed to close tender."))
   }
@@ -145,6 +148,7 @@ export class ViewTendersComponent implements OnInit {
     this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
       if (response) alert("Successfully set winner!")
     });
+  
   
     //Update Inventory
     this.updateInventories(idSelectedOffer);
@@ -196,7 +200,11 @@ export class ViewTendersComponent implements OnInit {
                 if (response) {
                   alert("Successfully updated pharmacy inventory!")
                   this.urgentRequestService.UpdateHospitalInventory(med, item.availableQuantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-                    if (response) alert("Successfully updated hospital inventory!")
+                    if (response) 
+                    {
+                      alert("Successfully updated hospital inventory!")
+                      window.location.reload()
+                    }
                     else alert("Failed to update hospital inventory!")
                   });
                 }
