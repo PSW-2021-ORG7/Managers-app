@@ -39,6 +39,8 @@ export class PharmacyProfileComponent implements OnInit {
   photo: string = ""
   disableFields: boolean = true
 
+  showChart: boolean = false
+
 
 
   constructor(private pharmacyService: PharmacyProfileService, private medicineService: MedicationSpecificationService) { }
@@ -54,12 +56,15 @@ export class PharmacyProfileComponent implements OnInit {
   
   selectChangeHandlerId(event: any) {
     this.selectedPharmacyId = event.target.value;
+    this.showChart = false;
     console.log(this.selectedPharmacyId)
 
   }
 
   viewProfile(): void {
 
+    localStorage.setItem("selectedPharmacyId", JSON.stringify(this.selectedPharmacyId));
+    this.showChart = true;
     this.disableFields = false;
     if (this.selectedPharmacyId == "") alert("Please select pharmacy!")
     else {
