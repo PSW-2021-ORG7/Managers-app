@@ -27,7 +27,6 @@ export class FloorPlanComponent implements OnInit {
   constructor(private d3Service: D3Service, private roomsService: RoomsService, private equipmentService: EquipmentService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-
     this.route.queryParams.subscribe(params => {
         this.buildingId = params['buildingId'];
         this.roomsService.getRooms(this.buildingId).subscribe(

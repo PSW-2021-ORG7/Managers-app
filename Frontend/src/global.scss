@@ -51,6 +51,11 @@ a{
 html, body { height: 100%; }
 body { margin: 0; font-family: $base-font-family }
 
+h1, h2, h3, h4, h5{
+    font-weight: bold !important;
+    color: color(blue) !important;
+}
+
 
 ngb-datepicker {
 

@@ -1,0 +1,72 @@
+@import 'src/styles/main.scss';
+
+.container{
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 20px;
+}
+
+    h5{
+        margin-bottom: 20px !important;
+    }
+    
+    .subtitle{
+        margin-right: 200px;
+    }
+
+    .grey-text{
+        color: color(darkgrey);
+    }
+
+    .create-new-shift{
+        cursor: pointer;
+    }
+
+        .green-text{
+            color: color(green);
+        }
+
+        .exit-icon{
+            margin-left: 5px;
+            @include background-svg($exit);
+            @include icon;
+            width: 14px;
+            height: 14px;
+        }
+
+    .scroll-box{
+        height: 334px;
+        @include scrollbar;
+        margin-bottom: 20px;
+        width: 100%;
+        padding: 5px 10px 0 5px;
+    }
+
+        .card{
+            @include card;
+            margin-bottom: 20px;
+            width: 100%;
+            padding: 10px 20px;
+        }
+
+            .card-title{
+                color: color(blue);
+                display: inline-block;
+                margin-bottom: 5px;
+            }
+
+            .card-subtitle{
+                color: color(darkgrey);
+                font-size: 14px;
+                display: inline-block;
+                margin-bottom: 0px;
+            }
+
+    .cancel-btn{
+        background-color: color(darkgrey);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+    

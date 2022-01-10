@@ -16,6 +16,8 @@ import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.co
 import { TenderComponent } from './tender/tender.component';
 import { ViewTendersComponent } from './view-tenders/view-tenders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -28,15 +30,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PrescriptionsComponent,
     PharmacyProfileComponent,
     TenderComponent,
-    ViewTendersComponent
-   
+    ViewTendersComponent,
+    BarChartComponent
+  
   ],
   imports: [
     CommonModule,
     IntegrationRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    ChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
