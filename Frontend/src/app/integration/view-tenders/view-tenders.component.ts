@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { TenderViewService } from './view-tenders.service';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { DatePipe } from '@angular/common';
+import { UrgentRequestService } from '../urgent-request/urgent-request.service';
 
 export class TenderOffer {
   constructor(
@@ -48,6 +49,13 @@ export class Pharmacy {
   ) { }
 }
 
+export class Medicine {
+  constructor(
+    public Id: number
+  ) { }
+}
+
+
 @Component({
   selector: 'app-view-tenders',
   templateUrl: './view-tenders.component.html',
@@ -76,7 +84,7 @@ export class ViewTendersComponent implements OnInit {
   selectedTenderStartDate: Date = new Date()
   selectedTenderEndDate: Date = new Date()
 
-  constructor(private datePipe: DatePipe, private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService) { }
+  constructor(private datePipe: DatePipe, private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService, private urgentRequestService: UrgentRequestService) { }
 
   ngOnInit(): void {
 
@@ -117,19 +125,24 @@ export class ViewTendersComponent implements OnInit {
     //TO DO:
   }
 
-  acceptOffer(id: number): void {
+  acceptOffer(idSelectedOffer: number): void {
 
     var idWinnerPharmacy = 0;
     this.tenderOffers.forEach((item) => {
-      if (item.idTenderOffer == id)
+      if (item.idTenderOffer == idSelectedOffer)
         idWinnerPharmacy = +item.idPharmacy
     });
 
+    //Inform Pharmacy
     this.informPharmacies(idWinnerPharmacy)
 
+    //Set Winner
     this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
       if (response) alert("Successfully set winner!")
     });
+  
+    //Update Inventory
+    this.updateInventories(idSelectedOffer);
   }
 
   informPharmacies(idWinnerPharmacy: number): void {
@@ -141,6 +154,7 @@ export class ViewTendersComponent implements OnInit {
         if (pharmacy.idPharmacy != idWinnerPharmacy) {
           var message = "We are sorry to inform you that you did not win Tender with ID: " + this.selectedTenderId
             + " ( " + pharmacyLocation + " )";
+          //Other pharmacies arne't implemented yet
           //this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
         }
         else {
@@ -154,6 +168,43 @@ export class ViewTendersComponent implements OnInit {
     });
 
   }
+
+  updateInventories(idSelectedOffer: number){
+    this.tenderOffers.forEach((offer) => {
+      if(offer.idTenderOffer == idSelectedOffer){
+        offer.tenderOfferItems.forEach((item) => {
+
+          this.pharmacyService.getPharmacyByID(offer.idPharmacy).subscribe((pharmacy: Pharmacy) => {
+            this.pharmacyService.findMedicineByNameAndDose(item.medicineName, item.medicineDosage.toString(), pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
+    
+              console.log("Returned medicine:")
+              console.log(med)
+    
+              console.log("Sent request:")
+              var inventoryUpdate = {
+                medicineId: med.Id,
+                quantity: item.availableQuantity
+              };
+              console.log(inventoryUpdate);
+    
+              this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
+                if (response) {
+                  alert("Successfully updated pharmacy inventory!")
+                  this.urgentRequestService.UpdateHospitalInventory(med, item.availableQuantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
+                    if (response) alert("Successfully updated hospital inventory!")
+                    else alert("Failed to update hospital inventory!")
+                  });
+                }
+    
+                else alert("Failed to update pharmacy inventory!")
+              });
+            })
+          })
+
+        })
+      }
+  });
+}
 
 
 }
