@@ -23,7 +23,7 @@
         </div>
     </div>
     <hr>
-    <app-doctor-schedule-calendar [shifts]="shifts" [onCallShifts]="onCallShifts" [holidays]="holidays"></app-doctor-schedule-calendar>
+    <app-doctor-schedule-calendar [shifts]="shifts" [onCallShifts]="onCallShifts" [holidays]="holidays" [newShift]="newShift"></app-doctor-schedule-calendar>
 </div>
 <div *ngIf="assignShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
     <app-assign-shift-dialog [doctorsShifts]="shifts" [doctorId]="doctorId" [isVisible]="assignShiftDialogVisible" (notifyCloseDialog)="onNotifyCloseDialog($event)"></app-assign-shift-dialog>

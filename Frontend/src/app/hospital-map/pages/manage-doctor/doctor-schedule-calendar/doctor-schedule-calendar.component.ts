@@ -17,6 +17,7 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
   @Input() shifts: Shift[] = [];
   @Input() onCallShifts    : OnCallShift[] = [];
   @Input() holidays: Holiday[] = [];
+  @Input() newShift!: Shift;
 
   events : CalendarEvent[] = [];
   @ViewChild('doctorschedulecalendar') fullCalendar!: FullCalendarComponent;
@@ -96,22 +97,56 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
         this.fullCalendar.getApi().refetchEvents();
       }
     }
+
+    if (changes['newShift']) {
+      if(changes.newShift.currentValue){
+        this.newShift = changes.newShift.currentValue;
+        this.events.push(new CalendarEvent(
+          this.newShift.id!.toString() + "shift",
+          this.newShift.name,
+          this.newShift.start,
+          this.newShift.end,
+          "#66A182"
+        ));
+      }
+      
+    }
+
+    if(this.fullCalendar){
+      this.fullCalendar.getApi().refetchEvents();
+    }
   }
 
 
 
   private filterShifts() : void {
-    for(let shift of this.shifts){
-      this.events.push(
-        new CalendarEvent(
-          shift.id!.toString() + "shift",
-          shift.name,
-          shift.start,
-          shift.end,
-          "#66A182"
-        )
-      );
+    if(this.events.length == 0){
+      for(let shift of this.shifts){
+          this.events.push(
+            new CalendarEvent(
+              shift.id!.toString() + "shift",
+              shift.name,
+              shift.start,
+              shift.end,
+              "#66A182"
+            )
+          );
+      }
     }
+    // } else {
+    //   let difference = this.shifts.filter(({ id: id1 }) => this.events.some(({ id: id2 }) => id2 == id1.toString()));
+    //   for (let shift of difference){
+    //     this.events.push(
+    //       new CalendarEvent(
+    //         shift.id!.toString() + "shift",
+    //         shift.name,
+    //         shift.start,
+    //         shift.end,
+    //         "#66A182"
+    //       )
+    //     );
+    //   }
+    // }
   }
 
   private filterOnCallShifts() : void {

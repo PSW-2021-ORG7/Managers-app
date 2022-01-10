@@ -4,10 +4,10 @@ export class Shift {
     public start: Date;
     public end: Date;
 
-    constructor(id: number, name: string, start: Date, end: Date){
-        this.id = id;
-        this.name = name;
-        this.start = start; 
-        this.end = end; 
+    constructor(){
+        this.id = -1;
+        this.name = "";
+        this.start = new Date(-8640000000000000); 
+        this.end = new Date(-8640000000000000); 
     }
 }

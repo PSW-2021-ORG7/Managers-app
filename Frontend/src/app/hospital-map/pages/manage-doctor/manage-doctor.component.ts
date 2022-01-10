@@ -25,6 +25,7 @@ export class ManageDoctorComponent implements OnInit {
   infoDialogMessage: string  = "";
   infoDialogButtonText: string  = "";
   isInfoDialogVisible: boolean = false;
+  newShift!: Shift;
 
   constructor(private doctorService: DoctorService, private shiftService: ShiftService, private route: ActivatedRoute, private router: Router) {
     if(router.getCurrentNavigation()?.extras.state?.roomId)
@@ -44,8 +45,6 @@ export class ManageDoctorComponent implements OnInit {
           this.shifts = data;
         }
       );
-
-
     })
   }
 
@@ -60,13 +59,20 @@ export class ManageDoctorComponent implements OnInit {
     this.assignShiftDialogVisible = !this.assignShiftDialogVisible;
   }
 
-  onNotifyCloseDialog(message: string): void{
-    if(message == "close")
+  onNotifyCloseDialog(messenger: any): void{
+    if(messenger.result == "close"){
       this.assignShiftDialogVisible = false;
-    else if(message == "badRequest"){
+    }else if(messenger.result == "assignedShift"){
       this.assignShiftDialogVisible = false;
       this.showInfoDialog("Assigned shift", "The shift has successfully been added to the doctor.", "Okay");
-      
+      this.shiftService.getShift(messenger.workday.shiftId).subscribe(
+        data => {
+          this.newShift = data;
+        }
+      );
+    }else if(messenger.result == "badRequest"){
+      this.assignShiftDialogVisible = false;
+      this.showInfoDialog("Bad request", "Unable to assign shift to doctor.", "Okay");
     }
   }
 

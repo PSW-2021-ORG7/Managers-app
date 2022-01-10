@@ -9,20 +9,25 @@ import { environment } from "src/environments/environment";
     providedIn: 'root'
 })
 export class ShiftService{
-   
-    private baseUrl: string = environment.baseUrlHospital + 'shifts';
+    
+    private baseUrl: string = environment.baseUrlHospital;
     
     constructor(private http: HttpClient) { }
 
     getShifts(doctorId: number): Observable<Shift[]>{
-        return this.http.get<Shift[]>(this.baseUrl + "/doctor/" + doctorId);
+        return this.http.get<Shift[]>(this.baseUrl + 'shifts' + "/doctor/" + doctorId);
     }
 
     getShiftsFromDate(startDate: string): Observable<Shift[]> {
-        return this.http.get<Shift[]>(this.baseUrl + '?start=' + startDate);
+        return this.http.get<Shift[]>(this.baseUrl + 'shifts' + '?start=' + startDate);
     }
 
     assignShiftToDoctor(workday: Object) : Observable<any> {
-        return this.http.post<Observable<any>>(this.baseUrl, workday);
+        return this.http.post<Observable<any>>(this.baseUrl + 'workdays', workday);
     }
+
+    getShift(id: number): Observable<Shift> {
+        return this.http.get<Shift>(this.baseUrl + 'shifts' + "/" + id);
+    }
+     
 }
