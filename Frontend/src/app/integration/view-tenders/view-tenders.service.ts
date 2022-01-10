@@ -35,4 +35,9 @@ export class TenderViewService {
         return this.http.post<string>(endpoint + "tendering/message", JSON.stringify(message));
     }
 
+    closeTender(idTender: number, apiKey: string): Observable<boolean>{
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));  
+        return this.http.post<boolean>(environment.baseUrlIntegration + "tendering/closeTender/" + idTender, null)
+    }
+
 }

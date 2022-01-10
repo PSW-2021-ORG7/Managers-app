@@ -96,7 +96,9 @@ export class ViewTendersComponent implements OnInit {
   }
 
   selectChangeHandlerId(event: any) {
+    this.showTenderInfo = false;
     this.selectedTenderId = event.target.value;
+    this.tenderOffers = [];
     console.log(this.selectedTenderId)
 
   }
