@@ -4,6 +4,7 @@ import { Doctor } from '@app/hospital-map/models/doctor/doctor.model';
 import { Holiday } from '@app/hospital-map/models/shift/holiday.model';
 import { OnCallShift } from '@app/hospital-map/models/shift/on-call-shift.model';
 import { Shift } from '@app/hospital-map/models/shift/shift.model';
+import { WorkdayShift } from '@app/hospital-map/models/shift/workday-shift.model';
 import { DoctorService } from '@app/hospital-map/shared/services/doctor.service';
 import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 
@@ -18,13 +19,18 @@ export class ManageDoctorComponent implements OnInit {
   doctorId!: number;
   doctor!: Doctor;
   assignShiftDialogVisible: boolean = false;
-  shifts: Shift[] = [];
+  shifts: WorkdayShift[] = [];
   onCallShifts: OnCallShift[] = [];
   holidays: Holiday[] = [];
   infoDialogTitle: string = "";
   infoDialogMessage: string  = "";
   infoDialogButtonText: string  = "";
   isInfoDialogVisible: boolean = false;
+  newShift!: Shift;
+  deleteShiftDialogVisible: boolean = false;
+  title: string = "";
+  description: string = "";
+  deleteWorkdayId: number = -1;
 
   constructor(private doctorService: DoctorService, private shiftService: ShiftService, private route: ActivatedRoute, private router: Router) {
     if(router.getCurrentNavigation()?.extras.state?.roomId)
@@ -39,13 +45,11 @@ export class ManageDoctorComponent implements OnInit {
           this.doctor = data;
         }
       );
-      this.shiftService.getShifts(this.doctorId).subscribe(
+      this.shiftService.getShiftWorkdaysForDoctor(this.doctorId).subscribe(
         data => {
           this.shifts = data;
         }
       );
-
-
     })
   }
 
@@ -60,13 +64,27 @@ export class ManageDoctorComponent implements OnInit {
     this.assignShiftDialogVisible = !this.assignShiftDialogVisible;
   }
 
-  onNotifyCloseDialog(message: string): void{
-    if(message == "close")
-      this.assignShiftDialogVisible = false;
-    else if(message == "badRequest"){
-      this.assignShiftDialogVisible = false;
+  onNotifyFromAssignShiftDialog(messenger: any): void{
+    this.assignShiftDialogVisible = false;
+    if(messenger.result == "assignedShift"){
       this.showInfoDialog("Assigned shift", "The shift has successfully been added to the doctor.", "Okay");
-      
+      this.shiftService.getShift(messenger.workday.shiftId).subscribe(
+        data => {
+          this.newShift = data;
+        }
+      );
+    } else if(messenger.result == "badRequest"){
+      this.showInfoDialog("Bad request", "Unable to assign shift to doctor.", "Okay");
+    }
+  }
+
+  onNotifyFromDoctorScheduleCalendar(messenger: any): void{
+    if(messenger.id.includes("workday")){
+      this.deleteWorkdayId = parseInt(messenger.id.slice(0, -8));
+      this.deleteShiftDialogVisible = true;
+      this.title = "Delete workday?";
+      this.description = "Are you sure you want to remove " + this.doctor.name + " " + this.doctor.surname + " from this working this day?" 
+      this.deleteShiftDialogVisible = true;
     }
   }
 
@@ -80,6 +98,21 @@ export class ManageDoctorComponent implements OnInit {
   onInfoDialogNotify(message: string): void{
     if(message == "close")
       this.isInfoDialogVisible = false;
+  }
+
+  onNotifyConfirmButton(): void{
+    this.deleteShiftDialogVisible = false;
+    if(this.deleteWorkdayId != -1)
+      this.shiftService.removeShiftFromDoctor(this.deleteWorkdayId).subscribe(
+        data => {
+          this.showInfoDialog("Removed workday", "Sucessfuly removed workday from Dr. " + this.doctor.name + " " +  this.doctor.surname + "'s schedule.", "Okay");
+        }
+      );
+  }
+
+  onNotifyCancelButton(): void{
+    this.deleteShiftDialogVisible = false;
+    this.deleteWorkdayId = -1;
   }
 
 }

@@ -1,0 +1,5 @@
+@import 'src/styles/main.scss';
+
+.delete-icon{
+    @include background-svg($delete);
+}
