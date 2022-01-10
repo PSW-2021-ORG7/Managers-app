@@ -11,8 +11,8 @@
         </div>
         <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
             title="Please select tender" required (change)="selectChangeHandlerId($event)">
-            <option *ngFor="let tender of tenders" [value]="tender.idTender">
-               {{tender.idTender}}
+            <option *ngFor="let tender of tenders" [value]="tender.id">
+               Tender ID : {{tender.id}}
             </option>
         </select>
 

@@ -15,4 +15,9 @@ export class TenderViewService {
         return this.http.get(environment.baseUrlIntegration + "api/tendering/getOffers/" + tenderId);
     }
 
+    getAllActiveTenders(apiKey: string): Observable<any> {
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
+        return this.http.get(environment.baseUrlIntegration + "api/tendering/getActive");
+    }
+
 }
