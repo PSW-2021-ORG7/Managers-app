@@ -27,7 +27,7 @@ export class TenderOfferItems {
 
 export class Tender {
   constructor(
-    public idTender: number,
+    public id: number,
     public tenderKey: string,
     public isActive: boolean,
     public startDate: Date,
@@ -72,15 +72,9 @@ export class ViewTendersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.tenderViewService.getAllOffersByTenderId("8", "ABC").subscribe((tenderOffers: TenderOffer[]) => {
-      this.tenderOffers = tenderOffers;
-
-      this.tenderOffers.forEach((item, index) => {
-        this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
-          item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
-        });
-    });
-
+    this.tenderViewService.getAllActiveTenders("ABC").subscribe((tenders: Tender[]) => {
+      console.log(tenders)
+      this.tenders = tenders
     });
 
   }
@@ -92,19 +86,17 @@ export class ViewTendersComponent implements OnInit {
   }
 
   viewOffers(): void{
-    var tenderOfferItems = {
-      medicineName: this.medicineName,
-      dosageInMilligrams: this.dosageInMilligrams,
-      availableQuantity: this.availableQuantity,
-      missingQuantity: this.missingQuantity,
-      priceForSingleEntity: this.priceForSingleEntity,
-    };
+    
+    this.tenderViewService.getAllOffersByTenderId(this.selectedTenderId, "ABC").subscribe((tenderOffers: TenderOffer[]) => {
+      this.tenderOffers = tenderOffers;
 
-    var tenderOffer = {
-      tenderOfferItems: this.tenderOfferItems,
-      priceForAllAvailable : this.priceForAllAvailable,
-      priceForAllRequired: this.priceForAllRequired,
-    };
+      this.tenderOffers.forEach((item, index) => {
+        this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
+          item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
+        });
+    });
+
+    });
 
   }
   
