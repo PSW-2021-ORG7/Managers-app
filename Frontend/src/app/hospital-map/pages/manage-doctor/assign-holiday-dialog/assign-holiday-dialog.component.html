@@ -1,5 +1,6 @@
 <div class="d-flex flex-column container align-items-center">
-    <h5>Assign holiday</h5>
+    <h5 *ngIf="!update">Assign holiday</h5>
+    <h5 *ngIf="update">Re-assign holiday</h5>
     <form class="time-form d-flex flex-column p-2">
         <div class="d-flex flex-row">
             <div class="form-group hidden">
@@ -53,11 +54,19 @@
               </div>
             </div>
         </div>
-        <textarea placeholder="Description"></textarea>
+        <textarea placeholder="Description" [(ngModel)]="holiday.description" name="description"></textarea>
     </form>
     <div class="w-100 d-flex">
-        <button class="cancel-btn w-50 me-2" (click)="cancel()">Cancel</button>
-        <app-primary-button (click)="assignHoliday()" [text]="'Assign'" class="w-50 ms-2"></app-primary-button>
+      <button class="cancel-btn w-50 me-2" (click)="cancel()">Cancel</button>
+      <app-primary-button (click)="assignHoliday()" [text]="'Assign'" class="w-50 ms-2"></app-primary-button>
+    </div>
+    <div class="w-100 d-flex mt-2" *ngIf="update">
+      <button (click)="deleteHoliday()" class="w-100 cancel-btn p-1">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 19C6 20.1 6.9 21 8 21H16C17.1 21 18 20.1 18 19V9C18 7.9 17.1 7 16 7H8C6.9 7 6 7.9 6 9V19ZM18 4H15.5L14.79 3.29C14.61 3.11 14.35 3 14.09 3H9.91C9.65 3 9.39 3.11 9.21 3.29L8.5 4H6C5.45 4 5 4.45 5 5C5 5.55 5.45 6 6 6H18C18.55 6 19 5.55 19 5C19 4.45 18.55 4 18 4Z" fill="white"/>
+        </svg>
+        <span class="ms-2">Remove holiday</span>
+      </button>
     </div>
 </div>
 

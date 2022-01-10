@@ -14,14 +14,11 @@ import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
   styleUrls: ['./doctor-schedule-calendar.component.scss']
 })
 export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
-
   @Input() shifts: WorkdayShift[] = [];
   @Input() onCallShifts    : OnCallShift[] = [];
   @Input() holidays: Holiday[] = [];
   @Input() newShift!: Shift;
-
   @Output() notifyFromDoctorScheduleCalendar: EventEmitter<any> = new EventEmitter<any>();
-
   events : CalendarEvent[] = [];
   @ViewChild('doctorschedulecalendar') fullCalendar!: FullCalendarComponent;
   descriptionText: string="";
@@ -49,7 +46,7 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
     expandRows: true,
     eventClick:(info)=>{
       if(info.event.start != null){
-        this.notifyFromDoctorScheduleCalendar.emit({id: info.event.id})
+        this.notifyFromDoctorScheduleCalendar.emit({id: info.event.id});
       }
     }
   };

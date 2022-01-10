@@ -32,6 +32,8 @@ export class ManageDoctorComponent implements OnInit {
   title: string = "";
   description: string = "";
   deleteWorkdayId: number = -1;
+  update: boolean = false;
+  holidayId: number = -1;
 
   constructor(private doctorService: DoctorService, private shiftService: ShiftService, private holidayService: HolidayService, private route: ActivatedRoute, private router: Router) {
     if(router.getCurrentNavigation()?.extras.state?.roomId)
@@ -66,11 +68,12 @@ export class ManageDoctorComponent implements OnInit {
       this.router.navigate(['/hospital-map/'])
   }
 
-  toggleAssignShiftDialog(): void{
+  toggleAssignShiftDialog(): void {
     this.assignShiftDialogVisible = !this.assignShiftDialogVisible;
   }
 
-  toggleAssignHolidayDialog(): void{
+  toggleAssignHolidayDialog(): void {
+    this.update = false;
     this.assignHolidayDialogVisible = !this.assignHolidayDialogVisible;
   }
 
@@ -96,9 +99,15 @@ export class ManageDoctorComponent implements OnInit {
       this.description = "Are you sure you want to remove " + this.doctor.name + " " + this.doctor.surname + " from this working this day?" 
       this.deleteShiftDialogVisible = true;
     }
+    if(messenger.id.includes("holiday")){
+      this.assignHolidayDialogVisible = true;
+      this.update = true;
+      this.holidayId = parseInt(messenger.id.slice(0, -7));
+    }
   }
 
   onNotifyCloseHolidayDialog() : void {
+    this.update = false;
     this.assignHolidayDialogVisible = false;
   }
 
@@ -128,7 +137,7 @@ export class ManageDoctorComponent implements OnInit {
     this.deleteShiftDialogVisible = false;
     this.deleteWorkdayId = -1;
   }
-  
+
   reload(): void {
     document.location.reload();
   }

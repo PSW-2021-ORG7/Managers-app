@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Holiday } from '@app/hospital-map/models/shift/holiday.model';
 import { Observable } from 'rxjs';
@@ -23,5 +23,16 @@ export class HolidayService {
 
   updateHoliday(holiday: Holiday): Observable<any> {
     return this.http.put<any>(this.baseUrl + '/' + holiday.id, holiday);
+  }
+
+  deleteHoliday(holiday: Holiday): Observable<any> {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: 
+      holiday    
+    } 
+    return this.http.delete<any>(this.baseUrl + '/' + holiday.id, options);
   }
 }

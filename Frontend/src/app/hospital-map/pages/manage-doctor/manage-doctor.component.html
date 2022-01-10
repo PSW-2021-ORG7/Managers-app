@@ -33,5 +33,5 @@
     <app-assign-shift-dialog [doctorsShifts]="shifts" [doctorId]="doctorId" [isVisible]="assignShiftDialogVisible" (notifyFromAssignShiftDialog)="onNotifyFromAssignShiftDialog($event)"></app-assign-shift-dialog>
 </div>
 <div *ngIf="assignHolidayDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
-    <app-assign-holiday-dialog [doctorsHolidays]="holidays" [doctorId]="doctorId" [isVisible]="assignHolidayDialogVisible" (notifyCloseHolidayDialog)="onNotifyCloseHolidayDialog()" (notifyReload)="reload()"></app-assign-holiday-dialog>
+    <app-assign-holiday-dialog [doctorsHolidays]="holidays" [doctorId]="doctorId" [isVisible]="assignHolidayDialogVisible" [update]="update" [holidayId]="holidayId" (notifyCloseHolidayDialog)="onNotifyCloseHolidayDialog()" (notifyReload)="reload()"></app-assign-holiday-dialog>
 </div>
