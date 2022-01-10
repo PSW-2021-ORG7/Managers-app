@@ -13,6 +13,8 @@ import { FormsModule }   from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PrescriptionsComponent } from './prescriptions/prescriptions.component';
 import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -23,14 +25,16 @@ import { PharmacyProfileComponent } from './pharmacy-profile/pharmacy-profile.co
     UrgentRequestComponent,
     MedicationSpecificationComponent,
     PrescriptionsComponent,
-    PharmacyProfileComponent
+    PharmacyProfileComponent,
+    BarChartComponent
    
   ],
   imports: [
     CommonModule,
     IntegrationRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
