@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { HttpClient, HttpParams } from '@angular/common/http';
-=======
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
->>>>>>> develop
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -16,10 +12,6 @@ export class EquipmentTransferService {
 
   constructor(private http: HttpClient) { }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
   getAvailableTimeSlots(equipmentTransfer : EquipmentTransfer, transferStartDate: string, transferEndDate: string): Observable<Date[]> {
     let params = new HttpParams()
     .set('start', transferStartDate)
@@ -27,13 +19,6 @@ export class EquipmentTransferService {
     .set('duration', equipmentTransfer.transferDuration)
     .set('srcRoomId', equipmentTransfer.sourceRoomId)
     .set('dstRoomId', equipmentTransfer.destinationRoomId);
-<<<<<<< HEAD
-    return this.http.get<Date[]>(this.baseUrl + "/availableTimeSlots", {params});
-  }
-  
-  postEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer> {
-    return this.http.post<EquipmentTransfer>(this.baseUrl + '/transfers', equipmentTransfer);
-=======
     return this.http.get<Date[]>(this.baseUrl + "availableTimeSlots", {params});
   }
   
@@ -54,6 +39,5 @@ export class EquipmentTransferService {
       equipmentTransfer    
     } 
     return this.http.delete<EquipmentTransfer>(this.baseUrl + 'transfers', options);
->>>>>>> develop
   }
 }
