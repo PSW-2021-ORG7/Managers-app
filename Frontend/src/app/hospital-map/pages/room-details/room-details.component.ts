@@ -25,12 +25,10 @@ export class RoomDetailsComponent implements OnInit {
       this.roomsService.getRoomWithEquipment(roomId).subscribe(
         data => {
           this.room = data;
-          console.log(this.room);
       })
       this.doctorService.getDoctorForRoom(roomId).subscribe(
         data => {
           this.doctor = data;
-          console.log(this.room);
       })
     })
   }
@@ -53,6 +51,13 @@ export class RoomDetailsComponent implements OnInit {
 
   showRoomSchedule(): void{
     this.router.navigate(['/hospital-map/room-schedule/' + this.room.id])
+  }
+
+  showManageDoctor(): void{
+    if(this.doctor != null && this.room != null)
+      this.router.navigate(['/hospital-map/manage-doctor/' + this.doctor.id], { state: { roomId: this.room.id } })
+    else
+      alert("This room doesn't have a doctor!");
   }
 
   onNotifyHideRoomInfo(){

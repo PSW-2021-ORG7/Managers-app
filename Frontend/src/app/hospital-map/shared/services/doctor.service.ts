@@ -9,13 +9,16 @@ import { environment } from "src/environments/environment";
 })
 export class DoctorService {
 
-    private baseUrl: string = environment.baseUrlHospital + 'doctor';
+    private baseUrl: string = environment.baseUrlHospital + 'doctors';
 
     constructor(private http: HttpClient) { }
 
     getDoctorForRoom(roomId: number): Observable<Doctor> {
-        let id = roomId;
         return this.http.get<Doctor>(this.baseUrl + "?roomId=" + roomId);
+    }
+
+    getDoctor(id: number): Observable<Doctor>{
+        return this.http.get<Doctor>(this.baseUrl + "/" + id);
     }
     
 }

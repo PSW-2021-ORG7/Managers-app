@@ -1,21 +1,21 @@
-import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 import {DOCUMENT} from '@angular/common'
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
-import { EquipmentTransferService } from '../../services/equipment-tranfser.service';
+import { EquipmentTransferService } from '@app/hospital-map/shared/services/equipment-tranfser.service';
 import { CalendarEvent } from 'src/app/hospital-map/models/calendar/calendar-event.model';
 import { SplitRenovation } from '@app/hospital-map/models/renovations/split-renovation.model';
 import { MergeRenovation } from '@app/hospital-map/models/renovations/merge-renovation.model';
-import { RoomTypeToStringPipe } from '../../pipes/room-type-to-string.pipe';
+import { RoomTypeToStringPipe } from '@app/hospital-map/shared/pipes/room-type-to-string.pipe';
 import { RoomType } from '@app/hospital-map/models/rooms/room.model';
-import { RenovationService } from '../../services/renovation.service';
+import { RenovationService } from '@app/hospital-map/shared/services/renovation.service';
 
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+  selector: 'app-room-schedule-calendar',
+  templateUrl: './room-schedule-calendar.component.html',
+  styleUrls: ['./room-schedule-calendar.component.scss']
 })
-export class CalendarComponent implements OnInit, OnChanges{
+export class RoomScheduleCalendarComponent implements OnInit, OnChanges{
 
   @Input() equipmentTransfers: EquipmentTransfer[] = [];
   @Input() splitRenovations: SplitRenovation[] = [];
@@ -50,10 +50,6 @@ export class CalendarComponent implements OnInit, OnChanges{
       if(info.event.start != null){
         var eventStartTime = new Date(info.event.start);
         var range = eventStartTime.valueOf() - Date.now().valueOf();
-        console.log(info.event.start);
-        console.log(eventStartTime);
-        console.log(eventStartTime.valueOf());
-        console.log(range);
         if(range >= 24*60*60*1000){
           this.descriptionText = info.event.title
           this.showOptionalDialog = true;

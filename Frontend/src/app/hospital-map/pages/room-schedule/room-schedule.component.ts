@@ -61,7 +61,7 @@ export class RoomScheduleComponent implements OnInit{
   }
 
   onBackToRoomDetails(): void{
-    this.router.navigate(['/hospital-map/'])
+    this.router.navigate(['/hospital-map/rooms/' + this.roomId])
   }
 
   public getRoomText(){

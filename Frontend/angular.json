@@ -55,6 +55,11 @@
 								"input" : "src/styles/components/_calendar.scss",
 								"bundleName" : "custom-calendar",
 								"inject": false
+							},
+							{
+								"input" : "src/styles/components/_calendar.scss",
+								"bundleName" : "doctor-schedule-calendar",
+								"inject": false
 							}
 						],
 						"scripts": []
