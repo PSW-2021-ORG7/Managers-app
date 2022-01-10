@@ -1,9 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { CalendarEvent } from '@app/hospital-map/models/calendar/calendar-event.model';
 import { Holiday } from '@app/hospital-map/models/shift/holiday.model';
 import { OnCallShift } from '@app/hospital-map/models/shift/on-call-shift.model';
 import { Shift } from '@app/hospital-map/models/shift/shift.model';
+import { WorkdayShift } from '@app/hospital-map/models/shift/workday-shift.model';
 import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 
@@ -14,10 +15,12 @@ import { CalendarOptions, FullCalendarComponent } from '@fullcalendar/angular';
 })
 export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
 
-  @Input() shifts: Shift[] = [];
+  @Input() shifts: WorkdayShift[] = [];
   @Input() onCallShifts    : OnCallShift[] = [];
   @Input() holidays: Holiday[] = [];
   @Input() newShift!: Shift;
+
+  @Output() notifyFromDoctorScheduleCalendar: EventEmitter<any> = new EventEmitter<any>();
 
   events : CalendarEvent[] = [];
   @ViewChild('doctorschedulecalendar') fullCalendar!: FullCalendarComponent;
@@ -44,23 +47,12 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
     },
     eventBorderColor : "#ffffff",
     expandRows: true,
-    // eventClick:(info)=>{
-    //   if(info.event.start != null){
-    //     var eventStartTime = new Date(info.event.start);
-    //     var range = eventStartTime.valueOf() - Date.now().valueOf();
-    //     console.log(info.event.start);
-    //     console.log(eventStartTime);
-    //     console.log(eventStartTime.valueOf());
-    //     console.log(range);
-    //     if(range >= 24*60*60*1000){
-    //       this.descriptionText = info.event.title
-    //       this.showOptionalDialog = true;
-    //       this.selectedEventId = info.event.id;
-    //    }
-    //   }
-      // }
+    eventClick:(info)=>{
+      if(info.event.start != null){
+        this.notifyFromDoctorScheduleCalendar.emit({id: info.event.id})
+      }
+    }
   };
-
 
   ngOnInit(): void {
     const headEl = this.document.getElementsByTagName('head')[0];
@@ -71,7 +63,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
 
     headEl.appendChild(newLinkEl);
   }
-
   
   ngOnChanges(changes: SimpleChanges) {
     if (changes['shifts']) {
@@ -109,7 +100,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
           "#66A182"
         ));
       }
-      
     }
 
     if(this.fullCalendar){
@@ -117,14 +107,12 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
     }
   }
 
-
-
   private filterShifts() : void {
     if(this.events.length == 0){
       for(let shift of this.shifts){
           this.events.push(
             new CalendarEvent(
-              shift.id!.toString() + "shift",
+              shift.workdayId!.toString() + "workdays",
               shift.name,
               shift.start,
               shift.end,
@@ -133,20 +121,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
           );
       }
     }
-    // } else {
-    //   let difference = this.shifts.filter(({ id: id1 }) => this.events.some(({ id: id2 }) => id2 == id1.toString()));
-    //   for (let shift of difference){
-    //     this.events.push(
-    //       new CalendarEvent(
-    //         shift.id!.toString() + "shift",
-    //         shift.name,
-    //         shift.start,
-    //         shift.end,
-    //         "#66A182"
-    //       )
-    //     );
-    //   }
-    // }
   }
 
   private filterOnCallShifts() : void {
@@ -176,16 +150,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
       );
     }
   }
-
-
-
-
-
-
-
-  
-
-
 
 
 }

@@ -16,7 +16,7 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
   shifts: Shift[] = [];
   isShiftSelected: boolean = false;
   selectedShiftId: number = -1;
-  @Output() notifyCloseDialog: EventEmitter<any> = new EventEmitter<any>();
+  @Output() notifyFromAssignShiftDialog: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private shiftService: ShiftService, private datepipe: DatePipe) { }
 
@@ -36,6 +36,7 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
     } else if(changes['doctorId']){
       this.doctorId = changes.doctorId.currentValue;
     }
+
   }
 
   filterShifts() {
@@ -54,18 +55,18 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
   }
 
   onCancelClick(): void{
-    this.notifyCloseDialog.emit({result: "close"});
+    this.notifyFromAssignShiftDialog.emit({result: "close"});
   }
 
   assignShift(): void{
     let workday = {"doctorId": this.doctorId, "shiftId": this.selectedShiftId};
     this.shiftService.assignShiftToDoctor(workday).subscribe(
       data => {
-        this.notifyCloseDialog.emit({result: "assignedShift", workday: data})
+        this.notifyFromAssignShiftDialog.emit({result: "assignedShift", workday: data})
       },
       error => {
         if(error.status == 204)
-            this.notifyCloseDialog.emit({result: "badRequest"})
+            this.notifyFromAssignShiftDialog.emit({result: "badRequest"})
       });
   }
 

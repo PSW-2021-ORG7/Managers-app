@@ -1,4 +1,8 @@
 <app-info-dialog [hidden]="!isInfoDialogVisible" [title]="infoDialogTitle" [message]="infoDialogMessage" [buttonText]="infoDialogButtonText" (notify)="onInfoDialogNotify($event)"></app-info-dialog>
+<div class="overlay d-flex align-items-center justify-content-center" *ngIf="deleteShiftDialogVisible">
+    <app-optional-dialog [title]="title" [description]="description" cancelText="Cancel" confirmText="Yes"
+    (notifyCancelButton)="onNotifyCancelButton()" (notifyConfirmButton)="onNotifyConfirmButton()" ></app-optional-dialog>
+</div>
 <div id="manage-doctor" class="d-flex flex-column">
     <div class="back-to-room-details-btn" (click)="onBack()">
         <svg class="back-icon"></svg>
@@ -23,8 +27,8 @@
         </div>
     </div>
     <hr>
-    <app-doctor-schedule-calendar [shifts]="shifts" [onCallShifts]="onCallShifts" [holidays]="holidays" [newShift]="newShift"></app-doctor-schedule-calendar>
+    <app-doctor-schedule-calendar [shifts]="shifts" [onCallShifts]="onCallShifts" [holidays]="holidays" [newShift]="newShift" (notifyFromDoctorScheduleCalendar)="onNotifyFromDoctorScheduleCalendar($event)"></app-doctor-schedule-calendar>
 </div>
 <div *ngIf="assignShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
-    <app-assign-shift-dialog [doctorsShifts]="shifts" [doctorId]="doctorId" [isVisible]="assignShiftDialogVisible" (notifyCloseDialog)="onNotifyCloseDialog($event)"></app-assign-shift-dialog>
+    <app-assign-shift-dialog [doctorsShifts]="shifts" [doctorId]="doctorId" [isVisible]="assignShiftDialogVisible" (notifyFromAssignShiftDialog)="onNotifyFromAssignShiftDialog($event)"></app-assign-shift-dialog>
 </div>
