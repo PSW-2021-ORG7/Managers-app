@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TenderViewService } from './view-tenders.service';
+import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 
 export class TenderOffer {
   constructor(
+    public idTenderOffer: number,
+    public idPharmacy: string,
+    public pharmacy: string,
     public tenderOfferItems: TenderOfferItems[],
     public priceForAllAvailable: string,
     public priceForAllRequired: string,    
@@ -32,6 +36,14 @@ export class Tender {
   ){}
 }
 
+export class Pharmacy {
+  constructor(
+    public namePharmacy: string,
+    public address: string,
+    public city: string
+  ) { }
+}
+
 @Component({
   selector: 'app-view-tenders',
   templateUrl: './view-tenders.component.html',
@@ -56,12 +68,19 @@ export class ViewTendersComponent implements OnInit {
 
   tenderOffers: TenderOffer[] = []
 
-  constructor(private tenderViewService: TenderViewService) { }
+  constructor(private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService) { }
 
   ngOnInit(): void {
 
-    this.tenderViewService.getAllOffersByTenderId("8", "ABC").subscribe((tenderOffer: TenderOffer[]) => {
-      console.log(tenderOffer);
+    this.tenderViewService.getAllOffersByTenderId("8", "ABC").subscribe((tenderOffers: TenderOffer[]) => {
+      this.tenderOffers = tenderOffers;
+
+      this.tenderOffers.forEach((item, index) => {
+        this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
+          item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
+        });
+    });
+
     });
 
   }

@@ -22,18 +22,18 @@
         </ul>
     </nav>
 
-    <ngb-accordion style="width: 35rem; height: 5rem; margin-left: 3%;">
-        <ngb-panel id="static-1" title="Jankovic">
+    <ngb-accordion style="width: 35rem; height: 5rem; margin-left: 3%;" *ngFor="let offer of tenderOffers">
+        <ngb-panel title= "Tender Offer ID: {{offer.pharmacy}}" >
             <ng-template ngbPanelContent>
                 <div class="card-body" id="collapseExample" style="background: #8e8f8f80">
-                    <div class="card card-body">
+                    <div class="card card-body" *ngFor="let item of offer.tenderOfferItems">
                         <table style="text-align: left;">
                             <tr>
                                 <td><label (ngModel)="medicineName"><strong>
                                         Medicine name:
                                     </strong></label></td>&nbsp;
                                 <td>
-                                    {{medicineName}}
+                                    {{item.medicineName}}
                                     
                                 </td>
                             </tr>
@@ -42,7 +42,7 @@
                                         Dosage in milligrams:
                                     </strong></label></td>&nbsp;
                                 <td>
-                                    {{dosageInMilligrams}}
+                                    {{item.medicineDosage}}
                                 </td>
                             </tr>
                             <tr>
@@ -50,7 +50,7 @@
                                         Available quantity:
                                     </strong></label></td>&nbsp;
                                 <td>
-                                    {{availableQuantity}}
+                                    {{item.availableQuantity}}
                                 </td>
                             </tr>
                             <tr>
@@ -58,7 +58,7 @@
                                         Missing quantity:
                                     </strong></label></td>&nbsp;
                                 <td>
-                                    {{missingQuantity}}
+                                    {{item.missingQuantity}}
                                 </td>
                             </tr>
                             <tr>
@@ -66,7 +66,7 @@
                                         Price for single entity:
                                     </strong></label></td>&nbsp;
                                 <td>
-                                    {{priceForSingleEntity}}
+                                    {{item.priceForSingleEntity}}
                                 </td>
                             </tr>
                         </table>
@@ -77,19 +77,19 @@
                         Price for all available entities:
                     </strong></label>&nbsp;
                 <label style="text-align: left;">
-                    {{priceForAllAvailable}}
+                    {{offer.priceForAllAvailable}}
                 </label><br>
                 <label (ngModel)="priceForAllRequired" style="text-align: left; margin-top: 2%;"><strong>
                         Price for all required entities:
                     </strong></label>&nbsp;
                 <label style="text-align: left;">
-                    {{priceForAllRequired}}
+                    {{offer.priceForAllRequired}}
                 </label><br>
                 <label (ngModel)="totalNumberMissingMedicine" style="text-align: left; margin-top: 2%;"><strong>
                         Total number of missing medicine:
                     </strong></label>&nbsp;
                 <label style="text-align: left;">
-                    {{totalNumberMissingMedicine}}
+                    {{offer.totalNumberMissingMedicine}}
                 </label><br>
                 <button (click)="acceptOffer()" class="btn btn-secondary btn-medium" style="background: #66A182; margin-top: 2%;"
                     title="Accept an offer">Accept</button>
@@ -97,8 +97,8 @@
             </ng-template>
             <div>
             </div>
-        </ngb-panel>        
         </ngb-panel>
+        
     </ngb-accordion>
 
 </div>
