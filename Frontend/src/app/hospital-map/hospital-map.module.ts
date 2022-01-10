@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { NgbDatepickerModule, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbDatepickerModule, NgbDropdownModule, NgbTimepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { HospitalMapRoutingModule } from './hospital-map-routing.module';
 import { HospitalMapComponent } from './hospital-map.component';
 import { D3Service } from './shared/services/d3.service';
@@ -77,11 +76,11 @@ FullCalendarModule.registerPlugins([
     CommonModule,
     HospitalMapRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
     NgbDatepickerModule,
     NgbDropdownModule,
     FullCalendarModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbTimepickerModule
   ],
   providers: [
     D3Service,

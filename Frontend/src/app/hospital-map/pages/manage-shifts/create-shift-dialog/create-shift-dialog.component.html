@@ -1,6 +1,6 @@
 <div class="d-flex flex-column container align-items-center">
     <h5>Create new shift</h5>
-    <form class="w-100">
+    <div class="w-100 wrapper">
         <div class="form-group d-flex flex-column mb-2 w-100">
             <label class="form-label" for="shiftType">Shift type</label>
             <select class="form-control" id="shiftType" name='shiftType'>
@@ -17,13 +17,19 @@
                 <option value = "Afternoon shift">Afternoon shift</option>
             </select>
         </div>
-        <div [formGroup]="formGroup">
-			<ng-bootstrap-datetime-angular placeholder="Select DateTime" inputDatetimeFormat="dd/MM/yyyy hh:mm a" formControlName="activeEndDate"
-				name="activeEndDate"></ng-bootstrap-datetime-angular>
-		</div>
-        <div class="dialog-buttons d-flex flex-row justify-content-center">
-            <app-primary-button class="dialog-button w-50" text="Cancel" color="#a2a2a2"></app-primary-button>
-            <app-primary-button class="dialog-button w-50" text="Create" color="#214975"></app-primary-button>
+        <div class="form-group">
+            <div class="input-group">
+              <input class="form-control custom-date-picker" placeholder="From"
+                     name="dp" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
         </div>
-    </form>
+        <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+        <div class="dialog-buttons d-flex flex-row justify-content-center">
+            <app-primary-button class="dialog-button w-100 me-2" text="Cancel" color="#a2a2a2"></app-primary-button>
+            <app-primary-button class="dialog-button w-100 ms-2" text="Create" color="#214975"></app-primary-button>
+        </div>
+    </div>
 </div>
