@@ -1,0 +1,100 @@
+@import 'src/styles/main.scss';
+
+.back-btn{
+    margin-top: 18px;
+    margin-left: 40px;
+}
+
+    .back-icon{
+        margin-right: 5px;
+        @include icon;
+        @include background-svg($back-icon);
+    }
+
+.title{
+    display: inline-block;
+    align-self: flex-end;
+    width: 75%;
+}
+
+    .text{
+        font-size: 1.563rem;
+        color: color(blue);
+        font-weight: bold;
+    }
+
+.crud-btn{
+    width: 13.35vw;
+    margin-left: 10px;
+}
+
+.card{
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06);
+    margin-bottom: 20px;
+    cursor: pointer;
+
+    &:hover {
+        transition: all 0.3s ease-out;
+        box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+        top: -3px;
+    }
+
+    &:before {
+        position: absolute;
+        z-index: -1;
+        top: -16px;
+        right: -16px;
+        height: 32px;
+        width: 32px;
+        transform: scale(2);
+        transform-origin: 50% 50%;
+        transition: all 0.3s ease-out;
+    }
+
+    &:hover:before {
+        transform: scale(2.15);
+        transition: all 0.3s ease-out;
+    }
+
+    .darkgray-text{
+        color: color(darkgray);
+    }
+
+    .blue-text{
+        color: color(blue);
+    }
+}
+
+.shift-info{
+    width: 17%;
+}
+
+.shift-name{
+    display: inline-block;
+    align-self: flex-end;
+    width: 75%;
+}
+
+.backdrop{
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(30, 30, 30, 0.95);
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    z-index: 101;
+    height: 100%;
+    background-color: rgba(27, 31, 35, 0.42);
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.2s ease-in-out, opacity 0.3s ease-in-out;
+}

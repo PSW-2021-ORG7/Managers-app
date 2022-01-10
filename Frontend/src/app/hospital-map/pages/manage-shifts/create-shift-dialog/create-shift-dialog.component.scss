@@ -1,0 +1,19 @@
+@import 'src/styles/main.scss';
+
+.container{
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 20px;
+    width: 375px;
+    height: 375px;
+}
+
+    h5{
+        margin-bottom: 20px !important;
+        font-weight: bold;
+        color: color(blue);
+    }
+
+    .dialog-button{
+        padding: 10px;
+    }

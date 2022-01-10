@@ -1,0 +1,29 @@
+<div class="d-flex flex-column container align-items-center">
+    <h5>Create new shift</h5>
+    <form class="w-100">
+        <div class="form-group d-flex flex-column mb-2 w-100">
+            <label class="form-label" for="shiftType">Shift type</label>
+            <select class="form-control" id="shiftType" name='shiftType'>
+                <option style="display:none"></option>
+                <option value = "Regular">Regular</option>
+                <option value = "On-call">On-call</option>
+            </select>
+        </div>
+        <div class="form-group d-flex flex-column mb-2 w-100">
+            <label class="form-label" for="shiftName">Shift name</label>
+            <select class="form-control" id="shiftName" name='shiftName'>
+                <option style="display:none"></option>
+                <option value = "Morning shift">Morning shift</option>
+                <option value = "Afternoon shift">Afternoon shift</option>
+            </select>
+        </div>
+        <div [formGroup]="formGroup">
+			<ng-bootstrap-datetime-angular placeholder="Select DateTime" inputDatetimeFormat="dd/MM/yyyy hh:mm a" formControlName="activeEndDate"
+				name="activeEndDate"></ng-bootstrap-datetime-angular>
+		</div>
+        <div class="dialog-buttons d-flex flex-row justify-content-center">
+            <app-primary-button class="dialog-button w-50" text="Cancel" color="#a2a2a2"></app-primary-button>
+            <app-primary-button class="dialog-button w-50" text="Create" color="#214975"></app-primary-button>
+        </div>
+    </form>
+</div>

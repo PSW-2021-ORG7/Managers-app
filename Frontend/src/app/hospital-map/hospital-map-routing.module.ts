@@ -7,6 +7,7 @@ import { MoveEquipmentComponent } from './pages/move-equipment/move-equipment.co
 import { RoomRenovationComponent } from './pages/room-renovation/room-renovation.component';
 import { RoomScheduleComponent } from './pages/room-schedule/room-schedule.component';
 import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.component';
+import { ManageShiftsComponent } from './pages/manage-shifts/manage-shifts.component';
 
 const routes: Routes = [
   { path: '', component: HospitalMapComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'move-equipment', component: MoveEquipmentComponent},
   { path: 'room-renovation/:id', component: RoomRenovationComponent},
   { path: 'room-schedule/:id', component: RoomScheduleComponent},
-  { path: 'manage-doctor/:id', component: ManageDoctorComponent}
+  { path: 'manage-doctor/:id', component: ManageDoctorComponent},
+  { path: 'manage-shifts', component: ManageShiftsComponent}
 ];
 
 @NgModule({

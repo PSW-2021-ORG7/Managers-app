@@ -6,7 +6,7 @@ import { HospitalMapRoutingModule } from './hospital-map-routing.module';
 import { HospitalMapComponent } from './hospital-map.component';
 import { D3Service } from './shared/services/d3.service';
 import { FloorPlanComponent } from './pages/floor-plan/floor-plan.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoomInfoFormComponent } from './pages/room-details/room-info-form/room-info-form.component';
 import { RoomTypeToStringPipe } from './shared/pipes/room-type-to-string.pipe';
 import { RoomStatusToStringPipe } from './shared/pipes/room-status-to-string.pipe';
@@ -34,6 +34,8 @@ import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.compo
 import { DoctorScheduleCalendarComponent } from './pages/manage-doctor/doctor-schedule-calendar/doctor-schedule-calendar.component';
 import { AssignShiftDialogComponent } from './pages/manage-doctor/assign-shift-dialog/assign-shift-dialog.component';
 import { AssignHolidayDialogComponent } from './pages/manage-doctor/assign-holiday-dialog/assign-holiday-dialog.component';
+import { ManageShiftsComponent } from './pages/manage-shifts/manage-shifts.component';
+import { CreateShiftDialogComponent } from './pages/manage-shifts/create-shift-dialog/create-shift-dialog.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -68,11 +70,14 @@ FullCalendarModule.registerPlugins([
     DoctorScheduleCalendarComponent,
     AssignShiftDialogComponent,
     AssignHolidayDialogComponent,
+    ManageShiftsComponent,
+    CreateShiftDialogComponent
   ],
   imports: [
     CommonModule,
     HospitalMapRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbDatepickerModule,
     NgbDropdownModule,
     FullCalendarModule,

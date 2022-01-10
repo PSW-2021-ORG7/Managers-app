@@ -1,0 +1,43 @@
+<div class="d-flex flex-column">
+    <div>
+        <button class="back-btn btn darkgray-text">
+            <svg class="back-icon"></svg>
+            <span class="align-middle ms-1">Assign shift</span>
+        </button>
+    </div>
+    <div class="d-flex flex-row-reverse mb-4 mx-5 mt-2">
+        <app-primary-button class="crud-btn" text="Create new shift" (click)="createShift()"></app-primary-button>
+        <app-primary-button class="crud-btn" text="Update shift" [isBtnDisabled]="!isShiftSelected"></app-primary-button>
+        <app-primary-button class="crud-btn" text="Delete shift" [isBtnDisabled]="!isShiftSelected" (click)="deleteShift()"></app-primary-button>
+        <div class="title">
+            <span class="text">Shift manager</span> 
+        </div>
+    </div>
+    <div class="d-flex flex-column mx-5">
+        <div class="d-flex flex-row card rounded p-3 mb-3" *ngFor="let s of shifts" (click)="selectShift(s)">
+            <div class="d-flex flex-column shift-info">
+                <span class="darkgray-text">Date</span>
+                <span class="blue-text">{{ s.start | date:'fullDate' }}</span>
+            </div>
+            <div class="d-flex flex-column shift-info">
+                <span class="darkgray-text">Time</span>
+                <span class="blue-text">{{ s.start | date:'shortTime'}} - {{ s.end | date:'shortTime' }}</span>
+            </div>
+            <div class="d-flex flex-column shift-info">
+                <span class="darkgray-text">Type</span>
+                <span class="blue-text">Regular</span>
+            </div>
+            <div class="d-flex flex-column shift-name">
+                <span class="darkgray-text align-self-end">Shift name</span>
+                <span class="blue-text align-self-end">{{ s.name }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="backdrop d-flex align-items-center justify-content-center" *ngIf="showOptionalDialog">
+        <app-optional-dialog title="Remove shift?" [description]="'Are you sure you want to remove this shift?'" cancelText="Cancel" confirmText="Yes"
+        (notifyCancelButton)="onNotifyCancelButton()" (notifyConfirmButton)="onNotifyConfirmButton()"></app-optional-dialog>
+    </div>
+    <div *ngIf="createShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
+        <app-create-shift-dialog [isVisible]="createShiftDialogVisible" (notifyCloseDialog)="onNotifyCloseDialog($event)"></app-create-shift-dialog>
+    </div>
+</div>
