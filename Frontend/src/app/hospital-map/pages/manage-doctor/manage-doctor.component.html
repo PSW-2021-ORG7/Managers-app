@@ -1,3 +1,4 @@
+<app-info-dialog [hidden]="!isInfoDialogVisible" [title]="infoDialogTitle" [message]="infoDialogMessage" [buttonText]="infoDialogButtonText" (notify)="onInfoDialogNotify($event)"></app-info-dialog>
 <div id="manage-doctor" class="d-flex flex-column">
     <div class="back-to-room-details-btn" (click)="onBack()">
         <svg class="back-icon"></svg>
@@ -25,5 +26,5 @@
     <app-doctor-schedule-calendar [shifts]="shifts" [onCallShifts]="onCallShifts" [holidays]="holidays"></app-doctor-schedule-calendar>
 </div>
 <div *ngIf="assignShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
-    <app-assign-shift-dialog [isVisible]="assignShiftDialogVisible" (notifyCloseDialog)="onNotifyCloseDialog($event)"></app-assign-shift-dialog>
+    <app-assign-shift-dialog [doctorsShifts]="shifts" [doctorId]="doctorId" [isVisible]="assignShiftDialogVisible" (notifyCloseDialog)="onNotifyCloseDialog($event)"></app-assign-shift-dialog>
 </div>

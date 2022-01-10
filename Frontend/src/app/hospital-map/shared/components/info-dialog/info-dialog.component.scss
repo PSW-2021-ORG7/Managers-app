@@ -1,0 +1,32 @@
+@import "src/styles/main.scss";
+
+.overlay{
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(34, 34, 34, 0.5);
+}
+
+    .dialog-container{
+        background-color: white;
+        border-radius: 7px;
+        width: 34.72vw;
+        padding: 30px 30px;
+    }
+
+        h5{
+            color: color(blue);
+            margin-bottom: 10px;
+        }
+
+        .message{
+            color: color(darkgrey);
+            display: inline-block;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .button{
+            width: 100%;
+        }

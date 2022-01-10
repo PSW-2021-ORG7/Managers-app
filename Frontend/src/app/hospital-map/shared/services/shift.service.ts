@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
     providedIn: 'root'
 })
 export class ShiftService{
-
+   
     private baseUrl: string = environment.baseUrlHospital + 'shifts';
     
     constructor(private http: HttpClient) { }
@@ -22,4 +22,7 @@ export class ShiftService{
         return this.http.get<Shift[]>(this.baseUrl + '?start=' + startDate);
     }
 
+    assignShiftToDoctor(workday: Object) : Observable<any> {
+        return this.http.post<Observable<any>>(this.baseUrl, workday);
+    }
 }

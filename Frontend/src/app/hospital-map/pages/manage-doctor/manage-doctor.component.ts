@@ -21,6 +21,10 @@ export class ManageDoctorComponent implements OnInit {
   shifts: Shift[] = [];
   onCallShifts: OnCallShift[] = [];
   holidays: Holiday[] = [];
+  infoDialogTitle: string = "";
+  infoDialogMessage: string  = "";
+  infoDialogButtonText: string  = "";
+  isInfoDialogVisible: boolean = false;
 
   constructor(private doctorService: DoctorService, private shiftService: ShiftService, private route: ActivatedRoute, private router: Router) {
     if(router.getCurrentNavigation()?.extras.state?.roomId)
@@ -43,7 +47,6 @@ export class ManageDoctorComponent implements OnInit {
 
 
     })
-    
   }
 
   onBack(): void{
@@ -60,6 +63,23 @@ export class ManageDoctorComponent implements OnInit {
   onNotifyCloseDialog(message: string): void{
     if(message == "close")
       this.assignShiftDialogVisible = false;
+    else if(message == "badRequest"){
+      this.assignShiftDialogVisible = false;
+      this.showInfoDialog("Assigned shift", "The shift has successfully been added to the doctor.", "Okay");
+      
+    }
+  }
+
+  showInfoDialog(title: string, message: string, buttonText: string) {
+    this.infoDialogTitle = title;
+    this.infoDialogMessage = message;
+    this.infoDialogButtonText = buttonText;
+    this.isInfoDialogVisible = true;
+  }
+
+  onInfoDialogNotify(message: string): void{
+    if(message == "close")
+      this.isInfoDialogVisible = false;
   }
 
 }

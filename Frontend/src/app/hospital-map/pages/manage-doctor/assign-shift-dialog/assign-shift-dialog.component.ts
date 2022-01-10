@@ -11,6 +11,8 @@ import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 export class AssignShiftDialogComponent implements OnInit, OnChanges{
 
   @Input() isVisible: boolean = false;
+  @Input() doctorId: number = -1;
+  @Input() doctorsShifts: Shift[] = [];
   shifts: Shift[] = [];
   isShiftSelected: boolean = false;
   selectedShiftId: number = -1;
@@ -26,9 +28,19 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
       this.shiftService.getShiftsFromDate(this.datepipe.transform(today, 'yyyy-MM-dd')!).subscribe(
         data => {
           this.shifts = data;
+          this.filterShifts();
         }
       )
+    } else if(changes['doctorsShifts']){
+      this.doctorsShifts = changes.doctorsShifts.currentValue;
+    } else if(changes['doctorId']){
+      this.doctorId = changes.doctorId.currentValue;
     }
+  }
+
+  filterShifts() {
+      let difference = this.shifts.filter(({ id: id1 }) => !this.doctorsShifts.some(({ id: id2 }) => id2 == id1));
+      this.shifts = difference;
   }
 
   selectShift(id: number): void{
@@ -38,6 +50,18 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
 
   onCancelClick(): void{
     this.notifyCloseDialog.emit("close");
+  }
+
+  assignShift(): void{
+    let workday = {doctorId: this.doctorId, shiftId: this.selectedShiftId};
+    this.shiftService.assignShiftToDoctor(workday).subscribe(
+      data => {
+        this.notifyCloseDialog.emit("badRequest")
+      },
+      error => {
+        if(error.status == 204)
+            this.notifyCloseDialog.emit("badRequest")
+      });
   }
 
 }

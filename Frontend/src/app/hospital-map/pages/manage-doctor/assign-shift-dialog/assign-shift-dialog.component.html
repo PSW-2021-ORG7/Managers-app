@@ -23,7 +23,7 @@
     </div>
     <div class="w-100 d-flex">
         <button class="cancel-btn w-50 me-2" (click)="onCancelClick()">Cancel</button>
-        <app-primary-button [text]="'Assign'" [isBtnDisabled]="!isShiftSelected" class="w-50 ms-2"></app-primary-button>
+        <app-primary-button (click)="assignShift()" [text]="'Assign'" [isBtnDisabled]="!isShiftSelected" class="w-50 ms-2"></app-primary-button>
     </div>
 </div>
 
