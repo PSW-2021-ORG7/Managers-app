@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TenderViewService } from './view-tenders.service';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
+import { DatePipe } from '@angular/common';
 
 export class TenderOffer {
   constructor(
@@ -69,10 +70,10 @@ export class ViewTendersComponent implements OnInit {
 
   tenderOffers: TenderOffer[] = []
   
-  selectedTenderStartDate: string = ""
-  selectedTenderEndDate: string = ""
+  selectedTenderStartDate: Date = new Date()
+  selectedTenderEndDate: Date = new Date()
 
-  constructor(private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService) { }
+  constructor(private datePipe: DatePipe, private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService) { }
 
   ngOnInit(): void {
 
@@ -93,8 +94,8 @@ export class ViewTendersComponent implements OnInit {
     this.showTenderInfo = true;
     this.tenderViewService.getTenderById(this.selectedTenderId, "ABC").subscribe((tender: Tender) => {
       console.log(tender);
-      this.selectedTenderStartDate = tender.startDate.toString();
-      this.selectedTenderEndDate = tender.endDate.toString();
+      this.selectedTenderStartDate = tender.startDate;
+      this.selectedTenderEndDate = tender.endDate;
       
       this.tenderViewService.getAllOffersByTenderId(this.selectedTenderId, "ABC").subscribe((tenderOffers: TenderOffer[]) => {
         this.tenderOffers = tenderOffers;

@@ -23,22 +23,24 @@
     </nav>
 
     <div>
-        <span style="text-align: left;" *ngIf = "this.showTenderInfo">
+        <span style="text-align: left;" *ngIf="this.showTenderInfo">
 
             <label style="margin-left: 3%;" (ngModel)="selectedTenderStartDate">
                 <strong>
                     Tender Opened on:
                 </strong>
             </label> &nbsp;
-            <label>{{selectedTenderStartDate}}</label>
-
+            <label>{{selectedTenderStartDate | date:'fullDate'}}</label>
+            <br>
             <label style="margin-left: 3%;" (ngModel)="selectedTenderEndDate"><strong>
                     Tender Closes on:
                 </strong></label>&nbsp;
-            <label> {{selectedTenderEndDate}} </label><br><br>
+            <label> {{selectedTenderEndDate | date:'fullDate'}} </label><br><br>
+            <br>
+            <button (click)="closeTender()" class="btn btn-outline-danger btn-medium;" style="margin-left: 3%;">Close
+                Tender</button>
+            <br>
 
-            <button (click)="closeTender()" class="btn btn-outline-danger btn-medium;" style="margin-left: 3%;">Close Tender</button>
-            
         </span>
         <ngb-accordion style="width: 35rem; height: 5rem; margin-left: 3%;" *ngFor="let offer of tenderOffers">
             <ngb-panel title="Tender Offer ID: {{offer.pharmacy}}">
