@@ -20,4 +20,9 @@ export class TenderViewService {
         return this.http.get(environment.baseUrlIntegration + "api/tendering/getActive");
     }
 
+    getTenderById(id: string, apiKey: string): any{
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
+        return this.http.get(environment.baseUrlIntegration + "api/tendering/" + id);
+    }
+
 }

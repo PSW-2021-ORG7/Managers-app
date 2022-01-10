@@ -67,6 +67,9 @@ export class ViewTendersComponent implements OnInit {
   totalNumberMissingMedicine: string = ""
 
   tenderOffers: TenderOffer[] = []
+  
+  selectedTenderStartDate: string = ""
+  selectedTenderEndDate: string = ""
 
   constructor(private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService) { }
 
@@ -87,17 +90,26 @@ export class ViewTendersComponent implements OnInit {
 
   viewOffers(): void{
     
-    this.tenderViewService.getAllOffersByTenderId(this.selectedTenderId, "ABC").subscribe((tenderOffers: TenderOffer[]) => {
-      this.tenderOffers = tenderOffers;
-
-      this.tenderOffers.forEach((item, index) => {
-        this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
-          item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
-        });
+    this.tenderViewService.getTenderById(this.selectedTenderId, "ABC").subscribe((tender: Tender) => {
+      console.log(tender);
+      this.selectedTenderStartDate = tender.startDate.toString();
+      this.selectedTenderEndDate = tender.endDate.toString();
+      
+      this.tenderViewService.getAllOffersByTenderId(this.selectedTenderId, "ABC").subscribe((tenderOffers: TenderOffer[]) => {
+        this.tenderOffers = tenderOffers;
+  
+        this.tenderOffers.forEach((item, index) => {
+          this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
+            item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
+          });
+      });
+  
+      });
     });
+  }
 
-    });
-
+  closeTender(){
+    //TO DO:
   }
   
   acceptOffer(): void {
