@@ -10,6 +10,11 @@ export class TenderService {
 
     constructor(private http: HttpClient) { }
 
+    openTender(obj: any, apiKey: string): any {
+        localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
+        return this.http.post(environment.baseUrlIntegration + "api/tendering/addTender", obj);
+    }
+
     sendTenderRequest(obj: any, apiKey: string): Observable<boolean> {
         localStorage.setItem('ApiKey', JSON.stringify(apiKey));    
         return this.http.post<boolean>(environment.baseUrlIntegration + "api/tendering/sendRequest", obj);

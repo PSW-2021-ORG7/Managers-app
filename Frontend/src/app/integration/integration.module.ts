@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { IntegrationRoutingModule } from './integration-routing.module';
 import { IntegrationComponent } from './integration.component';
 import { PharmacyRegistrationComponent } from './pharmacy-registration/pharmacy-registration.component';
@@ -40,6 +40,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    DatePipe
   ]
 })
 export class IntegrationModule { }

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { TenderService } from './tender.service';
@@ -17,6 +18,12 @@ export class TenderRequest {
   ) { }
 }
 
+export class Tender {
+  constructor(
+    public tenderKey: string
+  ) { }
+}
+
 @Component({
   selector: 'app-tender',
   templateUrl: './tender.component.html',
@@ -26,7 +33,7 @@ export class TenderComponent implements OnInit {
   medicine: string = '';
   dose: string = '';
   quantity: string = '';
-  date: string = '';
+  date: Date = new Date();
   disableFields: boolean = true;
   
   showItemEditRemoveButtons: boolean = false;
@@ -35,7 +42,7 @@ export class TenderComponent implements OnInit {
 
   requestedItems: TenderRequestItem[] = [];
   
-  constructor(private httpClient: HttpClient, private tenderService: TenderService) { }
+  constructor(private datePipe: DatePipe, private tenderService: TenderService) { }
 
   ngOnInit(): void {
   }
@@ -149,15 +156,28 @@ export class TenderComponent implements OnInit {
 
   openTender(): void{
     if(this.requestedItems.length == 0) alert ("No items were added!")
-    else{
-
-      var tenderRequest = {
-        requestedItems: this.requestedItems 
+    else if(this.date <= (new Date())){
+     alert("Invalid date!")
+    }
+    else{   
+      var tender = {
+        IsActive: true,
+        IdWinnerPharmacy: 0,
+        StartDate: this.datePipe.transform(new Date(), "dd/MM/yyyy")?.toString(),
+        EndDate: this.datePipe.transform(this.date, "dd/MM/yyyy")?.toString()
       }
+      console.log(tender);
+      this.tenderService.openTender(tender, "ABC").subscribe((tender: Tender) => {
+        console.log(tender)
+        var tenderRequest = {
+          requestedItems: this.requestedItems ,
+          TenderKey: tender.tenderKey
+        }
+        console.log(tenderRequest)
+        this.tenderService.sendTenderRequest(tenderRequest, "ABC").subscribe(response => {
+        }, error => alert("Didn't create tender!"))
 
-      console.log(tenderRequest)
-      this.tenderService.sendTenderRequest(tenderRequest, "ABC").subscribe(response => {
-      })
+      });    
     }
   }
 
