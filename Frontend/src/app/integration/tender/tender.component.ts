@@ -169,6 +169,7 @@ export class TenderComponent implements OnInit {
       console.log(tender);
       this.tenderService.openTender(tender, "ABC").subscribe((tender: Tender) => {
         console.log(tender)
+        alert("Successfully opened tender!")
         var tenderRequest = {
           requestedItems: this.requestedItems ,
           TenderKey: tender.tenderKey
