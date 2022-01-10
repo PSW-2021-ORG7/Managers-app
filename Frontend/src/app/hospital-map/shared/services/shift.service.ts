@@ -14,7 +14,12 @@ export class ShiftService{
     
     constructor(private http: HttpClient) { }
 
+    getShifts(doctorId: number): Observable<Shift[]>{
+        return this.http.get<Shift[]>(this.baseUrl + "/doctor/" + doctorId);
+    }
+
     getShiftsFromDate(startDate: string): Observable<Shift[]> {
         return this.http.get<Shift[]>(this.baseUrl + '?start=' + startDate);
     }
+
 }
