@@ -30,6 +30,7 @@ export class ManageDoctorComponent implements OnInit {
   isInfoDialogVisible: boolean = false;
   newShift!: Shift;
   deleteShiftDialogVisible: boolean = false;
+  deleteOnCallShiftDialogVisible: boolean = false;
   title: string = "";
   description: string = "";
   deleteWorkdayId: number = -1;
@@ -102,10 +103,6 @@ export class ManageDoctorComponent implements OnInit {
     }    
   }
 
-
-
-
-
   onNotifyFromDoctorScheduleCalendar(messenger: any): void{
     if(messenger.id.includes("workday")){
       this.deleteWorkdayId = parseInt(messenger.id.slice(0, -8));
@@ -113,17 +110,26 @@ export class ManageDoctorComponent implements OnInit {
       this.description = "Are you sure you want to remove " + this.doctor.name + " " + this.doctor.surname + " from this working this day?" 
       this.deleteShiftDialogVisible = true;
     }
-    if(messenger.id.includes("onCallShifts")){
+    if(messenger.id.includes("onCallShift")){
       this.deleteOnCallShiftId = parseInt(messenger.id.slice(0, -11));
       this.title = "Delete On-Call Shift?";
       this.description = "Are you sure you want to remove " + this.doctor.name + " " + this.doctor.surname + " from this working this day?" 
-      this.assignOnCallShiftDialogVisible = true;
-      //this.shiftService.deleteOnCallShift(selectedOnCallShift).subscribe();
+      this.deleteOnCallShiftDialogVisible = true;
     }
     if(messenger.id.includes("holiday")){
       this.assignHolidayDialogVisible = true;
       this.update = true;
       this.holidayId = parseInt(messenger.id.slice(0, -7));
+    }
+  }
+
+  onNotifyFromAssignOnCallShiftDialog(message: string): void{
+    if(message == "close"){
+      this.assignOnCallShiftDialogVisible = false;
+    } else if(message == "assigned"){
+      this.assignOnCallShiftDialogVisible = false;
+      this.showInfoDialog("Successful", "Sucessfuly added on-call shift in Dr. " + this.doctor.name + " " +  this.doctor.surname + "'s schedule.", "Okay");
+      this.reload();
     }
   }
 
@@ -161,18 +167,13 @@ export class ManageDoctorComponent implements OnInit {
   }
 
   onNotifyConfirmOnCallShiftButton() : void {
-    this.assignOnCallShiftDialogVisible
+    this.deleteOnCallShiftDialogVisible = false;
+    this.shiftService.deleteOnCallShift(this.deleteOnCallShiftId).subscribe();
   }
 
   onNotifyCancelOnCallShiftButton() : void {
-
-
+    this.deleteOnCallShiftDialogVisible = false;
   }
-
-
-
-
-
 
   reload(): void {
     document.location.reload();
@@ -188,14 +189,5 @@ export class ManageDoctorComponent implements OnInit {
       this.assignOnCallShiftDialogVisible = false;
     }
   }
-
-
-
-
-
-
-
-
-
 
 }

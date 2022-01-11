@@ -67,15 +67,8 @@ export class ShiftService{
         return this.http.post<Observable<any>>(this.baseUrl + "onCallShifts", onCallShift);
     }
     
-    deleteOnCallShift(onCallShift: OnCallShift) : Observable<OnCallShift>{
-        const options = {
-            headers: new HttpHeaders({
-              'Content-Type': 'application/json',
-            }),
-            body: 
-            onCallShift    
-        }
-        return this.http.delete<OnCallShift>(this.baseUrl + "onCallShifts", options);        
+    deleteOnCallShift(onCallShiftId: number) : Observable<any>{
+        return this.http.delete<Observable<any>>(this.baseUrl + 'onCallShifts/' + onCallShiftId);  
     }
 
 }
