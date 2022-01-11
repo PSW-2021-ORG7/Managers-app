@@ -1,11 +1,11 @@
 export class OnCallShift {
     public id: number;
-    public name: string;
-    public date: Date;
+    public start: Date;
+    public doctorId: number;
 
-    constructor(){
-        this.id = -1;
-        this.name = "";
-        this.date = new Date(); 
+    constructor(id: number, start: Date, doctorId: number){
+        this.id = id;
+        this.start = start;
+        this.doctorId = doctorId;
     }
 }

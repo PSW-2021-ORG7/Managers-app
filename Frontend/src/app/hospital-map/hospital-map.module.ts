@@ -36,6 +36,7 @@ import { AssignHolidayDialogComponent } from './pages/manage-doctor/assign-holid
 import { ManageShiftsComponent } from './pages/manage-shifts/manage-shifts.component';
 import { CreateShiftDialogComponent } from './pages/manage-shifts/create-shift-dialog/create-shift-dialog.component';
 import { UpdateShiftDialogComponent } from './pages/manage-shifts/update-shift-dialog/update-shift-dialog.component';
+import { AssignOnCallShiftDialogComponent } from './pages/manage-doctor/assign-on-call-shift-dialog/assign-on-call-shift-dialog.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -72,7 +73,8 @@ FullCalendarModule.registerPlugins([
     AssignHolidayDialogComponent,
     ManageShiftsComponent,
     CreateShiftDialogComponent,
-    UpdateShiftDialogComponent
+    UpdateShiftDialogComponent,
+    AssignOnCallShiftDialogComponent
   ],
   imports: [
     CommonModule,

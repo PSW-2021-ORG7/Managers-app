@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { OnCallShift } from "@app/hospital-map/models/shift/on-call-shift.model";
 import { Shift } from "@app/hospital-map/models/shift/shift.model";
 import { WorkdayShift } from "@app/hospital-map/models/shift/workday-shift.model";
 import { Observable } from "rxjs";
@@ -10,7 +11,6 @@ import { environment } from "src/environments/environment";
     providedIn: 'root'
 })
 export class ShiftService{
-    
     
     private baseUrl: string = environment.baseUrlHospital;
     
@@ -58,4 +58,17 @@ export class ShiftService{
         }
         return this.http.delete<Shift>(this.baseUrl + 'shifts', options);
     }
+
+    getOnCallShifts(doctorId: number): Observable<OnCallShift[]>{
+        return this.http.get<OnCallShift[]>(this.baseUrl + "onCallShifts/doctor/" + doctorId);
+    }
+
+    postOnCallShift(onCallShift: Object) : Observable<any>{
+        return this.http.post<Observable<any>>(this.baseUrl + "onCallShifts", onCallShift);
+    }
+    
+    deleteOnCallShift(onCallShiftId: number) : Observable<any>{
+        return this.http.delete<Observable<any>>(this.baseUrl + 'onCallShifts/' + onCallShiftId);  
+    }
+
 }
