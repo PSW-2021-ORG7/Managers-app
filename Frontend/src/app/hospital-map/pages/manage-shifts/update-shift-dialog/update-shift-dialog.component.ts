@@ -49,7 +49,11 @@ export class UpdateShiftDialogComponent implements OnInit, OnChanges {
     start.setMinutes(this.startTime.minute);
     end.setHours(this.endTime.hour + 1);
     end.setMinutes(this.endTime.minute);
-    let shift = new Shift(this.selectedShift.id, this.selectedShift.name, start, end)
+    let shift = new Shift();
+    shift.id = this.selectedShift.id;
+    shift.name = this.selectedShift.name;
+    shift.start = start;
+    shift.end = end;
     this.shiftService.putShift(shift).subscribe(
       data => {
         this.notifyCloseDialog.emit("close");

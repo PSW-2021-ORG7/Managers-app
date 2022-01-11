@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { Shift } from '@app/hospital-map/models/shift/shift.model';
 import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 
@@ -18,7 +19,7 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
   selectedShiftId: number = -1;
   @Output() notifyFromAssignShiftDialog: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private shiftService: ShiftService, private datepipe: DatePipe) { }
+  constructor(private shiftService: ShiftService, private datepipe: DatePipe, private router: Router) { }
 
   ngOnInit(): void {}
 
@@ -68,6 +69,10 @@ export class AssignShiftDialogComponent implements OnInit, OnChanges{
         if(error.status == 204)
             this.notifyFromAssignShiftDialog.emit({result: "badRequest"})
       });
+  }
+
+  onCreate(): void{
+    this.router.navigate(['/hospital-map/manage-shifts'])
   }
 
 }

@@ -37,15 +37,15 @@ export class ShiftService{
     }
      
     getAllShifts(): Observable<Shift[]> {
-        return this.http.get<Shift[]>(this.baseUrl);
+        return this.http.get<Shift[]>(this.baseUrl + 'shifts');
     }
     
     postShift(shift: Object): Observable<Shift> {
-        return this.http.post<Shift>(this.baseUrl, shift);
+        return this.http.post<Shift>(this.baseUrl + 'shifts', shift);
     }
     
     putShift(shift: Shift): Observable<Shift> {
-        return this.http.put<Shift>(this.baseUrl, shift);
+        return this.http.put<Shift>(this.baseUrl + 'shifts', shift);
     }
     
     deleteShift(shift: Shift): Observable<Shift> {
@@ -56,6 +56,6 @@ export class ShiftService{
           body: 
           shift    
         }
-        return this.http.delete<Shift>(this.baseUrl, options);
+        return this.http.delete<Shift>(this.baseUrl + 'shifts', options);
     }
 }

@@ -11,7 +11,7 @@ import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 export class ManageShiftsComponent implements OnInit {
   shifts: Shift[] = [];
   isShiftSelected: boolean = false;
-  selectedShift: Shift = new Shift(-1, "", new Date(), new Date());
+  selectedShift: Shift = new Shift();
   showOptionalDialog: boolean = false;
   createShiftDialogVisible: boolean = false;
   updateShiftDialogVisible: boolean = false;
@@ -67,6 +67,10 @@ export class ManageShiftsComponent implements OnInit {
       this.router.onSameUrlNavigation = 'reload';
       this.router.navigate([currentUrl]);
     }
+  }
+
+  onBack(): void{
+    this.router.navigate(['/hospital-map'])
   }
 
 }
