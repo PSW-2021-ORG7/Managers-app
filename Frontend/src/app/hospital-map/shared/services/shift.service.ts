@@ -12,6 +12,7 @@ import { environment } from "src/environments/environment";
 })
 export class ShiftService{
     
+    
     private baseUrl: string = environment.baseUrlHospital;
     
     constructor(private http: HttpClient) { }
@@ -25,7 +26,11 @@ export class ShiftService{
     }
 
     getShiftsInDateRange(startDate: string, endDate: string): Observable<Shift[]> {
-        return this.http.get<Shift[]>(this.baseUrl + '?start=' + startDate + "&end=" + endDate );
+        return this.http.get<Shift[]>(this.baseUrl + 'shifts' + '?start=' + startDate + "&end=" + endDate );
+    }
+
+    getOnCallShiftsInDateRange(startDate: string, endDate: string): Observable<OnCallShift[]> {
+        return this.http.get<OnCallShift[]>(this.baseUrl + 'onCallShifts' + '?start=' + startDate + "&end=" + endDate );
     }
 
     assignShiftToDoctor(workday: Object) : Observable<any> {

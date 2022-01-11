@@ -2,11 +2,13 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Doctor } from '@app/hospital-map/models/doctor/doctor.model';
+import { OnCallShift } from '@app/hospital-map/models/shift/on-call-shift.model';
 import { Shift } from '@app/hospital-map/models/shift/shift.model';
 import { DoctorService } from '@app/hospital-map/shared/services/doctor.service';
 import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 import { ThirdPartyDraggable } from '@fullcalendar/interaction';
 import { ChartType } from 'chart.js';
+import { thresholdFreedmanDiaconis } from 'd3';
 import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
@@ -16,7 +18,7 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class DoctorWorkloadComponent implements OnInit {
 
-  roomId!: string;
+  roomId: string = "";
   doctorId!: number;
   doctor!: Doctor;
   currentDate: Date = new Date();
@@ -34,7 +36,9 @@ export class DoctorWorkloadComponent implements OnInit {
     {data: Array<any>(), label: 'On-call shifts', cubicInterpolationMode: 'monotone', borderColor: '#214975'}
   ];
   shifts: Shift[] = [];
+  onCallShifts: OnCallShift[]= [];
   @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
+  
 
   constructor(private route: ActivatedRoute, private router: Router, private doctorService: DoctorService, private shiftService: ShiftService, private datepipe: DatePipe) { 
     if(router.getCurrentNavigation()?.extras.state?.roomId)
@@ -51,35 +55,52 @@ export class DoctorWorkloadComponent implements OnInit {
       );
       var firstDateInYear = new Date(new Date().getFullYear(), 0, 1);
       var lastDateInYear = new Date(new Date().getFullYear(), 11, 31);
-      this.shiftService.getShiftsInDateRange(this.datepipe.transform(firstDateInYear, 'yyyy-MM-dd')!, this.datepipe.transform(lastDateInYear, 'yyyy-MM-dd')!).subscribe(
-        data => {
-          this.shifts = data;
-          this.filterShiftsForGraph();
-          this.chart.update();
-        }
-      );
       // this.shiftService.getShiftsInDateRange(this.datepipe.transform(firstDateInYear, 'yyyy-MM-dd')!, this.datepipe.transform(lastDateInYear, 'yyyy-MM-dd')!).subscribe(
       //   data => {
       //     this.shifts = data;
+      //     this.filterShiftsForGraph();
+      //     this.chart.update();
       //   }
       // );
+      this.shiftService.getOnCallShiftsInDateRange(this.datepipe.transform(firstDateInYear, 'yyyy-MM-dd')!, this.datepipe.transform(lastDateInYear, 'yyyy-MM-dd')!).subscribe(
+        data => {
+          this.onCallShifts = data;
+          this.filterOnCallShiftsForGraph();
+          this.chart.update();
+        }
+      );
     });
   }
+  
 
   filterShiftsForGraph() {
     for(let month = 0; month < 12; month++){
       var firstDateInMonth = new Date(new Date().getFullYear(), month, 1);
       var lastDateInMonth = new Date(new Date().getFullYear(), month+1, 0);
-      var shiftWorkedCount = 0;
+      var shiftsWorkedCount = 0;
       for(let shift of this.shifts){
         if(new Date(shift.start) > firstDateInMonth && new Date(shift.end) < lastDateInMonth){
-          shiftWorkedCount += 1;
+          shiftsWorkedCount += 1;
         }
       }
-      this.chartData[0].data.push(shiftWorkedCount);
-      
+      this.chartData[0].data.push(shiftsWorkedCount);
     }
-    
+  }
+
+  filterOnCallShiftsForGraph() {
+    for(let month = 0; month < 12; month++){
+      var firstDateInMonth = new Date(new Date().getFullYear(), month, 1);
+      var lastDateInMonth = new Date(new Date().getFullYear(), month+1, 0);
+      var onCallShiftsWorkedCount = 0;
+      for(let onCallShift of this.onCallShifts){
+        if(onCallShift.doctorId == this.doctorId){
+          if(new Date(onCallShift.start) > firstDateInMonth && new Date(onCallShift.start) < lastDateInMonth){
+            onCallShiftsWorkedCount += 1;
+          }
+        }
+      }
+      this.chartData[1].data.push(onCallShiftsWorkedCount);
+    }
   }
 
   onBack(): void{

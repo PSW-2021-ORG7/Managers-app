@@ -4,7 +4,11 @@
         <span *ngIf="roomId != ''" class="align-middle ms-1">Room details</span>
         <span *ngIf="roomId == ''" class="align-middle ms-1">Map view</span>
     </div>
-    <h2 *ngIf="doctor">Dr. {{doctor.name}} {{doctor.surname}} Workload</h2>
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 *ngIf="doctor">Dr. {{doctor.name}} {{doctor.surname}} Workload</h2>
+        <span class="subtitle">Monthly view for 2022</span>
+    </div>
+    
     <div class="canvas-wrapper">
         <canvas baseChart
             [datasets]="chartData"
