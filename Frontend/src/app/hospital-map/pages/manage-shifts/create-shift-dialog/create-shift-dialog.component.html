@@ -1,0 +1,36 @@
+<div class="d-flex flex-column container align-items-center">
+    <h5>Create new shift</h5>
+    <div class="w-100 wrapper">
+        <div class="form-group d-flex flex-column mb-2 w-100">
+            <label class="form-label" for="shiftName">Shift name</label>
+            <select class="form-control" id="shiftName" name='shiftName' [(ngModel)]="shiftName">
+                <option style="display:none"></option>
+                <option value = "Morning shift">Morning shift</option>
+                <option value = "Afternoon shift">Afternoon shift</option>
+            </select>
+        </div>
+        <div class="form-group my-3">
+            <div class="input-group">
+              <input class="form-control custom-date-picker" placeholder="Date"
+                     name="dp" [(ngModel)]="fromDate" ngbDatepicker #d="ngbDatepicker" [minDate]="minDate!" [startDate]="minDate!">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+              </div>
+            </div>
+        </div>
+        <div class="d-flex flex-row">
+            <div class="form-group d-flex flex-column mb-2 w-100">
+                <label class="form-label" for="startTime">Start time</label>
+                <ngb-timepicker [(ngModel)]="startTime"></ngb-timepicker>
+            </div>
+            <div class="form-group d-flex flex-column mb-2 w-100">
+                <label class="form-label" for="startTime">End time</label>
+                <ngb-timepicker [(ngModel)]="endTime"></ngb-timepicker>
+            </div>
+        </div>
+        <div class="dialog-buttons d-flex flex-row justify-content-center">
+            <app-primary-button class="dialog-button w-100 me-2" text="Cancel" color="#a2a2a2" (click)="onCancelClick()"></app-primary-button>
+            <app-primary-button class="dialog-button w-100 ms-2" text="Create" color="#214975" (click)="createShift()"></app-primary-button>
+        </div>
+    </div>
+</div>
