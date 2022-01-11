@@ -37,6 +37,8 @@ import { ManageShiftsComponent } from './pages/manage-shifts/manage-shifts.compo
 import { CreateShiftDialogComponent } from './pages/manage-shifts/create-shift-dialog/create-shift-dialog.component';
 import { UpdateShiftDialogComponent } from './pages/manage-shifts/update-shift-dialog/update-shift-dialog.component';
 import { AssignOnCallShiftDialogComponent } from './pages/manage-doctor/assign-on-call-shift-dialog/assign-on-call-shift-dialog.component';
+import { DoctorWorkloadComponent } from './pages/doctor-workload/doctor-workload.component';
+import { NgChartsModule } from 'ng2-charts';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -74,7 +76,8 @@ FullCalendarModule.registerPlugins([
     ManageShiftsComponent,
     CreateShiftDialogComponent,
     UpdateShiftDialogComponent,
-    AssignOnCallShiftDialogComponent
+    AssignOnCallShiftDialogComponent,
+    DoctorWorkloadComponent,
   ],
   imports: [
     CommonModule,
@@ -84,7 +87,8 @@ FullCalendarModule.registerPlugins([
     NgbDropdownModule,
     FullCalendarModule,
     NgxSpinnerModule,
-    NgbTimepickerModule
+    NgbTimepickerModule,
+    NgChartsModule
   ],
   providers: [
     D3Service,

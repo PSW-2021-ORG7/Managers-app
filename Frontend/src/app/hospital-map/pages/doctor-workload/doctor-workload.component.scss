@@ -1,0 +1,33 @@
+@import 'src/styles/main.scss';
+
+#doctor-workload{
+    padding-right: 40px;
+    padding-left: 40px;
+}
+
+    .back-icon{
+        margin-right: 5px;
+        @include icon;
+        @include background-svg($back-icon);
+    }
+
+    .back-to-room-details-btn{
+        margin-top: 20px;
+        cursor: pointer;
+    }
+
+        .back-to-room-details-btn span{
+            color: color(darkgrey);
+        }
+
+    h2{
+        margin: 20px 0;
+    }
+
+    .subtitle{
+        color: color(darkgrey);
+    }
+
+    .canvas-wrapper{
+        height: 78vh;
+    }
