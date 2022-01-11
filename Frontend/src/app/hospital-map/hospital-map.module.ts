@@ -33,6 +33,7 @@ import { AvailableTimeSlotsComponent } from './shared/components/available-time-
 import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.component';
 import { DoctorScheduleCalendarComponent } from './pages/manage-doctor/doctor-schedule-calendar/doctor-schedule-calendar.component';
 import { AssignShiftDialogComponent } from './pages/manage-doctor/assign-shift-dialog/assign-shift-dialog.component';
+import { AssignHolidayDialogComponent } from './pages/manage-doctor/assign-holiday-dialog/assign-holiday-dialog.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -66,6 +67,7 @@ FullCalendarModule.registerPlugins([
     ManageDoctorComponent,
     DoctorScheduleCalendarComponent,
     AssignShiftDialogComponent,
+    AssignHolidayDialogComponent,
   ],
   imports: [
     CommonModule,
