@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Shift } from '@app/hospital-map/models/schedule/shift.model';
-import { ShiftsService } from '@app/hospital-map/shared/services/shifts.service';
+import { Router } from '@angular/router';
+import { Shift } from '@app/hospital-map/models/shift/shift.model';
+import { ShiftService } from '@app/hospital-map/shared/services/shift.service';
 
 @Component({
   selector: 'app-manage-shifts',
@@ -10,15 +11,16 @@ import { ShiftsService } from '@app/hospital-map/shared/services/shifts.service'
 export class ManageShiftsComponent implements OnInit {
   shifts: Shift[] = [];
   isShiftSelected: boolean = false;
-  selectedShift: any = null;
+  selectedShift: Shift = new Shift(-1, "", new Date(), new Date());
   showOptionalDialog: boolean = false;
   createShiftDialogVisible: boolean = false;
+  updateShiftDialogVisible: boolean = false;
 
-  constructor(private shiftsService: ShiftsService) { }
+  constructor(private shiftService: ShiftService, private router: Router) { }
 
   ngOnInit(): void {
 
-    this.shiftsService.getShifts().subscribe(
+    this.shiftService.getAllShifts().subscribe(
       data => {
         this.shifts = data;
       }
@@ -35,6 +37,14 @@ export class ManageShiftsComponent implements OnInit {
   }
 
   onNotifyConfirmButton(){
+    this.shiftService.deleteShift(this.selectedShift).subscribe(
+      data => {
+        let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate([currentUrl]);
+      }
+    );
     this.showOptionalDialog = false;
   }
 
@@ -46,9 +56,17 @@ export class ManageShiftsComponent implements OnInit {
     this.createShiftDialogVisible = true;
   }
 
+  updateShift(): void{
+    this.updateShiftDialogVisible = true;
+  }
+
   onNotifyCloseDialog(message: string): void{
-    if(message == "close")
-      this.createShiftDialogVisible = false;
+    if(message == "close"){
+      let currentUrl = this.router.url;
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate([currentUrl]);
+    }
   }
 
 }

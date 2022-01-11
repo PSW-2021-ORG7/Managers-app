@@ -1,0 +1,19 @@
+<div class="d-flex flex-column container align-items-center">
+    <h5>Update shift</h5>
+    <div class="w-100 wrapper">
+        <div class="d-flex flex-row">
+            <div class="form-group d-flex flex-column mb-2 w-100">
+                <label class="form-label" for="startTime">Start time</label>
+                <ngb-timepicker [(ngModel)]="startTime"></ngb-timepicker>
+            </div>
+            <div class="form-group d-flex flex-column mb-2 w-100">
+                <label class="form-label" for="startTime">End time</label>
+                <ngb-timepicker [(ngModel)]="endTime"></ngb-timepicker>
+            </div>
+        </div>
+        <div class="dialog-buttons d-flex flex-row justify-content-center">
+            <app-primary-button class="dialog-button w-100 me-2" text="Cancel" color="#a2a2a2" (click)="onCancelClick()"></app-primary-button>
+            <app-primary-button class="dialog-button w-100 ms-2" text="Update" color="#214975" (click)="updateShift()"></app-primary-button>
+        </div>
+    </div>
+</div>
