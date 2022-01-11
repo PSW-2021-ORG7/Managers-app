@@ -60,6 +60,12 @@ export class RoomDetailsComponent implements OnInit {
       alert("This room doesn't have a doctor!");
   }
 
+  showDoctorWorkload(): void{
+    if(this.doctor != null && this.room != null){
+      this.router.navigate(['/hospital-map/doctor-workload/' + this.doctor.id], { state: { roomId: this.room.id } })
+    }
+  }
+
   onNotifyHideRoomInfo(){
     this.roomInfoFormVisible = false;
   }

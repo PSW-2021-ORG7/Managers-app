@@ -1,0 +1,17 @@
+<div id="doctor-workload" class="d-flex flex-column">
+    <div class="back-to-room-details-btn" (click)="onBack()">
+        <svg class="back-icon"></svg>
+        <span *ngIf="roomId != ''" class="align-middle ms-1">Room details</span>
+        <span *ngIf="roomId == ''" class="align-middle ms-1">Map view</span>
+    </div>
+    <h2 *ngIf="doctor">Dr. {{doctor.name}} {{doctor.surname}} Workload</h2>
+    <div class="canvas-wrapper">
+        <canvas baseChart
+            [datasets]="chartData"
+            [labels]="chartLabels"
+            [options]="chartOptions"
+            [legend]="chartLegend"
+            [type]="chartType">
+        </canvas>
+    </div>
+</div>

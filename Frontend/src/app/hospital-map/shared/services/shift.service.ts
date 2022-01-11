@@ -24,6 +24,10 @@ export class ShiftService{
         return this.http.get<Shift[]>(this.baseUrl + 'shifts' + '?start=' + startDate);
     }
 
+    getShiftsInDateRange(startDate: string, endDate: string): Observable<Shift[]> {
+        return this.http.get<Shift[]>(this.baseUrl + '?start=' + startDate + "&end=" + endDate );
+    }
+
     assignShiftToDoctor(workday: Object) : Observable<any> {
         return this.http.post<Observable<any>>(this.baseUrl + 'workdays', workday);
     }

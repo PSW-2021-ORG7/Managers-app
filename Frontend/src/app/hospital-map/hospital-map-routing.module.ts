@@ -8,6 +8,7 @@ import { RoomRenovationComponent } from './pages/room-renovation/room-renovation
 import { RoomScheduleComponent } from './pages/room-schedule/room-schedule.component';
 import { ManageDoctorComponent } from './pages/manage-doctor/manage-doctor.component';
 import { ManageShiftsComponent } from './pages/manage-shifts/manage-shifts.component';
+import { DoctorWorkloadComponent } from './pages/doctor-workload/doctor-workload.component';
 
 const routes: Routes = [
   { path: '', component: HospitalMapComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: 'room-renovation/:id', component: RoomRenovationComponent},
   { path: 'room-schedule/:id', component: RoomScheduleComponent},
   { path: 'manage-doctor/:id', component: ManageDoctorComponent},
-  { path: 'manage-shifts', component: ManageShiftsComponent}
+  { path: 'manage-shifts', component: ManageShiftsComponent},
+  { path: 'doctor-workload/:id', component: DoctorWorkloadComponent}
 ];
 
 @NgModule({
