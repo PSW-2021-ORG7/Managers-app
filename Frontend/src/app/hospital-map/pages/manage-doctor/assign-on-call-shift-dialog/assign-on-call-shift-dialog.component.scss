@@ -1,0 +1,91 @@
+@import 'src/styles/main.scss';
+
+.container{
+    background-color: white;
+    border-radius: 5px;
+    padding: 20px 20px;
+}
+
+    h5{
+        margin-bottom: 20px !important;
+        font-weight: bold;
+        color: color(blue);
+    }
+    
+    .subtitle{
+        margin-right: 200px;
+    }
+
+    .grey-text{
+        color: color(darkgrey);
+    }
+
+    .create-new-shift{
+        cursor: pointer;
+    }
+
+    .custom-date-picker{
+        border: 0px;
+        height: 33px;
+        box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.06);
+        margin-right: 20px;
+    }
+
+    .form-group.hidden {
+        width: 0;
+        margin: 0;
+        border: none;
+        padding: 0;
+    }
+
+    .custom-day {
+        text-align: center;
+        padding: 0.185rem 0.25rem;
+        display: inline-block;
+        height: 2rem;
+        width: 2rem;
+    }
+
+    .custom-day.focused {
+        background-color: #e6e6e6;
+    }
+
+    .custom-day.range, .custom-day:hover {
+        background-color: color(blue);
+        color: white;
+        border: 0px;
+    }
+
+    .custom-day.faded {
+        background-color: rgba(54, 112, 176, 0.3);
+    }
+
+    .input-group{
+        position: relative;
+    }
+
+        input{
+            background-color: white !important;
+        }
+
+    .calendar{
+        position: absolute;
+        @include icon;
+        right: 26px;
+        top: 6px;
+        @include background-svg($calendar-icon);
+        z-index: 100;
+    }
+
+    .cancel-btn{
+        background-color: color(darkgrey);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+
+
+    
+    

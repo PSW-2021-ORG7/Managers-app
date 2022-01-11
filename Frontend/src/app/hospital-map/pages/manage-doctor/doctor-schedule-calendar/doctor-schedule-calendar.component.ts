@@ -69,7 +69,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
         this.fullCalendar.getApi().refetchEvents();
       }
     }
-  
     if(changes['onCallShifts']){
       this.onCallShifts = changes.onCallShifts.currentValue;
       this.filterOnCallShifts();
@@ -77,7 +76,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
         this.fullCalendar.getApi().refetchEvents();
       }
     }
-
     if(changes['holidays']){
       this.holidays = changes.holidays.currentValue;
       this.filterHolidays();
@@ -85,7 +83,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
         this.fullCalendar.getApi().refetchEvents();
       }
     }
-
     if (changes['newShift']) {
       if(changes.newShift.currentValue){
         this.newShift = changes.newShift.currentValue;
@@ -98,7 +95,6 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
         ));
       }
     }
-
     if(this.fullCalendar){
       this.fullCalendar.getApi().refetchEvents();
     }
@@ -121,14 +117,14 @@ export class DoctorScheduleCalendarComponent implements OnInit, OnChanges {
   }
 
   private filterOnCallShifts() : void {
-    for(let shift of this.shifts){
+    for(let onCallShift of this.onCallShifts){
       this.events.push(
         new CalendarEvent(
-          shift.id!.toString() + "OnCallShift",
-          shift.name,
-          shift.start,
-          shift.end,
-          "#ffc700"
+          onCallShift.id!.toString() + "onCallShift",
+          "On-call shift",
+          onCallShift.start,
+          new Date(new Date(onCallShift.start).getTime() + 9*60*60*1000),
+          "#387da7"
         )
       );
     }

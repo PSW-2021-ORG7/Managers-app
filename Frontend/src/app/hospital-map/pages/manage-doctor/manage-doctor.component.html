@@ -3,6 +3,10 @@
     <app-optional-dialog [title]="title" [description]="description" cancelText="Cancel" confirmText="Yes"
     (notifyCancelButton)="onNotifyCancelButton()" (notifyConfirmButton)="onNotifyConfirmButton()" ></app-optional-dialog>
 </div>
+<div class="overlay d-flex align-items-center justify-content-center" *ngIf="deleteOnCallShiftDialogVisible">
+    <app-optional-dialog [title]="title" [description]="description" cancelText="Cancel" confirmText="Yes"
+    (notifyCancelButton)="onNotifyCancelOnCallShiftButton()" (notifyConfirmButton)="onNotifyConfirmOnCallShiftButton()" ></app-optional-dialog>
+</div>
 <div id="manage-doctor" class="d-flex flex-column">
     <div class="back-to-room-details-btn" (click)="onBack()">
         <svg class="back-icon"></svg>
@@ -18,7 +22,7 @@
             </div>
             <div class="assign-on-call-shift-btn">
                 <svg class="on-call-shift-icon"></svg>
-                <span class="align-middle ms-1 button-text fw-bold">Assign on-call shift</span>
+                <span class="align-middle ms-1 button-text fw-bold" (click)="toggleAssignOnCallShiftDialog()">Assign on-call shift</span>
             </div>
             <div class="assign-shift-btn">
                 <svg class="shift-icon"></svg>
@@ -34,4 +38,7 @@
 </div>
 <div *ngIf="assignHolidayDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
     <app-assign-holiday-dialog [doctorsHolidays]="holidays" [doctorId]="doctorId" [isVisible]="assignHolidayDialogVisible" [update]="update" [holidayId]="holidayId" (notifyCloseHolidayDialog)="onNotifyCloseHolidayDialog()" (notifyReload)="reload()"></app-assign-holiday-dialog>
+</div>
+<div *ngIf="assignOnCallShiftDialogVisible" class="overlay d-flex justify-content-center align-items-center w-100">
+    <app-assign-on-call-shift-dialog [doctorsOnCallShifts]="onCallShifts" [doctorId]="doctorId" [isVisible]="assignOnCallShiftDialogVisible" (notifyFromAssignOnCallShiftDialog)="onNotifyFromAssignOnCallShiftDialog($event)"></app-assign-on-call-shift-dialog>
 </div>
