@@ -128,6 +128,7 @@ export class ManageDoctorComponent implements OnInit {
     if(this.deleteWorkdayId != -1)
       this.shiftService.removeShiftFromDoctor(this.deleteWorkdayId).subscribe(
         data => {
+          this.reload();
           this.showInfoDialog("Removed workday", "Sucessfuly removed workday from Dr. " + this.doctor.name + " " +  this.doctor.surname + "'s schedule.", "Okay");
         }
       );
