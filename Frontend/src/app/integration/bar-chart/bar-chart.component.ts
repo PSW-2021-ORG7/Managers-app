@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ChartDataset, ChartType, ChartOptions } from 'chart.js';
+import { ChartType, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { TenderViewService } from '../view-tenders/view-tenders.service';
 

@@ -185,11 +185,7 @@ export class ViewTendersComponent implements OnInit {
 
           this.pharmacyService.getPharmacyByID(offer.idPharmacy).subscribe((pharmacy: Pharmacy) => {
             this.pharmacyService.findMedicineByNameAndDose(item.medicineName, item.medicineDosage.toString(), pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
-    
-              console.log("Returned medicine:")
-              console.log(med)
-    
-              console.log("Sent request:")
+       
               var inventoryUpdate = {
                 medicineId: med.Id,
                 quantity: item.availableQuantity
@@ -207,8 +203,7 @@ export class ViewTendersComponent implements OnInit {
                     }
                     else alert("Failed to update hospital inventory!")
                   });
-                }
-    
+                }  
                 else alert("Failed to update pharmacy inventory!")
               });
             })

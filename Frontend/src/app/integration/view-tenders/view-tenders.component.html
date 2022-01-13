@@ -22,7 +22,7 @@
         </ul>
     </nav>
 
-    <div>
+    <div style="margin-left: 3%;">
         <span style="text-align: left;" *ngIf="this.showTenderInfo && this.selectedTenderId != ''">
 
             <label style="margin-left: 3%;" (ngModel)="selectedTenderStartDate">
@@ -48,6 +48,7 @@
                     <div class="card-body" id="collapseExample" style="background: #8e8f8f80">
                         <div class="card card-body" *ngFor="let item of offer.tenderOfferItems">
                             <table style="text-align: left;">
+                                <th></th> <caption> </caption>
                                 <tr>
                                     <td><label (ngModel)="medicineName"><strong>
                                                 Medicine name:
