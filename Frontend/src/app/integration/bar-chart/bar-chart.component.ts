@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChartDataSets, ChartType, ChartOptions } from 'chart.js';
-import { Color, Label } from 'ng2-charts';
+import { ChartDataset, ChartType, ChartOptions } from 'chart.js';
 import { TenderViewService } from '../view-tenders/view-tenders.service';
 
 export class Tender {
@@ -33,19 +32,19 @@ export class BarChartComponent implements OnInit {
 
   barChartOptions: ChartOptions = {
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
+    //scales: { xAxes: [{}], yAxes: [{}] },
   };
-  barChartLabels: Label[] = [];
+  barChartLabels: String[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
-  barChartColors: Color[] = [
+  barChartColors: any[] = [
     {
       borderColor: 'black',
       backgroundColor: 'rgba(255,0,0,0.55)',
     },
   ];
-  barChartData: ChartDataSets[] = [
+  barChartData: ChartDataset[] = [
     { data: [], label: 'Price Available' },
     { data: [], label: 'Price Required' },
     { data: [], label: 'Price Available (Won Tender)' }
