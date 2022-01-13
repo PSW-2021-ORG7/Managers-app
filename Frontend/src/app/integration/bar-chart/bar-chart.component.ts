@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChartDataset, ChartType, ChartOptions } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { TenderViewService } from '../view-tenders/view-tenders.service';
 
 export class Tender {
@@ -30,9 +31,10 @@ export class TenderOffer {
 })
 export class BarChartComponent implements OnInit {
 
+  @ViewChild(BaseChartDirective) chart!: BaseChartDirective;
   barChartOptions: ChartOptions = {
     responsive: true,
-    //scales: { xAxes: [{}], yAxes: [{}] },
+    scales: { xAxes: {}, yAxes: {} },
   };
   barChartLabels: String[] = [];
   barChartType: ChartType = 'bar';
@@ -44,7 +46,7 @@ export class BarChartComponent implements OnInit {
       backgroundColor: 'rgba(255,0,0,0.55)',
     },
   ];
-  barChartData: ChartDataset[] = [
+  barChartData: any[] = [
     { data: [], label: 'Price Available' },
     { data: [], label: 'Price Required' },
     { data: [], label: 'Price Available (Won Tender)' }
@@ -97,10 +99,10 @@ export class BarChartComponent implements OnInit {
               else{
                 this.barChartData[0].data?.push(+offer.priceForAllAvailable)
                 this.barChartData[2].data?.push(0)
-              }
-            
+              }       
           }
         })
+        this.chart.update()
       })
 
     })
