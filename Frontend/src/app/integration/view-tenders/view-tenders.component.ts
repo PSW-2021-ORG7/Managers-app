@@ -140,7 +140,6 @@ export class ViewTendersComponent implements OnInit {
         idWinnerPharmacy = +item.idPharmacy
     });
 
-    /*
     //Inform Pharmacy
     this.informPharmacies(idWinnerPharmacy)
 
@@ -148,8 +147,7 @@ export class ViewTendersComponent implements OnInit {
     this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
       if (response) alert("Successfully set winner!")
     });
-    */
-
+ 
     //Update Inventory
     this.updateInventories(idSelectedOffer);
   }
