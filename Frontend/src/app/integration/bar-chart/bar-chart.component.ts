@@ -26,8 +26,7 @@ export class TenderOffer {
 
 @Component({
   selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.scss']
+  templateUrl: './bar-chart.component.html'
 })
 export class BarChartComponent implements OnInit {
 
@@ -36,7 +35,7 @@ export class BarChartComponent implements OnInit {
     responsive: true,
     scales: { xAxes: {}, yAxes: {} },
   };
-  barChartLabels: String[] = [];
+  barChartLabels: string[] = [];
   barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];

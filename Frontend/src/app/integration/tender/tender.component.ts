@@ -131,10 +131,10 @@ export class TenderComponent {
   }
 
   cancelEdit(){
-    this.selectedItemId = "",
-    this.medicine = "",
-    this. dose = "",
-    this.quantity = "",
+    this.selectedItemId = ""
+    this.medicine = ""
+    this. dose = ""
+    this.quantity = ""
     this.showItemEditRemoveButtons = false
   }
 
