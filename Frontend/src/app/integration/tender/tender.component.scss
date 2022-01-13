@@ -19,9 +19,6 @@
     float: left;
   }
   
-  input[type=text]{
-    background: #8a8787;
-  }
   input[type=text]:focus {
     background-color: #A2A2A2;
     outline: none;
@@ -37,7 +34,7 @@
 
   .form-control:focus {
     border-color: #f3f5f7;
-    box-shadow: 0 0 0 0.2rem #70a9e6;;
+    box-shadow: 0 0 0 0.2rem #70a9e6;
 } 
 
 .submitButton {

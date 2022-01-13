@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { TenderViewService } from './view-tenders.service';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { DatePipe } from '@angular/common';
@@ -125,8 +124,8 @@ export class ViewTendersComponent implements OnInit {
 
   closeTender() {
     this.tenderViewService.closeTender(+this.selectedTenderId).subscribe(response => {
-      if(response){
-        alert ("Successfully closed tender!")
+      if (response) {
+        alert("Successfully closed tender!")
         window.location.reload();
       }
       else alert("Failed to close tender.")
@@ -141,6 +140,7 @@ export class ViewTendersComponent implements OnInit {
         idWinnerPharmacy = +item.idPharmacy
     });
 
+    /*
     //Inform Pharmacy
     this.informPharmacies(idWinnerPharmacy)
 
@@ -148,8 +148,8 @@ export class ViewTendersComponent implements OnInit {
     this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
       if (response) alert("Successfully set winner!")
     });
-  
-  
+    */
+
     //Update Inventory
     this.updateInventories(idSelectedOffer);
   }
@@ -159,15 +159,16 @@ export class ViewTendersComponent implements OnInit {
     this.tenderOffers.forEach((item) => {
       this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
         console.log(pharmacy)
+        var message = ""
         var pharmacyLocation = item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
         if (pharmacy.idPharmacy != idWinnerPharmacy) {
-          var message = "We are sorry to inform you that you did not win Tender with ID: " + this.selectedTenderId
+          message = "We are sorry to inform you that you did not win Tender with ID: " + this.selectedTenderId
             + " ( " + pharmacyLocation + " )";
-          //Other pharmacies arne't implemented yet
+          //Other pharmacies aren't implemented yet
           //this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
         }
         else {
-          var message = "Congratulations! You won Tender with ID: " + this.selectedTenderId
+          message = "Congratulations! You won Tender with ID: " + this.selectedTenderId
             + " ( " + pharmacyLocation + " )";
           this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
         }
@@ -178,32 +179,26 @@ export class ViewTendersComponent implements OnInit {
 
   }
 
-  updateInventories(idSelectedOffer: number){
+  updateInventories(idSelectedOffer: number) {
     this.tenderOffers.forEach((offer) => {
-      if(offer.idTenderOffer == idSelectedOffer){
+      if (offer.idTenderOffer == idSelectedOffer) {
         offer.tenderOfferItems.forEach((item) => {
 
           this.pharmacyService.getPharmacyByID(offer.idPharmacy).subscribe((pharmacy: Pharmacy) => {
             this.pharmacyService.findMedicineByNameAndDose(item.medicineName, item.medicineDosage.toString(), pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe((med: Medicine) => {
-       
+
               var inventoryUpdate = {
                 medicineId: med.Id,
                 quantity: item.availableQuantity
               };
               console.log(inventoryUpdate);
-    
-              this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-                if (response) {
+
+              this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(pharmacyResponse => {
+                if (pharmacyResponse) {
                   alert("Successfully updated pharmacy inventory!")
-                  this.urgentRequestService.UpdateHospitalInventory(med, item.availableQuantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-                    if (response) 
-                    {
-                      alert("Successfully updated hospital inventory!")
-                      window.location.reload()
-                    }
-                    else alert("Failed to update hospital inventory!")
-                  });
-                }  
+                  this.updateHospitalInventory(med, pharmacy, item.availableQuantity);
+                  
+                }
                 else alert("Failed to update pharmacy inventory!")
               });
             })
@@ -211,8 +206,18 @@ export class ViewTendersComponent implements OnInit {
 
         })
       }
-  });
-}
+    });
+  }
 
+  updateHospitalInventory(med: Medicine, pharmacy: Pharmacy, quantity: number){
+    
+    this.urgentRequestService.UpdateHospitalInventory(med, quantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(hospitalResponse => {
+      if (hospitalResponse) {
+        alert("Successfully updated hospital inventory!")
+        window.location.reload()
+      }
+      else alert("Failed to update hospital inventory!")
+    });
+  }
 
 }
