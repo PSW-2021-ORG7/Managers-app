@@ -12,7 +12,7 @@ export class TokenInterceptor implements HttpInterceptor {
       ApiKey = JSON.parse(localStorage.getItem('ApiKey') || '')
     } 
       const modifiedReq = req.clone({ 
-        headers: req.headers.set('ApiKey', ApiKey),    
+        headers: req.headers.set('ApiKey', ApiKey).set("Content-Type", "application/json")          
       });
     return next.handle(modifiedReq)
     .pipe();

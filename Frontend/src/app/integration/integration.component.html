@@ -1,33 +1,36 @@
 <div>
   <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #214975;">  
     <div class="container-fluid">
-      <a class="navbar-brand" href="/integration">OASIS-Integration</a>
+      <a class="navbar-brand" href="/integration" title="Home page">OASIS-Integration</a>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/integration">Home Page</a>
+            <a class="nav-link" title="Home page" routerLink="/integration">Home page</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/integration/pharmacy-registration">Pharmacy Registration</a>
+            <a class="nav-link" title="Register pharmacy" routerLink="/integration/pharmacy-registration">Pharmacy registration</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" routerLink="/integration/feedback">Feedback</a>
+              <a class="nav-link" title="Create and view all feedback" routerLink="/integration/feedback">Feedback</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/integration/medication-specification">Medication specification</a>
+            <a class="nav-link" title="Request medication specification" routerLink="/integration/medication-specification">Medication specification</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/integration/pharmacy-profile">Pharmacies</a>
+            <a class="nav-link" title="Pharmacy profiles" routerLink="/integration/pharmacy-profile">Pharmacies</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/integration/prescriptions">Prescriptions</a>
+            <a class="nav-link" title="View and send prescriptions" routerLink="/integration/prescriptions">Prescriptions</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" title="Submit and view all active tenders" routerLink="/integration/tender">Tender</a>
           </li>
         </ul>
         
       </ul>
     </div>
     <ul class="nav navbar-nav navbar-right" style="margin-right: 2%;">
-      <li><button type="button" routerLink="/integration/urgent-request" class="btn btn-danger btn-sm">Urgent request</button></li>
+      <li><button type="button" title="Send an urgent request" routerLink="/integration/urgent-request" class="btn btn-danger btn-sm">Urgent request</button></li>
     </ul>
   </nav>
   

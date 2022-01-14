@@ -1,0 +1,72 @@
+<app-integration></app-integration>
+<br>
+
+<div id="Tender" class="background">
+    <div class="viewTenders">
+        <button class="btn btn-secondary btn-medium" title="View all active tenders" routerLink="/integration/view-tenders">View active tenders</button>
+    </div>
+    <form style="margin-top: -2%;">
+      <div class="container">
+          <table>
+            <caption style="text-align:left"></caption>
+            <h1 style="text-align:left;">Tender</h1>
+            <hr>
+            <tr>
+                <th scope="col"></th> 
+                <th scope="col"></th>       
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>Medicine</strong></label>
+                    <input type="text" [(ngModel)]="medicine" name="medicine" (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
+                </td>
+                <td>
+                    <div class="form2">
+                        <label><strong>Requested items  </strong></label>
+                        <select (change)="selectChangeHandlerSelectedItem($event)" style="width:120%; max-width:100%; outline: none; overflow-y: auto; background: none;" name="multipleSelect" id="multipleSelect" multiple title="Please select item" required>
+                            <option class = "requestedItems" *ngFor="let item of requestedItems" [value]="item.Id">
+                             {{item.MedicineName}} {{item.DosageInMilligrams}}mg x {{item.RequiredQuantity}}
+                            </option>
+                        </select>
+                        <div class="editItems" *ngIf = "this.showItemEditRemoveButtons">
+                            <button  type="button" class="btn btn-secondary sendBtn" (click) = "updateItem()">Update</button>&nbsp;
+                            <button  type="button" class="btn btn-secondary sendBtn" (click) = "removeItem()">Remove</button>&nbsp;
+                            <button  type="button" class="btn btn-secondary sendBtn" (click) = "cancelEdit()">Cancel</button>&nbsp;
+                        </div>
+                        <tr>
+                            <td>
+                                <label><strong>End date</strong></label>&nbsp;<br>
+                                <input type="date" (change)="selectChangeHandlerDate($event)" style="width: 100%; height: 150%;" title="Please select date"><br>
+                            </td>
+                        </tr>
+                    </div>   
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>Dose</strong></label>&nbsp;<br>
+                    <input type="text" [(ngModel)]="dose" name="dose" (change)="selectChangeHandlerDose($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
+                </td>
+                <td>
+                    <button (click)="openTender()" class="btn btn-secondary submitButton btn-medium">Open Tender</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label><strong>Quantity</strong></label>&nbsp;<br>
+                    <input type="text" [(ngModel)]="quantity" name="quantity" (change)="selectChangeHandlerQuantity($event)" style="font-size: medium; max-width: 30%;" pattern="[0-9]" title="Please use numbers only" required><br>
+                </td>
+            </tr>
+            <tr>
+                <br>
+                <button (click)= "addItem()" class="btn btn-secondary btn-medium" style="width:100px;">Add</button>
+            </tr>
+            <hr>
+           
+           
+        </table>
+      </div>
+
+    </form>
+</div>
+
