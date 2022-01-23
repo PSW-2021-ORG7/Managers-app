@@ -7,18 +7,26 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class CreateFeedbackService {
-    private baseUrl: string = environment.baseUrlIntegration + 'api/pharmacy';
+  
+  private baseUrlHospital: string = environment.baseUrlIntegration + 'api/pharmacy';
+  
     constructor(private http: HttpClient) { }
 
-    getPharmacies(): Observable<any> {
-      
-      localStorage.setItem('ApiKey', JSON.stringify("ABC"));
-      return this.http.get(this.baseUrl);
-    }
+  getPharmacies(): Observable<any> {
 
-    getPharmacyByID(id: string): Observable<any> {
-      
-      localStorage.setItem('ApiKey', JSON.stringify("XYZ"));
-      return this.http.get(this.baseUrl + "/" + id);
+    localStorage.setItem('ApiKey', JSON.stringify("ABC"));
+    return this.http.get(this.baseUrlHospital);
   }
+
+  getPharmacyByID(id: string): Observable<any> {
+      
+    localStorage.setItem('ApiKey', JSON.stringify("ABC"));
+    return this.http.get(this.baseUrlHospital + id);
+}
+
+  addFeedback(feedback: any, apiKey: string, endpoint: string){
+    localStorage.setItem('ApiKey', JSON.stringify(apiKey));
+    return this.http.post(endpoint + "feedback", feedback);
+  }
+
 }

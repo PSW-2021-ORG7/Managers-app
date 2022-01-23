@@ -1,17 +1,14 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CreateFeedbackService } from './create-feedback.service';
+import Swal from 'sweetalert2'
 
 export class Pharmacy {
   constructor(
-    public idPharmacy: string,
+    public idPharmacy: number,
     public namePharmacy: string,
     public apiKeyPharmacy: string,
-    public endpoint: string
-  ) {
-
-  }
-
+    public endpoint: string,
+  ) { }
 }
 
 export class Feedback {
@@ -23,12 +20,6 @@ export class Feedback {
 
 }
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-  })
-};
-
 @Component({
   selector: 'app-create-feedback',
   templateUrl: './create-feedback.component.html',
@@ -37,17 +28,18 @@ const httpOptions = {
 export class CreateFeedbackComponent implements OnInit {
 
   pharmacies: Pharmacy[] = [];
-  selectedPharmacyId: string = '';
-  contentFeedback: string = '';
+  selectedPharmacyId: string = ''
+  contentFeedback: string = ''
   http: any;
   feedback: Feedback | undefined
+  apiKey: string = ""
+  endpoint: string = ""
 
-  constructor(private httpClient: HttpClient, private feedbackService: CreateFeedbackService) {
+  constructor(private feedbackService: CreateFeedbackService) {
 
   }
 
   ngOnInit(): void {
-
 
     this.feedbackService.getPharmacies().subscribe((pharmacies: Pharmacy[]) => {
       this.pharmacies = pharmacies;
@@ -56,11 +48,9 @@ export class CreateFeedbackComponent implements OnInit {
     });
   }
 
-
-
-  //event handler for the select element's change event
   selectChangeHandlerId(event: any) {
     this.selectedPharmacyId = event.target.value;
+    console.log(this.selectedPharmacyId)
   }
 
   selectChangeHandlerContent(event: any) {
@@ -71,28 +61,33 @@ export class CreateFeedbackComponent implements OnInit {
 
   send(): void {
 
-    this.feedback = {
-      //generating id
-      idHospital: "H1",
-      contentFeedback: this.contentFeedback
+    this.pharmacies.forEach((pharmacy) => 
+    {
+      if(pharmacy.idPharmacy == +this.selectedPharmacyId){
+        this.apiKey = pharmacy.apiKeyPharmacy
+        this.endpoint = pharmacy.endpoint
+      }
+        
+    })
+
+    var feedback = {
+      IdHospital: "1",
+      ContentFeedback: this.contentFeedback
     };
 
-    console.log(this.feedback);
-    this.addFeedback(this.feedback)
+    this.feedbackService.addFeedback(feedback, this.apiKey, this.endpoint).subscribe(response => {
+      if(response) Swal.fire({
+        title: 'Successfully sent feedback!',
+        icon: 'success'
+      })
+    }, error => {Swal.fire({
+      title: "There was an error while trying to send feedback", 
+      text: "Server might be down",
+      icon: 'error'
+    }).then(function(){window.location.reload()}) 
 
+    })
   }
-
-  addFeedback(feedback: Feedback) {
-
-   /*this.feedbackService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
-
-    });*/
-    console.log(feedback)
-    return this.httpClient.post('http://localhost:64677/api/feedback', feedback, httpOptions).subscribe(); 
-
-  }
-
-
 }
 
 
