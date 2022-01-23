@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MedicationSpecificationService } from './medication-specification.service';
+import Swal from 'sweetalert2'
 
 
 export class MedicationSpecification {
@@ -33,7 +33,7 @@ export class MedicationSpecificationComponent implements OnInit {
   disableFields: boolean = false;
   pharmacies: Pharmacy[] = [];
 
-  constructor(private httpClient: HttpClient, private medicationSpecificationService: MedicationSpecificationService) { }
+  constructor(private medicationSpecificationService: MedicationSpecificationService) { }
 
   ngOnInit(): void {
   }
@@ -62,29 +62,30 @@ export class MedicationSpecificationComponent implements OnInit {
     };
 
     if (medicationSpecification.name == "" || medicationSpecification.dosageinmg == "") {
-      alert("Please fill both fields!")
+      Swal.fire({text: 'Please fill both fields!', icon: 'warning'})
     } else {
       this.pharmacies = [];
       this.medicationSpecificationService.checkIfAvailable(medicationSpecification).subscribe(response => {
         if (response) {
-          alert("Medicine is available!")
-          this.medicationSpecificationService.getPharmacyByID("1").subscribe(response =>{
-            console.log(response)
+          Swal.fire({ text: 'Medicine is available!', icon: 'success' })
+          this.medicationSpecificationService.getPharmacyByID("1").subscribe(response => {
             this.pharmacies.push(response)
           })
           this.disableFields = true
         }
-        else {
-          alert("Medicine doesn't exist!")
-        }
-
+      }, error => {
+        Swal.fire({
+          title: 'Error trying to retreive medicine',
+          text: 'Server might be down or make sure you entered valid data',
+          icon: 'error'
+        })
       })
     }
   }
 
-  cancel(): void { 
+  cancel(): void {
     this.pharmacies = [];
-    this.disableFields = false;   
+    this.disableFields = false;
   }
 
   send(): void {
@@ -94,33 +95,32 @@ export class MedicationSpecificationComponent implements OnInit {
       quantity: 1
     };
 
-    if(this.selectedPharmacyId == ''){
-      alert("Please select pharmacy!")
-    }else{    
+    if (this.selectedPharmacyId == '') {
+      Swal.fire({text: 'Please select pharmacy!', icon: 'warning'})
+    } else {
       this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
 
         this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-          
+
           console.log("Returned file name: " + response)
 
-          if(response == ""){
-            alert("ERROR!")
+          if (response == "") {
+            Swal.fire({title: 'Unable to upload specification', text: 'Unable to connect to SFTP server', icon: 'error'})
           } else {
             this.disableFields = false;
             this.pharmacies = [];
           }
-      
+
           this.medicationSpecificationService.downloadSpecification(response).subscribe(downloadResponse => {
-            if(downloadResponse){
-              alert("Successfully returned medicine!")
-              window.location.reload()
+            if (downloadResponse) {
+              Swal.fire({text: 'Successfully downloaded specification!', icon: 'success'}).then(function(){window.location.reload()})             
             }
-            else{
-              alert("Failed to download specification!")
+            else {
+              Swal.fire({text: 'Failed to download specification!', icon: 'error'})
             }
           })
-        })      
+        })
       })
-    } 
+    }
   }
 }
