@@ -24,9 +24,10 @@ export class CreateFeedbackService {
     return this.http.get(this.baseUrlHospital + id);
 }
 
-  addFeedback(feedback: any, apiKey: string, endpoint: string){
+  addFeedback(feedback: any, apiKey: string, endpoint: string): Observable<boolean>{
+    
     localStorage.setItem('ApiKey', JSON.stringify(apiKey));
-    return this.http.post(endpoint + "feedback", feedback);
+    return this.http.post<boolean>(endpoint + "feedback", feedback);
   }
 
 }
