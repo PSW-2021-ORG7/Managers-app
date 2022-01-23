@@ -45,4 +45,9 @@ export class TenderViewService {
         return this.http.put<boolean>(environment.baseUrlIntegration + "api/tendering/closeTender/" + idTender, null)
     }
 
+    sendEmail(idTender: number): Observable<any>{
+        localStorage.setItem('ApiKey', JSON.stringify("ABC"));  
+        return this.http.post(environment.baseUrlIntegration + "api/tendering/sendEmail/tender/" + idTender, null); 
+    }
+
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TenderViewService } from './view-tenders.service';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
-import { DatePipe } from '@angular/common';
 import { UrgentRequestService } from '../urgent-request/urgent-request.service';
+import Swal from 'sweetalert2'
 
 export class TenderOffer {
   constructor(
@@ -83,7 +83,7 @@ export class ViewTendersComponent implements OnInit {
   selectedTenderStartDate: Date = new Date()
   selectedTenderEndDate: Date = new Date()
 
-  constructor(private datePipe: DatePipe, private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService, private urgentRequestService: UrgentRequestService) { }
+  constructor(private tenderViewService: TenderViewService, private pharmacyService: MedicationSpecificationService, private urgentRequestService: UrgentRequestService) { }
 
   ngOnInit(): void {
 
@@ -98,8 +98,6 @@ export class ViewTendersComponent implements OnInit {
     this.showTenderInfo = false;
     this.selectedTenderId = event.target.value;
     this.tenderOffers = [];
-    console.log(this.selectedTenderId)
-
   }
 
   viewOffers(): void {
@@ -124,12 +122,8 @@ export class ViewTendersComponent implements OnInit {
 
   closeTender() {
     this.tenderViewService.closeTender(+this.selectedTenderId).subscribe(response => {
-      if (response) {
-        alert("Successfully closed tender!")
-        window.location.reload();
-      }
-      else alert("Failed to close tender.")
-    }, error => alert("Failed to close tender."))
+        Swal.fire({text: 'Successfully closed tender', icon: 'success'}).then(function(){window.location.reload();})       
+    }, error =>  Swal.fire({text: 'Failed to close tender', icon: 'error'}))
   }
 
   acceptOffer(idSelectedOffer: number): void {
@@ -145,7 +139,11 @@ export class ViewTendersComponent implements OnInit {
 
     //Set Winner
     this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
-      if (response) alert("Successfully set winner!")
+      if (response) {
+        Swal.fire({title: 'Successfully set winner', text: 'The winner is pharmacy with ID: ' + idWinnerPharmacy, icon: 'success'})
+        this.informPharmacies(idWinnerPharmacy);
+      
+      }
     });
  
     //Update Inventory
@@ -154,28 +152,11 @@ export class ViewTendersComponent implements OnInit {
 
   informPharmacies(idWinnerPharmacy: number): void {
 
-    this.tenderOffers.forEach((item) => {
-      this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
-        console.log(pharmacy)
-        var message = ""
-        var pharmacyLocation = item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
-        if (pharmacy.idPharmacy != idWinnerPharmacy) {
-          message = "We are sorry to inform you that you did not win Tender with ID: " + this.selectedTenderId
-            + " ( " + pharmacyLocation + " )";
-          //Other pharmacies aren't implemented yet
-          //this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
-        }
-        else {
-          message = "Congratulations! You won Tender with ID: " + this.selectedTenderId
-            + " ( " + pharmacyLocation + " )";
-          this.tenderViewService.sendMessage(message, pharmacy.endpoint, pharmacy.apiKeyPharmacy).subscribe();
-        }
-        console.log(message);
-      });
-
-    });
-
+    this.tenderViewService.sendEmail(+this.selectedTenderId).subscribe(response => {
+      Swal.fire({text: 'Successfully sent emails', icon: 'success'})
+    }, error => Swal.fire({title: 'Failed to send emails', icon: 'error'}));
   }
+  
 
   updateInventories(idSelectedOffer: number) {
     this.tenderOffers.forEach((offer) => {
@@ -193,12 +174,11 @@ export class ViewTendersComponent implements OnInit {
 
               this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(pharmacyResponse => {
                 if (pharmacyResponse) {
-                  alert("Successfully updated pharmacy inventory!")
-                  this.updateHospitalInventory(med, pharmacy, item.availableQuantity);
-                  
+                  Swal.fire({title:'Successfully updated pharmacy inventory', icon:'success'})
+                  this.updateHospitalInventory(med, pharmacy, item.availableQuantity);                
                 }
-                else alert("Failed to update pharmacy inventory!")
-              });
+                else Swal.fire({title: 'Failed to update pharmacy inventory', icon: 'error'})
+              }, error => {Swal.fire({title: 'Failed to update pharmacy inventory', text: 'Pharmacy server might be down', icon: 'error'})});
             })
           })
 
@@ -211,11 +191,10 @@ export class ViewTendersComponent implements OnInit {
     
     this.urgentRequestService.UpdateHospitalInventory(med, quantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(hospitalResponse => {
       if (hospitalResponse) {
-        alert("Successfully updated hospital inventory!")
-        window.location.reload()
+        Swal.fire({title:'Successfully updated hospital inventory', icon:'success'}).then(function(){window.location.reload()})       
       }
-      else alert("Failed to update hospital inventory!")
-    });
+      else Swal.fire({title: 'Failed to update hospital inventory', icon: 'error'})
+    }, error => {Swal.fire({title: 'Failed to update pharmacy inventory', text: 'Pharmacy server might be down', icon: 'error'})});
   }
 
 }

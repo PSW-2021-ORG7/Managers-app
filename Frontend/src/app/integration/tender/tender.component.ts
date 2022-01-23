@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component} from '@angular/core';
 import { TenderService } from './tender.service';
+import Swal from 'sweetalert2'
 
 export class TenderRequestItem {
   constructor(
@@ -80,7 +81,7 @@ export class TenderComponent {
 
     if(this.validate()) 
     {
-        if(this.checkEqual(tender)) alert("Item already exists on the list!")
+        if(this.checkEqual(tender)) Swal.fire({text: 'Item already exists on the list', icon: 'warning'})
         else this.requestedItems.push(tender);             
     }    
   }
@@ -104,7 +105,7 @@ export class TenderComponent {
       if(+this.selectedItemId == item.Id){
         this.requestedItems.splice(index, 1)    
         this.deletedItemsCount++
-        alert("Successfully deleted item!")    
+        Swal.fire("Successfully deleted item")    
       }
         
   });
@@ -124,7 +125,7 @@ export class TenderComponent {
       this.requestedItems.forEach((item, index) => {
         if(+this.selectedItemId == item.Id){
           this.requestedItems.splice(index, 1, tender)
-          alert("Successfully updated item!")    
+          Swal.fire("Successfully updated item")    
         }          
     });     
     } 
@@ -153,7 +154,7 @@ export class TenderComponent {
   openTender(): void{
     if(this.requestedItems.length == 0) alert ("No items were added!")
     else if(this.date < new Date()){
-     alert("Invalid date!")
+      Swal.fire({text: 'Invalid date!', icon: 'warning'})    
     }
     else{   
       var sendTender = {
@@ -165,9 +166,6 @@ export class TenderComponent {
       console.log(sendTender);
       this.tenderService.openTender(sendTender, "ABC").subscribe((tender: Tender) => {
         
-        console.log(tender)
-        alert("Successfully opened tender!")
-        
         var tenderRequest = {
           requestedItems: this.requestedItems ,
           TenderKey: tender.tenderKey
@@ -175,10 +173,8 @@ export class TenderComponent {
         
         console.log(tenderRequest)
         this.tenderService.sendTenderRequest(tenderRequest, "ABC").subscribe(response => {
-          if(response) alert("Successfully sent request!")
-          else alert ("Failed to send request to RabbitMQ queue!")
-        }, error => alert("Error while sending request to RabbitMQ..."))
-
+          Swal.fire({title: 'Successfully opened tender and delivered request', icon: 'success'})    
+        }, error => Swal.fire({title: 'Error trying to send requests', text: 'Error: Failed to connect to RabbitMQ server', icon: 'error'}))    
       });    
     }
   }
@@ -187,17 +183,17 @@ export class TenderComponent {
     var ret = true;
 
     if(this.medicine == "" || this.dose == "" || this.quantity == ""){
-      alert("Please fill all fields!")
+      Swal.fire({text: 'Please fill all fields!', icon: 'warning'})    
       ret = false
     }
 
     if(this.dose.match(/^\d+$/) == null){
-      alert("Dose can only be a number!")
+      Swal.fire({text: 'Dose can only be a number!', icon: 'warning'})    
       ret = false
     }
 
     if(this.quantity.match(/^\d+$/) == null){
-      alert("Quantity can only be a number!")
+      Swal.fire({text: 'Quantity can only be a number!', icon: 'warning'}) 
       ret = false
     }
     return ret
