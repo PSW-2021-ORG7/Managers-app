@@ -27,7 +27,7 @@
         
         <label><strong>Email</strong></label>
         <span *ngIf = "emailIsValid == false" class="errorText"><br>Invalid Email Format</span>
-        <input [ngClass]="{'error': emailIsValid == false}" [(ngModel)] = "email" [value]="email" type="text" placeholder="Enter Email" required (change)="selectChangeHandlerEmail($event)" [attr.aria-label]="email">
+        <input [ngClass]="{'error': emailIsValid == false}" (ngModel) = "email" [value]="email" type="text" placeholder="Enter Email" required (change)="selectChangeHandlerEmail($event)" [attr.aria-label]="email">
         
         <hr>
         <button type="submit" class="registerbtn">Register</button>
