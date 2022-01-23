@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { PrescriptionService } from './prescriptions.service';
+import Swal from 'sweetalert2'
 
 export class Prescription {
   constructor(
@@ -28,7 +29,7 @@ export class Medicine {
   constructor(
     public name: string,
     public dosageInMilligrams: number
-  ){ }
+  ) { }
 }
 
 @Component({
@@ -51,7 +52,7 @@ export class PrescriptionsComponent implements OnInit {
   patientJMBG: string = "JMBG"
   doctor: string = "Doctor"
   medicine: string = "Medicine 0" //Medicine name & dose
-  medicineObj: Medicine = {name:"", dosageInMilligrams: 0}
+  medicineObj: Medicine = { name: "", dosageInMilligrams: 0 }
   durationInDays: number = 0
   timesPerDay: number = 0
   description: string = "Description"
@@ -78,7 +79,7 @@ export class PrescriptionsComponent implements OnInit {
     console.log(this.selectedPharmacyId);
   }
 
-  viewPrescription(): void{
+  viewPrescription(): void {
 
     this.disableFields = false
     this.prescriptionService.getPrescriptionyByID(this.selectedPrescriptionId).subscribe((prescription: Prescription) => {
@@ -100,8 +101,8 @@ export class PrescriptionsComponent implements OnInit {
 
   }
 
-  checkIfAvailable(): void{
-    
+  checkIfAvailable(): void {
+
     var medicationSpecification = {
       name: this.medicineObj.name,
       dosageinmg: this.medicineObj.dosageInMilligrams,
@@ -109,44 +110,50 @@ export class PrescriptionsComponent implements OnInit {
     };
 
     this.medicationspec.checkIfAvailable(medicationSpecification).subscribe(response => {
-      if(response){
+      if (response) {
 
-        alert("Medicine available!")
-        this.medicationspec.getPharmacyByID("1").subscribe(response =>{
-          console.log(response)
+        Swal.fire({ text: 'Medicine is available!', icon: 'success' })
+        this.medicationspec.getPharmacyByID("1").subscribe(response => {
           this.pharmacies.push(response)
         });
-      } 
-      else alert("Medicine not available...")
+      }
+    }, error => {
+      Swal.fire({
+        title: 'Medicine is not available in chosen pharmacy!',
+        icon: 'warning'
+      })
     });
 
   }
 
-  sendSFTP(): void{
+  sendSFTP(): void {
 
     var prescription = {
-     id: this.selectedPrescriptionId,
-     patient: this.patient,
-     patientJMBG: this.patientJMBG,
-     doctor: this.doctor,
-     medicineId: this.medicineId,
-     durationInDays: this.durationInDays,
-     timesPerDay: this.timesPerDay,
-     description: this.description,      
+      id: this.selectedPrescriptionId,
+      patient: this.patient,
+      patientJMBG: this.patientJMBG,
+      doctor: this.doctor,
+      medicineId: this.medicineId,
+      durationInDays: this.durationInDays,
+      timesPerDay: this.timesPerDay,
+      description: this.description,
     };
 
     this.medicationspec.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
 
       this.prescriptionService.sendPrescriptionSFTP(prescription, "ABC").subscribe((filename: string) => {
-        alert("Successfully uploaded file!")
+        Swal.fire({ title: 'Successfully uploaded file on pharmacy!', icon: 'success' })
         this.prescriptionService.downloadPrescriptionSFTP(filename, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-          if(response) alert("Successfully downloaded file on pharmacy!")
-          else alert(":(")
+          if (response) Swal.fire({ title: 'File successfully uploaded and received!', icon: 'success' })
+        }, error => {
+          Swal.fire({ title: 'Unable to send prescription', text: 'Unable to connect to SFTP server', icon: 'error' })
         });
+      }, error => {
+        Swal.fire({ title: 'Unable to upload prescription', text: 'Unable to connect to SFTP server', icon: 'error' })
       });
     });
 
-    
+
 
   }
 

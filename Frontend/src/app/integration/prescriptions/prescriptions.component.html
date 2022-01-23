@@ -13,7 +13,7 @@
         <select  class="prescription" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
            title="Please select prescription" required (change)="selectChangeHandlerId($event)">
            <option *ngFor="let prescription of prescriptions" [value]="prescription.idPrescription">
-            {{prescription.patientJMBG}}
+            Patient with JMBG: {{prescription.patientJMBG}}
         </option>
         </select>
 
@@ -101,7 +101,6 @@
                 </tr>
                 <tr>
                     <td>
-                        <button type="button" [disabled]='disableSend' class="btn btn-secondary sendBtn">Send (HTTP)</button>&nbsp;
                         <button type="button" [disabled]='disableSend' (click) = "sendSFTP()" class="btn btn-secondary sendBtn">Send (SFTP)</button>&nbsp;
                     </td>
                 </tr>
