@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { PharmacyProfileService } from './pharmacy-profile.service';
+import Swal from 'sweetalert2'
 
 export class Pharmacy {
   constructor(
@@ -55,8 +56,9 @@ export class PharmacyProfileComponent implements OnInit {
   url = "../../../assets/images/integration.jpg"
   
   selectChangeHandlerId(event: any) {
-    this.selectedPharmacyId = event.target.value;
+    this.selectedPharmacyId = event.target.value
     this.showChart = false;
+    this.cancelChanges()
     console.log(this.selectedPharmacyId)
 
   }
@@ -66,7 +68,7 @@ export class PharmacyProfileComponent implements OnInit {
     localStorage.setItem("selectedPharmacyId", JSON.stringify(this.selectedPharmacyId));
     this.showChart = true;
     this.disableFields = false;
-    if (this.selectedPharmacyId == "") alert("Please select pharmacy!")
+    if (this.selectedPharmacyId == "")  Swal.fire({text: 'Please select pharmacy!', icon: 'warning'})
     else {
       this.medicineService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
         this.apiKeyPharmacy = pharmacy.apiKeyPharmacy
@@ -100,10 +102,15 @@ export class PharmacyProfileComponent implements OnInit {
     console.log(pharmacy)
     this.pharmacyService.updatePharmacy(pharmacy, this.selectedPharmacyId).subscribe(response => {
       if (response) {
-        alert("Successfully updated pharmacy!")
-        window.location.reload()
+        Swal.fire({ text: 'Successfully updated pharmacy information!', icon: 'success' }).then(function(){
+          window.location.reload()
+        })       
       }
-      else alert("Failed to update pharmacy... :(")
+    }, error => {
+      Swal.fire({
+        title: 'Error trying to update pharmacy',
+        icon: 'error'
+      })
     });
 
   }
@@ -119,6 +126,7 @@ export class PharmacyProfileComponent implements OnInit {
   }
 
   cancelChanges(): void {
+    
     this.disableFields = true;
     this.pharmacyName = ""
     this.pharmacyWebsite = ""
