@@ -1,7 +1,7 @@
 <app-integration></app-integration>
 
   <div id="PharmacyRegistration" class="background">
-    <form (submit)="send()">
+    <form (submit)="send()" ngNativeValidate>
       <div class="container">
         <h1 style="text-align: center;">Pharmacy registration</h1>
         <p>Please fill in this form to create an account.</p>
@@ -13,8 +13,22 @@
         <label><strong>API Key</strong></label>
         <input type="text" placeholder="Enter API Key" required (change)="selectChangeHandlerApiKey($event)" [attr.aria-label]="apiKeyPharmacy">
       
-        <label><strong>Endpoint</strong></label>
-        <input type="text" placeholder="Enter Endpoint" required (change)="selectChangeHandlerEndpoint($event)" [attr.aria-label]="endpoint">
+        <label><strong>Website</strong></label>
+        <input type="text" placeholder="Enter Website Link" required (change)="selectChangeHandlerEndpoint($event)" [attr.aria-label]="endpoint">
+        
+        <label><strong>Address</strong></label>
+        <input type="text" placeholder="Enter Website Link" required (change)="selectChangeHandlerAddress($event)" [attr.aria-label]="address">
+        
+        <label><strong>City</strong></label>
+        <input type="text" placeholder="Enter City" required (change)="selectChangeHandlerCity($event)" [attr.aria-label]="city">
+        
+        <label><strong>Contact</strong></label>
+        <input type="text" placeholder="Enter Contact" required (change)="selectChangeHandlerContact($event)" [attr.aria-label]="contact">
+        
+        <label><strong>Email</strong></label>
+        <span *ngIf = "emailIsValid == false" class="errorText"><br>Invalid Email Format</span>
+        <input [ngClass]="{'error': emailIsValid == false}" [(ngModel)] = "email" [value]="email" type="text" placeholder="Enter Email" required (change)="selectChangeHandlerEmail($event)" [attr.aria-label]="email">
+        
         <hr>
         <button type="submit" class="registerbtn">Register</button>
       </div>

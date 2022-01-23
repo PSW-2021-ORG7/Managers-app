@@ -18,6 +18,7 @@ import { ViewTendersComponent } from './view-tenders/view-tenders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { NgChartsModule } from 'ng2-charts';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { NgChartsModule } from 'ng2-charts';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
-    NgChartsModule
+    NgChartsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },

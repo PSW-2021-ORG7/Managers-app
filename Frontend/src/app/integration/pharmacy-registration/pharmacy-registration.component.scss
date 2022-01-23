@@ -53,4 +53,27 @@ input[type=text]:focus {
     width: 100%;
     height: 1024px;
 }
+
+.correct {
+  outline: 0;
+  border: 3px solid greenyellow;
+}
+.error
+{
+  border:1px solid red;
+  background: red;
+  width: 1;
+
+}
+
+input.error{
+  border:1px solid red;
+  width: 1;
+}
+
+.errorText{
+  color: red
+}
+
+
   
