@@ -102,15 +102,10 @@ export class MedicationSpecificationComponent implements OnInit {
 
         this.medicationSpecificationService.requestSpecification(medicationSpecification.name, medicationSpecification.dosageinmg, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
 
-          console.log("Returned file name: " + response)
-
-          if (response == "") {
-            Swal.fire({title: 'Unable to upload specification', text: 'Unable to connect to SFTP server', icon: 'error'})
-          } else {
+          console.log("Returned file name: " + response) 
             this.disableFields = false;
             this.pharmacies = [];
-          }
-
+          
           this.medicationSpecificationService.downloadSpecification(response).subscribe(downloadResponse => {
             if (downloadResponse) {
               Swal.fire({text: 'Successfully downloaded specification!', icon: 'success'}).then(function(){window.location.reload()})             
@@ -119,7 +114,7 @@ export class MedicationSpecificationComponent implements OnInit {
               Swal.fire({text: 'Failed to download specification!', icon: 'error'})
             }
           })
-        })
+        }, error => {Swal.fire({title: 'Unable to upload specification', text: 'Unable to connect to SFTP server', icon: 'error'})})
       })
     }
   }

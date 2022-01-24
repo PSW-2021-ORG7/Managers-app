@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FeedbackService } from './feedback.service';
+import Swal from 'sweetalert2'
 
 export class Pharmacy {
   constructor(
@@ -56,9 +57,7 @@ export class FeedbackComponent implements OnInit {
 
     this.feedbackService.getResponsesByPharmacy(this.selectedPharmacyId).subscribe((feedback: Feedback[]) => {
       this.feedback = feedback;
-      console.log(this.feedback);
-
-    })
+    }, error => {Swal.fire({title: 'No response found', text: 'There is no feedback available from pharmacies'})})
 
   }
 
