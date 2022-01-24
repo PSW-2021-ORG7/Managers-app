@@ -11,7 +11,7 @@
     </div> 
     
     <div class="select-view d-flex flex-row">
-        <div [class.searched-elements-active-selected-equipment]="isSelectedEquipment" class="searched-elements">
+        <div [class.searched-elements-active-selected-equipment]="isSelectedEquipment" [class.searched-elements-active-quick-transfer]="isQuickTransferVisible" class="searched-elements">
             <div *ngFor="let equipment of filteredEquipment;">
                 <app-equipment-card (notifySelectedEquipment)="onNotifySelectedEquipment($event)" [type]="'transfer'" [equipment]="equipment" [selectedEquipmentId]="selectedEquipmentId"></app-equipment-card>
             </div>
@@ -35,5 +35,40 @@
             <app-primary-button class="mt-3" text="Continue" (click)="confirmQuantity()"></app-primary-button>
         </div>
     </div>
+
 </div>
 
+<div [class.selected-quick-transfer-active]="isQuickTransferVisible" class="select-quick-transfer d-flex justify-content-center">
+    <div class="d-flex flex-row justify-content-center" (click)="toggleQuickEquipmentTransfer()">
+        <p class="menu-title">Quick equipment transfer</p>
+        <span>
+            <svg [class.quick-transfer-arrow-down-icon] = "isQuickTransferVisible" [class.quick-transfer-arrow-up-icon] = "!isQuickTransferVisible" class="me-2"></svg>
+        </span>
+        
+    </div>
+    <div [class.sub-menus-quick-transfer-active]="isQuickTransferVisible"  class="d-flex flex-row justify-content-center sub-menus">
+        <div class="d-flex flex-row justify-content-around">
+            <div class="d-flex flex-column">
+                <p class="menu-title">Most frequently transfered equipment</p>
+                <div class="d-flex flex-row">
+                    <p class="quick-item">Equipment-01</p>
+                    <p class="quick-item">Equipment-02</p>
+                    <p class="quick-item">Equipment-03</p>
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <p class="menu-title">Most frequent source rooms</p>
+                <div class="d-flex flex-row">
+                    <p class="quick-item">Room-01</p>
+                    <p class="quick-item">Room-02</p>
+                    <p class="quick-item">Room-03</p>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+        
+</div>

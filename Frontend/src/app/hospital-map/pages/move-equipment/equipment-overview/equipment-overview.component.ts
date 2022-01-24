@@ -14,6 +14,7 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   isEquipmentSelected: boolean = false;
   filteredEquipment: RoomEquipment[] = [];
   isSelectedEquipment: boolean = false;
+  isQuickTransferVisible: boolean = false;
   searchInput: string = "";
   searchFilter: string = "";
   scrollBoxTitle: string = "Select equipment for transfer";
@@ -100,5 +101,11 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   confirmQuantity(){
     this.confirmQuantityEvent.emit();
   }
+
+  toggleQuickEquipmentTransfer(): void{
+    this.isQuickTransferVisible = !this.isQuickTransferVisible;
+  }
+
+
 
 }

@@ -38,7 +38,7 @@
     .select-view{
         background-color: #fff;
         position: relative;
-        height: 69vh;
+        height: 69vh; 
     }
 
         .searched-elements{
@@ -48,6 +48,7 @@
             grid-template-rows: minmax(100px, 102px);
             padding: 10px 10px 0 5px;
             width: 100%;
+            height: 90%; // before quickTransfer: 90%
             @include scrollbar;
             transition: all 0.4s ease;
         }
@@ -118,3 +119,58 @@
                     -webkit-appearance: none;
                     margin: 0;
                 }
+
+        .select-quick-transfer{
+            position: fixed;
+            bottom: 0px;
+            height: 30px;
+            width: 95%;
+            border-radius: 5px;
+            transition: height 0.4s ease;
+            box-shadow: 0px 0px 15px 0px  #E5E5E5;
+            background-color: #fff;
+            padding: 5px;
+        }
+
+        .selected-quick-transfer-active{
+            display: flex;
+            flex-direction: column;
+            height: 130px;
+            transition: height 0.1s ease-out;
+        }
+
+        .menu-title{
+            display: inline-block;
+            color: color(darkgray);
+        }
+        
+        .quick-transfer-arrow-up-icon{
+            @include background-svg($arrow-up);
+            @include icon; 
+        }
+
+        .quick-transfer-arrow-down-icon{
+            @include background-svg($arrow-down);
+            @include icon; 
+        }
+
+        .sub-menus{
+            display: none !important;
+        }
+
+        .sub-menus-quick-transfer-active{
+            display:  inline-block !important;
+        }
+
+            .quick-item{
+                border-radius: 25px;
+                background: #e9edf2;
+                //color:
+                padding: 5px 10px; 
+                margin-right: 5px;
+                cursor: pointer;
+            }
+
+            .quick-item:hover {
+                background-color: #bdc9d7;
+              }
