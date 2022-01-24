@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MedicationSpecificationService } from '../medication-specification/medication-specification.service';
 import { UrgentRequestService } from './urgent-request.service';
+import Swal from 'sweetalert2'
 
 export class Medicine {
   constructor(
@@ -66,12 +67,12 @@ export class UrgentRequestComponent implements OnInit {
     };
 
     if (urgentRequest.Name == "" || urgentRequest.DosageInMg == "" || urgentRequest.Quantity == "") {
-      alert("Please fill all fields!")
+      Swal.fire({title: 'Please fill all fields', icon: 'warning'})
     } else {
       this.pharmacies = [];
       this.medicationSpecificationService.checkIfAvailable(urgentRequest).subscribe(response => {
         if (response) {
-          alert("Medicine is available in required quantity!")
+          Swal.fire({title: 'Medicine is available in required quantity', icon: 'success'})
           this.medicationSpecificationService.getPharmacyByID("1").subscribe(response => {
             console.log(response)
             this.pharmacies.push(response)
@@ -79,10 +80,10 @@ export class UrgentRequestComponent implements OnInit {
           this.disableFields = true
         }
         else {
-          alert("Medicine doesn't exist or not available in desired quantity!")
+          Swal.fire({title: 'Medicine does not exist or is not available in desired quantity', icon: 'warning'})
         }
 
-      })
+      }, error => {Swal.fire({title: 'Error connecting to pharmacy', icon: 'error'})})
     }
 
   }
@@ -101,7 +102,7 @@ export class UrgentRequestComponent implements OnInit {
     };
 
     if (this.selectedPharmacyId == "") {
-      alert("Please select pharmacy!")
+      Swal.fire({title: 'Please select pharmacy', icon: 'warning'})
     } else {
 
       this.medicationSpecificationService.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
@@ -115,19 +116,20 @@ export class UrgentRequestComponent implements OnInit {
             medicineId: med.Id,
             quantity: this.quantity
           };
+          
           console.log(inventoryUpdate);
 
           this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
             if (response) {
-              alert("Successfully updated pharmacy inventory!")
+              Swal.fire({title:'Successfully updated pharmacy inventory', icon:'success'})
               this.urgentRequestService.UpdateHospitalInventory(med, +this.quantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-                if (response) alert("Successfully updated hospital inventory!")
-                else alert("Failed to update hospital inventory!")
-              });
+                if (response) Swal.fire({title:'Successfully updated hospital inventory', icon:'success'}).then(function(){window.location.reload()}) 
+                else  Swal.fire({title: 'Failed to update hospital inventory', icon: 'error'})
+              }, error => { Swal.fire({title: 'Failed to connect to hospital server', icon: 'error'})});
             }
 
-            else alert("Failed to update pharmacy inventory!")
-          });
+            else  Swal.fire({title: 'Failed to update pharmacy inventory', icon: 'error'})
+          }, error => { Swal.fire({title: 'Failed to connect to pharmacy server', icon: 'error'})});
         })
       })
     }
