@@ -122,6 +122,15 @@ option {
     width: 40%;
 }
 
+h5 {
+    color: white !important;
+    font-weight: normal !important;
+}
+
+h1 {
+    font-weight: normal !important;
+}
+
 @media (max-width: 768px) {
     #sidebar {
         margin-left: -250px;

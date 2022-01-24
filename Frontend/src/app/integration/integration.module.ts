@@ -18,7 +18,7 @@ import { ViewTendersComponent } from './view-tenders/view-tenders.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BarChartComponent } from './bar-chart/bar-chart.component';
 import { NgChartsModule } from 'ng2-charts';
-import { BrowserModule } from '@angular/platform-browser';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { BrowserModule } from '@angular/platform-browser';
     PharmacyProfileComponent,
     TenderComponent,
     ViewTendersComponent,
-    BarChartComponent
+    BarChartComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,

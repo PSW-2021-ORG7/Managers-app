@@ -1,4 +1,4 @@
-<app-integration></app-integration>
+<app-menu></app-menu>
 <br>
 <div  class="background">
   <button type="button" routerLink="/integration/feedback" class="btn btn-secondary btn-lg"
@@ -18,8 +18,7 @@
         <li class="list-group-item" style="background-color:#f5f3f3; ">Content:</li>
         <textarea placeholder="Enter Feedback Content" style="width:479px; height:120px;" required
           (change)="selectChangeHandlerContent($event)"> {{contentFeedback}}</textarea>
-        <hr>
-        <li class="list-group-item" style="background-color:#f5f3f3;"><button type="submit" class="btn btn-secondary"
+          <li class="list-group-item" style="background-color:#f5f3f3;"><button type="submit" class="btn btn-secondary"
             style="text-align: center; display: grid; margin: auto; cursor: pointer;">Submit</button></li>
       </ul>
     </form>
