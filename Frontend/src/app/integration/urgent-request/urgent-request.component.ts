@@ -79,11 +79,7 @@ export class UrgentRequestComponent implements OnInit {
           })
           this.disableFields = true
         }
-        else {
-          Swal.fire({title: 'Medicine does not exist or is not available in desired quantity', icon: 'warning'})
-        }
-
-      }, error => {Swal.fire({title: 'Error connecting to pharmacy', icon: 'error'})})
+      }, error => {Swal.fire({title: 'Medicine does not exist or is not available in desired quantity', icon: 'warning'})})
     }
 
   }
@@ -124,12 +120,9 @@ export class UrgentRequestComponent implements OnInit {
               Swal.fire({title:'Successfully updated pharmacy inventory', icon:'success'})
               this.urgentRequestService.UpdateHospitalInventory(med, +this.quantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
                 if (response) Swal.fire({title:'Successfully updated hospital inventory', icon:'success'}).then(function(){window.location.reload()}) 
-                else  Swal.fire({title: 'Failed to update hospital inventory', icon: 'error'})
-              }, error => { Swal.fire({title: 'Failed to connect to hospital server', icon: 'error'})});
+              }, error => { Swal.fire({title: 'Failed to update hospital inventory', icon: 'error'})});
             }
-
-            else  Swal.fire({title: 'Failed to update pharmacy inventory', icon: 'error'})
-          }, error => { Swal.fire({title: 'Failed to connect to pharmacy server', icon: 'error'})});
+          }, error => { Swal.fire({title: 'Failed to update pharmacy inventory', icon: 'error'})});
         })
       })
     }

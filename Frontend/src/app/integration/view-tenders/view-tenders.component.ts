@@ -177,7 +177,6 @@ export class ViewTendersComponent implements OnInit {
                   Swal.fire({title:'Successfully updated pharmacy inventory', icon:'success'})
                   this.updateHospitalInventory(med, pharmacy, item.availableQuantity);                
                 }
-                else Swal.fire({title: 'Failed to update pharmacy inventory', icon: 'error'})
               }, error => {Swal.fire({title: 'Failed to update pharmacy inventory', text: 'Pharmacy server might be down', icon: 'error'})});
             })
           })
@@ -193,8 +192,7 @@ export class ViewTendersComponent implements OnInit {
       if (hospitalResponse) {
         Swal.fire({title:'Successfully updated hospital inventory', icon:'success'}).then(function(){window.location.reload()})       
       }
-      else Swal.fire({title: 'Failed to update hospital inventory', icon: 'error'})
-    }, error => {Swal.fire({title: 'Failed to update pharmacy inventory', text: 'Pharmacy server might be down', icon: 'error'})});
+    }, error => {Swal.fire({title: 'Failed to update hospital inventory', text: 'Hospital server might be down', icon: 'error'})});
   }
 
 }
