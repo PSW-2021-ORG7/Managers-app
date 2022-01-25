@@ -57,7 +57,6 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
 
 
   quickTransferSearchBySourceRoom() : void {
-    this
     this.scrollBoxTitle = "Most recently used source room's equipments";
 
     let equipment = this.equipment;
@@ -66,7 +65,6 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   }
   // TODO: QuickTransfer with Equipment is not finished yet
   quickTransferSearchByEquipment() : void {
-    this
     this.scrollBoxTitle = "Most recently transfered equipment in different rooms";
 
     let equipment = this.equipment;
