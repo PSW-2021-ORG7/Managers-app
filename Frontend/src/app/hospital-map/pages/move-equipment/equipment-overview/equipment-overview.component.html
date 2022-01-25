@@ -39,12 +39,21 @@
 </div>
 
 <div [class.selected-quick-transfer-active]="isQuickTransferVisible" class="select-quick-transfer d-flex justify-content-center">
-    <div class="d-flex flex-row justify-content-center" (click)="toggleQuickEquipmentTransfer()">
-        <p class="menu-title">Quick equipment transfer</p>
-        <span>
-            <svg [class.quick-transfer-arrow-down-icon] = "isQuickTransferVisible" [class.quick-transfer-arrow-up-icon] = "!isQuickTransferVisible" class="me-2"></svg>
-        </span>
-        
+    <div class="d-flex flex-row justify-content-evenly">
+        <div  (click)="quickTransferSearchBySourceRoom()">
+            <p class="menu-title">Most recently used source room</p>
+            <span>
+                <svg [class.quick-transfer-arrow-down-icon] = "isQuickTransferVisible" [class.quick-transfer-arrow-up-icon] = "!isQuickTransferVisible" class="me-2"></svg>
+            </span> 
+        </div>
+        <!-- TODO: QuickTrasfer with EquipmentID
+        <div (click)="quickTransferSearchByEquipment()">
+            <p class="menu-title">Most recently transfered equipment</p>
+            <span>
+                <svg [class.quick-transfer-arrow-down-icon] = "isQuickTransferVisible" [class.quick-transfer-arrow-up-icon] = "!isQuickTransferVisible" class="me-2"></svg>
+            </span> 
+        </div>
+        -->
     </div>
     <div [class.sub-menus-quick-transfer-active]="isQuickTransferVisible"  class="d-flex flex-row justify-content-center sub-menus">
         <div class="d-flex flex-row justify-content-around">
