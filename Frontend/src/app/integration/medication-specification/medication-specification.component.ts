@@ -89,6 +89,7 @@ export class MedicationSpecificationComponent implements OnInit {
   }
 
   send(): void {
+    
     var medicationSpecification = {
       name: this.medicine,
       dosageinmg: this.dose,

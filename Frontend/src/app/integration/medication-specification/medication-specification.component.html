@@ -16,18 +16,18 @@
                 <tr>
                     <td>
                         <label><strong>Medicine </strong></label>
-                        <input type="text" [disabled]='disableFields' (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
+                        <input id= "medicine" type="text" [disabled]='disableFields' (change)="selectChangeHandlerMedicine($event)" autofocus pattern="[a-zA-Z]" title="Please use letters only" required>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label><strong>Dose </strong></label><br>
-                        <input type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
+                        <input id= "dose" type="text" [disabled]='disableFields' style="font-size: medium; max-width: 30%;" (change)="selectChangeHandlerDose($event)" pattern="[0-9]" title="Please use numbers only" required>&nbsp;<label>mg</label><br>
                     </td>
                 </tr>
                 <tr>
-                    <button type="button" (click)="checkIfAvailable()" class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
-                    <button type="button" (click)="cancel()" class="btn btn-secondary cancelBtn">Cancel</button><br><br>
+                    <button id= "checkButton" type="button" (click)="checkIfAvailable()" class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
+                    <button id= "cancelButton" type="button" (click)="cancel()" class="btn btn-secondary cancelBtn">Cancel</button><br><br>
                 </tr>
                 <tr>
                     <label><strong>Available in: </strong></label><br>

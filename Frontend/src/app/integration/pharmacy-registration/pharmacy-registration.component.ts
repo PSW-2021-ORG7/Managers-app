@@ -99,8 +99,8 @@ export class PharmacyRegistrationComponent {
     this.pharmacyService.createNewPharmacy(registration).subscribe(response => {
       if(response) Swal.fire({text: "Successfully registered pharmacy!", icon: 'success'}).then(function(){window.location.reload()})     
     }, error => {Swal.fire({
-      title: "There was an error while trying to register pharmacy", 
-      text: "Server might be down or you entered invalid data",
+      title: "Oops!", 
+      text: "Server appears to be down at the moment or double check input data",
       icon: 'error'
     }).then(function(){window.location.reload()}) 
   });
