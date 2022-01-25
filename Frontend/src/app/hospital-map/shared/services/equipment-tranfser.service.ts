@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EquipmentTransferEvent } from '@app/hospital-map/models/equipment/equipment-transfer-event.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { EquipmentTransfer } from '../../models/equipment/equipment-transfer.model';
@@ -28,6 +29,10 @@ export class EquipmentTransferService {
 
   getTransfersForRoom(roomId: number) : Observable<EquipmentTransfer[]>{
     return this.http.get<EquipmentTransfer[]>(this.baseUrl + 'transfers/room/' + roomId);
+  }
+
+  getEquipmentTransferEvents() : Observable<EquipmentTransferEvent[]>{
+    return this.http.get<EquipmentTransfer[]>(this.baseUrl + 'transfers/events/');
   }
 
   deleteEquipmentTransfer(equipmentTransfer: EquipmentTransfer): Observable<EquipmentTransfer>{

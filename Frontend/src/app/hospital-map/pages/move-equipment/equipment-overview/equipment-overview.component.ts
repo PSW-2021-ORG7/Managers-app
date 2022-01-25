@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { EquipmentTransferEvent } from '@app/hospital-map/models/equipment/equipment-transfer-event.model';
+import { EquipmentTransferService } from '@app/hospital-map/shared/services/equipment-tranfser.service';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
 import { EquipmentService } from 'src/app/hospital-map/shared/services/equipment.service';
@@ -24,8 +26,9 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   @Input() equipmentTransfer!: EquipmentTransfer;
   @Output() confirmQuantityEvent = new EventEmitter();
   @Output() equipmentTransferChanged = new EventEmitter();
+  transferEvents: EquipmentTransferEvent[] = [];
 
-  constructor(private equipmentService: EquipmentService) { }
+  constructor(private equipmentService: EquipmentService, private equipmentTransferService: EquipmentTransferService) { }
 
   ngOnInit(): void {
     this.equipmentService.getEquipment().subscribe(
@@ -34,6 +37,18 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
         this.filteredEquipment = data;
       }
     )
+    this.equipmentTransferService.getEquipmentTransferEvents().subscribe(
+      data => {
+        this.transferEvents = data;
+        this.findMostPopularEvents();
+      }
+    )
+  }
+
+
+
+  findMostPopularEvents() {
+    //
   }
 
   ngOnChanges(changes: SimpleChanges) {
