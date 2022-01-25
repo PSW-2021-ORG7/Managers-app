@@ -1,4 +1,4 @@
-<div class="card d-flex flex-column" [style.background]="isCardSelected ? '#214975' : '#fff'" (click)="displayRoomOnMap()">
+<div class="card d-flex flex-column" id="card-{{room.id}}" [style.background]="isCardSelected ? '#214975' : '#fff'" (click)="displayRoomOnMap()">
     <span class="card-title" [style.color]="isCardSelected ? '#fff' : '#214975'">{{room.type | roomTypeToString}} {{room.name}}</span>
     <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-row align-items-center">

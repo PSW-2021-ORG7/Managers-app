@@ -7,7 +7,7 @@
                 <div *ngIf="floors">
                     <div *ngFor="let floor of floors">
                         <div class="d-flex flex-row mb-2">
-                            <input class="radio-btn form-check-input me-2" checked name="floor" value="{{floor}}" [checked]="selectedFloor == floor" (change)="selectedFloorChanged(floor)" type="radio" id="{{'floor' + floor}}">
+                            <input class="radio-btn form-check-input me-2" name="name-{{'floor' + floor}}" value="{{floor}}" [checked]="selectedFloor == floor" (change)="selectedFloorChanged(floor)" type="radio" id="{{'floor' + floor}}">
                             <label class="radio-btn form-check-label" for="{{'floor' + floor}}">
                                <span *ngIf="floor > 0">Floor {{floor}}</span>
                                <span *ngIf="floor == 0">Ground level</span>
