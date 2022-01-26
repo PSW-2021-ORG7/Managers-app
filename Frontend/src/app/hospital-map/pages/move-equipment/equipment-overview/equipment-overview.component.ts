@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { EquipmentTransferEvent } from '@app/hospital-map/models/equipment/equipment-transfer-event.model';
+import { EquipmentTransferService } from '@app/hospital-map/shared/services/equipment-tranfser.service';
+import { RoomsService } from '@app/hospital-map/shared/services/rooms.service';
 import { EquipmentTransfer } from 'src/app/hospital-map/models/equipment/equipment-transfer.model';
 import { RoomEquipment } from 'src/app/hospital-map/models/equipment/room-equipment.model';
 import { EquipmentService } from 'src/app/hospital-map/shared/services/equipment.service';
@@ -14,17 +17,22 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   isEquipmentSelected: boolean = false;
   filteredEquipment: RoomEquipment[] = [];
   isSelectedEquipment: boolean = false;
+  isQuickTransferVisible: boolean = false;
   searchInput: string = "";
   searchFilter: string = "";
   scrollBoxTitle: string = "Select equipment for transfer";
   isSearchActive: boolean = false;
   selectedEquipment!: RoomEquipment;
   selectedEquipmentId: number = -1;
+  mostRecentlyUsedSourceRoomId: number = -1;
+  mostRecentlyUsedEquipmentId: number = -1;
   @Input() equipmentTransfer!: EquipmentTransfer;
   @Output() confirmQuantityEvent = new EventEmitter();
   @Output() equipmentTransferChanged = new EventEmitter();
+  transferEvents: EquipmentTransferEvent[] = [];
+  
 
-  constructor(private equipmentService: EquipmentService) { }
+  constructor(private equipmentService: EquipmentService, private equipmentTransferService: EquipmentTransferService) { }
 
   ngOnInit(): void {
     this.equipmentService.getEquipment().subscribe(
@@ -33,7 +41,37 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
         this.filteredEquipment = data;
       }
     )
+    this.equipmentTransferService.getEquipmentTransferEvents().subscribe(
+      data => {
+        this.transferEvents = data;
+        this.findTheMostRecentEvent();
+      }
+    )
   }
+
+  findTheMostRecentEvent(){
+    let mostRecentEquipmentTransfer: EquipmentTransferEvent = this.transferEvents[this.transferEvents.length - 1];
+    this.mostRecentlyUsedSourceRoomId = mostRecentEquipmentTransfer.sourceRoomId;
+    this.mostRecentlyUsedEquipmentId = mostRecentEquipmentTransfer.equipmentId;
+  }
+
+
+  quickTransferSearchBySourceRoom() : void {
+    this.scrollBoxTitle = "Most recently used source room's equipments";
+
+    let equipment = this.equipment;
+    equipment = equipment.filter(param => param.roomId === this.mostRecentlyUsedSourceRoomId);
+    this.filteredEquipment = equipment;
+  }
+  // TODO: QuickTransfer with Equipment is not finished yet
+  quickTransferSearchByEquipment() : void {
+    this.scrollBoxTitle = "Most recently transfered equipment in different rooms";
+
+    let equipment = this.equipment;
+    equipment = equipment.filter(param => param.equipmentItemId === this.mostRecentlyUsedEquipmentId);
+    this.filteredEquipment = equipment;
+  }
+
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes['isEquipmentSelected']){
@@ -100,5 +138,11 @@ export class SelectedEquipmentComponent implements OnInit, OnChanges{
   confirmQuantity(){
     this.confirmQuantityEvent.emit();
   }
+
+  toggleQuickEquipmentTransfer(): void{
+    this.isQuickTransferVisible = !this.isQuickTransferVisible;
+  }
+
+
 
 }
