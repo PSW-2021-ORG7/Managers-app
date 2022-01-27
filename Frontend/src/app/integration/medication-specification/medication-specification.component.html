@@ -32,7 +32,7 @@
                 <tr>
                     <label><strong>Available in: </strong></label><br>
                     
-                    <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple (change)="selectChangeHandlerSelectedPharmacy($event)" title="Please select pharmacy" required>
+                    <select class="form-select" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple (change)="selectChangeHandlerSelectedPharmacy($event)" title="Please select pharmacy" required>
                         <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
                             {{phar.namePharmacy}}
                         </option>

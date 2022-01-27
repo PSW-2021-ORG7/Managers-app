@@ -75,7 +75,7 @@ export class MedicationSpecificationComponent implements OnInit {
         }
       }, error => {
         Swal.fire({
-          title: 'Error trying to retreive medicine',
+          title: 'Error trying to retreive medicine information',
           text: 'Server might be down or make sure you entered valid data',
           icon: 'error'
         })
@@ -115,7 +115,7 @@ export class MedicationSpecificationComponent implements OnInit {
               Swal.fire({text: 'Failed to download specification!', icon: 'error'})
             }
           })
-        }, error => {Swal.fire({title: 'Unable to upload specification', text: 'Unable to connect to SFTP server', icon: 'error'})})
+        }, error => {Swal.fire({title: 'Unable to transfer specification', text: 'Unable to connect to SFTP server', icon: 'error'})})
       })
     }
   }

@@ -100,17 +100,19 @@ ul.CTAs a {
     margin-top: 5%;
 }
 
+
 select {
     overflow-y: auto;
     background: none;
     border: none;
     outline: none;
-    
+    overflow-x: auto;
 }
 
 option {
     text-align: center;
-    color: white;    
+    color: white; 
+       
 }
 
 .saveChangesBtn {

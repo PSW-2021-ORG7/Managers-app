@@ -5,13 +5,13 @@ import Swal from 'sweetalert2'
 
 export class Pharmacy {
   constructor(
-    public idPharmacy: string,
+    public idPharmacy: number,
     public namePharmacy: string,
+    public address: string,
+    public city: string,
     public apiKeyPharmacy: string,
     public endpoint: string
-  ) {
-
-  }
+  ) { }
 }
 
 export class Feedback {
@@ -31,9 +31,10 @@ export class Feedback {
 })
 export class FeedbackComponent implements OnInit {
 
-  pharmacies: Pharmacy[] = [];
-  feedback: Feedback[] = [];
-  selectedPharmacyId: string = '';
+  pharmacies: Pharmacy[] = []
+  feedback: Feedback[] = []
+  selectedPharmacyId: string = ''
+  pharmacyResponseInfo: string = ''
 
   constructor(private httpClient: HttpClient, private feedbackService: FeedbackService) {
 
@@ -56,7 +57,7 @@ export class FeedbackComponent implements OnInit {
   viewResponse(): void {
 
     this.feedbackService.getResponsesByPharmacy(this.selectedPharmacyId).subscribe((feedback: Feedback[]) => {
-      this.feedback = feedback;
+      this.feedback = feedback;    
     }, error => {Swal.fire({title: 'No response found', text: 'There is no feedback available from pharmacies'})})
 
   }

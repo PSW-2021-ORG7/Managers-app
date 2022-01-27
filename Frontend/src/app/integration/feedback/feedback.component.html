@@ -9,9 +9,9 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Choose pharmacy</li>
-      <select (change)="selectChangeHandlerId($event)">
+      <select class="form-select" (change)="selectChangeHandlerId($event)">
         <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
-          {{phar.namePharmacy}}
+          {{phar.namePharmacy}} in {{phar.address}}, {{phar.city}}
         </option>
       </select>
     </ul>
@@ -19,7 +19,10 @@
   <li class="list-group-item" style="background-color:#f5f3f3; "><button (click)="viewResponse()" class="btn btn-secondary"
       style="text-align: center; display: grid;  cursor: pointer; margin-left: 1%">View Response</button></li>
 
-  <p style="margin-top: 2%" *ngFor="let feed of feedback">
-    &nbsp; &nbsp; {{feed.contentFeedback}} <br>
-  </p>
+  <div class="card" *ngFor="let feed of feedback" style="width: 18rem; margin-left: 2%; margin-top: 2%;">
+    <div class="card-body">
+      {{feed.contentFeedback}}
+    </div>
+  </div>
+  <br>
 </div>

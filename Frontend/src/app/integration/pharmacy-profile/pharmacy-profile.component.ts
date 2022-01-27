@@ -127,6 +127,7 @@ export class PharmacyProfileComponent implements OnInit {
 
   cancelChanges(): void {
     
+    this.showChart = false;
     this.disableFields = true;
     this.pharmacyName = ""
     this.pharmacyWebsite = ""

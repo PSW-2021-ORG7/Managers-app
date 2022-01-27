@@ -6,10 +6,10 @@
             <br>
             <h5>Choose pharmacy</h5>
         </div>
-        <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+        <select style="width:120%;height: 16%;max-width:100%; max-height: 200%;" name="multipleSelect" id="multipleSelect" multiple
             (change)="selectChangeHandlerId($event)" title="Please select pharmacy" required>
             <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
-                {{phar.namePharmacy}}
+                {{phar.namePharmacy}} in {{phar.city}}
             </option>
         </select>
 
@@ -105,7 +105,7 @@
 
         </div>
     
-    <div *ngIf = "showChart" style="display:flexbox; width: 180%; margin-left: 4%; margin-top: 3%;">    
+    <div *ngIf = "showChart" style="display:flexbox; width: 50%; margin-left: 4%; margin-top: 3%;">    
         <app-bar-chart></app-bar-chart><br>
     </div>
 </div>

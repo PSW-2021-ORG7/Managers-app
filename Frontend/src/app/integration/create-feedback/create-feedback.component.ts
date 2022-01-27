@@ -6,6 +6,8 @@ export class Pharmacy {
   constructor(
     public idPharmacy: number,
     public namePharmacy: string,
+    public city: string,
+    public address: string,
     public apiKeyPharmacy: string,
     public endpoint: string,
   ) { }
@@ -61,32 +63,37 @@ export class CreateFeedbackComponent implements OnInit {
 
   send(): void {
 
-    this.pharmacies.forEach((pharmacy) => 
-    {
-      if(pharmacy.idPharmacy == +this.selectedPharmacyId){
-        this.apiKey = pharmacy.apiKeyPharmacy
-        this.endpoint = pharmacy.endpoint
-      }
-        
-    })
+    if (this.contentFeedback == "") Swal.fire({ title: 'Please write some feedback', icon: 'warning' })
+    else {
 
-    var feedback = {
-      IdHospital: "1",
-      ContentFeedback: this.contentFeedback
-    };
+      this.pharmacies.forEach((pharmacy) => {
+        if (pharmacy.idPharmacy == +this.selectedPharmacyId) {
+          this.apiKey = pharmacy.apiKeyPharmacy
+          this.endpoint = pharmacy.endpoint
+        }
 
-    this.feedbackService.addFeedback(feedback, this.apiKey, this.endpoint).subscribe(response => {
-      if(response) Swal.fire({
-        title: 'Successfully sent feedback!',
-        icon: 'success'
       })
-    }, error => {Swal.fire({
-      title: "There was an error while trying to send feedback", 
-      text: "Server might be down",
-      icon: 'error'
-    }).then(function(){window.location.reload()}) 
 
-    })
+      var feedback = {
+        IdHospital: "1",
+        ContentFeedback: this.contentFeedback
+      };
+
+      this.feedbackService.addFeedback(feedback, this.apiKey, this.endpoint).subscribe(response => {
+        if (response) Swal.fire({
+          title: 'Successfully sent feedback!',
+          icon: 'success'
+        })
+      }, error => {
+        Swal.fire({
+          title: "There was an error while trying to send feedback",
+          text: "Server might be down",
+          icon: 'error'
+        }).then(function () { window.location.reload() })
+
+      })
+
+    }
   }
 }
 

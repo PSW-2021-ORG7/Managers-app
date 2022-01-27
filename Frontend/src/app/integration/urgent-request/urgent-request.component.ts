@@ -117,7 +117,7 @@ export class UrgentRequestComponent implements OnInit {
 
           this.urgentRequestService.updatePharmacyInventory(inventoryUpdate, inventoryUpdate.medicineId, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
             if (response) {
-              Swal.fire({title:'Successfully updated pharmacy inventory', icon:'success'})
+              //Swal.fire({title:'Successfully updated pharmacy inventory', icon:'success'})
               this.urgentRequestService.UpdateHospitalInventory(med, +this.quantity, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
                 if (response) Swal.fire({title:'Successfully updated hospital inventory', icon:'success'}).then(function(){window.location.reload()}) 
               }, error => { Swal.fire({title: 'Failed to update hospital inventory', icon: 'error'})});

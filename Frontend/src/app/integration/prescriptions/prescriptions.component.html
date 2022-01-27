@@ -12,7 +12,11 @@
         <select  class="prescription" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
            title="Please select prescription" required (change)="selectChangeHandlerId($event)">
            <option *ngFor="let prescription of prescriptions" [value]="prescription.idPrescription">
-            Patient with JMBG: {{prescription.patientJMBG}}
+            {{prescription.patient}} 
+            <br>
+            JMBG: {{prescription.patientJMBG}} 
+            <br>
+            <br>
         </option>
         </select>
 
@@ -85,13 +89,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <br>
                     <button type="button" (click) = "checkIfAvailable()" [disabled]='disableFields' class="btn btn-secondary checkIfAvailableBtn">Check</button>&nbsp;
                 </tr>
-               
+               <br>
                 <tr>
                     <label><strong>Available in: </strong></label><br>
                     
-                    <select style="width:120%;max-width:100%;" name="multipleSelect" (change)="selectChangeHandlerSelectedPharmacy($event)" id="multipleSelect" multiple  title="Please select pharmacy" required>
+                    <select class="form-select" style="width:120%;max-width:100%;" name="multipleSelect" (change)="selectChangeHandlerSelectedPharmacy($event)" id="multipleSelect" multiple  title="Please select pharmacy" required>
                         <option class = "pharmacies" *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
                             {{phar.namePharmacy}}
                         </option>

@@ -134,26 +134,23 @@ export class ViewTendersComponent implements OnInit {
         idWinnerPharmacy = +item.idPharmacy
     });
 
-    //Inform Pharmacy
-    this.informPharmacies(idWinnerPharmacy)
-
     //Set Winner
     this.tenderViewService.setWinner(+this.selectedTenderId, idWinnerPharmacy, "ABC").subscribe(response => {
       if (response) {
-        Swal.fire({title: 'Successfully set winner', text: 'The winner is pharmacy with ID: ' + idWinnerPharmacy, icon: 'success'})
+        //Swal.fire({title: 'Successfully set winner', text: 'The winner is pharmacy with ID: ' + idWinnerPharmacy, icon: 'success'})
         this.informPharmacies(idWinnerPharmacy);
       
       }
     });
  
     //Update Inventory
-    this.updateInventories(idSelectedOffer);
+    //this.updateInventories(idSelectedOffer);
   }
 
   informPharmacies(idWinnerPharmacy: number): void {
 
     this.tenderViewService.sendEmail(+this.selectedTenderId).subscribe(response => {
-      Swal.fire({text: 'Successfully sent emails', icon: 'success'})
+      Swal.fire({text: 'Successfully chose winner and informed pharmacies', icon: 'success'}).then(function(){window.location.reload()})
     }, error => Swal.fire({title: 'Failed to send emails', icon: 'error'}));
   }
   

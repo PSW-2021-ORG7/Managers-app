@@ -10,12 +10,12 @@
     <form (submit)="send()">
       <ul class="list-group list-group-flush">
         <li class="list-group-item" style="background-color:#f5f3f3;">Pharmacy:</li>
-        <select (change)="selectChangeHandlerId($event)">
+        <select class="form-select" (change)="selectChangeHandlerId($event)">
           <option *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
-            {{phar.namePharmacy}}
+            {{phar.namePharmacy}} in {{phar.address}}, {{phar.city}}
           </option>
         </select>
-        <li class="list-group-item" style="background-color:#f5f3f3; ">Content:</li>
+        <li class="list-group-item" style="background-color:#f5f3f3; ">Leave some feedback:</li>
         <textarea placeholder="Enter Feedback Content" style="width:479px; height:120px;" required
           (change)="selectChangeHandlerContent($event)"> {{contentFeedback}}</textarea>
           <li class="list-group-item" style="background-color:#f5f3f3;"><button type="submit" class="btn btn-secondary"
