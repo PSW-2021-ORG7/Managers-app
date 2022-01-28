@@ -8,8 +8,9 @@ export class RoomEquipment {
     public equipmentItemName: string;
     public equipmentItemDescription: string;
     public quantity: number;
+    public reservedQuantity: number;
 
-    constructor(id: number, roomId: number, roomName: string, type: number, roomFloor: number, equipmentItemId: number, equipmentItemName: string, equipmentItemDescription: string, quantity: number) {
+    constructor(id: number, roomId: number, roomName: string, type: number, roomFloor: number, equipmentItemId: number, equipmentItemName: string, equipmentItemDescription: string, quantity: number, reservedQuantity: number) {
         this.id = id;
         this.roomId = roomId;
         this.roomName = roomName;
@@ -19,5 +20,6 @@ export class RoomEquipment {
         this.equipmentItemName = equipmentItemName;
         this.equipmentItemDescription = equipmentItemDescription;
         this.quantity = quantity;
+        this.reservedQuantity = reservedQuantity;
     }
 }
