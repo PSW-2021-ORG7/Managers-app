@@ -15,7 +15,9 @@ export class Pharmacy {
     public idPharmacy: string,
     public namePharmacy: string,
     public apiKeyPharmacy: string,
-    public endpoint: string
+    public endpoint: string,
+    public address: string,
+    public city: string
   ) { }
 }
 

@@ -21,7 +21,9 @@ export class Pharmacy {
     public idPharmacy: number,
     public namePharmacy: string,
     public apiKeyPharmacy: string,
-    public endpoint: string
+    public endpoint: string,
+    public city: string,
+    public address: string
   ) { }
 }
 
@@ -48,14 +50,15 @@ export class PrescriptionsComponent implements OnInit {
 
   idPrescription: number = 0
   medicineId: number = 0
-  patient: string = "Patient"
-  patientJMBG: string = "JMBG"
+  patient: string = "... patient name ..."
+  patientJMBG: string = "... jmbg ..."
   doctor: string = "Doctor"
   medicine: string = "Medicine 0" //Medicine name & dose
   medicineObj: Medicine = { name: "", dosageInMilligrams: 0 }
   durationInDays: number = 0
   timesPerDay: number = 0
   description: string = "Description"
+  showPrescriptionData: boolean = true
 
   constructor(private prescriptionService: PrescriptionService, private medicationspec: MedicationSpecificationService) { }
 
@@ -63,13 +66,14 @@ export class PrescriptionsComponent implements OnInit {
 
     this.prescriptionService.getPrescriptions().subscribe((prescrptions: Prescription[]) => {
       this.prescriptions = prescrptions
+   
     });
+    
 
   }
 
   selectChangeHandlerId(event: any) {
     this.selectedPrescriptionId = event.target.value;
-    console.log(this.selectedPrescriptionId)
 
   }
 
@@ -81,6 +85,7 @@ export class PrescriptionsComponent implements OnInit {
 
   viewPrescription(): void {
 
+    this.showPrescriptionData = true
     this.disableFields = false
     this.prescriptionService.getPrescriptionyByID(this.selectedPrescriptionId).subscribe((prescription: Prescription) => {
       this.medicineId = prescription.medicineId
@@ -142,9 +147,9 @@ export class PrescriptionsComponent implements OnInit {
     this.medicationspec.getPharmacyByID(this.selectedPharmacyId).subscribe((pharmacy: Pharmacy) => {
 
       this.prescriptionService.sendPrescriptionSFTP(prescription, "ABC").subscribe((filename: string) => {
-        Swal.fire({ title: 'Successfully uploaded file on pharmacy!', icon: 'success' })
+        //Swal.fire({ title: 'Successfully uploaded file on pharmacy!', icon: 'success' })
         this.prescriptionService.downloadPrescriptionSFTP(filename, pharmacy.apiKeyPharmacy, pharmacy.endpoint).subscribe(response => {
-          if (response) Swal.fire({ title: 'File successfully uploaded and received!', icon: 'success' })
+          if (response) Swal.fire({ title: 'Prescription successfully delivered!', icon: 'success' })
         }, error => {
           Swal.fire({ title: 'Unable to send prescription', text: 'Unable to connect to SFTP server', icon: 'error' })
         });

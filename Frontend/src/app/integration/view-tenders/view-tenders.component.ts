@@ -112,7 +112,7 @@ export class ViewTendersComponent implements OnInit {
 
         this.tenderOffers.forEach((item, index) => {
           this.pharmacyService.getPharmacyByID(item.idPharmacy).subscribe((pharmacy: Pharmacy) => {
-            item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.city;
+            item.pharmacy = pharmacy.namePharmacy + " in " + pharmacy.address + ", " + pharmacy.city;
           });
         });
 
@@ -150,7 +150,7 @@ export class ViewTendersComponent implements OnInit {
   informPharmacies(idWinnerPharmacy: number): void {
 
     this.tenderViewService.sendEmail(+this.selectedTenderId).subscribe(response => {
-      Swal.fire({text: 'Successfully chose winner and informed pharmacies', icon: 'success'}).then(function(){window.location.reload()})
+      Swal.fire({text: 'Successfully closed tender and informed pharmacies', icon: 'success'}).then(function(){window.location.reload()})
     }, error => Swal.fire({title: 'Failed to send emails', icon: 'error'}));
   }
   

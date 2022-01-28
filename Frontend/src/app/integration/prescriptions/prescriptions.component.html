@@ -5,17 +5,14 @@
     <nav id="sidebar">
         <div class="sidebar-header">
             <br>
-            <h5>Choose prescription</h5>
+            <h5>Patients</h5>
         </div>
 
-
-        <select  class="prescription" style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+        <hr>
+        <select  class="prescription" style="width:120%;height:64%; max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
            title="Please select prescription" required (change)="selectChangeHandlerId($event)">
-           <option *ngFor="let prescription of prescriptions" [value]="prescription.idPrescription">
+           <option *ngFor="let prescription of prescriptions" [value]="prescription.idPrescription" style="text-align: left; margin-left: 2%;">
             {{prescription.patient}} 
-            <br>
-            JMBG: {{prescription.patientJMBG}} 
-            <br>
             <br>
         </option>
         </select>
@@ -28,11 +25,12 @@
     <!-- Page Content  -->
     <div id="content">
 
-        <div class="left">
+        <div class="left" *ngIf = "showPrescriptionData">
 
-            <table>
+            <table style="width: 30%;">
                 <caption style="text-align:left"></caption>
-                <h1>Prescriptions</h1>
+                <h1>Prescription</h1>
+                <hr>
                 <tr>
                     <th scope="col"></th>
                     <th scope="col"></th>
@@ -40,7 +38,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label (ngModel)= "patient"><strong>Patient's name</strong></label>
+                        <label (ngModel)= "patient"><strong>Patient</strong></label>
                         <br>
                         <label>{{patient}}</label>
                     </td>
@@ -75,7 +73,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <label><strong>Doctor's name</strong></label>
+                        <label><strong>Doctor</strong></label>
                         <br>
                         <label (ngModel)= "doctor">{{doctor}}</label>
                     </td>
@@ -98,7 +96,7 @@
                     
                     <select class="form-select" style="width:120%;max-width:100%;" name="multipleSelect" (change)="selectChangeHandlerSelectedPharmacy($event)" id="multipleSelect" multiple  title="Please select pharmacy" required>
                         <option class = "pharmacies" *ngFor="let phar of pharmacies" [value]="phar.idPharmacy">
-                            {{phar.namePharmacy}}
+                            {{phar.namePharmacy}} in {{phar.address}}, {{phar.city}}
                         </option>
                     </select><br><br>
                     

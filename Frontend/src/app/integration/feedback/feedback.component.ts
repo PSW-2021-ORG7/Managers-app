@@ -51,14 +51,15 @@ export class FeedbackComponent implements OnInit {
   }
 
   selectChangeHandlerId(event: any) {
-    this.selectedPharmacyId = event.target.value;
+    this.selectedPharmacyId = event.target.value
+    this.feedback = []
   }
 
   viewResponse(): void {
 
     this.feedbackService.getResponsesByPharmacy(this.selectedPharmacyId).subscribe((feedback: Feedback[]) => {
       this.feedback = feedback;    
-    }, error => {Swal.fire({title: 'No response found', text: 'There is no feedback available from pharmacies'})})
+    }, error => {Swal.fire({title: 'No response found', text: 'There is no feedback available from selected pharmacy'})})
 
   }
 

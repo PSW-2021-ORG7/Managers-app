@@ -105,7 +105,7 @@ export class TenderComponent {
       if(+this.selectedItemId == item.Id){
         this.requestedItems.splice(index, 1)    
         this.deletedItemsCount++
-        Swal.fire("Successfully deleted item")    
+        //Swal.fire("Successfully deleted item")    
       }
         
   });
@@ -125,7 +125,7 @@ export class TenderComponent {
       this.requestedItems.forEach((item, index) => {
         if(+this.selectedItemId == item.Id){
           this.requestedItems.splice(index, 1, tender)
-          Swal.fire("Successfully updated item")    
+          //Swal.fire("Successfully updated item")    
         }          
     });     
     } 
@@ -173,7 +173,7 @@ export class TenderComponent {
         
         console.log(tenderRequest)
         this.tenderService.sendTenderRequest(tenderRequest, "ABC").subscribe(response => {
-          Swal.fire({title: 'Successfully opened tender and delivered request', icon: 'success'})    
+          Swal.fire({title: 'Successfully opened tender and delivered request', icon: 'success'}).then(function(){window.location.reload()})   
         }, error => Swal.fire({title: 'Error trying to send requests', text: 'Error: Failed to connect to RabbitMQ server', icon: 'error'}))    
       });    
     }

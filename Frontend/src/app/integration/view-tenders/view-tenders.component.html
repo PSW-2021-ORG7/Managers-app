@@ -9,7 +9,7 @@
             <br>
             <h5 style="text-align: center;">Active Tenders</h5>
         </div>
-        <select style="width:120%;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
+        <select style="width:120%; height: 16% ;max-width:100%;" name="multipleSelect" id="multipleSelect" multiple
             title="Please select tender" required (change)="selectChangeHandlerId($event)">
             <option *ngFor="let tender of tenders" [value]="tender.id">
                 Tender ID : {{tender.id}}
@@ -26,17 +26,14 @@
         <span style="text-align: left;" *ngIf="this.showTenderInfo && this.selectedTenderId != ''">
 
             <label style="margin-left: 3%;" (ngModel)="selectedTenderStartDate">
-                <strong>
-                    Tender Opened on:
-                </strong>
+                <strong> Tender opened on: </strong> 
             </label> &nbsp;
             <label>{{selectedTenderStartDate | date:'fullDate'}}</label>
             <br>
-            <label style="margin-left: 3%;" (ngModel)="selectedTenderEndDate"><strong>
-                    Tender Closes on:
-                </strong></label>&nbsp;
-            <label> {{selectedTenderEndDate | date:'fullDate'}} </label><br><br>
-            <br>
+            <label style="margin-left: 3%;" (ngModel)="selectedTenderEndDate">
+                <strong> Tender closes on: </strong>
+            </label> &nbsp;        
+            <label> {{selectedTenderEndDate | date:'fullDate'}} </label> <hr>
             <button (click)="closeTender()" class="btn btn-outline-danger btn-medium;" style="margin-left: 3%;">Close
                 Tender</button>
             <br>
@@ -96,13 +93,13 @@
                     </div>
 
                     <label (ngModel)="priceForAllAvailable" style="text-align: left; margin-top: 2%;"><strong>
-                            Price for all available entities:
+                            Price for all available medicine:
                         </strong></label>&nbsp;
                     <label style="text-align: left;">
                         {{offer.priceForAllAvailable}}
                     </label><br>
                     <label (ngModel)="priceForAllRequired" style="text-align: left; margin-top: 2%;"><strong>
-                            Price for all required entities:
+                            Price for all required medicine:
                         </strong></label>&nbsp;
                     <label style="text-align: left;">
                         {{offer.priceForAllRequired}}

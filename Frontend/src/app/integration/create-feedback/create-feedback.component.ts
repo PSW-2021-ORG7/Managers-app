@@ -83,7 +83,8 @@ export class CreateFeedbackComponent implements OnInit {
         if (response) Swal.fire({
           title: 'Successfully sent feedback!',
           icon: 'success'
-        })
+        }).then(function(){window.location.reload()})
+        
       }, error => {
         Swal.fire({
           title: "There was an error while trying to send feedback",

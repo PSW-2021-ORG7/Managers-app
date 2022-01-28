@@ -18,8 +18,7 @@ export class FeedbackService {
     }
 
     getResponsesByPharmacy(idPharmacy: string): Observable<any> {
-
-        
+      
         return this.http.get(this.baseUrlFeedback + idPharmacy);
     }
 }
