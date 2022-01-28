@@ -4,6 +4,6 @@
         <div class="d-flex flex-row align-items-center">
             <span class="floor-text" [style.color]="isCardSelected ? '#fff' : '#a2a2a2'">{{equipment.roomType | roomTypeToString}} {{equipment.roomName}}</span>
         </div>
-        <span class="floor-text" [style.color]="isCardSelected ? '#fff' : '#214975'">{{equipment.quantity}}</span>
+        <span class="floor-text" [style.color]="isCardSelected ? '#fff' : '#a2a2a2'">Qty {{equipment.quantity}}<span *ngIf="equipment.reservedQuantity > 0">, Reserved {{equipment.reservedQuantity}}</span></span>
     </div>
 </div>
